@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import '~/assets/styles/color-theme.scss'
+import Icon from '~/assets/image/favicon.ico'
 
 useHead({
   title: '花远明的小世界',
@@ -19,7 +20,7 @@ useHead({
     },
     {
       rel: 'shortcut icon',
-      href: 'favicon.ico',
+      href: Icon,
     },
   ],
 })
