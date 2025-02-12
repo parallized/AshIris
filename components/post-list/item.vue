@@ -1,0 +1,42 @@
+<script setup lang="ts">
+import type { Post } from '~/types/halo-struct'
+import { genStrCategories, getStrCategory } from '~/utils/categories'
+import { formatDate } from '../../utils/time'
+
+const props = defineProps<{
+  post: Post
+}>()
+</script>
+
+<template>
+  <div class="item">
+    <NuxtLink class="title" :href="post.metadata.name"
+      >· {{ post.spec.title }}
+    </NuxtLink>
+
+    <NuxtLink class="categories">
+      <Icon name="ph:folder-thin" class="opacity-55 text-[11px]" />
+      <span class="text-[11px] cursor-pointer hover:opacity-85 opacity-35 transition-all" v-for="i in post.spec.categories">
+        {{ getStrCategory(i) }}
+      </span>
+    </NuxtLink>
+
+    <div v-if="post.spec.publishTime" class="ml-auto pointer-events-none text-[11px] opacity-55">
+      {{formatDate(post.spec.publishTime)}}
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.item {
+  @apply inline-flex gap-1 items-center w-[65%];
+
+  .title {
+    @apply block text-sm cursor-pointer max-w-[340px] truncate line-clamp-1;
+  }
+
+  .categories {
+    @apply ml-3 text-sm inline-flex gap-1 items-center;
+  }
+}
+</style>

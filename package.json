@@ -1,0 +1,37 @@
+{
+  "name": "ash-iris",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "format": "prettier --write \"**/*.{js,vue,json}\""
+  },
+  "dependencies": {
+    "@directus/sdk": "^16.1.2",
+    "@halo-dev/api-client": "^2.20.0",
+    "@nuxt/eslint": "^0.7.6",
+    "@nuxt/icon": "^1.10.3",
+    "@nuxt/image": "^1.9.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@vueuse/core": "^12.5.0",
+    "axios": "^1.7.9",
+    "dayjs": "^1.11.13",
+    "nuxt": "^3.15.4",
+    "tocbot": "4.34.1-0",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxtjs/sitemap": "^7.2.4",
+    "@types/markdown-it": "^14.1.2",
+    "prettier": "^3.5.0",
+    "prettier-eslint": "^16.3.0",
+    "sass": "^1.84.0"
+  },
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
+}
