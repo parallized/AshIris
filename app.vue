@@ -17,6 +17,10 @@ useHead({
       rel: 'stylesheet',
       href: 'https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css',
     },
+    {
+      rel: 'shortcut icon',
+      href: 'favicon.ico',
+    },
   ],
 })
 </script>
