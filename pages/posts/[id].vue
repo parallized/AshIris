@@ -11,7 +11,8 @@ const route = useRoute()
 const id = route.params.id
 
 const postData = ref()
-const content = ref()
+let content: string | null = null
+
 const readPost = async (id: string) => {
   const post = await coreApi.content.post.getPost({ name: id })
   postData.value = post.data
@@ -22,58 +23,58 @@ const readPost = async (id: string) => {
     .data
   const patch = snap.spec.rawPatch
   if (!patch) return
+
   if (patch[0] == '[') {
-    content.value = JSON.parse(patch)[0].target.lines.join('\n')
+    content = JSON.parse(patch)[0].target.lines.join('\n')
   } else {
-    content.value = patch
+    content = patch
   }
 }
 
+// toc
+const tocNav = ref()
+const hasToc = ref(true)
+const showToc = ref(false)
 const loadToc = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 333))
   tocbot.init({
     tocSelector: '#toc-nav',
     contentSelector: '.prose',
     headingSelector: 'h1, h2, h3',
     hasInnerContainers: true,
   })
-  visible.value = true
 
-  await new Promise((resolve) => setTimeout(resolve, 333))
   if (!tocNav.value?.childNodes || tocNav.value?.childNodes.length === 0) {
     hasToc.value = false
   }
+  showToc.value = true
+  return
 }
+onMounted(loadToc)
 
 const toIndexPage = () => {
   useRouter().back()
 }
 
-// toc
-const tocNav = ref()
-const hasToc = ref(true)
-const visible = ref(false)
-
-readPost(id as string).then(loadToc)
-
+// generate
+await readPost(id as string)
 useHead({
-  title: postData.value?.spec.title,
+  title: postData.value?.spec?.title,
   meta: [
     {
       hid: 'description',
       name: 'description',
-      content: postData.value?.spec.title
-    }
-  ]
+      content: postData.value?.spec?.title,
+    },
+  ],
 })
 </script>
 
 <template>
   <div class="post-page">
-    <nav v-if="postData" class="pl-[3px]">
+    <nav class="pl-[3px]">
       <header class="post-description">
         <h1>
-          {{ postData.spec.title }}
+          {{ postData?.spec?.title }}
         </h1>
         <h2 class="flex items-center gap-1 opacity-50 flex-wrap">
           <div class="text-[12px] gap-1 flex items-center">
@@ -92,7 +93,7 @@ useHead({
         <div class="flex flex-col items-start gap-1">
           <p class="date">
             <Icon name="gridicons:create" />
-            {{ formatDate(postData.spec.publishTime) }}
+            {{ formatDate(postData?.spec?.publishTime) }}
           </p>
           <!--          <p-->
           <!--            v-if="-->
@@ -113,25 +114,20 @@ useHead({
           name="streamline:cursor-click-solid"
         />
       </div>
-      <div class="sticky w-full top-[40px] left-0">
-        <Transition name="fade">
-          <div
-            id="toc-nav"
-            ref="tocNav"
-            class="transition-all duration-[0.66s]"
-            :class="
-              visible
-                ? 'opacity-[1] translate-x-[0px]'
-                : 'opacity-0 translate-x-[15px]'
-            "
-          ></div>
-        </Transition>
+      <div
+        v-if="hasToc"
+        :class="showToc ? 'opacity-100' : 'opacity-0 translate-x-[20px]'"
+        class="transition-all duration-500 sticky w-full top-[40px] left-0"
+      >
+        <div id="toc-nav" ref="tocNav"></div>
       </div>
-      <Transition name="fade">
-        <div v-if="!hasToc" class="text-neutral-300 text-[12px]">
-          内容短 / 无 Toc 概要
-        </div>
-      </Transition>
+      <div
+        v-else
+        class="text-neutral-300 text-[12px] transition-all duration-500"
+        :class="showToc ? 'opacity-100' : 'opacity-0 translate-x-[20px]'"
+      >
+        内容短 / 无 Toc 概要
+      </div>
     </nav>
 
     <div
