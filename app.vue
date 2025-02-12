@@ -34,12 +34,11 @@ body {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.45s ease;
+  transition: all 0.15s;
 }
 
 .page-enter-from,
 .page-leave-to {
-  opacity: 0.32;
-  transform: translateY(16px);
+  opacity: 0.2;
 }
 </style>
