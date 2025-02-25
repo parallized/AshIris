@@ -24,6 +24,8 @@ const { introHide } = storeToRefs(theme)
     <SectionPortfolio></SectionPortfolio>
     <SectionContact></SectionContact>
     <SectionTechskill></SectionTechskill>
+    <SectionShowreel></SectionShowreel>
+    <SectionPeak></SectionPeak>
   </div>
 </template>
 

@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <div class="card">
     <div
-      class="inset-0 absolute border border-r-0 border-neutral-300/55 group-hover:border-r-[1px] rounded-[3px] bg-transparent"
+      class="border border-r-0 border-neutral-300/55 rounded-[3px] bg-transparent"
     ></div>
     <Icon class="icon" :name="name"></Icon>
   </div>

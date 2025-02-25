@@ -6,6 +6,7 @@ import TechCard from '~/components/tech/tech-card.vue'
   <section class="techskill">
     <div class="tech-group">
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>语言 & 脚本</h2>
         <TechCard name="devicon:csharp" />
         <TechCard name="devicon:cplusplus" />
@@ -22,6 +23,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>设计 & CG</h2>
         <TechCard name="file-icons:houdini" class="text-[#ff9c4c]" />
         <TechCard name="devicon:blender" />
@@ -32,6 +34,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>工具 & 中间件</h2>
         <TechCard name="devicon:git" />
         <TechCard name="devicon:jenkins" />
@@ -50,6 +53,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>前端 & UI</h2>
         <TechCard name="devicon:vuejs" />
         <TechCard name="devicon:react" />
@@ -68,6 +72,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>后端相关</h2>
         <TechCard name="devicon:express" />
         <TechCard name="devicon:nestjs" />
@@ -81,6 +86,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
+        <div class="divider"></div>
         <h2>跨端 & 客户端</h2>
         <TechCard name="devicon:androidstudio" />
         <TechCard name="devicon:flutter" />
@@ -107,8 +113,11 @@ import TechCard from '~/components/tech/tech-card.vue'
   @apply grid grid-cols-3 items-center justify-center flex-wrap gap-24 w-full;
 
   &_set {
-    @apply pt-8 pb-[150px] border-t border-neutral-500/25 flex flex-wrap items-start gap-2 h-[44px];
+    @apply pb-[150px] flex flex-wrap items-start gap-2 h-[44px];
 
+    .divider {
+      @apply bg-gradient-to-r h-[1px] w-full from-neutral-400/50 to-neutral-100 mb-6
+    }
     h2 {
       @apply text-base tracking-wider opacity-75 text-start w-full mb-2;
     }

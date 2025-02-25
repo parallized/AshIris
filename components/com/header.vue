@@ -42,7 +42,7 @@ const themeClass = computed(()=>{
 
 <style lang="scss" scoped>
 .header__wrapper {
-  @apply fixed transition-all top-0 w-full border-b border-gray-300/10 z-[1] backdrop-blur-[5px];
+  @apply fixed transition-all top-0 w-full border-b border-gray-300/10 z-[9999] backdrop-blur-[5px];
 }
 
 .header {

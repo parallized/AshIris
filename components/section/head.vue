@@ -25,7 +25,13 @@ useIntersectionObserver(headEl, ([entry]) => {
     <div class="content-container">
       <div class="content">
         <h1>不散, 不见</h1>
-        <div>这里是花远明，<span class="text-orange-300">数字媒体技术</span> 本科在校生一枚，初中开始接触游戏开发，一直在学习和思考一些有意思的编码、设计</div>
+        <div>
+          这里是花远明，<span class="text-orange-300">数字媒体技术</span>
+          本科在校生一枚，初中开始接触游戏开发，一直在学习和思考一些有意思的编码、设计
+          <div class="mt-2 opacity-70">
+            <Icon class="text-3xl" name="line-md:download-loop" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -33,15 +39,15 @@ useIntersectionObserver(headEl, ([entry]) => {
 
 <style scoped lang="scss">
 .head-image-container {
-  @apply flex relative h-[100vh];
+  @apply flex relative h-[100vh] w-full;
 
   .head-image {
-    @apply fixed top-0 left-0 z-[-1];
-    @apply object-cover w-[100vw] h-[100vh] brightness-[100%] grayscale-[30%];
+    @apply fixed top-0 z-[-1];
+    @apply object-cover w-[100vw] h-[100vh] grayscale-[30%];
   }
 
   .content-container {
-    @apply absolute w-full h-full flex items-end pb-[15vh];
+    @apply fixed w-full h-full flex items-end pb-[25vh] z-[-1];
   }
 
   .content {

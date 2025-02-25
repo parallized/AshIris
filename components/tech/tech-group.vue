@@ -99,7 +99,7 @@ import TechCard from '~/components/tech/tech-card.vue'
 .tech-group {
   @apply flex flex-wrap gap-3 w-full;
   &_set {
-    @apply w-[45%];
+    @apply w-[45%] relative;
     h2 {
       @apply text-sm opacity-75 text-end;
     }
