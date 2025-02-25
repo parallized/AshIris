@@ -117,7 +117,7 @@ useHead({
       <div
         v-if="hasToc"
         :class="showToc ? 'opacity-100' : 'opacity-0 translate-x-[20px]'"
-        class="transition-all duration-500 sticky w-full top-[40px] left-0"
+        class="transition-all duration-500 sticky w-full top-[100px] left-0"
       >
         <div id="toc-nav" ref="tocNav"></div>
       </div>
@@ -139,7 +139,7 @@ useHead({
 
 <style lang="scss" scoped>
 .post-page {
-  @apply p-4 pb-48 max-w-[1000px] flex mx-auto gap-8;
+  @apply pt-[105px] pb-[40vh] min-h-[100vh] max-w-[1340px] flex mx-auto gap-6;
 }
 
 .post-description {
@@ -161,10 +161,6 @@ useHead({
 </style>
 
 <style>
-body {
-  scroll-behavior: smooth;
-}
-
 .toc-list {
   @apply list-none;
 
@@ -206,15 +202,5 @@ body {
     @apply bg-gradient-to-r from-neutral-500/70 to-transparent via-neutral-500/20 text-white;
     background-clip: unset;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

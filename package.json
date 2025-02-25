@@ -18,10 +18,13 @@
     "@nuxt/image": "^1.9.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.13.1",
+    "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/typography": "^0.5.16",
     "@vueuse/core": "^12.5.0",
+    "@vueuse/motion": "^2.2.6",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
+    "lenis": "^1.1.21",
     "nuxt": "^3.15.4",
     "tocbot": "4.34.1-0",
     "vue": "latest"

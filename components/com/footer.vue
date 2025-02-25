@@ -1,55 +1,65 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="footer">
-    <ul class="column">
-      <li>
-        <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
-          <Icon name="fluent:shield-task-28-regular" />
-          备案 @ 浙ICP备2024103738号-4
-        </NuxtLink>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
-          <Icon name="hugeicons:drawing-mode" />
-          花远明 设计编码 & 部署
-        </NuxtLink>
-      </li>
-    </ul>
+  <div class="footer-wrapper">
+    <div class="footer">
+      <ul class="column">
+        <li>
+          <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
+            <Icon name="fluent:shield-task-28-regular" />
+            备案 @ 浙ICP备2024103738号-4
+          </NuxtLink>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
+            <Icon name="hugeicons:drawing-mode" />
+            花远明 设计编码 & 部署
+          </NuxtLink>
+        </li>
+      </ul>
 
-    <ul class="column">
-      <li>
-        <NuxtLink to="https://nuxt.com/">
-          <Icon name="devicon-plain:nuxtjs" />
-          服务端渲染 @ Nuxt.js
-        </NuxtLink>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <NuxtLink to="https://halo.run">
-          <Icon name="fluent:box-edit-20-regular" />
-          易用的后台 / 内容管理 @ Halo.run
-        </NuxtLink>
-      </li>
-      <li class="divider"></li>
-      <li>
-        <NuxtLink to="https://github.com/parallized">
-          <Icon name="hugeicons:github" />
-          博客开源在 <span class="text-orange-900/75">灰烬与鸢尾</span> Ash 'n'
-          Iris @ GitHub
-        </NuxtLink>
-      </li>
-    </ul>
+      <ul class="column">
+        <li>
+          <NuxtLink to="https://nuxt.com/">
+            <Icon name="devicon-plain:nuxtjs" />
+            服务端渲染 @ Nuxt.js
+          </NuxtLink>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <NuxtLink to="https://halo.run">
+            <Icon name="fluent:box-edit-20-regular" />
+            易用的后台 / 内容管理 @ Halo.run
+          </NuxtLink>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <NuxtLink to="https://github.com/parallized">
+            <Icon name="hugeicons:github" />
+            博客开源在 <span class="text-orange-300/75">灰烬与鸢尾</span> Ash
+            'n' Iris @ GitHub
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <div class="ender-word">Parallized</div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.footer-wrapper {
+  @apply relative h-[240px];
+  clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
 .footer {
-  @apply mt-auto mb-12 text-xs text-center flex flex-col items-center gap-3;
+  @apply fixed bottom-0 h-[240px] w-full bg-neutral-800 text-white;
+  @apply py-12 text-xs text-center flex flex-col items-center gap-3;
 
   .column {
-    @apply flex justify-center items-center gap-3 w-[100%] mx-auto max-w-[1200px];
+    @apply flex items-center gap-6 w-[100%] mx-auto max-w-[1340px];
   }
 
   .divider {
@@ -57,7 +67,12 @@
   }
 
   li > a {
-    @apply flex items-center gap-1 opacity-50 hover:opacity-100 cursor-pointer transition-all duration-300;
+    @apply flex items-center text-[14px] gap-2 cursor-pointer transition-all duration-300;
   }
+}
+
+.ender-word {
+  @apply bg-gradient-to-r from-white/5  via-neutral-800/10 to-neutral-700 leading-[120px] text-transparent bg-clip-text;
+  @apply absolute font-bold flex justify-start bottom-[-14px] text-[120px] w-full max-w-[1340px];
 }
 </style>

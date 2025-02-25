@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
   <div class="item">
     <NuxtLink class="title" :href="post.metadata.name"
-      >· {{ post.spec.title }}
+      >{{ post.spec.title }}
     </NuxtLink>
 
     <NuxtLink class="categories">
@@ -29,10 +29,11 @@ const props = defineProps<{
 
 <style scoped lang="scss">
 .item {
-  @apply inline-flex gap-1 items-center w-[65%];
+  @apply inline-flex gap-1 items-center;
 
   .title {
     @apply block text-sm cursor-pointer max-w-[340px] truncate line-clamp-1;
+    @apply border-l-[1.5px] pl-2 border-neutral-300;
   }
 
   .categories {

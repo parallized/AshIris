@@ -1,0 +1,43 @@
+<script setup lang="ts"></script>
+
+<template>
+  <section class="contact">
+    <h1 class="text-3xl tracking-wider">获取联络</h1>
+    <h2 class="opacity-60">
+      经常往 GitHub 上面放乱七八糟的代码，偶尔在 B 站发水视频记录一下
+    </h2>
+
+    <div class="flex gap-3">
+      <NuxtLink to="https://github.com/parallized" target="_blank" class="href">
+        <Icon name="hugeicons:github" />
+        parallized
+      </NuxtLink>
+
+      <NuxtLink
+        to="https://space.bilibili.com/3546851334687241"
+        target="_blank"
+        class="href"
+      >
+        <Icon name="mingcute:bilibili-line" />
+        parallized
+      </NuxtLink>
+
+      <div class="href">
+        <Icon name="material-symbols-light:mail-outline" />
+        parallized@outlook.com
+      </div>
+    </div>
+
+    <img src="~/assets/image/shader.png" class="w-[60%] mt-8">
+  </section>
+</template>
+
+<style scoped lang="scss">
+.contact {
+  @apply pt-[20vh] pb-24 bg-neutral-100 flex flex-col justify-center items-center w-full gap-5;
+}
+
+.href {
+  @apply flex items-center text-neutral-600 justify-center gap-2 text-[13px] px-2 py-1 border-neutral-300 border rounded-lg;
+}
+</style>

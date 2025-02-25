@@ -1,15 +1,20 @@
 <script setup lang="ts">
+import { useLenis, VueLenis } from 'lenis/vue'
+
+useLenis(({ scroll }) => {
+  console.log(scroll)
+})
 </script>
 
 <template>
-  <div class="layout-base relative">
+  <VueLenis root class="layout-base relative">
     <ComMouseBloom />
     <ComHeader />
     <main>
       <slot />
     </main>
     <ComFooter />
-  </div>
+  </VueLenis>
 </template>
 
 <style lang="scss" scoped>

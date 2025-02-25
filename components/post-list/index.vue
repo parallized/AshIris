@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Post } from '~/types/halo-struct'
 import Item from './item.vue'
-import Hero from '../com/hero.vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import { ref, onMounted } from 'vue'
 import { useHalo } from '~/utils/halo'
@@ -56,12 +55,6 @@ const count = ref()
 
 <template>
   <div class="post-list">
-    <Hero
-      title="远"
-      description="有许多遙远的，不稀奇的事情記載在这里"
-      title-class="text-[40px] text-transparent bg-clip-text from-black to-green-800/75 bg-gradient-to-br"
-    />
-
     <div v-if="posts?.[0] && count > 0" class="h-[20px] mb-6">
       <span class="opacity-55 text-sm items-center flex gap-2">
         <Icon name="mdi:select-search" />
@@ -70,11 +63,9 @@ const count = ref()
     </div>
 
     <ul v-if="posts" class="post-list__list">
-      <TransitionGroup name="fade-in">
-        <template v-for="p in posts" :key="idx">
-          <Item :post="p" />
-        </template>
-      </TransitionGroup>
+      <template v-for="p in posts" :key="idx">
+        <Item :post="p" />
+      </template>
     </ul>
 
     <div
@@ -90,24 +81,10 @@ const count = ref()
 
 <style lang="scss" scoped>
 .post-list {
-  @apply p-4;
+  @apply pb-24 px-1 pt-[100px];
 
   &__list {
-    @apply gap-4 flex flex-col;
+    @apply gap-6 flex flex-col;
   }
-}
-
-.fade-in-enter-active,
-.fade-in-leave-active {
-  @apply transition-all duration-[0.7s];
-  opacity: 1;
-}
-
-.fade-in-enter-from,
-.fade-in-leave-to {
-  @apply transition-all duration-[0.7s];
-  opacity: 0;
-  filter: blur(0.5px) grayscale(0.5);
-  transform: translateY(30px);
 }
 </style>
