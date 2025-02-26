@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHalo } from '~/utils/halo'
-import tocbot from 'tocbot'
+import * as tocbot from 'tocbot'
 
 definePageMeta({
   layout: 'base',

@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="hero" >
+  <div class="hero">
     <h1 :class="titleClass">{{ title }}</h1>
     <h2 class="mt-4">
       <span class="text-sm opacity-85" v-html="description"></span>
