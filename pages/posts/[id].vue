@@ -3,6 +3,7 @@ import { useHalo } from '~/utils/halo'
 import * as tocbot from 'tocbot'
 import { definePageMeta, useHead, useRoute, useRouter } from '#imports'
 import { onMounted, ref } from 'vue'
+import { formatDate } from '~/utils/time'
 
 definePageMeta({
   layout: 'base'
