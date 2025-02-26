@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import '~/assets/styles/color-theme.scss'
 import { useHead } from '#imports'
-import { VueLenis, useLenis } from 'lenis/vue'
+import { useLenis, VueLenis } from 'lenis/vue'
 
 useHead({
   title: '花远明的小世界',
@@ -21,7 +21,7 @@ useHead({
     },
     {
       rel: 'shortcut icon',
-      href: '/image/favicon.ico'
+      href: '/favicon.ico'
     }
   ]
 })

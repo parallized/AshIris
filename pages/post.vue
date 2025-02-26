@@ -35,7 +35,7 @@ coreApi.content.post.listPost().then((response) => {
         class="lores text-[14px] mt-4 px-1 font-light flex flex-col items-start gap-1"
       >
         <li class="opacity-85">
-          主业是学习
+          主业是学习<Icon  name="meteor-icons:wave" class="icon" />
         </li>
 
         <li class="mt-1 flex">

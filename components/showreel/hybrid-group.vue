@@ -5,7 +5,7 @@
     <div class="item">
       <div class="left-desc">
         <h1 class="from-white to-orange-500">
-          <Icon class="icon" name="entypo:sound" />
+          <Icon class="h-icon" name="entypo:sound" />
           Bobber
         </h1>
 
@@ -21,7 +21,7 @@
     <div class="item">
       <div class="left-desc">
         <h1 class="from-white to-purple-500">
-          <Icon class="icon" name="meteor-icons:wave" />
+          <Icon name="meteor-icons:wave" class="h-icon" />
           WaveSoundBus
         </h1>
 
@@ -37,7 +37,7 @@
     <div class="item">
       <div class="left-desc">
         <h1 class="from-white to-red-500">
-          <Icon class="icon" name="meteor-icons:wave" />
+          <Icon class="h-icon" name="mingcute:pin-line" />
           PinTranslator
         </h1>
 
@@ -77,7 +77,7 @@
   }
 }
 
-.icon {
-  @apply text-white;
+.h-icon {
+  @apply text-white text-xl;
 }
 </style>

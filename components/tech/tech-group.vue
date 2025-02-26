@@ -45,12 +45,12 @@ import TechCard from '~/components/tech/tech-card.vue'
       <TechCard name="devicon:nuget" />
       <TechCard name="devicon:postman" />
       <TechCard name="devicon:storybook" />
-      <TechCard name="devicon:vercel" />
+      <TechCard name="logos:vercel-icon" />
     </div>
 
     <div class="tech-group_set">
       <h2>前端</h2>
-      <TechCard name="devicon:vuejs" />
+      <TechCard name="logos:vue" />
       <TechCard name="devicon:react" />
       <TechCard name="devicon:astro" />
       <TechCard name="devicon:solidjs" />

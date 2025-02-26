@@ -3,12 +3,13 @@ import axios from 'axios'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-11-01',
+
   devtools: { enabled: false },
 
   imports: {
     autoImport: false
   },
-
   plugins: ['~/plugins/lenis'],
 
   modules: [
@@ -20,7 +21,7 @@ export default defineNuxtConfig({
   ],
 
   css: ['@/assets/fonts/fonts.css'],
-  ssr: true,
+  ssr: false,
   site: {
     url: 'https://parallized.cn',
     name: '花明远的小世界'
@@ -57,7 +58,5 @@ export default defineNuxtConfig({
         ctx.routes.add(url)
       }
     }
-  },
-
-  compatibilityDate: '2025-02-26'
+  }
 })

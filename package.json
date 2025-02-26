@@ -1,6 +1,7 @@
 {
   "name": "ash-iris",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
@@ -20,12 +21,15 @@
     "axios": "^1.8.1",
     "dayjs": "^1.11.13",
     "lenis": "^1.1.21",
-    "nuxt": "^3.15.4",
+    "nuxt": "^3.15.3",
     "pinia": "^3.0.1",
     "tocbot": "4.34.1-0",
-    "vue": "^3.5.13"
+    "vue": "latest"
   },
   "devDependencies": {
+    "@iconify-json/devicon": "^1.2.17",
+    "@iconify-json/entypo": "^1.2.1",
+    "@iconify-json/meteor-icons": "^1.2.1",
     "@nuxt/eslint": "^0.7.6",
     "@nuxtjs/sitemap": "^7.2.6",
     "@types/markdown-it": "^14.1.2",

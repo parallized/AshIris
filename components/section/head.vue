@@ -43,7 +43,7 @@ useIntersectionObserver(headEl, ([entry]) => {
 
   .head-image {
     @apply fixed top-0 z-[-1];
-    @apply object-cover w-[100vw] h-[100vh] grayscale-[30%];
+    @apply object-cover w-[100vw] h-[100vh];
   }
 
   .content-container {

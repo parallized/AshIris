@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <img :src="`http://cdn.parallized.cn/`+src" />
+  <img :src="`https://cdn.parallized.cn/`+src" />
 </template>
 
 <style scoped lang="scss">
