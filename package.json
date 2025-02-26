@@ -1,6 +1,7 @@
 {
   "name": "ash-iris",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,18 +12,14 @@
     "check": "nuxi typecheck"
   },
   "dependencies": {
-    "@directus/sdk": "^16.1.2",
     "@halo-dev/api-client": "^2.20.0",
-    "@nuxt/eslint": "^0.7.6",
     "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "^1.9.0",
-    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/typography": "^0.5.16",
-    "@vueuse/core": "^12.5.0",
-    "@vueuse/motion": "^2.2.6",
-    "axios": "^1.7.9",
+    "@vueuse/core": "^12.7.0",
+    "axios": "^1.8.1",
     "dayjs": "^1.11.13",
     "lenis": "^1.1.21",
     "nuxt": "^3.15.4",
@@ -30,10 +27,11 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@nuxtjs/sitemap": "^7.2.4",
+    "@nuxt/eslint": "^0.7.6",
+    "eslint": "^9.21.0",
+    "@nuxtjs/sitemap": "^7.2.6",
     "@types/markdown-it": "^14.1.2",
-    "prettier": "^3.5.0",
-    "sass": "^1.84.0",
+    "sass": "^1.85.1",
     "typescript": "^5.7.3",
     "vue-tsc": "^2.2.4"
   },

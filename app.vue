@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import '~/assets/styles/color-theme.scss'
 import Icon from '~/assets/image/favicon.ico'
+// import { useLenis, VueLenis } from 'lenis/vue'
 
 useHead({
   title: '花远明的小世界',
@@ -27,9 +28,11 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+<!--  <VueLenis root>-->
+<!--  </VueLenis>-->
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 </template>
 
 <style lang="scss">

@@ -5,22 +5,17 @@ import axios from 'axios'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  plugins: ['~/plugins/lenis'],
+  // plugins: ['~/plugins/lenis'],
   modules: [
     '@nuxt/eslint',
-    '@vueuse/motion/nuxt',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
     '@nuxt/image',
     '@nuxt/icon',
-    '@nuxtjs/sitemap',
     '@pinia/nuxt',
+    // '@nuxtjs/sitemap',
   ],
   css: ['@/assets/fonts/fonts.css'],
-  colorMode: {
-    classSuffix: '',
-  },
-  ssr: true,
+  ssr: false,
   vite: {
     css: {
       preprocessorOptions: {
@@ -30,13 +25,13 @@ export default defineNuxtConfig({
       },
     },
   },
-  site: {
-    url: 'https://parallized.cn',
-    name: '花明远的小世界',
-  },
-  sitemap: {
-    sources: ['/api/__sitemap__/urls'],
-  },
+  // site: {
+  //   url: 'https://parallized.cn',
+  //   name: '花明远的小世界',
+  // },
+  // sitemap: {
+  //   sources: ['/api/__sitemap__/urls'],
+  // },
   // nitro: {
   //   prerender: {
   //     routes: ['/', '/sitemap.xml', '/robots.txt'],
