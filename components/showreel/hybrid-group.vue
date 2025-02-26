@@ -10,12 +10,12 @@
         </h1>
 
         <h2>
-          一个超级酷的 Windows Endpoint API 监听软件, 由 C++ Dll 和 Electron
+          一个超酷的 Windows Endpoint API 监听软件, 由 C++ Dll 和 Electron
           构成, UI 完全自主设计
         </h2>
       </div>
 
-      <img src="~/assets/image/bobber.png" >
+      <NuxtImg src="/image/bobber.webp" />
     </div>
 
     <div class="item">
@@ -31,7 +31,7 @@
         </h2>
       </div>
 
-      <img src="~/assets/image/wavesound.png" >
+      <NuxtImg src="/image/wavesound.webp" />
     </div>
 
     <div class="item">
@@ -42,12 +42,12 @@
         </h1>
 
         <h2>
-          同样具有极简和高品质的 Tauri Sticky 桌面翻译软件,
+          极简的 Tauri Sticky 桌面翻译软件,
           帮助你在任意时刻找到译文, Portable 版本仅占用 8.3MB 大小
         </h2>
       </div>
 
-      <img src="~/assets/image/pint.gif" >
+      <NuxtImg src="/image/pint.gif" />
     </div>
   </div>
 </template>

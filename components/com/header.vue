@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useThemeStore, HeaderColorMode } from '~/store/theme'
+import { computed, storeToRefs } from '#imports'
 
 const theme = useThemeStore()
 

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import SectionHead from '~/components/section/head.vue'
 import { useThemeStore } from '~/store/theme'
+import { definePageMeta, storeToRefs } from '#imports'
 
 definePageMeta({
-  layout: 'base',
+  layout: 'base'
 })
 
 const theme = useThemeStore()
@@ -12,7 +13,7 @@ const { introHide } = storeToRefs(theme)
 
 <template>
   <div class="index">
-    <SectionHead/>
+    <SectionHead />
 
     <section class="self-intro bg-noise">
       <div class="intro" :class="introHide ? '' : 'opacity-0'">
@@ -21,12 +22,12 @@ const { introHide } = storeToRefs(theme)
       </div>
     </section>
 
-    <SectionPortfolio/>
-    <SectionContact/>
-    <SectionTechskill/>
-    <SectionShowreel/>
-    <SectionPeak/>
-    <SectionTail/>
+    <SectionPortfolio />
+    <SectionContact />
+    <SectionTechskill />
+    <SectionShowreel />
+    <SectionPeak />
+    <SectionTail />
   </div>
 </template>
 

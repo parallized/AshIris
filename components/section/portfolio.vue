@@ -2,6 +2,8 @@
 import { useIntersectionObserver } from '@vueuse/core'
 import { useThemeStore } from '~/store/theme'
 import PortfolioCard from '~/components/section/portfolio-card.vue'
+import { storeToRefs } from '#imports'
+import { ref } from 'vue'
 
 const theme = useThemeStore()
 
@@ -19,28 +21,28 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
       <div class="portfolio-group pt-[16vh] scale-[95%]">
         <PortfolioCard>
           <template #image>
-            <img class="portfolio-img" src="~/assets/image/latern.jpg" >
+            <NuxtImg class="portfolio-img" src="/image/latern.webp" />
           </template>
         </PortfolioCard>
 
         <PortfolioCard>
           <template #image>
-            <img class="portfolio-img" src="~/assets/image/street.jpg" >
+            <NuxtImg class="portfolio-img" src="/image/street.webp" />
           </template>
         </PortfolioCard>
       </div>
       <div class="portfolio-group">
         <PortfolioCard>
           <div>
-            <img class="thumb" src="~/assets/image/iris.jpg" >
+            <NuxtImg class="thumb" src="/image/iris.webp" />
             喜欢记录一些无论价值的事物，所以制作了
             <span class="text-orange-400/75">AshIris</span>
             这个博客，叫做灰烬与莺尾
             <span class="opacity-65"
-              >这个博客经历了非常多次重构，贯穿了大学生涯</span
+            >这个博客经历了非常多次重构，贯穿了大学生涯</span
             >
           </div>
-          <div class="divider"/>
+          <div class="divider" />
           <NuxtLink
             class="badge"
             href="https://github.com/parallized/AshIris"
@@ -52,20 +54,20 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
         </PortfolioCard>
         <PortfolioCard>
           <template #image>
-            <img class="portfolio-img" src="~/assets/image/leaves.jpg" >
+            <NuxtImg class="portfolio-img" src="/image/leaves.webp" />
           </template>
         </PortfolioCard>
         <PortfolioCard class="invert opacity-80">
           <div>
-            <img class="thumb invert" src="~/assets/image/build.jpg" >
+            <NuxtImg class="thumb invert" src="/image/build.webp" />
             在制作博客同样的想法下开发了 3D 的
             Pixellens，记录一下做过的模型（或许还能当一个简易的 ShaderLab）<span
-              class="opacity-65"
-              >早期考虑的是做 Minecraft
+            class="opacity-65"
+          >早期考虑的是做 Minecraft
               机器图鉴，半路被拐入建筑区开始学做建筑了</span
-            >
+          >
           </div>
-          <div class="divider"/>
+          <div class="divider" />
           <NuxtLink
             target="_blank"
             href="https://github.com/goatcorp/Dalamud"
@@ -79,20 +81,20 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
       <div class="portfolio-group pt-[40vh] scale-[95%]">
         <PortfolioCard ref="introEndTriggerEl">
           <template #image>
-            <img class="portfolio-img" src="~/assets/image/wave.jpg" >
+            <NuxtImg class="portfolio-img" src="/image/wave.webp" />
           </template>
         </PortfolioCard>
         <PortfolioCard>
           <div>
-            <img class="thumb" src="~/assets/image/wow.jpg" >
+            <NuxtImg class="thumb" src="/image/wow.webp" />
             曾经是个 Minecraft 服务器开发者，做过一些没有名气的 War3
             地图，算是一部分 Shader 和 PCG 学习的兴趣来源~
             <span class="opacity-65"
-              >玩的最多的是 MMO，从古早的传奇到现代的
+            >玩的最多的是 MMO，从古早的传奇到现代的
               FF14，最喜欢的部分是编写机器人帮我打游戏</span
             >
           </div>
-          <div class="divider"/>
+          <div class="divider" />
           <NuxtLink
             target="_blank"
             href="https://github.com/goatcorp/Dalamud"

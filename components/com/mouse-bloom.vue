@@ -5,6 +5,7 @@ import {
   useDebounceFn,
   usePageLeave,
 } from '@vueuse/core'
+import { ref } from 'vue'
 
 const { x, y } = useMouse()
 

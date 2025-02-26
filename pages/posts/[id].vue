@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useHalo } from '~/utils/halo'
 import * as tocbot from 'tocbot'
+import { definePageMeta, useHead, useRoute, useRouter } from '#imports'
+import { onMounted, ref } from 'vue'
 
 definePageMeta({
-  layout: 'base',
+  layout: 'base'
 })
 
 const { coreApi } = useHalo()
@@ -40,7 +42,7 @@ const loadToc = async () => {
     tocSelector: '#toc-nav',
     contentSelector: '.prose',
     headingSelector: 'h1, h2, h3',
-    hasInnerContainers: true,
+    hasInnerContainers: true
   })
 
   if (!tocNav.value?.childNodes || tocNav.value?.childNodes.length === 0) {
@@ -63,9 +65,9 @@ useHead({
     {
       hid: 'description',
       name: 'description',
-      content: postData.value?.spec?.title,
-    },
-  ],
+      content: postData.value?.spec?.title
+    }
+  ]
 })
 </script>
 
@@ -119,7 +121,7 @@ useHead({
         :class="showToc ? 'opacity-100' : 'opacity-0 translate-x-[20px]'"
         class="transition-all duration-500 sticky w-full top-[100px] left-0"
       >
-        <div id="toc-nav" ref="tocNav"/>
+        <div id="toc-nav" ref="tocNav" />
       </div>
       <div
         v-else

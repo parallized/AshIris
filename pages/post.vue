@@ -2,9 +2,11 @@
 import type { Post } from '~/types/halo-struct'
 import TechGroup from '~/components/tech/tech-group.vue'
 import { useHalo } from '~/utils/halo'
+import { definePageMeta } from '#imports'
+import { ref } from 'vue'
 
 definePageMeta({
-  layout: 'base',
+  layout: 'base'
 })
 
 const posts = ref<Post[]>()
@@ -20,10 +22,10 @@ coreApi.content.post.listPost().then((response) => {
 <template>
   <div class="index">
     <section class="relative w-full flex flex-col">
-      <img
+      <NuxtImg
         class="absolute right-[50px] top-[30px] w-[270px] opacity-30 grayscale"
-        src="~/assets/image/flower-1.webp"
-      >
+        src="/image/flower-1.webp"
+      />
 
       <div class="flex">
         <h1 class="text-[40px] text-transparent bg-clip-text  from-black to-red-800/75 bg-gradient-to-br">花</h1>
@@ -90,7 +92,7 @@ coreApi.content.post.listPost().then((response) => {
         </li>
 
         <li class="mt-4 mb-24 flex w-full">
-          <TechGroup/>
+          <TechGroup />
         </li>
       </ul>
     </section>

@@ -11,7 +11,7 @@
           <Icon name="mingcute:right-line" />
           <h1>AshIris</h1>
         </div>
-        <img src="~/assets/image/ashiris.png" >
+        <NuxtImg src="/image/ashiris.webp" />
       </div>
       <div class="desc">NuxtJS 构建的博客, CMS 为本地部署的 Halo</div>
     </div>
@@ -24,7 +24,7 @@
           <Icon name="mingcute:right-line" />
           <h1>Almuni</h1>
         </div>
-        <img src="~/assets/image/almuni.png" >
+        <NuxtImg src="/image/almuni.webp" />
       </div>
       <div class="desc">Tauri + React + Vite 多端 Monorepo 实践</div>
     </div>
@@ -37,7 +37,7 @@
           <Icon name="mingcute:right-line" />
           <h1>GametipJS</h1>
         </div>
-        <img src="~/assets/image/gametips.gif" >
+        <NuxtImg src="/image/gametips.gif" />
       </div>
       <div class="desc">一个优雅的在浏览器里模拟鼠标跟随提示的 JS 库</div>
     </div>
@@ -50,7 +50,7 @@
           <Icon name="mingcute:right-line" />
           <h1>NodePacs</h1>
         </div>
-        <img src="~/assets/image/pacs.png" >
+        <NuxtImg src="/image/pacs.webp" />
       </div>
       <div class="desc">
         基于 dicom4j 的 node pacs 服务 Demo, 并在前端展示医疗数据
@@ -65,7 +65,7 @@
           <Icon name="mingcute:right-line" />
           <h1>Kapi</h1>
         </div>
-        <img src="~/assets/image/kapi.png" >
+        <NuxtImg src="/image/kapi.webp" />
       </div>
       <div class="desc">
         基于 H2SQL + Ktor 的 BFF, 快速上手的文件数据库极简后端
@@ -80,7 +80,7 @@
           <Icon name="mingcute:right-line" />
           <h1>Tampermonkey-PTA-paste</h1>
         </div>
-        <img src="~/assets/image/tamper.png" >
+        <NuxtImg src="/image/tamper.webp" />
       </div>
       <div class="desc">
         PTA 平台支持复制的油猴脚本, 答题时本地 IDE 调试更便利
@@ -111,7 +111,7 @@
   }
 
   img {
-    @apply w-full aspect-video object-left-top brightness-75 object-cover rounded-b-[6px] overflow-hidden transition-all;
+    @apply w-full aspect-video object-left-top brightness-[85%] object-cover rounded-b-[6px] overflow-hidden transition-all;
   }
 }
 

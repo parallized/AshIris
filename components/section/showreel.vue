@@ -11,7 +11,7 @@
       </div>
 
       <div class="image-container">
-        <img src="~/assets/image/curve.webp" >
+        <NuxtImg src="/image/curve.webp" />
         <div class="mask"/>
       </div>
     </div>

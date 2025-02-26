@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { HeaderColorMode, useThemeStore } from '~/store/theme'
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 const theme = useThemeStore()
@@ -23,19 +23,19 @@ useIntersectionObserver(flowerEl, ([entry]) => {
   <section class="peak">
     <div ref="flowerEl" class="clip">
       <div class="clip-text-wrapper">
-        <div class="clip-text">等待更多未来</div>
+        <div class="clip-text">更多未来</div>
       </div>
       <div class="clip-image">
-        <img
+        <NuxtImg
           class="object-cover w-full max-w-[1200px]"
-          src="~/assets/image/flowersea.webp"
-        >
+          src="/image/flowersea.webp"
+        />
         <div class="clip-mask"/>
       </div>
     </div>
 
     <div class="underworld bg-noise">
-      <h1>施工中</h1>
+      <h1>剩余内容施工中...</h1>
     </div>
   </section>
 </template>
@@ -77,7 +77,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
     @apply h-[500px] flex items-center justify-center sticky bottom-[0vh];
 
     h1 {
-      @apply text-[128px] text-neutral-500;
+      @apply text-[58px] text-neutral-500;
     }
   }
 }

@@ -3,18 +3,7 @@
 <template>
   <div class="flex flex-wrap pt-12 gap-12">
     <div class="item">
-      <img src="~/assets/image/map.png" >
-      <div class="badge">
-        <div class="border-b-2 border-green-400/75">Leaflet</div>
-        <div class="border-b-2 border-[#00D1F7]/75">React</div>
-        <div class="border-b-2 border-[#FFB13B]/75">SVG</div>
-      </div>
-      <h1>· 实时热力图</h1>
-      <h2>geo 数据绘制生成 svg, 根据 heat 值渐进颜色大小</h2>
-    </div>
-
-    <div class="item">
-      <img src="~/assets/image/pixellens.png" >
+      <NuxtImg src="/image/pixellens.webp" />
       <div class="badge">
         <div class="border-b-2 border-[#FF4F4F]/75">Tresjs</div>
         <div class="border-b-2 border-[#08D47F]/75">Nuxt</div>
@@ -22,6 +11,17 @@
       </div>
       <h1>· 像素档案馆</h1>
       <h2>Tresjs 3D 全息模型馆, 多种环境展示, 自动材质流水线</h2>
+    </div>
+
+    <div class="item">
+      <NuxtImg src="/image/map.webp" />
+      <div class="badge">
+        <div class="border-b-2 border-green-400/75">Leaflet</div>
+        <div class="border-b-2 border-[#00D1F7]/75">React</div>
+        <div class="border-b-2 border-[#FFB13B]/75">SVG</div>
+      </div>
+      <h1>· 实时热力图</h1>
+      <h2>geo 数据绘制生成 svg, 根据 heat 值渐进颜色大小</h2>
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@
   }
 
   img {
-    @apply w-full brightness-[70%] aspect-video border border-neutral-200/40 object-cover rounded-[6px] overflow-hidden transition-all;
+    @apply w-full brightness-[85%] aspect-video border border-neutral-200/40 object-cover rounded-[6px] overflow-hidden transition-all;
 
     box-shadow: rgba(88, 88, 88, 0.5) 6px 6px 0;
 

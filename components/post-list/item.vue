@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Post } from '~/types/halo-struct'
 import { getStrCategory } from '~/utils/categories'
-import { formatDate } from '../../utils/time'
+import { formatDate } from '~/utils/time'
 
 defineProps<{
   post: Post

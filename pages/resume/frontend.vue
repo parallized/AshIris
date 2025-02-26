@@ -1,7 +1,4 @@
 <script setup lang="ts">
-onMounted(() => {
-  useColorMode().value = 'light'
-})
 </script>
 <template>
   <div class="resume">

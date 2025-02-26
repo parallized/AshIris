@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { HeaderColorMode, useThemeStore } from '~/store/theme'
+import { definePageMeta, storeToRefs } from '#imports'
 
 definePageMeta({
   layout: 'base',

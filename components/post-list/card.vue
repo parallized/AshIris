@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Post } from '~/types/halo-struct'
+import { onMounted, ref } from 'vue'
 
 defineProps<{
   post: Post

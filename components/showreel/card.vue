@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ShowTopic } from '~/components/showreel/grid.vue'
+import type { ShowTopic } from '~/types/global'
 
 defineProps<{
   data: ShowTopic
@@ -11,7 +11,7 @@ defineProps<{
     <h1 class="title">{{ data.title }}</h1>
     <h2 v-if="data.desc" class="desc">{{ data.desc }}</h2>
 
-    <slot/>
+    <slot />
   </div>
 </template>
 

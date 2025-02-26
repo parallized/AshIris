@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import { HeaderColorMode, useThemeStore } from '~/store/theme'
 
@@ -21,7 +21,7 @@ useIntersectionObserver(headEl, ([entry]) => {
 
 <template>
   <section ref="headEl" class="head-image-container">
-    <img class="head-image" src="~/assets/image/dance.jpg" >
+    <NuxtImg class="head-image" src="/image/dance.webp" />
     <div class="content-container">
       <div class="content">
         <h1>不散, 不见</h1>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import '~/assets/styles/color-theme.scss'
-import Icon from '~/assets/image/favicon.ico'
-// import { useLenis, VueLenis } from 'lenis/vue'
+import { useHead } from '#imports'
+import { VueLenis, useLenis } from 'lenis/vue'
 
 useHead({
   title: '花远明的小世界',
@@ -9,30 +9,32 @@ useHead({
   link: [
     {
       rel: 'stylesheet',
-      href: 'https://fonts.font.im/css?family=Amaranth:400i|Comfortaa|Marcellus',
+      href: 'https://fonts.font.im/css?family=Amaranth:400i|Comfortaa|Marcellus'
     },
     {
       rel: 'stylesheet',
-      href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css',
+      href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css'
     },
     {
       rel: 'stylesheet',
-      href: 'https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css',
+      href: 'https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css'
     },
     {
       rel: 'shortcut icon',
-      href: Icon,
-    },
-  ],
+      href: '/image/favicon.ico'
+    }
+  ]
 })
+
+useLenis()
 </script>
 
 <template>
-<!--  <VueLenis root>-->
-<!--  </VueLenis>-->
+  <VueLenis root>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+  </VueLenis>
 </template>
 
 <style lang="scss">
