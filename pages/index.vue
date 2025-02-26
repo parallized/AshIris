@@ -14,7 +14,7 @@ const { introHide } = storeToRefs(theme)
   <div class="index">
     <SectionHead></SectionHead>
 
-    <section class="self-intro">
+    <section class="self-intro bg-noise">
       <div class="intro" :class="introHide ? '' : 'opacity-0'">
         <h1 class="text-3xl opacity-60 tracking-wider">你好啊~</h1>
         <h1 class="text-3xl tracking-wider">相逢何必曾相识</h1>
@@ -26,6 +26,7 @@ const { introHide } = storeToRefs(theme)
     <SectionTechskill></SectionTechskill>
     <SectionShowreel></SectionShowreel>
     <SectionPeak></SectionPeak>
+    <SectionTail></SectionTail>
   </div>
 </template>
 
@@ -35,7 +36,7 @@ const { introHide } = storeToRefs(theme)
 }
 
 .self-intro {
-  @apply bg-neutral-100 flex flex-col items-center justify-center h-[100vh];
+  @apply flex flex-col items-center justify-center h-[100vh];
 
   .intro {
     @apply transition-all sticky top-[30vh] flex flex-col gap-2 items-center;

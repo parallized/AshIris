@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   //     mode: 'out-in',
   //   },
   // },
-  ssr: false,
+  ssr: true,
   vite: {
     css: {
       preprocessorOptions: {

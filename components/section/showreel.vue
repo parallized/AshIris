@@ -22,7 +22,7 @@
 
 <style scoped lang="scss">
 .showreel {
-  @apply bg-black min-h-[100vh] w-full text-white;
+  @apply bg-black min-h-[100vh] pb-[30vh] w-full text-white;
 
   .content {
     @apply z-[0] max-w-[1440px] h-full mx-auto flex relative;

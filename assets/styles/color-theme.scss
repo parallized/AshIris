@@ -3,5 +3,17 @@ body {
 }
 
 * {
-  @apply subpixel-antialiased;
+  @apply subpixel-antialiased select-none;
+}
+
+.bg-noise {
+  @apply relative bg-neutral-100;
+}
+
+.bg-noise::before {
+  content: "";
+  @apply absolute inset-0 opacity-[0.06] z-[0];
+  background-size: 109px;
+  background-image: url("~/assets/image/noise.png");
+  background-repeat: repeat;
 }

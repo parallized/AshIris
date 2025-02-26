@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <section class="contact">
+  <section class="contact bg-noise">
     <h1 class="text-3xl tracking-wider">获取联络</h1>
     <h2 class="opacity-60 text-center leading-[34px]">
       经常往 GitHub 上面放乱七八糟的代码，偶尔在 B 站发水视频记录一下<br>
@@ -31,16 +31,16 @@
       </div>
     </div>
 
-    <img src="~/assets/image/ide.png" class="w-[60%] mt-8">
+    <img src="~/assets/image/ide.png" class="w-[60%] z-[1] mt-8">
   </section>
 </template>
 
 <style scoped lang="scss">
 .contact {
-  @apply pt-[20vh] pb-24 bg-neutral-100 flex flex-col justify-center items-center w-full gap-5;
+  @apply pt-[20vh] pb-24 flex flex-col justify-center items-center w-full gap-5;
 }
 
 .href {
-  @apply flex items-center text-neutral-600 justify-center gap-2 text-[13px] px-2 py-1 border-neutral-300 border rounded-lg;
+  @apply z-[1] bg-white/65 flex items-center text-neutral-600 justify-center gap-2 text-[13px] px-2 py-1 border-neutral-300 border rounded-lg;
 }
 </style>

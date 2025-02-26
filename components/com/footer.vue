@@ -1,4 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
   <div class="footer-wrapper">
@@ -43,7 +44,11 @@
         </li>
       </ul>
 
-      <div class="ender-word">Parallized</div>
+      <Icon class="ender-icon" name="hugeicons:flower" />
+
+      <div class="ender-word">
+        Parallized · HanaMin
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +77,11 @@
 }
 
 .ender-word {
-  @apply bg-gradient-to-r from-white/5  via-neutral-800/10 to-neutral-700 leading-[120px] text-transparent bg-clip-text;
-  @apply absolute font-bold flex justify-start bottom-[-14px] text-[120px] w-full max-w-[1340px];
+  @apply bg-gradient-to-r from-neutral-500/5 to-slate-300/40 leading-[120px] text-transparent bg-clip-text;
+  @apply absolute font-bold flex justify-start bottom-[-18px] text-[120px] w-full max-w-[1340px];
+}
+
+.ender-icon {
+  @apply absolute w-full flex items-end max-w-[1340px] right-0 text-[50px] text-white/75 top-[50px];
 }
 </style>

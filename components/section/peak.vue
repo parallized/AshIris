@@ -23,7 +23,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
   <section class="peak">
     <div class="clip" ref="flowerEl">
       <div class="clip-text-wrapper">
-        <div class="clip-text">未来的更多</div>
+        <div class="clip-text">等待更多未来</div>
       </div>
       <div class="clip-image">
         <img
@@ -34,13 +34,15 @@ useIntersectionObserver(flowerEl, ([entry]) => {
       </div>
     </div>
 
-    <div class="underworld">Undercity</div>
+    <div class="underworld bg-noise">
+      <h1>施工中</h1>
+    </div>
   </section>
 </template>
 
 <style scoped lang="scss">
 .peak {
-  @apply relative h-[1300px] text-center w-full;
+  @apply relative h-[1000px] text-center w-full;
   clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
 
   .clip {
@@ -48,6 +50,10 @@ useIntersectionObserver(flowerEl, ([entry]) => {
 
     .clip-image {
       @apply absolute bottom-0 w-full flex justify-center blur-[4px] brightness-[80%] grayscale-[20%];
+    }
+
+    .clip-text {
+      text-shadow: rgba(0, 0, 0, 0.89) 2px 2px 4px;
     }
 
     .clip-mask {
@@ -68,7 +74,11 @@ useIntersectionObserver(flowerEl, ([entry]) => {
   }
 
   .underworld {
-    @apply h-[800px] flex items-center bg-neutral-100 justify-center sticky bottom-[0vh];
+    @apply h-[500px] flex items-center justify-center sticky bottom-[0vh];
+
+    h1 {
+      @apply text-[128px] text-neutral-500;
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@ import TechCard from '~/components/tech/tech-card.vue'
 </script>
 
 <template>
-  <section class="techskill">
+  <section class="techskill bg-noise">
     <div class="tech-group">
       <div class="tech-group_set">
         <div class="divider"></div>
@@ -105,7 +105,7 @@ import TechCard from '~/components/tech/tech-card.vue'
 
 <style lang="scss" scoped>
 .techskill {
-  @apply w-full bg-neutral-100 pb-48;
+  @apply w-full pb-48;
 }
 
 .tech-group {

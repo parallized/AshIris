@@ -18,15 +18,15 @@ defineProps<{
 <style scoped lang="scss">
 .card {
   @apply shadow-md bg-neutral-950 border border-neutral-500/25 rounded-lg;
-  @apply p-6 flex flex-col gap-3 z-[1] relative overflow-hidden;
+  @apply p-[26px] flex flex-col gap-3 z-[1] relative overflow-hidden;
   // text alignment
 
   .title {
-    @apply text-[18px] tracking-wider;
+    @apply text-[19px] tracking-wider;
   }
 
   .desc {
-    @apply text-[14px] tracking-wide opacity-55 max-w-[70%];
+    @apply text-[14px] tracking-wider opacity-55 max-w-[70%];
   }
 }
 </style>

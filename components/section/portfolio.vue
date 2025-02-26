@@ -14,7 +14,7 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
 </script>
 
 <template>
-  <section class="self-portfolio">
+  <section class="self-portfolio bg-noise">
     <div class="portfolio-container">
       <div class="portfolio-group pt-[16vh] scale-[95%]">
         <PortfolioCard>
@@ -109,7 +109,7 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
 
 <style scoped lang="scss">
 .self-portfolio {
-  @apply bg-neutral-100 pb-12 tracking-wider;
+  @apply pb-12 tracking-wider;
 
   .portfolio-container {
     @apply w-full grid-cols-3 gap-16 grid max-w-[1370px] mx-auto;
@@ -120,7 +120,7 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
   }
 
   .portfolio-img {
-    @apply w-full object-cover object-left-bottom h-full;
+    @apply w-full object-cover object-left-bottom h-full  brightness-[115%];
   }
 }
 
