@@ -134,7 +134,7 @@ useHead({
     </nav>
 
     <div
-      class="prose-code:text-[14px] prose-code:inline-flex prose-pre:leading-[20px] prose-code:opacity-85 prose-img:rounded-lg prose-img:drop-shadow-lg prose-img:max-h-[170px] prose-ul:text-[14px] prose-li:text-[14px] prose-p:text-[14px] prose-h1:text-[23px] prose-h2:text-[19px] prose-h3:text-[16px] prose max-w-full"
+      class="prose-code:text-[14px] prose-code:inline-flex prose-pre:leading-[20px] prose-code:opacity-85 prose-img:rounded-lg prose-img:drop-shadow-lg prose-ul:text-[14px] prose-li:text-[14px] prose-p:text-[14px] prose-h1:text-[23px] prose-h2:text-[19px] prose-h3:text-[16px] prose max-w-full"
       v-html="content"
     />
   </div>
