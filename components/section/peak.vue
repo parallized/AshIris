@@ -26,7 +26,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
         <div class="clip-text">更多未来</div>
       </div>
       <div class="clip-image">
-        <NuxtImg
+        <QImg
           class="object-cover w-full max-w-[1200px]"
           src="image/flowersea.webp"
         />

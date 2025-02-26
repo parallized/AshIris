@@ -11,12 +11,12 @@
       </div>
 
       <div class="image-container">
-        <NuxtImg src="image/curve.webp" />
-        <div class="mask"/>
+        <QImg src="image/curve.webp" />
+        <div class="mask" />
       </div>
     </div>
 
-    <ShowreelGrid/>
+    <ShowreelGrid />
   </section>
 </template>
 

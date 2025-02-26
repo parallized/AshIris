@@ -13,7 +13,6 @@
   "dependencies": {
     "@halo-dev/api-client": "^2.20.0",
     "@nuxt/icon": "^1.10.3",
-    "@nuxt/image": "^1.9.0",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/typography": "^0.5.16",

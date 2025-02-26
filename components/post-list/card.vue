@@ -22,7 +22,7 @@ onMounted(async () => {
     :href="`/posts/${post.spec.slug}`"
   >
 <!--    <div class="post-card__cover">-->
-<!--      <NuxtImg-->
+<!--      <QImg-->
 <!--        v-if="post.spec"-->
 <!--        :src="dirAssetsSrc(post.cover)"-->
 <!--        :class="imgLoading ? `outrect-loading` : ''"-->

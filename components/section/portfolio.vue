@@ -21,20 +21,20 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
       <div class="portfolio-group pt-[16vh] scale-[95%]">
         <PortfolioCard>
           <template #image>
-            <NuxtImg class="portfolio-img" src="image/latern.webp" />
+            <QImg class="portfolio-img" src="image/latern.webp" />
           </template>
         </PortfolioCard>
 
         <PortfolioCard>
           <template #image>
-            <NuxtImg class="portfolio-img" src="image/street.webp" />
+            <QImg class="portfolio-img" src="image/street.webp" />
           </template>
         </PortfolioCard>
       </div>
       <div class="portfolio-group">
         <PortfolioCard>
           <div>
-            <NuxtImg class="thumb" src="image/iris.webp" />
+            <QImg class="thumb" src="image/iris.webp" />
             喜欢记录一些无论价值的事物，所以制作了
             <span class="text-orange-400/75">AshIris</span>
             这个博客，叫做灰烬与莺尾
@@ -54,12 +54,12 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
         </PortfolioCard>
         <PortfolioCard>
           <template #image>
-            <NuxtImg class="portfolio-img" src="image/leaves.webp" />
+            <QImg class="portfolio-img" src="image/leaves.webp" />
           </template>
         </PortfolioCard>
         <PortfolioCard class="invert opacity-80">
           <div>
-            <NuxtImg class="thumb invert" src="image/build.webp" />
+            <QImg class="thumb invert" src="image/build.webp" />
             在制作博客同样的想法下开发了 3D 的
             Pixellens，记录一下做过的模型（或许还能当一个简易的 ShaderLab）<span
             class="opacity-65"
@@ -81,12 +81,12 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
       <div class="portfolio-group pt-[40vh] scale-[95%]">
         <PortfolioCard ref="introEndTriggerEl">
           <template #image>
-            <NuxtImg class="portfolio-img" src="image/wave.webp" />
+            <QImg class="portfolio-img" src="image/wave.webp" />
           </template>
         </PortfolioCard>
         <PortfolioCard>
           <div>
-            <NuxtImg class="thumb" src="image/wow.webp" />
+            <QImg class="thumb" src="image/wow.webp" />
             曾经是个 Minecraft 服务器开发者，做过一些没有名气的 War3
             地图，算是一部分 Shader 和 PCG 学习的兴趣来源~
             <span class="opacity-65"

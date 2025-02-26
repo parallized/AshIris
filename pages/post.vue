@@ -22,7 +22,7 @@ coreApi.content.post.listPost().then((response) => {
 <template>
   <div class="index">
     <section class="relative w-full flex flex-col">
-      <NuxtImg
+      <QImg
         class="absolute right-[50px] top-[30px] w-[270px] opacity-30 grayscale"
         src="image/flower-1.webp"
       />
