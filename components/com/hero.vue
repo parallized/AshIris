@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   title?: string
   description?: string
   titleClass?: string
@@ -10,7 +10,7 @@ const props = defineProps<{
   <div class="hero">
     <h1 :class="titleClass">{{ title }}</h1>
     <h2 class="mt-4">
-      <span class="text-sm opacity-85" v-html="description"></span>
+      <span class="text-sm opacity-85" v-html="description"/>
     </h2>
   </div>
 </template>

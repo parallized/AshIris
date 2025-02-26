@@ -11,7 +11,7 @@
             备案 @ 浙ICP备2024103738号-4
           </NuxtLink>
         </li>
-        <li class="divider"></li>
+        <li class="divider"/>
         <li>
           <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
             <Icon name="hugeicons:drawing-mode" />
@@ -27,14 +27,14 @@
             服务端渲染 @ Nuxt.js
           </NuxtLink>
         </li>
-        <li class="divider"></li>
+        <li class="divider"/>
         <li>
           <NuxtLink to="https://halo.run">
             <Icon name="fluent:box-edit-20-regular" />
             易用的后台 / 内容管理 @ Halo.run
           </NuxtLink>
         </li>
-        <li class="divider"></li>
+        <li class="divider"/>
         <li>
           <NuxtLink to="https://github.com/parallized">
             <Icon name="hugeicons:github" />

@@ -7,8 +7,6 @@ definePageMeta({
   layout: 'base',
 })
 
-const PAGE_LIMIT = 8
-
 const posts = ref<Post[]>()
 
 const { coreApi } = useHalo()
@@ -25,7 +23,7 @@ coreApi.content.post.listPost().then((response) => {
       <img
         class="absolute right-[50px] top-[30px] w-[270px] opacity-30 grayscale"
         src="~/assets/image/flower-1.webp"
-      />
+      >
 
       <div class="flex">
         <h1 class="text-[40px] text-transparent bg-clip-text  from-black to-red-800/75 bg-gradient-to-br">花</h1>
@@ -53,9 +51,9 @@ coreApi.content.post.listPost().then((response) => {
 
         <li class="mt-2 flex flex-wrap w-[75%] overflow-hidden">
           <NuxtLink
-            class="flex mr-4 mb-1 opacity-50 text-[13px] hover:opacity-100 cursor-pointer transition-all"
             v-for="(p, idx) in posts"
             :key="idx"
+            class="flex mr-4 mb-1 opacity-50 text-[13px] hover:opacity-100 cursor-pointer transition-all"
             :href="`/posts/` + p.metadata.name"
           >
             · {{ p.spec.title }}
@@ -92,7 +90,7 @@ coreApi.content.post.listPost().then((response) => {
         </li>
 
         <li class="mt-4 mb-24 flex w-full">
-          <TechGroup></TechGroup>
+          <TechGroup/>
         </li>
       </ul>
     </section>

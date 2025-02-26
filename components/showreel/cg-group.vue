@@ -3,7 +3,7 @@
 <template>
   <div class="flex flex-wrap pt-12 gap-12">
     <div class="item">
-      <img src="~/assets/image/map.png" />
+      <img src="~/assets/image/map.png" >
       <div class="badge">
         <div class="border-b-2 border-green-400/75">Leaflet</div>
         <div class="border-b-2 border-[#00D1F7]/75">React</div>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="item">
-      <img src="~/assets/image/pixellens.png" />
+      <img src="~/assets/image/pixellens.png" >
       <div class="badge">
         <div class="border-b-2 border-[#FF4F4F]/75">Tresjs</div>
         <div class="border-b-2 border-[#08D47F]/75">Nuxt</div>

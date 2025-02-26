@@ -21,7 +21,7 @@ useIntersectionObserver(headEl, ([entry]) => {
 
 <template>
   <section ref="headEl" class="head-image-container">
-    <img class="head-image" src="~/assets/image/dance.jpg" />
+    <img class="head-image" src="~/assets/image/dance.jpg" >
     <div class="content-container">
       <div class="content">
         <h1>不散, 不见</h1>

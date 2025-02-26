@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Post } from '~/types/halo-struct'
-import { genStrCategories, getStrCategory } from '~/utils/categories'
+import { getStrCategory } from '~/utils/categories'
 import { formatDate } from '../../utils/time'
 
-const props = defineProps<{
+defineProps<{
   post: Post
 }>()
 </script>
@@ -16,7 +16,7 @@ const props = defineProps<{
 
     <NuxtLink class="categories">
       <Icon name="ph:folder-thin" class="opacity-55 text-[11px]" />
-      <span class="text-[11px] cursor-pointer hover:opacity-85 opacity-35 transition-all" v-for="i in post.spec.categories">
+      <span v-for="(i,idx) in post.spec.categories" :key="idx"  class="text-[11px] cursor-pointer hover:opacity-85 opacity-35 transition-all">
         {{ getStrCategory(i) }}
       </span>
     </NuxtLink>

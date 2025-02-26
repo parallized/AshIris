@@ -33,7 +33,7 @@ const topics = ref<ShowTopic[]>([
   <section class="showreel-grid">
     <div class="showreel-row">
       <ShowreelCard :data="topics[0]" class="col-span-1">
-        <GithubIcon></GithubIcon>
+        <GithubIcon/>
         <div
           class="text-[14px] flex flex-col gap-2 text-neutral-400 tracking-wide"
         >
@@ -64,15 +64,15 @@ const topics = ref<ShowTopic[]>([
       </ShowreelCard>
 
       <ShowreelCard :data="topics[1]" class="col-span-2">
-        <CgGroup></CgGroup>
+        <CgGroup/>
       </ShowreelCard>
 
       <ShowreelCard :data="topics[2]" class="col-span-2">
-        <WebGroup></WebGroup>
+        <WebGroup/>
       </ShowreelCard>
 
       <ShowreelCard :data="topics[3]" class="col-span-1">
-        <HybridGroup></HybridGroup>
+        <HybridGroup/>
       </ShowreelCard>
     </div>
   </section>

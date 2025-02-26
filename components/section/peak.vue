@@ -21,7 +21,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
 
 <template>
   <section class="peak">
-    <div class="clip" ref="flowerEl">
+    <div ref="flowerEl" class="clip">
       <div class="clip-text-wrapper">
         <div class="clip-text">等待更多未来</div>
       </div>
@@ -29,8 +29,8 @@ useIntersectionObserver(flowerEl, ([entry]) => {
         <img
           class="object-cover w-full max-w-[1200px]"
           src="~/assets/image/flowersea.webp"
-        />
-        <div class="clip-mask"></div>
+        >
+        <div class="clip-mask"/>
       </div>
     </div>
 

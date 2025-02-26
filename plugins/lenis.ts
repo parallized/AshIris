@@ -2,7 +2,7 @@ import vuePlugin from 'lenis/vue'
 
 export default defineNuxtPlugin({
   name: 'lenis',
-  setup(nuxtApp: any) {
+  setup(nuxtApp) {
     nuxtApp.vueApp.use(vuePlugin)
   }
 })

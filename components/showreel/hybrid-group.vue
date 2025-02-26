@@ -15,7 +15,7 @@
         </h2>
       </div>
 
-      <img src="~/assets/image/bobber.png" />
+      <img src="~/assets/image/bobber.png" >
     </div>
 
     <div class="item">
@@ -31,7 +31,7 @@
         </h2>
       </div>
 
-      <img src="~/assets/image/wavesound.png" />
+      <img src="~/assets/image/wavesound.png" >
     </div>
 
     <div class="item">
@@ -47,7 +47,7 @@
         </h2>
       </div>
 
-      <img src="~/assets/image/pint.gif" />
+      <img src="~/assets/image/pint.gif" >
     </div>
   </div>
 </template>

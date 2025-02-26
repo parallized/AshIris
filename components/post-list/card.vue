@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { Post } from '~/types/halo-struct'
 
-const props = defineProps<{
+defineProps<{
   post: Post
 }>()
 
 const loading = ref(true)
-const imgLoading = ref(true)
+// const imgLoading = ref(true)
 
 onMounted(async () => {
   await new Promise((resolve) => setTimeout(resolve, 12))

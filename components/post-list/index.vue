@@ -15,7 +15,7 @@ const fetchingPosts = ref(false)
 const posts = ref<Post[]>([] as Post[])
 const readPosts = async (page: number) => {
   const res = await coreApi.content.post.listPost({
-    page,
+    page
   })
 
   const newPosts = (res.data.items as Post[]).filter((p) => !p.spec.deleted)
@@ -42,7 +42,7 @@ onMounted(readNextPage)
 // lazy loading
 const target = ref(null)
 const targetVisible = ref(false)
-useIntersectionObserver(target, async ([entry], observerElement) => {
+useIntersectionObserver(target, async ([entry]) => {
   targetVisible.value = entry.isIntersecting
   if (entry.isIntersecting) {
     await readNextPage()
@@ -63,14 +63,12 @@ const count = ref()
     </div>
 
     <ul v-if="posts" class="post-list__list">
-      <template v-for="p in posts" :key="idx">
-        <Item :post="p" />
-      </template>
+      <Item v-for="(p,idx) in posts" :key="idx" :post="p" />
     </ul>
 
     <div
-      ref="target"
       v-if="!isEnd"
+      ref="target"
       class="flex items-center text-sm gap-1 opacity-75 justify-start"
     >
       <Icon class="text-sm" name="eos-icons:loading" />

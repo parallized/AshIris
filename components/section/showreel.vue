@@ -11,12 +11,12 @@
       </div>
 
       <div class="image-container">
-        <img src="~/assets/image/curve.webp" />
-        <div class="mask"></div>
+        <img src="~/assets/image/curve.webp" >
+        <div class="mask"/>
       </div>
     </div>
 
-    <ShowreelGrid></ShowreelGrid>
+    <ShowreelGrid/>
   </section>
 </template>
 

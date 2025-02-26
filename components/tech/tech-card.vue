@@ -8,8 +8,8 @@ defineProps<{
   <div class="card">
     <div
       class="border border-r-0 border-neutral-300/55 rounded-[3px] bg-transparent"
-    ></div>
-    <Icon class="icon" :name="name"></Icon>
+    />
+    <Icon class="icon" :name="name"/>
   </div>
 </template>
 

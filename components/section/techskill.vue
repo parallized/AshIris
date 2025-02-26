@@ -6,7 +6,7 @@ import TechCard from '~/components/tech/tech-card.vue'
   <section class="techskill bg-noise">
     <div class="tech-group">
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>语言 & 脚本</h2>
         <TechCard name="devicon:csharp" />
         <TechCard name="devicon:cplusplus" />
@@ -23,7 +23,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>设计 & CG</h2>
         <TechCard name="file-icons:houdini" class="text-[#ff9c4c]" />
         <TechCard name="devicon:blender" />
@@ -34,7 +34,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>工具 & 中间件</h2>
         <TechCard name="devicon:git" />
         <TechCard name="devicon:jenkins" />
@@ -53,7 +53,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>前端 & UI</h2>
         <TechCard name="devicon:vuejs" />
         <TechCard name="devicon:react" />
@@ -72,7 +72,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>后端相关</h2>
         <TechCard name="devicon:express" />
         <TechCard name="devicon:nestjs" />
@@ -86,7 +86,7 @@ import TechCard from '~/components/tech/tech-card.vue'
       </div>
 
       <div class="tech-group_set">
-        <div class="divider"></div>
+        <div class="divider"/>
         <h2>跨端 & 客户端</h2>
         <TechCard name="devicon:androidstudio" />
         <TechCard name="devicon:flutter" />

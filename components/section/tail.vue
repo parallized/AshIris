@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="tail bg-noise"></section>
+  <section class="tail bg-noise"/>
 </template>
 
 <style scoped lang="scss">

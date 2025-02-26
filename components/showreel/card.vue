@@ -11,7 +11,7 @@ defineProps<{
     <h1 class="title">{{ data.title }}</h1>
     <h2 v-if="data.desc" class="desc">{{ data.desc }}</h2>
 
-    <slot></slot>
+    <slot/>
   </div>
 </template>
 
