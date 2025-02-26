@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { HeaderColorMode, useThemeStore } from '~/store/theme'
-import { definePageMeta, storeToRefs } from '#imports'
+import { useThemeStore } from '~/store/theme'
+import { definePageMeta } from '#imports'
 
 definePageMeta({
   layout: 'base',
 })
-
-const theme = useThemeStore()
-const { headerColorMode } = storeToRefs(theme)
-
-headerColorMode.value = HeaderColorMode.LIGHT
 </script>
 
 <template>

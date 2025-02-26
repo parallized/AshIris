@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { useThemeStore, HeaderColorMode } from '~/store/theme'
-import { computed, storeToRefs } from '#imports'
+import { computed, storeToRefs, useRoute } from '#imports'
 
 const theme = useThemeStore()
 
 const { headerColorMode } = storeToRefs(theme)
 
-const themeClass = computed(()=>{
+const themeClass = computed(() => {
   if (headerColorMode.value == HeaderColorMode.DARK) {
-    return "text-white bg-black/75"
+    return 'text-white bg-black/75'
   } else {
-    return "text-black bg-neutral-100/90"
+    return 'text-black bg-neutral-100/90'
   }
 })
 </script>
@@ -30,7 +30,7 @@ const themeClass = computed(()=>{
       <div class="header__nav">
         <NuxtLink to="/">主页<span class="opacity-50"> · 花</span></NuxtLink>
         <NuxtLink to="/posts/"
-          >笔记<span class="opacity-50"> · 远 </span></NuxtLink
+        >笔记<span class="opacity-50"> · 远 </span></NuxtLink
         >
         <NuxtLink class="disable-use" to="/posts/">
           <Icon name="famicons:construct-outline" class="opacity-50" />

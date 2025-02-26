@@ -36,7 +36,7 @@ import Shadin from '~/components/com/shadin.vue'
       </div>
     </div>
 
-    <QImg src="image/ide.webp" class="w-[55%] z-[1] mt-8" />
+    <QImg src="image/ide.webp" class="w-[45%] z-[1] mt-8" />
   </section>
 </template>
 
