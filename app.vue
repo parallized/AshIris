@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import '~/assets/styles/color-theme.scss'
+import icon from '~/assets/image/favicon.ico'
 import { useHead } from '#imports'
 import { useLenis, VueLenis } from 'lenis/vue'
 
@@ -21,7 +22,7 @@ useHead({
     },
     {
       rel: 'shortcut icon',
-      href: '/favicon.ico'
+      href: icon
     }
   ]
 })
