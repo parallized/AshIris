@@ -4,10 +4,13 @@ import axios from 'axios'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+
   imports: {
     autoImport: false
   },
+
   plugins: ['~/plugins/lenis'],
+
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
@@ -16,15 +19,19 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/sitemap'
   ],
+
   css: ['@/assets/fonts/fonts.css'],
   ssr: false,
+
   site: {
     url: 'https://parallized.cn',
     name: '花明远的小世界'
   },
+
   sitemap: {
     sources: ['/api/__sitemap__/urls']
   },
+
   nitro: {
     prerender: {
       routes: ['/', '/sitemap.xml', '/robots.txt'],
@@ -32,6 +39,7 @@ export default defineNuxtConfig({
       crawlLinks: true
     }
   },
+
   hooks: {
     async 'prerender:routes'(ctx) {
       const axiosInstance = axios.create({
@@ -55,5 +63,7 @@ export default defineNuxtConfig({
         ctx.routes.add(url)
       }
     }
-  }
+  },
+
+  compatibilityDate: '2025-02-26'
 })
