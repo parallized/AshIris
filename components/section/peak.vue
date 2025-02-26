@@ -28,7 +28,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
       <div class="clip-image">
         <NuxtImg
           class="object-cover w-full max-w-[1200px]"
-          src="/image/flowersea.webp"
+          src="image/flowersea.webp"
         />
         <div class="clip-mask"/>
       </div>

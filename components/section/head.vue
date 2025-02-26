@@ -21,7 +21,7 @@ useIntersectionObserver(headEl, ([entry]) => {
 
 <template>
   <section ref="headEl" class="head-image-container">
-    <NuxtImg class="head-image" src="/image/dance.webp" />
+    <NuxtImg class="head-image" src="image/dance.webp" />
     <div class="content-container">
       <div class="content">
         <h1>不散, 不见</h1>

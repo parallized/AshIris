@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <NuxtImg src="/image/ide.webp" class="w-[60%] z-[1] mt-8" />
+    <NuxtImg src="image/ide.webp" class="w-[60%] z-[1] mt-8" />
   </section>
 </template>
 

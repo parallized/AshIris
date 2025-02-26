@@ -14,6 +14,6 @@ body {
   content: "";
   @apply absolute inset-0 opacity-[0.06] z-[0];
   background-size: 109px;
-  background-image: url("/image/noise.png");
+  background-image: url("image/noise.png");
   background-repeat: repeat;
 }

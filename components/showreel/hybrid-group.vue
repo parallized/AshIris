@@ -15,7 +15,7 @@
         </h2>
       </div>
 
-      <NuxtImg src="/image/bobber.webp" />
+      <NuxtImg src="image/bobber.webp" />
     </div>
 
     <div class="item">
@@ -31,7 +31,7 @@
         </h2>
       </div>
 
-      <NuxtImg src="/image/wavesound.webp" />
+      <NuxtImg src="image/wavesound.webp" />
     </div>
 
     <div class="item">
@@ -47,7 +47,7 @@
         </h2>
       </div>
 
-      <NuxtImg src="/image/pint.gif" />
+      <NuxtImg src="image/pint.gif" />
     </div>
   </div>
 </template>
