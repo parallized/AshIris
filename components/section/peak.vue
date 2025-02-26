@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { HeaderColorMode, useThemeStore } from '~/store/theme'
-import { ref, shallowRef } from 'vue'
+import { useThemeStore } from '~/store/theme'
+import { ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 const theme = useThemeStore()
 
 const flowerEl = ref()
-const flowerVisible = shallowRef(false)
 
 useIntersectionObserver(flowerEl, ([entry]) => {
-  flowerVisible.value = entry?.isIntersecting || false
-  console.log(flowerVisible.value)
-  if (flowerVisible.value) {
-    theme.headerColorMode = HeaderColorMode.DARK
-  } else {
-    theme.headerColorMode = HeaderColorMode.LIGHT
-  }
+  theme.flowerVisible = entry?.isIntersecting || false
 })
 </script>
 
@@ -30,7 +23,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
           class="object-cover w-full max-w-[1200px]"
           src="image/flowersea.webp"
         />
-        <div class="clip-mask"/>
+        <div class="clip-mask" />
       </div>
     </div>
 
@@ -60,10 +53,10 @@ useIntersectionObserver(flowerEl, ([entry]) => {
       @apply absolute inset-0;
       z-index: 2;
       background: radial-gradient(
-        circle at 50% 35%,
-        transparent 15%,
-        black 50%,
-        black 100%
+          circle at 50% 35%,
+          transparent 15%,
+          black 50%,
+          black 100%
       );
     }
 

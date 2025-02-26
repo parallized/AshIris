@@ -5,6 +5,7 @@ import WebGroup from '~/components/showreel/web-group.vue'
 import HybridGroup from '~/components/showreel/hybrid-group.vue'
 import { ref } from 'vue'
 import type { ShowTopic } from '~/types/global'
+import ClockNum from '~/components/com/clock-num.vue'
 
 const topics = ref<ShowTopic[]>([
   {
@@ -37,15 +38,17 @@ const topics = ref<ShowTopic[]>([
           <div>
             <span
               class="text-[23px] font-bold bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
-            >65+</span
             >
+              <ClockNum :num="65" :duration="1.7" suffix></ClockNum>
+             </span
+             >
             followers
           </div>
 
           <div>
             <span
               class="text-[23px] font-bold bg-gradient-to-r from-white to-yellow-400 bg-clip-text text-transparent"
-            >200+</span
+            ><ClockNum :num="200" :duration="2.4" suffix></ClockNum></span
             >
             Star
           </div>
@@ -53,7 +56,7 @@ const topics = ref<ShowTopic[]>([
           <div>
             <span
               class="text-[23px] font-bold bg-gradient-to-r from-white to-green-600 bg-clip-text text-transparent"
-            >5000+</span
+            ><ClockNum :num="5000" :duration="3" suffix></ClockNum></span
             >
             contributions
           </div>

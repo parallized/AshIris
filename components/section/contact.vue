@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import Shadin from '~/components/com/shadin.vue'
 </script>
 
 <template>
   <section class="contact bg-noise">
-    <h1 class="text-3xl tracking-wider">获取联络</h1>
-    <h2 class="opacity-60 text-center leading-[34px]">
-      经常往 GitHub 上面放乱七八糟的代码，偶尔在 B 站发水视频记录一下<br>
-      欢迎交流学习，如果有可以提供帮助的地方同样乐意效劳
-    </h2>
+    <Shadin :duration="800">
+      <h1 class="text-3xl tracking-wider">获取联络</h1>
+    </Shadin>
+    <Shadin :duration="800" :delay="800">
+      <h2 class="opacity-60 text-center leading-[34px]">
+        经常往 GitHub 上面放乱七八糟的代码，偶尔在 B 站发水视频记录一下<br>
+        欢迎交流学习，如果有可以提供帮助的地方同样乐意效劳
+      </h2>
+    </Shadin>
 
 
     <div class="flex gap-3">
@@ -31,7 +36,7 @@
       </div>
     </div>
 
-    <QImg src="image/ide.png" class="w-[55%] z-[1] mt-8" />
+    <QImg src="image/ide.webp" class="w-[55%] z-[1] mt-8" />
   </section>
 </template>
 

@@ -2,6 +2,7 @@
 import SectionHead from '~/components/section/head.vue'
 import { useThemeStore } from '~/store/theme'
 import { definePageMeta, storeToRefs } from '#imports'
+import Shadin from '~/components/com/shadin.vue'
 
 definePageMeta({
   layout: 'base'
@@ -16,10 +17,12 @@ const { introHide } = storeToRefs(theme)
     <SectionHead />
 
     <section class="self-intro bg-noise">
-      <div class="intro" :class="introHide ? '' : 'opacity-0'">
-        <h1 class="text-3xl opacity-60 tracking-wider">你好啊~</h1>
-        <h1 class="text-3xl tracking-wider">相逢何必曾相识</h1>
-      </div>
+      <Shadin :duration="800">
+        <div class="intro" :class="introHide ? '' : 'opacity-0'">
+          <h1 class="text-3xl opacity-60 tracking-wider">你好啊~</h1>
+          <h1 class="text-3xl tracking-wider">相逢何必曾相识</h1>
+        </div>
+      </Shadin>
     </section>
 
     <SectionPortfolio />
