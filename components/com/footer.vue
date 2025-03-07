@@ -77,8 +77,8 @@
 }
 
 .ender-word {
-  @apply bg-gradient-to-r from-neutral-500/5 to-slate-300/40 leading-[65px] xl:leading-[120px] text-transparent bg-clip-text;
-  @apply absolute font-bold flex justify-start bottom-[-18px] text-[38px] xl:text-[120px] w-full max-w-[1340px];
+  @apply bg-gradient-to-r from-neutral-500/5 to-slate-300/40 leading-[58px] xl:leading-[120px] text-transparent bg-clip-text;
+  @apply absolute font-bold flex justify-start bottom-[-18px] text-[30px] xl:text-[120px] w-full max-w-[1340px];
 }
 
 .ender-icon {

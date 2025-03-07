@@ -28,13 +28,13 @@ const themeClass = computed(() => {
         </NuxtLink>
       </div>
       <div class="header__nav">
-        <NuxtLink to="/">主页<span class="opacity-50"> · 花</span></NuxtLink>
+        <NuxtLink to="/">主页<span class="opacity-50 max-xl:hidden"> · 花</span></NuxtLink>
         <NuxtLink to="/posts/"
-        >笔记<span class="opacity-50"> · 远 </span></NuxtLink
+        >笔记<span class="opacity-50 max-xl:hidden"> · 远 </span></NuxtLink
         >
         <NuxtLink class="disable-use" to="/posts/">
           <Icon name="famicons:construct-outline" class="opacity-50" />
-          作品集<span class="opacity-50"> · 明</span></NuxtLink
+          作品集<span class="opacity-50 max-xl:hidden"> · 明</span></NuxtLink
         >
       </div>
     </div>
