@@ -3,7 +3,7 @@
 <template>
   <div class="resume">
     <h1 class="title">
-      技术美术
+      游戏设计与开发
       <span class="name">梅狸猫</span>
     </h1>
     <header class="personal-info">
@@ -61,26 +61,17 @@
       <ul>
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          <strong>杭州医疗信息化公司 A</strong>
+          <span><strong>杭州医疗信息化公司 A</strong>· 解析 dicom 协议到前端 WebGL 医疗可视化 / 开发 Node.js 后端</span>
           <span class="time">2023.03 至 2023.06</span>
         </li>
-
-        <li>- 解析 dicom 医疗数据文件并基于 WebGL 完成可交互场景</li>
-        <li>- 根据西门子 TCP/IP 协议约定进行数据轮询, 完善数据处理流水线</li>
       </ul>
 
       <ul>
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          <strong>杭州互联网公司 B</strong>
+          <span><strong>杭州互联网公司 B</strong>· 开发 Figma / Chrome 插件, 完善 service worker 通信, 优化 ui/ux 体验并完成前后端开发</span>
           <span class="time">2023.09 至 2024.11</span>
         </li>
-
-        <li>
-          - 开发基于 Chromium 的 Figma / Chrome 插件，完善浏览器页面间 service
-          worker 通信
-        </li>
-        <li>- 优化公司产品 B 端 ui/ux 体验, 完成 web 前后端业务需求</li>
       </ul>
     </section>
     <section class="section-block">
@@ -91,54 +82,61 @@
 
       <ul>
         <li>
-          <Icon name="logos:threejs" />
-          <strong>MachineHub 生电工房</strong>
-          <a target="_blank" href="https://hub.parallized.cn">hub.parallized.cn</a>
-          <span class="time">2024.11 至今</span>
+          <Icon name="logos:unity" />
+          <strong>Unity Captain</strong>
+          <span>结合 AI 进行自动化开发</span>
+          <span class="time">2025.03 至今</span>
         </li>
         <li>
-          基于 TresJS + Nuxt 的 Web 3D 可交互实时渲染图鉴, 复用 Headless
-          后端和自制资产管理 API
+          基于 OpenAI API 和 ScriptableObject 结构的 AI 自动化 Editor Window 工具插件
+        </li>
+        <li>旨在配表效率提升 / 文案和叙事优化 / 简单的 ShaderGraph 和 VEG 生成</li>
+      </ul>
+
+      <ul>
+        <li>
+          <Icon name="simple-icons:cocos" />
+          <strong>Character Hero</strong>
+          <span>2D 横向卷轴游戏</span>
+          <span class="time">2021.11 至 2022.01</span>
         </li>
         <li>
-          美术资产通过 Blender / Mineways / Litematic 结构流水线进行解析与转换
+          gameplay 开发, 类冒险岛的战斗系统, 包括基本的场景切换, NPC AI, 相机灯光和 UI, 物理和动画
         </li>
-        <li>针对不同场景优化 GL 参数 在应用端进行自动化材质修补</li>
+        <li>自制对话节点蓝图工具, 并生成 Json 结构供策划快速编辑文案</li>
       </ul>
 
       <ul>
         <li>
           <Icon name="arcticons:minecraft" />
-          <strong>Minecraft 社区服务器作者</strong>
-
+          <span><strong>Minecraft 社区服务器作者 & 开发者</strong>最多时游戏内玩家 700+ 同时在线, 月营收 15k+</span>
           <span class="time">2013 至 2020</span>
         </li>
-
         <li>
-          通过 Blender / ObjToSchematic 等工具链,
-          完成游戏内较大世界的批量美术资产生成, 地形系统, 植被覆盖
+          通过多种插件及工具链完成游戏内较大世界的批量美术资产生成, 地形系统, 植被覆盖并完成程序化的怪物刷新和物品玩法机制
         </li>
         <li>
-          基于 Kotlin + spigot API, Gradle 构建的游戏 Mod / 插件实现玩法系统,
-          特效, Shader 光影等进行优化游戏体验和观感
+          基于 Kotlin + Spigot API + Gradle 构建游戏插件来实现玩法系统,
+          并开发简单的特效, Shader 光影等优化游戏体验和观感
         </li>
         <li>
-          制作 QT / Python 辅助工具简化物品数值, 掉落, 技能复用等配表流程,
-          为社区协作者提供无代码配置化方案如 Json 物品编辑器
-        </li>
-        <li>
-          最多时游戏内玩家 700+ 同时在线, 制作 web 前端并部署, 通过与后端 &
-          数据库交互提供注册验证等游戏内服务
+          制作 QT / .NET / Python 辅助工具简化物品数值, 掉落, 技能复用等配表流程,
+          为社区协作者提供无代码配置化方案如到端的 Json 物品编辑器
         </li>
       </ul>
 
       <ul>
         <li>
-          <Icon name="logos:astro-icon" />
-          <strong>ash-iris-template CMS 博客</strong>
-          <a target="_blank" href="https://parallized.cn">parallized.cn</a>
-          <span class="time">2023.05 至今</span>
+          <Icon name="logos:threejs" />
+          <strong>Pixellens 像素档案馆</strong>
+          <a target="_blank" href="https://github.com/Nesb01t/pixellens">nesb01t / pixellens</a>
+          <span class="time">2024.11 至今</span>
         </li>
+        <li>
+          基于 TresJS + Nuxt 的 Web 3D 可交互实时渲染图鉴, 自制资产管理 API, 美术资产通过 Blender / Mineways / Litematic
+          流水线进行解析与转换
+        </li>
+        <li>针对不同游戏实例场景优化 GL 参数, 自动对现有材质进行剔除, 透明度, 渲染队列等 Patch</li>
       </ul>
 
       <ul>
@@ -148,7 +146,7 @@
           <span class="time">/</span>
         </li>
         <li>
-          在 RPA 思想上设计, 基于 C# + WPF + WinAPI 的桌面端软件流程自动化工具
+          基于 RPA 的 C++ / WPF + ImGui WinAPI 软件自动化测试工具
         </li>
         <li>
           发布了多个符合游戏规则的衍生软件, 如: 魔兽世界拍卖信息分析, 最终幻想
@@ -161,37 +159,43 @@
           <Icon name="logos:microsoft-windows-icon" />
           <strong>最终幻想 XIV 插件 / 工具库</strong>
           <span>逆向分析工具 + 工程案例 + WebUI</span>
-          <a target="_blank" href="https://github.com/parallized/DalamudPlugins"
-            >github.com/parallized/DalamudPlugins</a
+          <a target="_blank" href="https://github.com/nesb01t/DalamudPlugins"
+          >nesb01t / DalamudPlugins</a
           >
           <span class="time">/</span>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <Icon name="logos:astro-icon" />
+          <span><strong>AshIris 个人博客</strong>· 基于 Astro / Nuxt + Halo CMS 的个人博客</span>
+          <a target="_blank" href="https://parallized.cn">parallized.cn</a>
+          <span class="time">2023.05 至今</span>
         </li>
       </ul>
     </section>
 
     <section class="section-block">
-      <label><Icon name="mingcute:braces-line" />知识技能</label>
+      <label>
+        <Icon name="mingcute:braces-line" />
+        知识技能</label>
 
       <ul class="skills">
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          了解计算机图形学, 渲染管线, 了解 cg, glsl, hlsl
+          了解计算机图形学和面向实时视频游戏的渲染管线, 了解 cg, glsl, hlsl
         </li>
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          了解美术制作流程和资源规范, 常用 Houdini, Blender 等 DCC 软件
+          了解美术制作流程和资源规范, 常用 Houdini, Blender 等 DCC Tools, 能完成常见的 HDA 制作和地编
         </li>
 
         <li>
           <Icon name="mingcute:hexagon-line" />
-          了解 Figma, Aesprite, PS 等设计工具, 有一定的 ui/ux 和 mg 基础
-        </li>
-
-        <li>
-          <Icon name="mingcute:hexagon-line" />
-          常用 Unity, Unreal, Cocos 等游戏引擎, 熟悉游戏开发流程及设计理论,
-          了解简单的性能分析和优化方案
+          常用 Unity, Unreal, Cocos, RPG Maker 等游戏引擎, 熟悉并长期实践游戏开发流程及游戏设计理论,
+          了解性能分析和常见的优化方案
         </li>
 
         <li>
@@ -202,14 +206,19 @@
         </li>
 
         <li>
+          <Icon name="mingcute:hexagon-line" />
+          了解 Figma, Aesprite, PS 等设计工具, 有一定的 ui/ux 和 mg 基础, 有浅薄的审美和设计原理学习经历
+        </li>
+
+        <li>
           <Icon name="mingcute:diamond-square-line" />
-          熟悉敏捷开发, 版本管理, 常用 Git flow, Git Actions, Linux
+          熟悉计算机系统和组成原理, 数据结构, 设计模式, 软件工程, 敏捷开发, 版本管理, 常用 Git flow, Git Actions, Linux
           辅助工作流和日志管理
         </li>
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          熟悉针对游戏周边的 Web 开发 / 运维部署 / 测试开发场景,
+          熟悉围绕游戏的 Web 开发 / 运维部署 / 测试开发场景,
           有多种游戏社区服务器长期运营开发经验
         </li>
       </ul>

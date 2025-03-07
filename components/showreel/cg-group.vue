@@ -1,4 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
   <div class="flex flex-wrap pt-12 gap-12">
@@ -11,6 +12,16 @@
       </div>
       <h1>· 像素档案馆</h1>
       <h2>Tresjs 3D 全息模型馆, 多种环境展示, 自动材质流水线</h2>
+    </div>
+
+    <div class="item">
+      <QImg src="image/wow-map.webp" />
+      <div class="badge">
+        <div class="border-b-2 border-green-400/75">Leaflet</div>
+        <div class="border-b-2 border-[#FFB13B]/75">SVG</div>
+      </div>
+      <h1>· Web MDT 副本战术板</h1>
+      <h2>基于 leaflet 的副本图例生成工具，轻松规划自定义路线</h2>
     </div>
 
     <div class="item">
