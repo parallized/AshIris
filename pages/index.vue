@@ -19,8 +19,8 @@ const { introHide } = storeToRefs(theme)
     <section class="self-intro bg-noise">
       <Shadin :duration="800">
         <div class="intro" :class="introHide ? '' : 'opacity-0'">
-          <h1 class="text-3xl opacity-60 tracking-wider">你好啊~</h1>
-          <h1 class="text-3xl tracking-wider">相逢何必曾相识</h1>
+          <h1 class="text-xl xl:text-3xl opacity-60 tracking-wider">你好啊~</h1>
+          <h1 class="text-xl xl:text-3xl tracking-wider">相逢何必曾相识</h1>
         </div>
       </Shadin>
     </section>

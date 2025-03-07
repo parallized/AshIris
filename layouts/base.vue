@@ -14,7 +14,7 @@
 
 <style lang="scss" scoped>
 .layout-base {
-  @apply min-h-[100vh] min-w-[1440px];
+  @apply min-h-[100vh];
   @apply flex flex-col;
 }
 </style>

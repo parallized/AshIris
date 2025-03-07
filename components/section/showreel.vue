@@ -16,10 +16,10 @@ useIntersectionObserver(gridEl, ([entry]) => {
 <template>
   <section class="showreel">
     <div class="content">
-      <div class="flex flex-col pt-[42vh] h-full py-8">
-        <Shadin :delay="300">
-          <h1 class="text-[50px] tracking-wider">技术画廊</h1>
-          <h2 class="text-[22px] tracking-wide opacity-60 z-[0]">
+      <div class="flex flex-col pt-[42vh] h-full py-8 pl-12 xl:pl-0 transition-all">
+        <Shadin :delay="150">
+          <h1 class="text-[25px] xl:text-[50px] tracking-wider">技术画廊</h1>
+          <h2 class="text-[15px] xl:text-[22px] tracking-wide opacity-60 z-[0]">
             自由意味着责任，或许多数人都惧怕自由。
           </h2>
         </Shadin>

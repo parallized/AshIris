@@ -61,7 +61,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
     }
 
     .clip-text-wrapper {
-      @apply absolute text-[45px] tracking-widest z-[1] flex h-full flex-col items-center justify-center w-full;
+      @apply absolute text-[27px] xl:text-[45px] tracking-widest z-[1] flex h-full flex-col items-center justify-center w-full;
       color: white;
     }
   }
@@ -70,7 +70,7 @@ useIntersectionObserver(flowerEl, ([entry]) => {
     @apply h-[500px] flex items-center justify-center sticky bottom-[0vh];
 
     h1 {
-      @apply text-[58px] text-neutral-500;
+      @apply text-[19px] xl:text-[58px] text-neutral-500;
     }
   }
 }

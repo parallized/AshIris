@@ -33,7 +33,7 @@ const topics = ref<ShowTopic[]>([
       <ShowreelCard :data="topics[0]" class="col-span-1">
         <GithubIcon />
         <div
-          class="text-[14px] flex flex-col gap-2 text-neutral-400 tracking-wide"
+          class="text-[11px] xl:text-[14px] flex flex-col gap-2 text-neutral-400 tracking-wide"
         >
           <div>
             <span
@@ -63,11 +63,11 @@ const topics = ref<ShowTopic[]>([
         </div>
       </ShowreelCard>
 
-      <ShowreelCard :data="topics[1]" class="col-span-2">
+      <ShowreelCard :data="topics[1]" class="xl:col-span-2">
         <CgGroup />
       </ShowreelCard>
 
-      <ShowreelCard :data="topics[2]" class="col-span-2">
+      <ShowreelCard :data="topics[2]" class="xl:col-span-2">
         <WebGroup />
       </ShowreelCard>
 
@@ -80,10 +80,10 @@ const topics = ref<ShowTopic[]>([
 
 <style scoped lang="scss">
 .showreel-grid {
-  @apply w-full flex mt-[-6px] flex-col items-center;
+  @apply w-full px-12 flex mt-[-6px] flex-col items-center;
 }
 
 .showreel-row {
-  @apply max-w-[1440px] gap-6 z-[1] w-full grid grid-cols-3;
+  @apply max-w-[1440px] gap-6 z-[1] w-full grid grid-cols-1 xl:grid-cols-3;
 }
 </style>

@@ -17,16 +17,16 @@ defineProps<{
 
 <style scoped lang="scss">
 .card {
-  @apply shadow-md bg-neutral-950 border border-neutral-500/25 rounded-lg;
-  @apply p-[26px] flex flex-col gap-3 z-[1] relative overflow-hidden;
+  @apply max-xl:w-full shadow-md bg-neutral-950 border border-neutral-500/25 rounded-lg;
+  @apply p-[22px] xl:p-[26px] flex flex-col gap-3 z-[1] relative overflow-hidden;
   // text alignment
 
   .title {
-    @apply text-[19px] tracking-wider;
+    @apply xl:text-[19px] tracking-wider;
   }
 
   .desc {
-    @apply text-[14px] tracking-wider opacity-55 max-w-[70%];
+    @apply text-[11px] xl:text-[14px] tracking-wider opacity-55 max-w-[70%];
   }
 }
 </style>

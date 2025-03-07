@@ -21,7 +21,7 @@ const themeClass = computed(() => {
       <div class="header__logo ">
         <NuxtLink to="/" class="logo">
           <Icon
-            class="text-[25px]"
+            class="text-[18px] xl:text-[25px]"
             name="arcticons:minecraft-education-preview"
           />
           花远明的小世界
@@ -50,14 +50,14 @@ const themeClass = computed(() => {
   @apply max-w-[1340px] mx-auto;
 
   @apply flex justify-between items-center;
-  @apply pt-6 pb-6;
+  @apply py-5 px-4 xl:py-6 xl:px-6;
 
   &__logo {
-    @apply text-xl flex items-center gap-2 tracking-[3px];
+    @apply text-[10px] xl:text-xl flex items-center gap-2 tracking-[3px];
   }
 
   &__nav {
-    @apply flex gap-10 text-sm;
+    @apply flex gap-6 xl:gap-10 text-[11px] xl:text-sm;
 
     a {
       @apply box-border flex items-center gap-1;
@@ -76,6 +76,6 @@ const themeClass = computed(() => {
 }
 
 .logo {
-  @apply text-[19px] font-extralight inline-flex gap-2 items-center;
+  @apply text-[12px] xl:text-[19px] font-extralight inline-flex gap-2 items-center;
 }
 </style>

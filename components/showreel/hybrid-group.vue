@@ -60,14 +60,14 @@
     @apply flex flex-1 justify-between gap-4;
 
     .left-desc {
-      @apply flex flex-col;
+      @apply flex flex-col w-1/2;
 
       h1 {
-        @apply font-bold flex text-lg items-center gap-2 bg-gradient-to-r text-transparent bg-clip-text;
+        @apply font-bold flex text-[10px] xl:text-lg items-center gap-1 xl:gap-2 bg-gradient-to-r text-transparent bg-clip-text;
       }
 
       h2 {
-        @apply text-[12px] opacity-40;
+        @apply text-[9px] xl:text-[12px] opacity-40;
       }
     }
 
@@ -78,6 +78,6 @@
 }
 
 .h-icon {
-  @apply text-white text-xl;
+  @apply text-white text-[14px] xl:text-xl;
 }
 </style>

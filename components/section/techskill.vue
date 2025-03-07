@@ -109,17 +109,17 @@ import TechCard from '~/components/tech/tech-card.vue'
 }
 
 .tech-group {
-  @apply max-w-[1440px] mx-auto;
-  @apply grid grid-cols-3 items-center justify-center flex-wrap gap-24 w-full;
+  @apply max-w-[1440px] mx-auto px-9;
+  @apply grid grid-cols-2 xl:grid-cols-3 items-center justify-center flex-wrap gap-8 xl:gap-24 w-full;
 
   &_set {
-    @apply pb-[150px] flex flex-wrap items-start gap-2 h-[44px];
+    @apply xl:pb-[150px] pb-[170px] flex flex-wrap items-start gap-2 h-[44px];
 
     .divider {
       @apply bg-gradient-to-r h-[1px] w-full from-neutral-400/50 to-neutral-100 mb-6
     }
     h2 {
-      @apply text-base tracking-wider opacity-75 text-start w-full mb-2;
+      @apply text-[14px] xl:text-base tracking-wider opacity-75 text-start w-full mb-2;
     }
   }
 }

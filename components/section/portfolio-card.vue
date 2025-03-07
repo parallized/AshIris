@@ -12,10 +12,10 @@
 
 <style scoped lang="scss">
 .card {
-  @apply relative w-full min-h-[420px] bg-white rounded-xl overflow-hidden;
+  @apply relative w-full min-h-[190px] xl:min-h-[420px] bg-white rounded-lg xl:rounded-xl overflow-hidden;
 
   &-body {
-    @apply overflow-x-auto p-8 absolute text-[18px] flex flex-col h-full;
+    @apply overflow-x-auto p-2 xl:p-8 absolute text-[8px] xl:text-[18px] flex flex-col h-full;
   }
 }
 </style>

@@ -24,7 +24,7 @@ useIntersectionObserver(headEl, ([entry]) => {
           这里是花远明，<span class="text-orange-300">数字媒体技术</span>
           本科在校生一枚，初中开始接触游戏开发，一直在学习和思考一些有意思的编码、设计
           <div class="mt-2 opacity-70">
-            <Icon class="text-3xl" name="line-md:download-loop" />
+            <Icon class="text-xl xl:text-3xl" name="line-md:download-loop" />
           </div>
         </Shadin>
       </div>
@@ -46,14 +46,14 @@ useIntersectionObserver(headEl, ([entry]) => {
   }
 
   .content {
-    @apply max-w-[1340px] w-full flex items-end justify-between mx-auto;
+    @apply max-w-[1340px] px-4 w-full flex flex-col xl:flex-row items-end justify-between mx-auto;
 
     .title {
-      @apply h-[120px] text-nowrap text-white text-[100px];
+      @apply h-[90px] xl:h-[120px] text-nowrap text-white text-[46px] xl:text-[100px];
     }
 
     div {
-      @apply text-white h-[40px] tracking-wider max-w-[440px] text-end;
+      @apply max-xl:text-[13px] text-white h-[40px] tracking-wider max-w-[440px] text-end;
     }
   }
 }

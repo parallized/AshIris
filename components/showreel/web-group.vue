@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="flex flex-wrap pt-12 pb-4 gap-[40px]">
+  <div class="flex flex-wrap pt-2 xl:pt-12 pb-4 gap-[18px] xl:gap-[40px]">
     <div class="item">
       <div class="mockup">
         <div class="title">
@@ -96,11 +96,11 @@
 }
 
 .item {
-  @apply max-w-[280px] min-w-[220px] flex-1;
+  @apply w-[160px] xl:max-w-[280px] xl:min-w-[220px] flex-1;
 }
 
 .desc {
-  @apply text-end text-[12px] text-wrap pt-2 pr-1 opacity-40 tracking-wider ml-auto max-w-[75%];
+  @apply text-end text-[9px] xl:text-[12px] text-wrap pt-2 pr-1 opacity-40 tracking-wider ml-auto max-w-[75%];
 }
 
 .mockup {

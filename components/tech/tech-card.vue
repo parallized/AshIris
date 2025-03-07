@@ -15,7 +15,7 @@ defineProps<{
 
 <style scoped lang="scss">
 .card {
-  @apply size-[40px] ml-[1px] mb-[1px] flex items-center justify-start rounded-[3px];
+  @apply size-[20px] xl:size-[40px] ml-[1px] mb-[1px] flex items-center justify-start rounded-[3px];
 
   .icon {
     @apply text-[24px] opacity-75;

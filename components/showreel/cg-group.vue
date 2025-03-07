@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="flex flex-wrap pt-12 gap-12">
+  <div class="flex max-xl:flex-col flex-wrap pt-2 xl:pt-12 gap-8 xl:gap-12">
     <div class="item">
       <QImg src="image/pixellens.webp" />
       <div class="badge">
@@ -39,7 +39,8 @@
 
 <style scoped lang="scss">
 .item {
-  @apply max-w-[280px] min-w-[220px] flex-1 relative text-white rounded-lg flex flex-col items-start gap-1;
+  @apply max-xl:w-full xl:max-w-[280px] xl:min-w-[220px];
+  @apply flex-1 relative text-white rounded-lg flex flex-col items-start gap-1;
 
   .badge {
     @apply absolute right-2 top-2 bg-neutral-950/40 rounded-md h-[30px] backdrop-blur-[1px];
@@ -48,12 +49,12 @@
   }
 
   h1 {
-    @apply text-[16px] tracking-wider pl-1 pt-5;
+    @apply text-[12px] xl:text-[16px] tracking-wider pl-1 pt-5;
     @apply bg-gradient-to-r from-neutral-600 via-neutral-50 to-neutral-600 text-transparent bg-clip-text;
   }
 
   h2 {
-    @apply text-[13px] tracking-wider pl-[14px] opacity-40;
+    @apply text-[9px] xl:text-[13px] tracking-wider pl-[14px] opacity-40;
   }
 
   img {

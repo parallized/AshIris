@@ -18,7 +18,7 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
 <template>
   <section class="self-portfolio bg-noise">
     <div class="portfolio-container">
-      <div class="portfolio-group pt-[16vh] scale-[95%]">
+      <div class="portfolio-group xl:pt-[16vh] pt-24 scale-[95%]">
         <PortfolioCard>
           <template #image>
             <QImg class="portfolio-img" src="image/latern.webp" />
@@ -78,7 +78,7 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
           </NuxtLink>
         </PortfolioCard>
       </div>
-      <div class="portfolio-group pt-[40vh] scale-[95%]">
+      <div class="portfolio-group xl:pt-[40vh] pt-8 scale-[95%]">
         <PortfolioCard ref="introEndTriggerEl">
           <template #image>
             <QImg class="portfolio-img" src="image/wave.webp" />
@@ -111,14 +111,14 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
 
 <style scoped lang="scss">
 .self-portfolio {
-  @apply pb-12 tracking-wider;
+  @apply pb-12 px-4 tracking-wider;
 
   .portfolio-container {
-    @apply w-full grid-cols-3 gap-16 grid max-w-[1370px] mx-auto;
+    @apply w-full grid-cols-3 gap-2 xl:gap-16 transition-all grid max-w-[1370px] mx-auto;
   }
 
   .portfolio-group {
-    @apply flex flex-col gap-12;
+    @apply flex flex-col gap-3 xl:gap-12;
   }
 
   .portfolio-img {
@@ -127,19 +127,19 @@ useIntersectionObserver(introEndTriggerEl, ([entry]) => {
 }
 
 .thumb {
-  @apply w-1/3 rounded-lg mb-4;
+  @apply w-1/3 rounded-lg xl:mb-4 mb-1;
   box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 3px;
 }
 
 .divider {
-  @apply border-t border-neutral-300/50 w-full mt-auto mb-6;
+  @apply border-t border-neutral-300/50 w-full mb-1 mt-auto xl:mt-auto xl:mb-6;
 }
 
 .badge {
-  @apply flex gap-2 px-2 items-center text-[15px] cursor-pointer hover:opacity-100 opacity-75 transition-all;
+  @apply flex justify-start gap-2 items-center text-[8px] xl:text-[15px] cursor-pointer hover:opacity-100 opacity-75 transition-all;
 
   .badge-icon {
-    @apply text-2xl opacity-70;
+    @apply xl:text-2xl text-[12px] opacity-70;
   }
 }
 </style>
