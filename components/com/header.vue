@@ -27,7 +27,7 @@ const leftOffset = computed(() => {
 
 <template>
   <div :class="[headerCollapsed ? 'header__wrapper-collapsed':'header__wrapper', themeClass].join(' ')">
-    <div :class="headerCollapsed ? 'header-collapse':'header'" @click="headerCollapsed = !headerCollapsed">
+    <div :class="headerCollapsed ? 'header-collapse':'header'">
       <div class="header__logo ">
         <NuxtLink to="/" class="logo">
           <Icon
