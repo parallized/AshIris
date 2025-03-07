@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div class="item">
-    <NuxtLink class="title" :href="post.metadata.name"
+    <NuxtLink class="title" :href="'posts/'+post.metadata.name"
     >{{ post.spec.title }}
     </NuxtLink>
 

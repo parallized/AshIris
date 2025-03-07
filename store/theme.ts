@@ -30,7 +30,13 @@ export const useThemeStore = defineStore('theme', () => {
   })
 
   const introHide = ref<boolean>(false)
+
+  const headerCollapsed = computed(()=>{
+    return (route.path.startsWith('/posts/'))
+  })
+
   return {
+    headerCollapsed,
     headerColorMode,
     introHide,
 
