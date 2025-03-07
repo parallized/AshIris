@@ -44,7 +44,7 @@
         </li>
       </ul>
 
-      <!--      <Icon class="ender-icon" name="hugeicons:flower" />-->
+      <!--<Icon class="ender-icon" name="hugeicons:flower" />-->
 
       <div class="ender-word">
         Parallized · HanaMin

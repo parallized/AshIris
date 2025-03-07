@@ -55,8 +55,8 @@ const count = ref()
 
 <template>
   <div class="post-list">
-    <div v-if="posts?.[0] && count > 0" class="h-[20px] mb-6">
-      <span class="opacity-55 text-sm items-center flex gap-2">
+    <div v-if="posts?.[0] && count > 0" class="h-[20px] mb-2 xl:mb-6">
+      <span class="opacity-55 text-[10px] xl:text-sm items-center flex gap-2">
         <Icon name="mdi:select-search" />
         <span> 共 {{ count }} 篇笔记</span>
       </span>
@@ -79,10 +79,10 @@ const count = ref()
 
 <style lang="scss" scoped>
 .post-list {
-  @apply pb-24 px-1 pt-[100px];
+  @apply pb-24 px-1 pt-[80px] xl:pt-[100px];
 
   &__list {
-    @apply gap-6 flex flex-col;
+    @apply gap-3 xl:gap-6 flex flex-col;
   }
 }
 </style>
