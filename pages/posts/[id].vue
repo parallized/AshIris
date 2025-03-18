@@ -67,14 +67,14 @@ useHead({
 }
 
 .page-content {
-  @apply xl:mt-[-105px];
+  @apply xl:mt-[-95px];
   @apply prose-code:text-[10px] prose-code:xl:text-[14px] prose-code:inline-flex prose-code:opacity-85 prose max-w-full;
   @apply prose-pre:leading-[20px];
   @apply prose-img:rounded-lg prose-img:drop-shadow-lg;
   @apply prose-li:text-[10px] prose-li:xl:text-[14px];
   @apply prose-ul:text-[10px] prose-ul:xl:text-[14px];
   @apply prose-p:text-[10px] prose-p:xl:text-[14px];
-  @apply prose-h1:text-[18px] prose-h1:xl:text-[23px];
+  @apply prose-h1:text-[18px] prose-h1:xl:text-[23px] prose-h1:pt-[16px];
   @apply prose-h2:text-[16px] prose-h2:xl:text-[19px];
   @apply prose-h3:text-[14px] prose-h3:xl:text-[16px];
 }
