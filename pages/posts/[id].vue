@@ -3,9 +3,10 @@ import { useHalo } from '~/utils/halo'
 import { definePageMeta, useHead, useRoute } from '#imports'
 import { ref } from 'vue'
 import Aside from '~/components/post-page/aside.vue'
+import { publicApiClient } from '@halo-dev/api-client'
 
 definePageMeta({
-  layout: 'base'
+  layout: 'base',
 })
 
 const { coreApi } = useHalo()
@@ -14,19 +15,30 @@ const id = route.params.id
 
 const postData = ref()
 const content = ref<string | null>()
+const testingContent = ref<any | null>()
 
 const readPost = async (id: string) => {
   const post = await coreApi.content.post.getPost({ name: id })
   postData.value = post.data
+  console.log(post.data)
 
   const snapId = post.data.spec.releaseSnapshot
-  if (!snapId) return
+  const baseSnapId = post.data.spec.baseSnapshot
+  if (!snapId || !baseSnapId) return
   const snap = (await coreApi.content.snapshot.getSnapshot({ name: snapId }))
     .data
-  const patch = snap.spec.rawPatch
+  let patch = snap.spec.rawPatch
+  if (patch == '[]') {
+    const baseSnap = (await coreApi.content.snapshot.getSnapshot({ name: baseSnapId }))
+    .data
+    patch = baseSnap.spec.rawPatch
+  }
   if (!patch) return
 
   if (patch[0] == '[') {
+    if (!JSON.parse(patch)?.[0]?.target) {
+      return
+    }
     content.value = JSON.parse(patch)[0].target.lines.join('\n')
   } else {
     content.value = patch
@@ -39,24 +51,49 @@ useHead({
   title: postData.value?.spec?.title,
   meta: [
     {
-      hid: 'description',
       name: 'description',
-      content: postData.value?.spec?.title
-    }
-  ]
+      content: postData.value?.spec?.title,
+    },
+  ],
 })
+
+// nav back
+const navBack = () => {
+  window.history.back()
+}
 </script>
 
 <template>
   <div class="post-page">
     <Suspense>
-      <Aside v-if="content" :title="postData?.spec?.title" :publish-time="postData?.spec?.publishTime"></Aside>
+      <Aside
+        v-if="content"
+        :title="postData?.spec?.title"
+        :publish-time="postData?.spec?.publishTime"
+      ></Aside>
     </Suspense>
 
     <div
+      v-if="content"
       class="page-content post-content__unique"
       v-html="content"
     />
+    <div v-else class="page-is-empty">
+      <Icon
+        class="w-[70px] h-[70px] opacity-50 mb-3"
+        name="game-icons:box-trap"
+      />
+      <div class="text-[14px] flex flex-col gap-3">
+        <p>这里看起来什么都没有, 可能</p>
+        <ul class="opacity-75">
+          <li>· 文章还在编辑中</li>
+          <li>· 文章隐藏或未公开</li>
+        </ul>
+      </div>
+      <button class="mt-4 text-[14px] text-orange-700/75" @click="navBack">
+        回到上一个页面
+      </button>
+    </div>
   </div>
 </template>
 
@@ -78,12 +115,15 @@ useHead({
   @apply prose-h2:text-[16px] prose-h2:xl:text-[19px];
   @apply prose-h3:text-[14px] prose-h3:xl:text-[16px];
 }
+
+.page-is-empty {
+  @apply w-full;
+  @apply flex flex-col items-center justify-center;
+}
 </style>
 
 <style>
-
 *:target {
-
   &::after {
     content: '';
     display: block;
