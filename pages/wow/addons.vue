@@ -31,13 +31,19 @@ const states = ref({
       <Icon name="akar-icons:chat-question" />整合插件学习困难?
       单体插件看不明白? 我的界面有点丑陋? 马上 3 分钟速成插件自定制
     </p>
-    <a
+    <div class="flex items-center gap-8 text-[14px]">
+      <a
       href="https://bbs.nga.cn/read.php?tid=43998343"
       target="_blank"
       class="hover:underline text-blue-600 flex items-center gap-2"
       ><Icon name="lucide:mouse-pointer-click" />宣传一下我的 NGA 公益大米 2-13C
       均可, 免费语音教学 + 插件 UI 定制</a
-    >
+      >
+      <a href="https://live.douyin.com/860590893740" target="_blank" class="hover:underline text-purple-600 flex items-center gap-2">
+        <Icon name="hugeicons:live-streaming-01" />
+        抖音直播间, 每天起床到晚 24 点直播, 免费教学公益大米
+      </a>
+    </div>
 
     <!-- 常用插件 -->
     <div
@@ -353,7 +359,7 @@ const states = ref({
       <button class="flex gap-2 items-center">
         <Icon name="gravity-ui:carets-expand-vertical" />
         神奇妙妙小插件<span class="text-gray-500 text-[14px]"
-          >共 1 个, 缓慢添加中</span
+          >共 2 个, 缓慢添加中</span
         >
       </button>
     </div>
@@ -388,6 +394,40 @@ const states = ref({
           <li class="text-gray-500">· 按照类型出售物品, 把物品移动到银行等</li>
           <li class="text-gray-500">
             · 可以同时看到多个账号的金币 / 货币 / 物品信息
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <div class="addon">
+          <img
+            class="icon-addons"
+            src="~/assets/image/wow/icons/loot.png"
+          />
+          <p class="desc">
+            KeystoneLoot<span class="sub-desc"
+              >查询某个部位在各副本的掉落, 收藏后可对着刷</span
+            >
+          </p>
+        </div>
+        <div class="flex items-center gap-4">
+          <img
+            class="intro !h-[190px]"
+            src="~/assets/image/wow/loot/1.png"
+          />
+          <img
+            class="intro !h-[190px]"
+            src="~/assets/image/wow/loot/2.png"
+          />
+          <img
+            class="intro !h-[190px]"
+            src="~/assets/image/wow/loot/3.png"
+          />
+        </div>
+        <ul class="addon-info">
+          <li class="text-gray-500">· 根据部位查询掉落, 支持收藏</li>
+          <li class="text-gray-500">
+            · 收藏页面可以直观看到八本掉落和需求
           </li>
         </ul>
       </li>

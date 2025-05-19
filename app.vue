@@ -5,7 +5,7 @@ import { useHead } from '#imports'
 import { useLenis, VueLenis } from 'lenis/vue'
 
 useHead({
-  title: '花远明的小世界',
+  title: '花明远的小世界',
   meta: [{ name: 'description', content: 'Page description' }],
   link: [
     {

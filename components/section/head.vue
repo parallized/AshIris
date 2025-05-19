@@ -21,7 +21,7 @@ useIntersectionObserver(headEl, ([entry]) => {
         </Shadin>
 
         <Shadin :delay="750">
-          这里是花远明，<span class="text-orange-300">数字媒体技术</span>
+          这里是花明远，<span class="text-orange-300">数字媒体技术</span>
           本科在校生一枚，初中开始接触游戏开发，一直在学习和思考一些有意思的编码、设计
           <div class="mt-2 opacity-70">
             <Icon class="text-xl xl:text-3xl" name="line-md:download-loop" />

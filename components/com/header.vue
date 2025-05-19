@@ -34,7 +34,7 @@ const leftOffset = computed(() => {
             class="text-[18px] xl:text-[25px]"
             name="arcticons:minecraft-education-preview"
           />
-          花远明的小世界
+          花明远的小世界
         </NuxtLink>
       </div>
       <div class="header__nav">

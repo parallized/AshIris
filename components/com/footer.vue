@@ -15,7 +15,7 @@
         <li>
           <NuxtLink href="https://beian.miit.gov.cn/" target="_blank">
             <Icon name="hugeicons:drawing-mode" />
-            花远明 设计编码 & 部署
+            花明远 设计编码 & 部署
           </NuxtLink>
         </li>
       </ul>
