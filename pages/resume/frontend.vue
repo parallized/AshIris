@@ -1,32 +1,37 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 <template>
   <div class="resume">
     <h1 class="title">
-      前端开发
-      <span class="name">梅狸猫</span>
+      全栈开发
+      <span class="name">杨家城</span>
     </h1>
     <header class="personal-info">
-      <a target="_blank" href="https://parallized.cn">
-        <Icon name="mingcute:book-2-line" />
-        博客 parallized.cn</a
-      >
-      <a target="_blank" href="https://github.com/parallized">
-        <Icon name="mingcute:github-line" />
-        parallized</a
-      >
-      <a>
-        <Icon name="mingcute:mail-line" />
-        parallized@outlook.com</a
-      >
-      <a target="_blank" href="https://www.zhihu.com/people/littlelumos">
-        <Icon name="mingcute:folder-open-line" />
-        知乎 littlelumos</a
-      >
-      <a>
-        <Icon name="mingcute:location-2-line" />
-        浙江 · 杭州</a
-      >
+      <div>
+        <a target="_blank" href="https://parallized.cn">
+          <Icon name="mingcute:book-2-line" />
+          博客 parallized.cn</a
+        >
+      </div>
+      <div>
+        <a target="_blank" href="https://github.com/nesb01t">
+          <Icon name="mingcute:github-line" />
+          nesb01t</a
+        >
+        <div class="h-full">/</div>
+        <a target="_blank" href="https://github.com/parallized">parallized</a>
+      </div>
+      <div>
+        <a>
+          <Icon name="mingcute:location-2-line" />
+          浙江 · 杭州</a
+        >
+      </div>
+      <div>
+        <a>
+          <Icon name="mingcute:mail-line" />
+          parallized@outlook.com</a
+        >
+      </div>
     </header>
 
     <section class="section-block">
@@ -42,8 +47,12 @@
           <span class="time">2021.09 至 2026.06</span>
         </li>
         <li>
-          结业课程: MIT6.006, CS61A, CS61B (迷宫生成 & 吉他仿声), UCB CS169, FCC
-          Frontend Camp, Games101, LearnOpenGL
+          完成课程 MIT6.006, CS61A, CS61B, UCB CS169, FCC Frontend Camp,
+          Games101, LearnOpenGL
+        </li>
+        <li>
+          结业完成了多种噪声的迷宫地形生成算法, 手写红黑树,
+          简易软光栅化图形引擎, Syscall 系统内核级内存读写驱动, SaaS 微服务开发
         </li>
         <li>
           中国大学生计算机设计大赛 · 省三等奖 (游戏组) / 浙江省电商创作大赛 ·
@@ -61,7 +70,7 @@
       <ul>
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          <strong>杭州医疗信息化公司 A</strong>
+          <strong>杭州星诚智控有限公司</strong>
           <span class="time">2023.03 至 2023.06</span>
         </li>
 
@@ -72,7 +81,7 @@
       <ul>
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          <strong>杭州互联网公司 B</strong>
+          <strong>杭州描路科技有限公司</strong>
           <span class="time">2023.09 至 2024.11</span>
         </li>
 
@@ -96,11 +105,13 @@
         <li>
           <Icon name="logos:threejs" />
           <strong>MachineHub 生电工房</strong>
-          <a target="_blank" href="https://hub.parallized.cn">hub.parallized.cn</a>
+          <a target="_blank" href="https://hub.parallized.cn"
+            >hub.parallized.cn</a
+          >
           <span class="time">2024.11 至今</span>
         </li>
         <li>
-          基于 TresJS + Nuxt 的 3D 可交互实时渲染图鉴, 复用 Headless
+          个人上线作品, 基于 TresJS + Nuxt 的 3D 可交互实时渲染图鉴, 复用 NestJS + CMS Headless
           后端和自制资产管理 API
         </li>
         <li>
@@ -119,8 +130,8 @@
           <span class="time">2024.04 至 2024.07</span>
         </li>
         <li>
-          支持 Web / Android / iOS 的多端 PWA 应用, 每月 50+ 订阅用户, 基于
-          Capacitor + Nuxt + UnoCSS 构建, 自动打包发布, 云端推送更新
+          个人上线作品, 支持 Web / Android / iOS 的多端 PWA 应用, 上线每月 50+ 订阅用户, 基于
+          Capacitor + Nuxt + UnoCSS 构建, 自动打包发布, 云端更新
         </li>
         <li>
           通过渠道推送帮助用户完成煤炉 (mercari) 平台海淘, 支持 WxPush, 企微,
@@ -132,7 +143,9 @@
         <li>
           <Icon name="devicon-plain:trpc" />
           <strong>TomatoMagic 魔法番茄</strong>
-          <a target="_blank" href="https://feel.parallized.cn">feel.parallized.cn</a>
+          <a target="_blank" href="https://feel.parallized.cn"
+            >feel.parallized.cn</a
+          >
           <span class="time">2024.04 至 2024.06</span>
         </li>
         <li>
@@ -153,7 +166,7 @@
           <span class="time">2022.09 至 2023.03</span>
         </li>
         <li>
-          基于 GitHub API 的开源互助社区, 帮助开源项目积累初始影响力,
+          合作上线网站, 基于 GitHub API 的开源互助社区, 帮助开源项目积累初始影响力,
           截至停止运营共有 1000+ 用户
         </li>
         <li>
@@ -165,12 +178,12 @@
       <ul>
         <li>
           <Icon name="logos:astro-icon" />
-          <strong>ash-iris-template 博客模板</strong>
-          <a target="_blank" href="https://nescraft.cn">nescraft.cn</a>
-          <span class="time">2023.05 至今</span>
+          <strong>AshIris 博客模板</strong>
+          <a target="_blank" href="https://parallized.cn">parallized.cn</a>
+          <span class="time">2014.05 至今</span>
         </li>
         <li>
-          基于 Astro + daisyUI 实现的 SSG 博客模板, 避免过度水合作用, 性能极佳且
+          自制博客, 经过多次大版本更迭, 基于 Astro + daisyUI 实现的 SSG 博客模板, 避免过度水合作用, 性能极佳且
           SEO 友好
         </li>
         <li>
@@ -181,13 +194,20 @@
 
       <ul>
         <li>
-          <Icon name="logos:microsoft-windows-icon" />
-          <strong>最终幻想 XIV 插件 / 工具库</strong>
-          <span>逆向分析工具 + 工程案例 + WebUI</span>
-          <a target="_blank" href="https://github.com/parallized/DalamudPlugins"
-            >github.com/parallized/DalamudPlugins</a
-          >
-          <span class="time">/</span>
+          <Icon name="arcticons:minecraft" />
+          <span><strong>Minecraft 社区服务器作者 & 开发者</strong>最多时游戏内玩家 700+ 同时在线, 月营收 15k+</span>
+          <span class="time">2013 至 2020</span>
+        </li>
+        <li>
+          通过多种插件及工具链完成游戏内较大世界的批量美术资产生成, 地形系统, 植被覆盖并完成程序化的怪物刷新和物品玩法机制
+        </li>
+        <li>
+          基于 Kotlin + Spigot API + Gradle 构建游戏插件来实现玩法系统,
+          并开发简单的特效, Shader 光影等优化游戏体验和观感
+        </li>
+        <li>
+          制作 QT / .NET / Python 辅助工具简化物品数值, 掉落, 技能复用等配表流程,
+          为社区协作者提供无代码配置化方案如到端的 Json 物品编辑器
         </li>
       </ul>
 
@@ -195,7 +215,11 @@
         <li>
           <Icon name="logos:microsoft-windows-icon" />
           <strong>RPALite 软件自动化工具</strong>
-          <span class="time">2021.12 至 2022.12</span>
+          <span>逆向分析工具 + 工程案例 + WebUI</span>
+          <a target="_blank" href="https://github.com/parallized/DalamudPlugins"
+            >github.com/parallized/DalamudPlugins</a
+          >
+          <span class="time">2012 至今</span>
         </li>
         <li>
           在 RPA 思想上设计, 基于 C# + WPF + WinAPI 的桌面端软件流程自动化工具
@@ -231,13 +255,8 @@
       <ul class="skills">
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          熟悉 JavaScript (ES6) 并常用 TypeScript 开发
-        </li>
-
-        <li>
-          <Icon name="mingcute:diamond-square-line" />
-          熟悉 CSS3, Scss 预处理器, 能够熟练使用 UnoCSS / Tailwind CSS, 熟悉
-          svg, css 动画
+          熟悉 JavaScript (ES6) 并常用 TypeScript 开发, 熟悉 UnoCSS / Tailwind CSS, 熟悉
+          svg, css 并对 ui/ux 和动画有较深理解
         </li>
 
         <li>
@@ -248,20 +267,25 @@
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          了解并常用工程化和规范化构建工具, 如 Vite, ESLint, Prettier,
+          熟悉并常用 AIGC 工具链, 包括 ChatGPT, OpenAI API, Stable Diffusion, Midjourney, Cursor, 尝试过自制多种 AI Tool 精简工作流
+        </li>
+
+        <li>
+          <Icon name="mingcute:diamond-square-line" />
+          了解并常用工程化, 规范化构建工具, 如 Vite, ESLint, Prettier,
           commitlint, changelog
         </li>
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          了解计算机图形学, 能够运用 Three.js, WebGL, GLSL, Blender 完成 3D 制作
-          & 渲染流程, 熟悉 Houdini, comfyui SD 程序化生成工作流
+          熟悉 Houdini, comfyui SD 程序化生成工作流, 了解计算机图形学, 熟悉 Three.js, Tresjs, Blender 3D 制作
+          & 渲染流程
         </li>
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
           熟悉全栈框架, 常用 Node.js, Nest.js, Nuxt.js, Next.js, Electron,
-          Tauri, uni-app, Flutter, Capacitor, .NET MAUI 完成各种场景开发
+          Tauri, uni-app, Flutter, Capacitor, .NET MAUI, PyQt, Qt5 完成各种场景开发
         </li>
 
         <li>
@@ -272,30 +296,23 @@
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          熟悉 webgis / canvas 开发, 了解 leaflet, d3, echarts, Chrome 插件,
-          能完成一定程度的 ui/ux 设计和优化
+          熟悉 webgis / canvas 开发, 了解 leaflet, d3, echarts, Chrome 插件开发, 有自己的 PS / Chrome 工具插件上线经验
         </li>
 
         <li>
           <Icon name="mingcute:diamond-square-line" />
-          熟悉 Linux / MacOS 及常见工具, 常用 pm2, docker, nginx
-          进行项目管理部署运维
-        </li>
-
-        <li class="unique-border-owner">
-          <Icon name="mingcute:hexagon-line" />
-          了解 Figma, Aesprite, Blender 等设计工具, 了解 3D 建模, 2D 动画,
-          能够完成简单的 Shader 需求场景
+          熟悉 Linux / MacOS / WinAPI 及常见工具的使用和开发, 常用 pm2, docker, nginx, 1Panel 进行项目管理部署运维
         </li>
 
         <li>
           <Icon name="mingcute:hexagon-line" />
-          了解 Unity, Cocos, Unreal 等游戏引擎, 了解游戏开发流程及其设计理论
+          熟悉 Photopea, Figma, Aesprite, Blender 等设计工具, 了解 3D 建模, 2D 动画,
+          能够完成一般的 Shader 需求场景
         </li>
 
         <li>
           <Icon name="mingcute:hexagon-line" />
-          有丰富的游戏脚本开发经验, 了解 Lua, Python, Java, C# 等语言
+          了解 Unity, Cocos, Unreal 等客户端引擎, 了解游戏开发流程及其设计理论, 有丰富的 Lua / C++ 游戏脚本开发经验
         </li>
       </ul>
     </section>
@@ -322,11 +339,14 @@ span.iconify {
   .personal-info {
     @apply flex flex-wrap pl-5;
 
-    a {
-      @apply w-1/3 p-1 text-sm flex text-neutral-800 items-center gap-1;
-      @apply hover:text-purple-500 cursor-pointer transition-all;
+    & > div {
+      @apply w-1/4 p-1 text-sm flex items-center gap-2 text-neutral-800;
       list-style: none;
 
+      a {
+        @apply flex items-center gap-1;
+        @apply hover:text-purple-500 cursor-pointer transition-all;
+      }
       span.iconify {
         @apply size-[16px];
       }
