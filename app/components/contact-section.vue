@@ -55,14 +55,12 @@ onMounted(() => {
     ref="container"
     class="w-full py-40 md:py-64 px-10 md:px-[12vw] bg-[#0A0A0A] text-[#E0E0E0] overflow-hidden relative"
   >
-    <!-- 背景纹理图：更新为 hire.JPG 并调整滤镜以适配工业冷感 -->
     <div
-      class="absolute inset-0 z-0 opacity-[0.1] grayscale brightness-[0.7] pointer-events-none"
+      class="absolute inset-0 z-0 opacity-[0.3] grayscale brightness-[1] pointer-events-none"
     >
       <img src="~/assets/image/hire.JPG" class="w-full h-full object-cover" />
     </div>
 
-    <!-- 背景极淡水印 -->
     <div
       class="absolute bottom-0 left-0 text-[15vw] font-black leading-none opacity-[0.015] select-none pointer-events-none tracking-tighter"
     >
@@ -119,7 +117,7 @@ onMounted(() => {
               :key="link.n"
               :href="link.u"
               target="_blank"
-              class="text-[10px] font-black uppercase tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity"
+              class="text-[14px] font-black uppercase tracking-[0.3em] opacity-60 hover:opacity-100 transition-opacity"
             >
               {{ link.n }}
             </a>
