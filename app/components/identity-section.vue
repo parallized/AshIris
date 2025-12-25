@@ -36,18 +36,18 @@ onMounted(() => {
 <template>
   <section
     ref="container"
-    class="w-full py-32 md:py-64 px-10 md:px-[12vw] bg-[#3D3935] text-[#D9D1C7] relative overflow-hidden"
+    class="w-full py-32 md:py-64 px-10 md:px-[12vw] bg-[#1A1C18] text-[#E8E4DF] relative overflow-hidden"
   >
     <!-- 背景巨大装饰字 -->
     <div
-      class="absolute top-20 left-10 text-[25vw] font-black leading-none opacity-[0.03] select-none pointer-events-none tracking-tighter whitespace-nowrap"
+      class="absolute top-20 left-10 text-[25vw] font-black leading-none opacity-[0.02] select-none pointer-events-none tracking-tighter whitespace-nowrap"
     >
       RESUME IDENTITY
     </div>
 
     <!-- 极细装饰边框 -->
     <div
-      class="absolute inset-0 border-[0.5px] border-[#D9D1C7]/10 pointer-events-none m-4 md:m-10"
+      class="absolute inset-0 border-[0.5px] border-[#E8E4DF]/10 pointer-events-none m-4 md:m-10"
     ></div>
 
     <div
@@ -55,19 +55,19 @@ onMounted(() => {
     >
       <!-- 1. 垂直标题区 -->
       <div
-        class="lg:col-span-3 border-l-[0.5px] border-[#D9D1C7]/20 pl-10 flex flex-col justify-between py-2"
+        class="lg:col-span-3 border-l-[0.5px] border-[#E8E4DF]/20 pl-10 flex flex-col justify-between py-2"
       >
         <div
           class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
         >
           <span
-            class="text-[9px] font-black uppercase tracking-[0.5em] text-[#A68B6D] mb-8 block"
+            class="text-[9px] font-black uppercase tracking-[0.5em] text-[#D4AF37] mb-8 block"
             >About Me</span
           >
           <h2
             class="text-6xl md:text-7xl font-light tracking-tighter leading-none"
           >
-            The<br /><span class="font-black italic text-[#A68B6D]"
+            The<br /><span class="font-black italic text-[#D4AF37]"
               >Identity</span
             >
           </h2>
@@ -82,7 +82,7 @@ onMounted(() => {
             Current Coordinates
           </p>
           <p
-            class="text-xl font-serif italic border-b-[0.5px] border-[#D9D1C7]/10 pb-4 inline-block"
+            class="text-xl font-serif italic border-b-[0.5px] border-[#E8E4DF]/10 pb-4 inline-block"
           >
             {{ base }} / UTC+8
           </p>
@@ -91,16 +91,27 @@ onMounted(() => {
 
       <!-- 2. 核心履历与简介 -->
       <div class="lg:col-span-6 space-y-24">
+        <!-- 更新：使用本地图片，并调整滤镜以突出花朵色彩 -->
+        <div
+          class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 delay-100 data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 w-full aspect-video overflow-hidden grayscale-[0.2] hover:grayscale-0 shadow-2xl"
+        >
+          <img
+            src="~/assets/image/identity.JPG"
+            alt="Identity Image"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-[3s]"
+          />
+        </div>
+
         <div
           class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 delay-200 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 space-y-12"
         >
           <p
-            class="text-2xl md:text-4xl font-light leading-[1.3] text-[#D9D1C7]/90"
+            class="text-2xl md:text-4xl font-light leading-[1.3] text-[#E8E4DF]/90"
           >
             在混乱的代码世界中，寻找一种温暖的、带有泥土气息的逻辑归宿。
           </p>
           <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-sm tracking-[0.15em] leading-[2] opacity-60 font-medium"
+            class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-sm tracking-[0.15em] leading-loose opacity-60 font-medium"
           >
             <p>
               Greater Bread Essence.
@@ -124,10 +135,10 @@ onMounted(() => {
             }"
             :key="label"
             :style="{ transitionDelay: `${index * 150}ms` }"
-            class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group border-b-[0.5px] border-[#D9D1C7]/10 py-10 flex flex-col md:flex-row md:items-center justify-between hover:bg-[#D9D1C7]/5 px-4 -mx-4 cursor-default"
+            class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group border-b-[0.5px] border-[#E8E4DF]/10 py-10 flex flex-col md:flex-row md:items-center justify-between hover:bg-[#E8E4DF]/5 px-4 -mx-4 cursor-default"
           >
             <span
-              class="text-[9px] font-black uppercase tracking-[0.4em] opacity-20 group-hover:opacity-100 group-hover:text-[#A68B6D]"
+              class="text-[9px] font-black uppercase tracking-[0.4em] opacity-20 group-hover:opacity-100 group-hover:text-[#D4AF37]"
               >{{ label }}</span
             >
             <span
@@ -149,10 +160,10 @@ onMounted(() => {
             v-for="(skill, index) in skills"
             :key="skill.name"
             :style="{ transitionDelay: `${index * 100 + 600}ms` }"
-            class="reveal-pure opacity-0 translate-x-4 transition-all duration-700 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 flex items-center justify-between border-b-[0.5px] border-[#D9D1C7]/5 pb-4 group"
+            class="reveal-pure opacity-0 translate-x-4 transition-all duration-700 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 flex items-center justify-between border-b-[0.5px] border-[#E8E4DF]/5 pb-4 group"
           >
             <span
-              class="text-[11px] font-bold uppercase tracking-widest group-hover:text-[#A68B6D] transition-colors"
+              class="text-[14px] font-bold uppercase tracking-widest group-hover:text-[#D4AF37] transition-colors"
               >{{ skill.name }}</span
             >
             <Icon

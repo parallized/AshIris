@@ -67,6 +67,7 @@ const skills: Skill[] = [
   <div class="bg-[#FDFBF7] min-h-screen">
     <!-- Hero Section -->
     <HeroSection
+      id="home"
       letter="G"
       word="reater"
       tagline="释放无限可能。面包之力，重塑现实。"
@@ -74,6 +75,7 @@ const skills: Skill[] = [
 
     <!-- Identity Section -->
     <IdentitySection
+      id="about"
       graduation="2021 — 2026"
       experience="3 Years Working"
       base="Zhejiang, China"
@@ -81,10 +83,11 @@ const skills: Skill[] = [
     />
 
     <!-- Works Section -->
-    <WorksSection :projects="projects" />
+    <WorksSection id="works" :projects="projects" />
 
     <!-- Contact Section -->
     <ContactSection
+      id="contact"
       email="parallized@foxmail.com"
       github="https://github.com/parallized"
       blog="https://parallized.cn"

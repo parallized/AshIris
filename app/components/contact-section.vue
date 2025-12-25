@@ -53,11 +53,18 @@ onMounted(() => {
 <template>
   <section
     ref="container"
-    class="w-full py-40 md:py-64 px-10 md:px-[12vw] bg-[#2A2724] text-[#D9D1C7] overflow-hidden relative"
+    class="w-full py-40 md:py-64 px-10 md:px-[12vw] bg-[#0A0A0A] text-[#E0E0E0] overflow-hidden relative"
   >
+    <!-- 背景纹理图：更新为 hire.JPG 并调整滤镜以适配工业冷感 -->
+    <div
+      class="absolute inset-0 z-0 opacity-[0.1] grayscale brightness-[0.7] pointer-events-none"
+    >
+      <img src="~/assets/image/hire.JPG" class="w-full h-full object-cover" />
+    </div>
+
     <!-- 背景极淡水印 -->
     <div
-      class="absolute bottom-0 left-0 text-[15vw] font-black leading-none opacity-[0.02] select-none pointer-events-none tracking-tighter"
+      class="absolute bottom-0 left-0 text-[15vw] font-black leading-none opacity-[0.015] select-none pointer-events-none tracking-tighter"
     >
       STAY IN TOUCH
     </div>
@@ -67,13 +74,13 @@ onMounted(() => {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-end">
           <div class="space-y-12 reveal-item">
             <span
-              class="text-[9px] font-black uppercase tracking-[0.5em] text-[#A68B6D]"
+              class="text-[9px] font-black uppercase tracking-[0.5em] text-[#707070]"
               >Contact Us</span
             >
             <h2
               class="text-6xl md:text-8xl font-light tracking-tighter leading-[0.9] uppercase"
             >
-              Let's build<br /><span class="font-black italic text-[#A68B6D]"
+              Let's build<br /><span class="font-black italic text-[#808080]"
                 >Together</span
               >
             </h2>
@@ -90,7 +97,7 @@ onMounted(() => {
               <a
                 ref="magneticButton"
                 :href="'mailto:' + email"
-                class="inline-block px-12 py-5 border-[0.5px] border-[#D9D1C7]/20 hover:bg-[#D9D1C7] hover:text-[#2A2724] transition-all duration-700 text-[10px] font-black uppercase tracking-[0.3em]"
+                class="inline-block px-12 py-5 border-[0.5px] border-[#E0E0E0]/20 hover:bg-[#E0E0E0] hover:text-[#0A0A0A] transition-all duration-700 text-[10px] font-black uppercase tracking-[0.3em]"
               >
                 Send an Inquiry
               </a>
@@ -100,7 +107,7 @@ onMounted(() => {
 
         <!-- 底部链接 -->
         <div
-          class="pt-24 border-t-[0.5px] border-[#D9D1C7]/10 flex flex-col md:flex-row justify-between items-center gap-12 reveal-item"
+          class="pt-24 border-t-[0.5px] border-[#E0E0E0]/10 flex flex-col md:flex-row justify-between items-center gap-12 reveal-item"
         >
           <div class="flex gap-16">
             <a

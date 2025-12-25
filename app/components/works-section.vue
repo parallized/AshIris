@@ -38,37 +38,59 @@ onMounted(() => {
 <template>
   <section
     ref="container"
-    class="w-full py-32 md:py-64 px-10 md:px-[12vw] bg-[#D9D1C7] text-[#2A2724] relative"
+    class="w-full py-32 md:py-64 px-10 md:px-[12vw] bg-[#0F110D] text-[#E2DFD5] relative overflow-hidden"
   >
-    <div class="max-w-[1400px] mx-auto space-y-32 md:space-y-48">
-      <!-- 标题区 -->
-      <div
-        class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 flex flex-col md:flex-row md:items-end justify-between gap-12 border-b-[0.5px] border-[#2A2724]/20 pb-16"
-      >
-        <div class="space-y-6">
-          <span
-            class="text-[9px] font-black uppercase tracking-[0.5em] text-[#8C4B3E]"
-            >Selected Portfolio</span
-          >
-          <h2
-            class="text-6xl md:text-8xl font-light tracking-tighter uppercase leading-none"
-          >
-            Recent<br /><span class="font-black italic text-[#8C4B3E]"
-              >Archive</span
+    <div class="max-w-[1400px] mx-auto space-y-32 md:space-y-48 relative z-10">
+      <!-- 标题与意象展示区 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div
+          class="lg:col-span-7 reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 space-y-12 md:space-y-24"
+        >
+          <div class="space-y-6 border-l-[0.5px] border-[#5B8FB9]/30 pl-10">
+            <span
+              class="text-[9px] font-black uppercase tracking-[0.5em] text-[#5B8FB9]"
+              >Selected Portfolio</span
             >
-          </h2>
+            <h2
+              class="text-6xl md:text-8xl font-light tracking-tighter uppercase leading-none"
+            >
+              Recent<br /><span class="font-black italic text-[#5B8FB9]"
+                >Archive</span
+              >
+            </h2>
+          </div>
+          <div class="max-w-md opacity-60">
+            <p
+              class="text-sm leading-loose tracking-widest font-medium uppercase"
+            >
+              每一次项目的迭代，都是对代码边界的探索。这里记录了我如何将复杂的逻辑转化为直觉性的视觉语言。
+            </p>
+          </div>
         </div>
-        <div class="max-w-xs text-right opacity-40">
-          <p
-            class="text-sm leading-loose tracking-[0.1em] font-medium uppercase"
+
+        <!-- 意象挂件：取代背景图 -->
+        <div
+          class="lg:col-span-5 reveal-pure opacity-0 translate-y-20 transition-all duration-[1.5s] delay-300 data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
+        >
+          <div
+            class="relative group overflow-hidden aspect-3/4 md:aspect-auto md:h-[600px] w-full bg-[#E2DFD5]/5 p-4 border-[0.5px] border-[#E2DFD5]/10"
           >
-            每一次项目的迭代，都是对代码边界的探索。这里记录了我如何将复杂的逻辑转化为直觉性的视觉语言。
-          </p>
+            <img
+              src="~/assets/image/works.JPG"
+              class="w-full h-full object-cover grayscale-[0.3] brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[3s] ease-out shadow-2xl"
+            />
+            <!-- 装饰性文字标签 -->
+            <div
+              class="absolute bottom-10 left-10 text-[9px] font-black uppercase tracking-[0.5em] text-white/50 [writing-mode:vertical-lr] mix-blend-exclusion"
+            >
+              Reflections of logic
+            </div>
+          </div>
         </div>
       </div>
 
       <div
-        class="project-list space-y-px bg-[#2A2724]/5 border-y-[0.5px] border-[#2A2724]/10"
+        class="project-list space-y-px bg-[#E2DFD5]/5 border-y-[0.5px] border-[#E2DFD5]/5"
       >
         <NuxtLink
           v-for="(project, index) in projects"
@@ -76,7 +98,7 @@ onMounted(() => {
           :to="project.url || '/'"
           :target="project.url ? '_blank' : '_self'"
           :style="{ transitionDelay: `${index * 150}ms` }"
-          class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group relative flex flex-col md:flex-row items-center justify-between py-16 md:py-24 px-8 md:px-12 bg-[#D9D1C7] hover:bg-[#C9C1B7] transition-all duration-700 overflow-hidden"
+          class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group relative flex flex-col md:flex-row items-center justify-between py-16 md:py-24 px-8 md:px-12 bg-transparent hover:bg-[#E2DFD5]/5 overflow-hidden"
         >
           <div
             class="flex items-baseline gap-12 relative z-10 w-full md:w-auto"
@@ -91,7 +113,7 @@ onMounted(() => {
                 {{ project.title }}
               </h3>
               <p
-                class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#8C4B3E] opacity-60"
+                class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#5B8FB9] opacity-60"
               >
                 {{ project.category }} / {{ project.date }}
               </p>
@@ -102,7 +124,7 @@ onMounted(() => {
             class="flex flex-col md:items-end gap-6 mt-10 md:mt-0 relative z-10 w-full md:w-1/3"
           >
             <p
-              class="text-sm font-medium leading-[1.8] text-[#2A2724]/60 md:text-right"
+              class="text-sm font-medium leading-relaxed text-[#E2DFD5]/60 md:text-right"
             >
               {{ project.description }}
             </p>
@@ -114,14 +136,14 @@ onMounted(() => {
                 >View Case</span
               >
               <div
-                class="h-[0.5px] w-8 bg-[#2A2724]/20 group-hover:w-12 group-hover:bg-[#8C4B3E] transition-all duration-700"
+                class="h-[0.5px] w-8 bg-[#E2DFD5]/20 group-hover:w-12 group-hover:bg-[#5B8FB9] transition-all duration-700"
               ></div>
             </div>
           </div>
 
           <!-- 极细分隔线 -->
           <div
-            class="absolute bottom-0 left-0 w-full h-[0.5px] bg-[#2A2724]/5"
+            class="absolute bottom-0 left-0 w-full h-[0.5px] bg-[#E2DFD5]/5"
           ></div>
         </NuxtLink>
       </div>

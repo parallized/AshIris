@@ -53,9 +53,9 @@ onMounted(() => {
         class="reveal-pure opacity-0 -translate-x-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-x-0 space-y-4 text-[#D9D1C7]"
       >
         <h1
-          class="text-6xl md:text-[10vw] font-black tracking-tighter leading-[0.85]"
+          class="text-6xl md:text-[6vw] font-black tracking-tighter leading-[0.85]"
         >
-          EST.<br />2024
+          Hey there,<br />I'm parallized.
         </h1>
         <div class="flex items-center gap-4">
           <div class="h-[0.5px] w-12 bg-[#D9D1C7]/30"></div>
