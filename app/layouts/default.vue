@@ -42,7 +42,7 @@
       <div class="-rotate-90 origin-center whitespace-nowrap">
         <span
           class="text-[14px] font-black uppercase tracking-[0.5em] opacity-20"
-          >ESTABLISHED 2024 / TOKYO JAPAN</span
+          >CREATED 2025 / CHINA HANGZHOU</span
         >
       </div>
     </aside>
@@ -61,7 +61,7 @@
           <span class="text-white font-black text-xl">🍞</span>
         </div>
         <p class="text-sm font-black uppercase tracking-widest">
-          ©2024-2026 GREATER BREAD ESSENCE.
+          ©2025-2026 GREATER BREAD ESSENCE.
         </p>
       </div>
       <div class="flex gap-8 text-sm font-black uppercase tracking-widest">
