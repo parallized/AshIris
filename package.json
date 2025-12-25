@@ -1,42 +1,25 @@
 {
-  "name": "ash-iris",
-  "private": true,
+  "name": "AshIris",
   "type": "module",
+  "private": true,
   "scripts": {
-    "build": "nuxi build",
-    "dev": "nuxi dev",
-    "generate": "nuxi generate",
-    "preview": "nuxi preview",
-    "postinstall": "nuxi prepare",
-    "format": "prettier --write \"**/*.{js,vue,json}\"",
-    "check": "nuxi typecheck"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@halo-dev/api-client": "^2.20.0",
-    "@nuxt/icon": "^1.10.3",
-    "@nuxtjs/tailwindcss": "^6.13.1",
-    "@pinia/nuxt": "^0.10.1",
-    "@tailwindcss/typography": "^0.5.16",
-    "@vueuse/core": "^12.7.0",
-    "axios": "^1.8.1",
-    "dayjs": "^1.11.13",
-    "lenis": "^1.1.21",
-    "nuxt": "^3.15.3",
-    "pinia": "^3.0.1",
-    "tocbot": "4.34.1-0",
-    "vue": "latest"
+    "@nuxt/content": "3.10.0",
+    "@nuxt/fonts": "0.12.1",
+    "@nuxt/icon": "2.1.1",
+    "@nuxt/image": "2.0.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "better-sqlite3": "^12.5.0",
+    "nuxt": "^4.2.2",
+    "tailwindcss": "^4.1.18",
+    "vue": "^3.5.26",
+    "vue-router": "^4.6.4"
   },
-  "devDependencies": {
-    "@iconify-json/devicon": "^1.2.17",
-    "@iconify-json/entypo": "^1.2.1",
-    "@iconify-json/meteor-icons": "^1.2.1",
-    "@nuxt/eslint": "^0.7.6",
-    "@nuxtjs/sitemap": "^7.2.6",
-    "@types/markdown-it": "^14.1.2",
-    "eslint": "^9.21.0",
-    "sass": "^1.85.1",
-    "typescript": "^5.7.3",
-    "vue-tsc": "^2.2.4"
-  },
-  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
+  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f"
 }
