@@ -58,7 +58,7 @@ onMounted(() => {
     <div
       class="absolute inset-0 z-0 opacity-[0.3] grayscale brightness-[1] pointer-events-none"
     >
-      <img src="~/assets/image/hire.JPG" class="w-full h-full object-cover" />
+      <img src="~/assets/image/hire.webp" class="w-full h-full object-cover" />
     </div>
 
     <div

@@ -96,7 +96,7 @@ onMounted(() => {
           class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 delay-100 data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 w-full aspect-video overflow-hidden grayscale-[0.2] hover:grayscale-0 shadow-2xl"
         >
           <img
-            src="~/assets/image/identity.JPG"
+            src="~/assets/image/identity.webp"
             alt="Identity Image"
             class="w-full h-full object-cover hover:scale-105 transition-transform duration-[3s]"
           />

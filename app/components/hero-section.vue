@@ -35,7 +35,7 @@ onMounted(() => {
     <!-- 背景大图：使用本地建筑图片 -->
     <div class="absolute inset-0 z-0">
       <img
-        src="~/assets/image/background.JPG"
+        src="~/assets/image/background.webp"
         alt="Architectural Context"
         class="w-full h-full object-cover opacity-50 grayscale-[0.3] brightness-[0.6]"
       />

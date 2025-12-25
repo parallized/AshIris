@@ -76,7 +76,7 @@ onMounted(() => {
             class="relative group overflow-hidden aspect-3/4 md:aspect-auto md:h-[600px] w-full bg-[#E2DFD5]/5 p-4 border-[0.5px] border-[#E2DFD5]/10"
           >
             <img
-              src="~/assets/image/works.JPG"
+              src="~/assets/image/works.webp"
               class="w-full h-full object-cover grayscale-[0.3] brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[3s] ease-out shadow-2xl"
             />
             <!-- 装饰性文字标签 -->
