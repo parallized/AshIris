@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/icon", "@nuxt/image"],
   app: {
     head: {
+      title: '强效面包精华 - Blog',
       link: [
         { rel: 'icon', type: 'image/png', href: '/bread.png' }
       ]
