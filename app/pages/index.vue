@@ -43,7 +43,7 @@ const projects: Project[] = [
     icon: "ph:magic-wand-fill",
   },
   {
-    title: "AshIris",
+    title: "Ash Iris",
     description: "经过数次迭代，极简、粗野主义与 Y2K 风格融合的个人博客",
     url: "https://parallized.cn",
     date: "2013",
