@@ -70,7 +70,7 @@ const skills: Skill[] = [
       id="home"
       letter="G"
       word="reater"
-      tagline="Be water, my friend."
+      tagline="Do not go gentle into that good night."
     />
 
     <!-- Identity Section -->
