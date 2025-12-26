@@ -130,7 +130,7 @@ onMounted(() => {
               Academic: graduation,
               Professional: experience,
               Location: base,
-              Status: 'Available for Hire',
+              Status: '接受邀约',
             }"
             :key="label"
             :style="{ transitionDelay: `${index * 150}ms` }"

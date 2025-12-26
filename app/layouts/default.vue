@@ -25,8 +25,8 @@ const handleNavClick = (to: string) => {
 
 const navLinks = [
   { name: "Home", to: "/#home" },
-  { name: "About", to: "/#about" },
   { name: "Works", to: "/#works" },
+  { name: "About", to: "/#about" },
   { name: "Contact", to: "/#contact" },
 ];
 </script>

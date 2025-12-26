@@ -7,6 +7,13 @@ export default defineNuxtConfig({
   ssr: false,
   css: ["./app/assets/css/main.css"],
   modules: ["@nuxt/icon", "@nuxt/image"],
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/bread.png' }
+      ]
+    }
+  },
   vite: {
     plugins: [tailwindcss()],
   },

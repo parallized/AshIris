@@ -73,17 +73,17 @@ const skills: Skill[] = [
       tagline="Do not go gentle into that good night."
     />
 
+    <!-- Works Section -->
+    <WorksSection id="works" :projects="projects" />
+
     <!-- Identity Section -->
     <IdentitySection
       id="about"
-      graduation="2021 — 2026"
-      experience="3 Years Working"
-      base="Zhejiang, China"
+      graduation="双非本数媒 2021 — 2026"
+      experience="2 年实习经验，多年游戏周边开发"
+      base="浙江，杭州"
       :skills="skills"
     />
-
-    <!-- Works Section -->
-    <WorksSection id="works" :projects="projects" />
 
     <!-- Contact Section -->
     <ContactSection
