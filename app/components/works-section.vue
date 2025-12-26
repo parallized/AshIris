@@ -15,22 +15,63 @@ defineProps<{
   projects: Project[];
 }>();
 
+const { $gsap: gsap, $ScrollTrigger: ScrollTrigger } = useNuxtApp();
 const container = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.setAttribute("data-animate", "true");
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
+  if (!gsap || !ScrollTrigger || !container.value) return;
 
-  container.value?.querySelectorAll(".reveal-pure").forEach((el) => {
-    observer.observe(el);
+  const q = gsap.utils.selector(container.value);
+
+  // 1. 标题区揭示
+  gsap.from(q(".reveal-title"), {
+    y: 60,
+    opacity: 0,
+    duration: 1.5,
+    ease: "expo.out",
+    scrollTrigger: {
+      trigger: q(".reveal-title"),
+      start: "top 90%",
+    },
+  });
+
+  // 2. 意象挂件揭示 (带有微妙的缩放)
+  gsap.from(q(".reveal-image"), {
+    y: 100,
+    scale: 1.1,
+    opacity: 0,
+    duration: 2,
+    delay: 0.2,
+    ease: "expo.out",
+    scrollTrigger: {
+      trigger: q(".reveal-image"),
+      start: "top 90%",
+    },
+  });
+
+  // 3. 项目列表流式揭示
+  gsap.from(q(".project-item"), {
+    y: 40,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 1.2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: q(".project-list"),
+      start: "top 85%",
+    },
+  });
+
+  // 4. 装饰性文字视差
+  gsap.to(q(".vertical-text"), {
+    y: -30,
+    ease: "none",
+    scrollTrigger: {
+      trigger: q(".reveal-image"),
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
   });
 });
 </script>
@@ -43,9 +84,7 @@ onMounted(() => {
     <div class="max-w-[1400px] mx-auto space-y-32 md:space-y-48 relative z-10">
       <!-- 标题与意象展示区 -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-        <div
-          class="lg:col-span-7 reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 space-y-12 md:space-y-24"
-        >
+        <div class="lg:col-span-7 space-y-12 md:space-y-24 reveal-title">
           <div class="space-y-6 border-l-[0.5px] border-[#5B8FB9]/30 pl-10">
             <span
               class="text-[9px] font-black uppercase tracking-[0.5em] text-[#5B8FB9]"
@@ -68,20 +107,18 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- 意象挂件：取代背景图 -->
-        <div
-          class="lg:col-span-5 reveal-pure opacity-0 translate-y-20 transition-all duration-[1.5s] delay-300 data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0"
-        >
+        <!-- 意象挂件 -->
+        <div class="lg:col-span-5 reveal-image">
           <div
             class="relative group overflow-hidden aspect-3/4 md:aspect-auto md:h-[600px] w-full bg-[#E2DFD5]/5 p-4 border-[0.5px] border-[#E2DFD5]/10"
           >
             <img
               src="~/assets/image/works.webp"
-              class="w-full h-full object-cover grayscale-[0.3] brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[3s] ease-out shadow-2xl"
+              class="w-full h-full object-cover grayscale-[0.3] brightness-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2s] ease-out shadow-2xl"
             />
             <!-- 装饰性文字标签 -->
             <div
-              class="absolute bottom-10 left-10 text-[9px] font-black uppercase tracking-[0.5em] text-white/50 [writing-mode:vertical-lr] mix-blend-exclusion"
+              class="absolute bottom-10 left-10 text-[9px] font-black uppercase tracking-[0.5em] text-white/50 [writing-mode:vertical-lr] mix-blend-exclusion vertical-text"
             >
               Reflections of logic
             </div>
@@ -97,13 +134,10 @@ onMounted(() => {
           :key="project.title"
           :to="project.url || '/'"
           :target="project.url ? '_blank' : '_self'"
-          :style="{ transitionDelay: `${index * 150}ms` }"
-          class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group relative flex flex-col md:flex-row items-center justify-between py-16 md:py-24 px-8 md:px-12 bg-transparent hover:bg-[#E2DFD5]/5 overflow-hidden"
+          class="group relative flex flex-col md:flex-row items-center justify-between py-16 md:py-24 px-8 md:px-12 bg-transparent hover:bg-[#E2DFD5]/5 transition-colors duration-700 overflow-hidden project-item"
         >
-          <div
-            class="flex items-baseline gap-12 relative z-10 w-full md:w-auto"
-          >
-            <span class="text-[9px] font-black font-serif italic opacity-30"
+          <div class="flex items-baseline gap-12 relative z-10 w-full md:w-auto">
+            <span class="text-[12px] font-black font-serif italic opacity-30"
               >0{{ index + 1 }}</span
             >
             <div class="space-y-2">
