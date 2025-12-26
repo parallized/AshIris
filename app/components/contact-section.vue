@@ -89,7 +89,7 @@ onMounted(() => {
               class="text-sm md:text-base leading-relaxed opacity-60 font-serif italic"
             >
               我在求职 Houdini / 全栈 / 游戏 /
-              互联网开发。让我们在光影与代码的交界处，共同构建一些富有温度的数字生命。
+              互联网开发。让我们共同构建一些有意思的东西。
             </p>
             <div class="pt-6">
               <a

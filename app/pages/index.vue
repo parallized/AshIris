@@ -19,7 +19,7 @@ const projects: Project[] = [
     title: "Runedra 知树",
     description: "人类知识学习加速启动，构建多维知识图谱",
     url: "https://rune.parallized.cn",
-    date: "2024.11",
+    date: "2024",
     category: "AI / Education",
     tag: "FEATURED",
     icon: "ph:tree-structure-fill",
@@ -28,7 +28,7 @@ const projects: Project[] = [
     title: "OwOcaptain",
     description: "守望先锋地图理解 60 秒速查，专业安娜位指南",
     url: "https://owo.parallized.cn",
-    date: "2024.08",
+    date: "2025.12",
     category: "Game Tool",
     tag: "UTILITY",
     icon: "ph:strategy-fill",
@@ -37,16 +37,16 @@ const projects: Project[] = [
     title: "WoW Magician",
     description: "魔兽世界 AI & MRT 战术板 + 全自动排轴解法",
     url: "https://wow.parallized.cn",
-    date: "2024.05",
+    date: "2025.09",
     category: "Full-Stack / AI",
     tag: "GUILD",
     icon: "ph:magic-wand-fill",
   },
   {
     title: "AshIris",
-    description: "极简、粗野主义与 Y2K 风格融合的个人博客",
+    description: "经过数次迭代，极简、粗野主义与 Y2K 风格融合的个人博客",
     url: "https://parallized.cn",
-    date: "2024.12",
+    date: "2013",
     category: "Identity",
     tag: "BLOG",
     icon: "ph:fingerprint-fill",
@@ -70,7 +70,7 @@ const skills: Skill[] = [
       id="home"
       letter="G"
       word="reater"
-      tagline="释放无限可能。面包之力，重塑现实。"
+      tagline="Be water, my friend."
     />
 
     <!-- Identity Section -->
@@ -88,7 +88,7 @@ const skills: Skill[] = [
     <!-- Contact Section -->
     <ContactSection
       id="contact"
-      email="parallized@foxmail.com"
+      email="1317699264@qq.com"
       github="https://github.com/parallized"
       blog="https://parallized.cn"
     />

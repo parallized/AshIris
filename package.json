@@ -1,6 +1,7 @@
 {
   "name": "AshIris",
   "type": "module",
+  "version": "3.0.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",

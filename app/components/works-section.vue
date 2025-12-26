@@ -102,7 +102,7 @@ onMounted(() => {
             <p
               class="text-sm leading-loose tracking-widest font-medium uppercase"
             >
-              每一次项目的迭代，都是对代码边界的探索。这里记录了我如何将复杂的逻辑转化为直觉性的视觉语言。
+              每一次项目的迭代，都是对优秀设计的思考，对代码边界的探索。这里记录了我如何将复杂的逻辑转化为直觉性的视觉语言。
             </p>
           </div>
         </div>

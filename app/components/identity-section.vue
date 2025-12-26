@@ -77,9 +77,9 @@ onMounted(() => {
           class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 delay-300 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 hidden lg:block space-y-4 mt-40"
         >
           <p
-            class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30"
+            class="text-[12px] font-black uppercase tracking-[0.4em] opacity-30"
           >
-            Current Coordinates
+            Current BASE
           </p>
           <p
             class="text-xl font-serif italic border-b-[0.5px] border-[#E8E4DF]/10 pb-4 inline-block"
@@ -108,18 +108,17 @@ onMounted(() => {
           <p
             class="text-2xl md:text-4xl font-light leading-[1.3] text-[#E8E4DF]/90"
           >
-            在混乱的代码世界中，寻找一种温暖的、带有泥土气息的逻辑归宿。
+            欣赏 IDEA、代码与美学的结合，痛恨不优雅且为所欲为的糟糕设计。
           </p>
           <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-sm tracking-[0.15em] leading-loose opacity-60 font-medium"
+            class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 text-sm tracking-[0.15em] leading-loose opacity-60"
           >
             <p>
               Greater Bread Essence.
-              在光影与秩序中徘徊的数字工匠。擅长捕捉那一抹转瞬即逝的创意灵光，并将其固化为永恒的像素。
+              多年游戏设计、建模与编码经验，擅长游戏周边应用设计，工具链开发，软件开发咨询。技术擅长 TypeScript，Lua，Java 和 C# 等，常用 TDD & DDD，了解架构设计与软件工程。
             </p>
             <p>
-              "Be water, my friend." 流动不息，在 Houdini
-              的节点流与全栈开发的逻辑栈中，探索技术与审美的交汇点。
+              流动不息，在 Houdini 的节点流与全栈开发的逻辑栈中，热爱探索技术与审美的交汇点。同样痛恨那些简单抄袭的糟糕产品设计，大道至简。
             </p>
           </div>
         </div>

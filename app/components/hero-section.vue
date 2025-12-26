@@ -60,7 +60,7 @@ onMounted(() => {
         <div class="flex items-center gap-4">
           <div class="h-[0.5px] w-12 bg-[#D9D1C7]/30"></div>
           <p
-            class="text-[10px] md:text-xs font-black tracking-[0.4em] text-[#A68B6D] uppercase"
+            class="text-[10px] md:text-[14px] font-black tracking-[0.4em] text-[#A68B6D] uppercase"
           >
             Digital Artisan & Pixel Craftsman
           </p>
@@ -79,10 +79,11 @@ onMounted(() => {
           </p>
           <div class="hero-description space-y-6 opacity-60">
             <p
-              class="text-sm leading-[2] tracking-widest uppercase border-t border-[#D9D1C7]/10 pt-6"
+              class="text-sm leading-loose tracking-widest uppercase border-t border-[#D9D1C7]/10 pt-6"
             >
               Greater Bread Essence.
-              在光影与秩序中徘徊的数字工匠。擅长捕捉那一抹转瞬即逝的创意灵光，并将其固化为永恒的像素。
+              <br />
+              思考，行动与分享构成了生活中不可或缺的动量，也是表达自我的方式。永远做一个初学者，永远保持好奇心。
             </p>
           </div>
         </div>

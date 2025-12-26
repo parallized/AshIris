@@ -144,9 +144,9 @@ const navLinks = [
         >
         <div class="space-y-2">
           <p
-            class="text-[9px] font-black uppercase tracking-[0.4em] text-[#D9D1C7]/30"
+            class="text-[12px] font-bold uppercase tracking-[0.4em] text-[#D9D1C7]/30"
           >
-            ©2024-2026 GREATER BREAD ESSENCE.
+            © 2025-2026 GREATER BREAD ESSENCE.
           </p>
           <p
             class="text-[8px] font-medium tracking-[0.2em] text-[#D9D1C7]/10 uppercase"
