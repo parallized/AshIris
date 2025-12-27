@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import FooterSection from "~/components/footer-section.vue";
 
 const isMenuOpen = ref(false);
 const { $lenis } = useNuxtApp();
@@ -12,13 +13,15 @@ const handleNavClick = (to: string) => {
   isMenuOpen.value = false;
   if (to.startsWith("/#") && $lenis) {
     const targetId = to.split("#")[1];
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      $lenis.scrollTo(targetElement, {
-        offset: 0,
-        duration: 1.5,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      });
+    if (targetId) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        $lenis.scrollTo(targetElement, {
+          offset: 0,
+          duration: 1.5,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      }
     }
   }
 };
@@ -134,41 +137,7 @@ const navLinks = [
       <slot />
     </main>
 
-    <footer
-      class="py-20 md:py-32 px-[6vw] md:px-[12vw] bg-[#1A1614] flex flex-col md:flex-row justify-between items-center gap-12 border-t border-[#D9D1C7]/5 relative z-10"
-    >
-      <div class="flex items-center gap-8">
-        <span
-          class="text-[8px] font-black uppercase tracking-[0.6em] text-[#A68B6D]/40 italic -rotate-90 origin-center"
-          >Scroll</span
-        >
-        <div class="space-y-2">
-          <p
-            class="text-[12px] font-bold uppercase tracking-[0.4em] text-[#D9D1C7]/30"
-          >
-            © 2025-2026 GREATER BREAD ESSENCE.
-          </p>
-          <p
-            class="text-[8px] font-medium tracking-[0.2em] text-[#D9D1C7]/10 uppercase"
-          >
-            Architecting Digital Experiences
-          </p>
-        </div>
-      </div>
-      <div class="flex gap-12 text-[9px] font-black uppercase tracking-[0.4em]">
-        <a
-          href="https://github.com/parallized"
-          target="_blank"
-          class="text-[#D9D1C7]/40 hover:text-[#A68B6D] transition-colors"
-          >GitHub</a
-        >
-        <a
-          href="mailto:parallized@foxmail.com"
-          class="text-[#D9D1C7]/40 hover:text-[#A68B6D] transition-colors"
-          >Connect</a
-        >
-      </div>
-    </footer>
+    <FooterSection />
   </div>
 </template>
 
