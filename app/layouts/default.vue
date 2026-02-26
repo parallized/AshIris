@@ -61,7 +61,7 @@ const navLinks = [
       >
         <div
           class="w-6 h-[0.5px] bg-current transition-all"
-          :class="{ 'rotate-45 translate-y-2': isMenuOpen }"
+          :class="{ 'rotate-45 translate-y-[6.5px]': isMenuOpen }"
         ></div>
         <div
           class="w-4 h-[0.5px] bg-current transition-opacity"
@@ -69,7 +69,7 @@ const navLinks = [
         ></div>
         <div
           class="w-6 h-[0.5px] bg-current transition-all"
-          :class="{ '-rotate-45 -translate-y-2': isMenuOpen }"
+          :class="{ '-rotate-45 -translate-y-[6.5px]': isMenuOpen }"
         ></div>
       </button>
 
