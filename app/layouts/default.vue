@@ -36,7 +36,8 @@ const navLinks = [
 
 <template>
   <div
-    class="bg-[#1A1614] min-h-screen text-[#D9D1C7] font-['Inter'] selection:bg-[#A68B6D] selection:text-white relative text-base"
+    class="bg-[#1A1614] min-h-screen text-[#D9D1C7] selection:bg-[#A68B6D] selection:text-white relative text-base"
+    style="font-family: 'Inter', 'Noto Sans SC', sans-serif;"
   >
     <!-- Desktop/Mobile Navigation -->
     <header

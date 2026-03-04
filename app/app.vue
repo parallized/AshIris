@@ -1,6 +1,7 @@
 <template>
   <div
-    class="bg-[#1A1614] min-h-screen font-['Inter'] selection:bg-[#A68B6D] selection:text-white"
+    class="bg-[#1A1614] min-h-screen selection:bg-[#A68B6D] selection:text-white"
+    style="font-family: 'Inter', 'Noto Sans SC', sans-serif;"
   >
     <NuxtLayout>
       <NuxtPage />
