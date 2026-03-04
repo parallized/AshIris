@@ -720,7 +720,6 @@ onBeforeUnmount(() => {
   <div class="cv-bg min-h-screen overflow-x-hidden bg-neutral-100 text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-100">
     <div class="page-wrap mx-auto w-full px-4 py-8 transition-all duration-500 md:px-8 md:py-12" :class="isTwoColumn ? 'max-w-none' : 'max-w-[1024px]'">
       <article class="sheet overflow-hidden rounded-2xl bg-white shadow-[0_24px_70px_rgba(0,0,0,0.10)] ring-1 ring-black/5 transition-colors duration-300 dark:bg-neutral-800 dark:shadow-[0_24px_70px_rgba(0,0,0,0.50)] dark:ring-white/10">
-        
         <!-- Main Content -->
         <main class="p-8 md:p-12">
           <!-- Header -->
