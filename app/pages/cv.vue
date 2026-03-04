@@ -718,7 +718,7 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <div class="cv-bg min-h-screen overflow-x-hidden bg-neutral-100 text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-100">
-    <div class="page-wrap mx-auto w-full px-4 py-8 transition-all duration-500 md:px-8 md:py-12" :class="isTwoColumn ? 'max-w-[1500px]' : 'max-w-[1024px]'">
+    <div class="page-wrap mx-auto w-full px-4 py-8 transition-all duration-500 md:px-8 md:py-12" :class="isTwoColumn ? 'max-w-none' : 'max-w-[1024px]'">
       <article class="sheet overflow-hidden rounded-2xl bg-white shadow-[0_24px_70px_rgba(0,0,0,0.10)] ring-1 ring-black/5 transition-colors duration-300 dark:bg-neutral-800 dark:shadow-[0_24px_70px_rgba(0,0,0,0.50)] dark:ring-white/10">
         
         <!-- Main Content -->
@@ -758,7 +758,7 @@ onBeforeUnmount(() => {
             </div>
           </header>
 
-          <div :class="isTwoColumn ? 'grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-x-12' : 'space-y-12'">
+          <div :class="isTwoColumn ? 'grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-x-8' : 'space-y-12'">
             <div class="space-y-12">
               <!-- Overview -->
               <section class="space-y-4">
@@ -788,12 +788,12 @@ onBeforeUnmount(() => {
               </section>
             </div>
 
-            <div :class="isTwoColumn ? 'space-y-12 border-l border-neutral-100 pl-12 dark:border-neutral-700' : 'pt-12 border-t border-neutral-100/50 dark:border-neutral-800/50'">
+            <div :class="isTwoColumn ? 'space-y-12 border-l border-neutral-100 pl-8 dark:border-neutral-700' : 'pt-12 border-t border-neutral-100/50 dark:border-neutral-800/50'">
               <!-- Project Experience -->
-              <section v-if="enabledProjects.length" class="space-y-10">
+              <section v-if="enabledProjects.length" class="space-y-6">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">项目经验</h2>
                 
-                <div class="space-y-10">
+                <div class="space-y-6">
                   <article
                     v-for="project in enabledProjects"
                     :key="project.id"
