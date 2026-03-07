@@ -143,8 +143,14 @@ const resumeItems = ref<ResumeItem[]>([
   {
     id: "uiux-system",
     enabled: true,
-    tag: "UI / UX 设计",
+    tag: "前端开发",
     label: "熟练运用 Figma / Blender / Houdini 工具链，熟悉交互心理学，从用户行为数据出发驱动交互设计，在工程实现与视觉表达间取得精准平衡",
+  },
+  {
+    id: "frontend-develop",
+    enabled: true,
+    tag: "前端开发",
+    label: "熟练运用 Vue 3 + TypeScript + TailwindCSS 构建响应式界面，结合 Three.js 实现 3D 可视化与交互，具备跨平台适配与性能优化能力",
   },
   {
     id: "product-discovery",
@@ -343,7 +349,7 @@ const projectPool = ref<ProjectItem[]>([
     roles: ["Agent 开发", "全栈开发", "后端开发", "数据可视化"],
     tags: ["策略协作", "规则系统", "AI 辅助生成", "线上产品"],
     evidence: [
-      "线上运营站点：wow.parallized.cn，团队实战使用",
+      "线上运营站点：wow.parallized.cn",
     ],
     star: {
       situation: "游戏机制排轴和战术同步完全依赖人工，信息更新慢且版本混乱，关键时刻信息可读性差。",
@@ -725,11 +731,10 @@ onBeforeUnmount(() => {
           <!-- Header -->
           <header class="mb-10 flex flex-col items-start justify-between gap-6 border-b border-neutral-100 pb-10 dark:border-neutral-700 md:flex-row md:items-end">
             <div class="space-y-3">
-              <h1 class="font-serif text-5xl font-black tracking-tight text-neutral-900 dark:text-white md:text-6xl">
-                Parallized
+              <h1 class="font-serif text-2xl tracking-tight text-neutral-900 dark:text-white md:text-4xl">
+                前端开发
               </h1>
               <p class="font-sans text-[14px] font-medium text-neutral-600 dark:text-neutral-400">
-                产品 UIUX 设计工程师 / 全栈技术
               </p>
               <div class="h-1 w-12 bg-neutral-900 dark:bg-neutral-100"></div>
             </div>
@@ -739,7 +744,7 @@ onBeforeUnmount(() => {
               <div class="space-y-2">
                 <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                   <Icon name="ph:envelope-simple-bold" class="opacity-60" />
-                  <a href="mailto:1317699264@qq.com" class="hover:underline">1317699264@qq.com</a>
+                  <a href="mailto:parallized@outlook.com" class="hover:underline">parallized@outlook.com</a>
                 </div>
                 <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                   <Icon name="ph:github-logo-bold" class="opacity-60" />
@@ -763,7 +768,7 @@ onBeforeUnmount(() => {
               <section class="space-y-4">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">个人概览</h2>
                 <div class="text-[13px] leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  <p>多年独立开发与自由职业历程，涵盖游戏服务器、全栈工具、底层安全。技术覆盖底层 C++ / Rust 逆向攻坚、Java 分布式后端、Unity/UE 引擎到 AI-Native 全栈实践。擅长通过 AI + MCP / RAG / SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环，同时具备处理 brownfield 项目的能力</p>
+                  <p>擅长通过 AI + MCP / RAG / SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环</p>
                 </div>
               </section>
 
