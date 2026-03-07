@@ -54,9 +54,18 @@ type ProjectItem = {
   star: ProjectStar;
 };
 
+type ExperienceItem = {
+  id: string;
+  enabled: boolean;
+  company: string;
+  date: string;
+  items: string[];
+};
+
 type PersistedState = {
   resume?: Array<{ id: string; enabled: boolean }>;
   projects?: Array<{ id: string; enabled: boolean }>;
+  experience?: Array<{ id: string; enabled: boolean }>;
   isTwoColumn?: boolean;
 };
 
@@ -73,19 +82,42 @@ const syncDarkClass = () => {
   document.documentElement.classList.toggle("dark", isDark.value);
 };
 
+const experiencePool = ref<ExperienceItem[]>([
+  {
+    id: "internship-c",
+    enabled: true,
+    company: "Deamoy (迪莫 AI)",
+    date: "2025.01 — 至今",
+    items: [
+      "参与 AI 原生全栈应用构建平台 Deamoy AI 的核心开发",
+      "实现 Streamable JIT 渲染协议，达成 UI 毫秒级生成与即时反馈",
+      "开发 AI 与视觉双工编辑模式，打通自然语言指令与 Figma 式拖拽操作",
+      "接入 Shopify / WordPress / Supabase 等外部数据源，实现 AI 驱动的业务系统装修",
+    ],
+  },
+  {
+    id: "internship-b",
+    enabled: true,
+    company: "杭州互联网公司 B",
+    date: "2023.09 — 2024.11",
+    items: [
+      "帮助开发基于 Vue + Svelte + RxJS 的 Chrome 插件，完善 service worker 通信",
+      "处理后台管理系统业务需求，优化公司产品 B 端 UX 体验，内部 monorepo 组件库",
+    ],
+  },
+  {
+    id: "internship-a",
+    enabled: true,
+    company: "杭州医疗信息化公司 A",
+    date: "2023.03 — 2023.06",
+    items: [
+      "重构 Java / C# + dicom 医疗信息化业务到 Node.js",
+      "开发 Vue3 + TypeScript + Vite 医疗可视化 SPA",
+    ],
+  },
+]);
+
 const resumeItems = ref<ResumeItem[]>([
-  {
-    id: "highlight-10y",
-    enabled: true,
-    tag: "全栈开发",
-    label: "10 年独立开发与自由职业历程，技术覆盖 C++/Rust 底层、Java 高并发后端、Unity/UE 引擎到前端全栈，累计独立交付 20+ 商业/开源项目",
-  },
-  {
-    id: "highlight-vibe",
-    enabled: true,
-    tag: "AI-Native 开发",
-    label: "AI 意图驱动先行者：构建 RAG + Graph 长周期上下文管理体系，日均交付量达传统 3 人团队水平，独立交付 10+ 个全栈应用平均原型周期 < 1 天。",
-  },
   {
     id: "highlight-hardcore",
     enabled: true,
@@ -99,28 +131,22 @@ const resumeItems = ref<ResumeItem[]>([
     label: "作为负责人从 0 打造 10W+ 注册量游戏，实现月纯利 20k+ 的规模化盈利",
   },
   {
-    id: "agent-workflow",
-    enabled: true,
-    tag: "Agent 开发",
-    label: "SDD 实践者：构建基于 MCP 的异步任务状态机，实现 AI 代理自动领票、执行、上报的闭环工作流，代码交付过程可追溯。",
-  },
-  {
     id: "agent-tooling",
     enabled: true,
     tag: "Agent 开发",
-    label: "深度集成 Claude Code / Codex / Gemini 多端协同工作流，通过 MCP + REST 混合工具链实现跨平台任务派发，支撑多 Worker 并行执行与结构化报告回写",
+    label: "深度集成 Claude Code / Codex / Gemini 多端协同工作流，多 Worker 并行执行与结构化报告回写",
   },
   {
     id: "ai-native-rag",
     enabled: true,
     tag: "AI-Native 开发",
-    label: "自研多层级 RAG 检索与上下文注入体系，将长短时记忆分层管理，有效解决 AI 协同开发中的幻觉与注意力碎片化问题，保障长周期上下文连续性",
+    label: "常用 SDD / TDD，熟悉多层级 RAG 检索与上下文注入体系，将长短时记忆分层管理，保障长周期上下文连续性",
   },
   {
     id: "ai-code-literacy",
     enabled: true,
     tag: "AI-Native 开发",
-    label: "具备较好的 AI 代码识读力：坚持人工代码审计与架构把关，确保 AI 生成逻辑符合生产级安全与性能标准，具备处理 brownfield 项目的重构能力",
+    label: "具备较好的 AI 代码识读力，坚持人工代码审计与架构把关，确保 AI 生成逻辑符合生产级安全与性能标准",
   },
   {
     id: "reverse-ida",
@@ -144,13 +170,13 @@ const resumeItems = ref<ResumeItem[]>([
     id: "uiux-system",
     enabled: true,
     tag: "前端开发",
-    label: "熟练运用 Figma / Blender / Houdini 工具链，熟悉交互心理学，从用户行为数据出发驱动交互设计，在工程实现与视觉表达间取得精准平衡",
+    label: "熟悉 Figma / Houdini 工具链，了解交互心理学，从用户行为出发驱动 UX 设计，追求更好的视觉表达",
   },
   {
     id: "frontend-develop",
     enabled: true,
     tag: "前端开发",
-    label: "熟练运用 Vue 3 + TypeScript + TailwindCSS 构建响应式界面，结合 Three.js 实现 3D 可视化与交互，具备跨平台适配与性能优化能力",
+    label: "熟悉 React / Nuxt 框架，常用 Tauri / Electron 进行跨平台应用开发",
   },
   {
     id: "product-discovery",
@@ -246,15 +272,14 @@ const projectPool = ref<ProjectItem[]>([
     summary: "为 AI 编码场景独特设计的 SDD 看板系统，多 Worker 任务派发、状态管理与报告回写",
     url: "https://github.com/parallized/maple",
     date: "2026",
-    stack: "TypeScript / MCP Server / Claude Code / Codex / Vue 3",
+    stack: "Tauri / MCP & Skills / CLI",
     roles: ["Agent 开发", "全栈开发", "产品设计", "前端开发"],
     tags: ["SDD 工作流", "任务看板", "多 Worker 协作", "100% 可追溯"],
     evidence: [
-      "已在 5+ 个项目中实际应用，显著降低多任务并行时的认知负担与上下文切换成本",
     ],
     star: {
-      situation: "AI 编码工具缺少结构化的任务管理层，执行过程不可追溯，多 Agent 并行时上下文混乱",
-      task: "Maple 打通「需求 → 任务 → 执行 → 回写」闭环",
+      situation: "AI 编码工具缺少结构化的任务管理层，多 Agent 并行时上下文混乱。",
+      task: "Maple 打通「任务 → 执行 → 回写」闭环",
       actions: [
         "设计任务状态流，统一多 Worker 执行视图与冲突解决，构建可视化看板 UI，提供直观的任务构思、编排与优先级管理体验",
         "实现完整 MCP 工具集（任务查询、报告提交、标签管理、Worker 完成通知），支持任意 AI Coding 工具调用",
@@ -317,22 +342,21 @@ const projectPool = ref<ProjectItem[]>([
     id: "runedra",
     enabled: true,
     title: "Runedra 知树 — 知识学习加速平台",
-    summary: "面向深度学习者的知识组织与加速平台，强调多维信息架构与可检索体验，已线上持续运营",
+    summary: "面向学习者的知识组织与加速平台，强调多维信息架构与可检索体验",
     url: "https://rune.parallized.cn",
     date: "2024 - 至今",
-    stack: "Nuxt 4 / Vue 3 / Full-Stack / AI 辅助内容生成",
+    stack: "Nuxt 4 / Graph / AI 驱动",
     roles: ["全栈开发", "产品设计", "前端开发"],
     tags: ["知识图谱", "信息架构设计", "持续迭代", "线上产品"],
     evidence: [
-      "线上持续运营：runedra.cn，用户可直接用于知识沉淀、学习路径规划与日常复盘",
-      "通过 Maple 持续验证页面结构和结构化信息表达方式，迅速迭代了数个大版本",
+      "线上持续运营：runedra.cn",
     ],
     star: {
-      situation: "学习资料分散在不同平台，上下文割裂，信息壁垒产生的信息浪费导致学习效率低下，用户难以形成系统性知识体系。",
-      task: "打造一个可持续演进的知识入口，兼顾结构化组织、浏览效率与内容可检索性。",
+      situation: "学习资料分散在不同平台，上下文割裂，信息壁垒导致学习效率低下。",
+      task: "借助 DeepSearch 与高效的交互设计使知识获取与管理更顺畅",
       actions: [
         "按学习路径重构信息架构，设计多维索引结构，降低至少 30% 任何层级和领域学习者的心智负担",
-        "结合 AI 与 DeepSearch 辅助内容生成与前端交互优化，提升检索命中率与回溯效率",
+        "深度优化的交互设计，结合 AI 与 DeepSearch 辅助内容生成题库并借助平台能力高效展示",
       ],
       results: [
       ],
@@ -532,9 +556,9 @@ const projectPool = ref<ProjectItem[]>([
     id: "lineup",
     enabled: true,
     title: "Lineup — 多游戏战术 Lineup 平台",
-    summary: "覆盖 Valorant / OW / War Thunder 等多款 FPS 游戏的统一 Lineup 查阅平台",
+    summary: "覆盖 Valorant / OW / War Thunder 等多款游戏的统一战术查阅平台",
     url: "https://github.com/parallized/Lineup",
-    date: "2026",
+    date: "2025",
     stack: "Web App / 空间信息可视化 / 游戏数据 / UX 设计",
     roles: ["数据可视化", "前端开发", "产品设计"],
     tags: ["游戏辅助", "多游戏 Lineup", "空间信息", "战术工具"],
@@ -542,11 +566,11 @@ const projectPool = ref<ProjectItem[]>([
       "多款热门游戏的战术点位数据，沉淀了空间信息展示的可复用交互模式与数据组织规范",
     ],
     star: {
-      situation: "FPS 游戏中 Lineup 技巧散落在视频和帖子中，实战前难以快速检索且缺少统一入口。",
-      task: "构建统一的多游戏 Lineup 查阅平台，实现跨游戏、跨地图的 Lineup 快速定位与检索。",
+      situation: "FPS 游戏中 Lineup 技巧散落在视频和帖子中，难以快速检索。",
+      task: "构建统一的多游戏查阅平台，实现 Lineup 快速定位与检索",
       actions: [
         "设计跨游戏统一的信息架构（游戏 → 地图 → 角色 → 点位），降低用户认知和查找成本",
-        "优化浏览路径与交互设计，确保实战前 30 秒内可获取关键 Lineup 信息，建立可扩展的数据结构，支持快速更新 Lineup 内容",
+        "优化浏览路径与交互设计，确保实战前 30 秒内可获取关键 Lineup 信息，建立可复用可扩展的数据结构，支持快速更新 Lineup 内容",
       ],
       results: [
       ],
@@ -582,6 +606,7 @@ const projectPool = ref<ProjectItem[]>([
 
 const enabledResumeItems = computed(() => resumeItems.value.filter((i) => i.enabled));
 const enabledProjects = computed(() => projectPool.value.filter((p) => p.enabled));
+const enabledExperiences = computed(() => experiencePool.value.filter((e) => e.enabled));
 
 const resumeGroups = computed(() => {
   const map = new Map<ResumeTag, ResumeItem[]>();
@@ -610,6 +635,7 @@ const printResume = () => {
 const selectAll = () => {
   for (const item of resumeItems.value) item.enabled = true;
   for (const project of projectPool.value) project.enabled = true;
+  for (const exp of experiencePool.value) exp.enabled = true;
 };
 
 const TEMPLATES = [
@@ -632,6 +658,11 @@ const applyTemplate = (tags: readonly string[]) => {
   for (const project of projectPool.value) {
     project.enabled = project.roles.some((r) => tags.includes(r));
   }
+  // Internships are generally always visible unless manually toggled, 
+  // but we can keep them all enabled for specific templates too.
+  for (const exp of experiencePool.value) {
+    exp.enabled = true;
+  }
 };
 
 const persistControls = () => {
@@ -644,6 +675,10 @@ const persistControls = () => {
       projects: projectPool.value.map((project) => ({
         id: project.id,
         enabled: project.enabled,
+      })),
+      experience: experiencePool.value.map((exp) => ({
+        id: exp.id,
+        enabled: exp.enabled,
       })),
       isTwoColumn: isTwoColumn.value,
     };
@@ -675,6 +710,14 @@ const restoreControls = () => {
       }
     }
 
+    if (Array.isArray(parsed.experience)) {
+      const map = new Map(parsed.experience.map((exp) => [exp.id, exp.enabled]));
+      for (const exp of experiencePool.value) {
+        const enabled = map.get(exp.id);
+        if (typeof enabled === "boolean") exp.enabled = enabled;
+      }
+    }
+
     if (typeof parsed.isTwoColumn === "boolean") {
       isTwoColumn.value = parsed.isTwoColumn;
     }
@@ -700,7 +743,7 @@ watch(isDark, () => {
 });
 
 watch(
-  [resumeItems, projectPool, isTwoColumn],
+  [resumeItems, projectPool, experiencePool, isTwoColumn],
   () => {
     if (typeof window === "undefined") return;
     persistControls();
@@ -739,7 +782,7 @@ onBeforeUnmount(() => {
               <div class="h-1 w-12 bg-neutral-900 dark:bg-neutral-100"></div>
             </div>
 
-            <!-- Contact & Education (Compact) -->
+            <!-- Contact & Education -->
             <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-sm sm:grid-cols-2">
               <div class="space-y-2">
                 <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
@@ -767,32 +810,51 @@ onBeforeUnmount(() => {
               <!-- Overview -->
               <section class="space-y-4">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">个人概览</h2>
-                <div class="text-[13px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <div class="text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                   <p>擅长通过 AI + MCP / RAG / SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环</p>
                 </div>
               </section>
 
               <!-- Skills -->
-              <section v-if="resumeGroups.length" :class="isTwoColumn ? 'space-y-4' : 'space-y-6'">
-                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">专业技能</h2>
-                <div :class="isTwoColumn ? 'grid gap-6' : 'grid gap-x-10 gap-y-8 sm:grid-cols-2'">
-                  <div v-for="group in resumeGroups" :key="group.tag" class="space-y-3">
-                    <h3 class="flex items-center gap-2.5 text-[11px] font-black uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-                      <span class="h-1 w-4 rounded-full bg-neutral-900/10 dark:bg-white/10"></span>
-                      {{ group.tag }}
-                    </h3>
-                    <ul class="space-y-2 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
-                      <li v-for="item in group.items" :key="item.id" class="relative pl-4">
-                        <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full border border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800"></span>
-                        {{ item.label }}
-                      </li>
-                    </ul>
-                  </div>
+              <section v-if="enabledResumeItems.length" :class="isTwoColumn ? 'space-y-4' : 'space-y-6'">
+                <h2 class="flex items-center gap-2 border-b border-neutral-100 pb-2 font-serif text-xl font-bold tracking-tight text-neutral-900 dark:border-neutral-800 dark:text-white">
+                  <span>专业技能</span>
+                </h2>
+                
+                <div class="space-y-3">
+                  <ul class="space-y-2 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                    <li v-for="item in enabledResumeItems" :key="item.id" class="relative pl-4">
+                      <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full border border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800"></span>
+                      {{ item.label }}
+                    </li>
+                  </ul>
                 </div>
               </section>
             </div>
 
             <div :class="isTwoColumn ? 'space-y-12 border-l border-neutral-100 pl-8 dark:border-neutral-700' : 'pt-12 border-t border-neutral-100/50 dark:border-neutral-800/50'">
+              <!-- Internship Experience -->
+              <section v-if="enabledExperiences.length" class="space-y-6">
+                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">实习经历</h2>
+                <div class="space-y-6">
+                  <article v-for="exp in enabledExperiences" :key="exp.id" class="space-y-3">
+                    <div class="flex items-baseline justify-between gap-4 border-b border-neutral-300/50 pb-1 dark:border-neutral-700/50">
+                      <h3 class="font-serif text-lg font-bold text-neutral-900 dark:text-white">
+                        {{ exp.company }}
+                      </h3>
+                      <span class="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500 shrink-0">
+                        {{ exp.date }}
+                      </span>
+                    </div>
+                    <ul class="list-disc space-y-1 pl-4 text-[13px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                      <li v-for="item in exp.items" :key="item">
+                        {{ item }}
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
+
               <!-- Project Experience -->
               <section v-if="enabledProjects.length" class="space-y-6">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">项目经验</h2>
@@ -829,7 +891,7 @@ onBeforeUnmount(() => {
                     <span class="ml-1 text-[11px] font-normal text-neutral-500 dark:text-neutral-400">{{ project.stack }}</span>
                   </p>
 
-                  <div class="grid gap-2 text-[13px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                  <div class="grid gap-2 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                     <div>
                       <p>{{ project.star.situation }} {{ project.star.task }}</p>
                     </div>
@@ -990,6 +1052,28 @@ onBeforeUnmount(() => {
                     <div class="min-w-0 space-y-1.5">
                       <p class="text-[13px] leading-snug text-neutral-700 dark:text-neutral-300">{{ item.label }}</p>
                       <span class="inline-block rounded bg-neutral-100 px-1.5 py-0.5 text-[9px] font-bold text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400">{{ item.tag }}</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Internship Toggles -->
+              <section class="space-y-6">
+                <h3 class="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">实习经历</h3>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div
+                    v-for="exp in experiencePool"
+                    :key="exp.id"
+                    class="flex items-start gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/50"
+                  >
+                    <label class="relative mt-0.5 inline-flex shrink-0 cursor-pointer items-center">
+                      <input v-model="exp.enabled" type="checkbox" class="peer sr-only" />
+                      <span class="h-4 w-7 rounded-full bg-neutral-200 transition peer-checked:bg-neutral-900 dark:bg-neutral-800 dark:peer-checked:bg-white" />
+                      <span class="absolute left-0.5 top-0.5 h-3 w-3 rounded-full bg-white shadow-sm transition peer-checked:translate-x-3 dark:bg-neutral-900" />
+                    </label>
+                    <div class="min-w-0">
+                      <div class="truncate text-xs font-bold">{{ exp.company }}</div>
+                      <div class="truncate text-[10px] text-neutral-500">{{ exp.date }}</div>
                     </div>
                   </div>
                 </div>
