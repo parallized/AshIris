@@ -86,35 +86,34 @@ const experiencePool = ref<ExperienceItem[]>([
   {
     id: "internship-c",
     enabled: true,
-    company: "Deamoy (迪莫 AI)",
+    company: "Deamoy.AI",
     date: "2025.01 — 至今",
     items: [
-      "参与 AI 原生全栈应用构建平台 Deamoy AI 的核心开发",
+      "参与 AI 原生全栈应用构建平台 Deamoy AI 的核心开发，开发 AI 与视觉双工编辑模式，打通自然语言指令与 Figma 式拖拽操作",
       "实现 Streamable JIT 渲染协议，达成 UI 毫秒级生成与即时反馈",
-      "开发 AI 与视觉双工编辑模式，打通自然语言指令与 Figma 式拖拽操作",
       "接入 Shopify / WordPress / Supabase 等外部数据源，实现 AI 驱动的业务系统装修",
     ],
   },
   {
     id: "internship-b",
     enabled: true,
-    company: "杭州互联网公司 B",
+    company: "Demoway.AI",
     date: "2023.09 — 2024.11",
     items: [
       "帮助开发基于 Vue + Svelte + RxJS 的 Chrome 插件，完善 service worker 通信",
       "处理后台管理系统业务需求，优化公司产品 B 端 UX 体验，内部 monorepo 组件库",
     ],
   },
-  {
-    id: "internship-a",
-    enabled: true,
-    company: "杭州医疗信息化公司 A",
-    date: "2023.03 — 2023.06",
-    items: [
-      "重构 Java / C# + dicom 医疗信息化业务到 Node.js",
-      "开发 Vue3 + TypeScript + Vite 医疗可视化 SPA",
-    ],
-  },
+  // {
+  //   id: "internship-a",
+  //   enabled: false,
+  //   company: "Dicom 可视化",
+  //   date: "2023.03 — 2023.06",
+  //   items: [
+  //     "重构 Java / C# + dicom 医疗信息化业务到 Node.js",
+  //     "开发 Vue3 + TypeScript + Vite 医疗可视化 SPA",
+  //   ],
+  // },
 ]);
 
 const resumeItems = ref<ResumeItem[]>([
@@ -772,12 +771,13 @@ onBeforeUnmount(() => {
         <!-- Main Content -->
         <main class="p-8 md:p-12">
           <!-- Header -->
-          <header class="mb-10 flex flex-col items-start justify-between gap-6 border-b border-neutral-100 pb-10 dark:border-neutral-700 md:flex-row md:items-end">
+          <header class="mb-10 flex flex-col items-start justify-between gap-6 pb-4 md:flex-row md:items-end">
             <div class="space-y-3">
               <h1 class="font-serif text-2xl tracking-tight text-neutral-900 dark:text-white md:text-4xl">
                 前端开发
               </h1>
-              <p class="font-sans text-[14px] font-medium text-neutral-600 dark:text-neutral-400">
+              <p class="font-sans text-[12px] font-light text-neutral-600 dark:text-neutral-400">
+                擅长通过 AI + SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环
               </p>
               <div class="h-1 w-12 bg-neutral-900 dark:bg-neutral-100"></div>
             </div>
@@ -800,29 +800,21 @@ onBeforeUnmount(() => {
               </div>
               <div class="space-y-1">
                 <div class="font-bold text-neutral-900 dark:text-white">浙江科技大学</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">数字媒体技术本科 · 2021 — 2026</div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">数媒技本科 · 26 届</div>
               </div>
             </div>
           </header>
 
-          <div :class="isTwoColumn ? 'grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-x-8' : 'space-y-12'">
-            <div class="space-y-12">
-              <!-- Overview -->
-              <section class="space-y-4">
-                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">个人概览</h2>
-                <div class="text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  <p>擅长通过 AI + MCP / RAG / SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环</p>
-                </div>
-              </section>
-
+          <div :class="isTwoColumn ? 'grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-x-8' : 'flex flex-col'">
+            <div class="space-y-10">
               <!-- Skills -->
-              <section v-if="enabledResumeItems.length" :class="isTwoColumn ? 'space-y-4' : 'space-y-6'">
+              <section v-if="enabledResumeItems.length" class="space-y-6">
                 <h2 class="flex items-center gap-2 border-b border-neutral-100 pb-2 font-serif text-xl font-bold tracking-tight text-neutral-900 dark:border-neutral-800 dark:text-white">
                   <span>专业技能</span>
                 </h2>
                 
-                <div class="space-y-3">
-                  <ul class="space-y-2 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <div class="space-y-4">
+                  <ul class="space-y-1.5 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                     <li v-for="item in enabledResumeItems" :key="item.id" class="relative pl-4">
                       <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full border border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800"></span>
                       {{ item.label }}
@@ -832,13 +824,13 @@ onBeforeUnmount(() => {
               </section>
             </div>
 
-            <div :class="isTwoColumn ? 'space-y-12 border-l border-neutral-100 pl-8 dark:border-neutral-700' : 'pt-12 border-t border-neutral-100/50 dark:border-neutral-800/50'">
+            <div class="space-y-12" :class="isTwoColumn ? 'pl-4' : 'pt-8'">
               <!-- Internship Experience -->
-              <section v-if="enabledExperiences.length" class="space-y-6">
+              <section v-if="enabledExperiences.length" class="space-y-4">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">实习经历</h2>
                 <div class="space-y-6">
-                  <article v-for="exp in enabledExperiences" :key="exp.id" class="space-y-3">
-                    <div class="flex items-baseline justify-between gap-4 border-b border-neutral-300/50 pb-1 dark:border-neutral-700/50">
+                  <article v-for="exp in enabledExperiences" :key="exp.id" class="space-y-1.5">
+                    <div class="flex items-baseline justify-between gap-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
                       <h3 class="font-serif text-lg font-bold text-neutral-900 dark:text-white">
                         {{ exp.company }}
                       </h3>
@@ -846,7 +838,7 @@ onBeforeUnmount(() => {
                         {{ exp.date }}
                       </span>
                     </div>
-                    <ul class="list-disc space-y-1 pl-4 text-[13px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                    <ul class="list-disc space-y-1 pl-4 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                       <li v-for="item in exp.items" :key="item">
                         {{ item }}
                       </li>
@@ -856,16 +848,16 @@ onBeforeUnmount(() => {
               </section>
 
               <!-- Project Experience -->
-              <section v-if="enabledProjects.length" class="space-y-6">
+              <section v-if="enabledProjects.length" class="space-y-4">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">项目经验</h2>
                 
                 <div class="space-y-6">
                   <article
                     v-for="project in enabledProjects"
                     :key="project.id"
-                    class="group space-y-4"
+                    class="group space-y-2"
                   >
-                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-neutral-300/50 pb-1 dark:border-neutral-700/50">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
                     <h3 class="flex items-center gap-2 font-serif text-lg font-bold text-neutral-900 dark:text-white">
                       <a :href="project.url" target="_blank" class="hover:underline hover:decoration-neutral-400">
                         {{ project.title }}
@@ -873,16 +865,6 @@ onBeforeUnmount(() => {
                     </h3>
                     <span class="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500">
                       {{ project.date }}
-                    </span>
-                  </div>
-
-                  <div class="hidden flex flex-wrap gap-1.5">
-                    <span
-                      v-for="tag in [...project.roles, ...project.tags]"
-                      :key="`${project.id}-${tag}`"
-                      class="inline-flex items-center rounded-sm bg-neutral-100 px-1.5 py-0.5 text-[10px] font-bold text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
-                    >
-                      {{ tag }}
                     </span>
                   </div>
 
