@@ -799,7 +799,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
               <div class="space-y-1">
-                <div class="font-bold text-neutral-900 dark:text-white">浙江科技大学</div>
+                <div class="text-neutral-900 dark:text-white">浙江科技大学</div>
                 <div class="text-xs text-neutral-500 dark:text-neutral-400">数媒技本科 · 26 届</div>
               </div>
             </div>
@@ -808,12 +808,12 @@ onBeforeUnmount(() => {
           <div :class="isTwoColumn ? 'grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-x-8' : 'flex flex-col'">
             <div class="space-y-10">
               <!-- Skills -->
-              <section v-if="enabledResumeItems.length" class="space-y-6">
+              <section v-if="enabledResumeItems.length" class="space-y-4">
                 <h2 class="flex items-center gap-2 border-b border-neutral-100 pb-2 font-serif text-xl font-bold tracking-tight text-neutral-900 dark:border-neutral-800 dark:text-white">
                   <span>专业技能</span>
                 </h2>
                 
-                <div class="space-y-4">
+                <div class="space-y-1">
                   <ul class="space-y-1.5 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                     <li v-for="item in enabledResumeItems" :key="item.id" class="relative pl-4">
                       <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full border border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800"></span>
@@ -905,7 +905,7 @@ onBeforeUnmount(() => {
 
     <!-- Controls Overlay (No-Print) -->
     <Teleport to="body">
-      <div class="no-print fixed bottom-6 left-1/2 z-[9999] flex -translate-x-1/2 items-center gap-1.5 rounded-2xl bg-white/80 p-1.5 shadow-2xl ring-1 ring-black/5 backdrop-blur-md transition-all hover:bg-white dark:bg-neutral-800/80 dark:ring-white/10 dark:hover:bg-neutral-800">
+      <div class="no-print fixed bottom-6 right-6 z-[9999] flex items-center gap-1.5 rounded-2xl bg-white/80 p-1.5 shadow-2xl ring-1 ring-black/5 backdrop-blur-md transition-all hover:bg-white dark:bg-neutral-800/80 dark:ring-white/10 dark:hover:bg-neutral-800">
         <button
           type="button"
           class="flex h-10 w-10 items-center justify-center rounded-xl text-neutral-600 transition hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700"
