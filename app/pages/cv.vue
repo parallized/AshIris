@@ -52,6 +52,7 @@ type ProjectItem = {
   tags: string[];
   evidence: string[];
   star: ProjectStar;
+  icon?: string;
 };
 
 type ExperienceItem = {
@@ -89,19 +90,18 @@ const experiencePool = ref<ExperienceItem[]>([
     company: "Deamoy.AI",
     date: "2025.01 — 至今",
     items: [
-      "参与 AI 原生全栈应用构建平台 Deamoy AI 的核心开发，开发 AI 与视觉双工编辑模式，打通自然语言指令与 Figma 式拖拽操作",
-      "实现 Streamable JIT 渲染协议，达成 UI 毫秒级生成与即时反馈",
-      "接入 Shopify / WordPress / Supabase 等外部数据源，实现 AI 驱动的业务系统装修",
+      "参与 AI 原生全栈应用构建平台 Deamoy AI 核心开发，开发 AI 与用户协同编辑模式",
+      "优化流式渲染协议，达成 UI 毫秒级生成与即时反馈。接入 Shopify / Supabase 等外部数据源，实现 AI 驱动的业务系统装修",
     ],
   },
   {
     id: "internship-b",
     enabled: true,
-    company: "Demoway.AI",
+    company: "Demoway.com",
     date: "2023.09 — 2024.11",
     items: [
-      "帮助开发基于 Vue + Svelte + RxJS 的 Chrome 插件，完善 service worker 通信",
-      "处理后台管理系统业务需求，优化公司产品 B 端 UX 体验，内部 monorepo 组件库",
+      "帮助开发基于 Vue + Svelte + RxJS 的 Figma / Chrome 插件，完善 service worker 通信",
+      "处理后台管理系统业务需求，优化公司产品 B 端 UX 体验，打磨产品 monorepo 组件库",
     ],
   },
   // {
@@ -133,13 +133,7 @@ const resumeItems = ref<ResumeItem[]>([
     id: "agent-tooling",
     enabled: true,
     tag: "Agent 开发",
-    label: "深度集成 Claude Code / Codex / Gemini 多端协同工作流，多 Worker 并行执行与结构化报告回写",
-  },
-  {
-    id: "ai-native-rag",
-    enabled: true,
-    tag: "AI-Native 开发",
-    label: "常用 SDD / TDD，熟悉多层级 RAG 检索与上下文注入体系，将长短时记忆分层管理，保障长周期上下文连续性",
+    label: "熟悉 Claude Code / Codex 等工作流，多 Worker 并行执行与报告回写。常用 SDD & TDD，多级 RAG 与长短时 Memory 分层管理",
   },
   {
     id: "ai-code-literacy",
@@ -166,16 +160,16 @@ const resumeItems = ref<ResumeItem[]>([
     label: "Rust + C++ DLL 跨语言混合开发：构建高性能扫描器与内存攻防组件，利用 Axum 实现标准化 RESTful API 服务化，涵盖 A* Navigation 路径规划、射线检测等核心接口",
   },
   {
-    id: "uiux-system",
-    enabled: true,
-    tag: "前端开发",
-    label: "熟悉 Figma / Houdini 工具链，了解交互心理学，从用户行为出发驱动 UX 设计，追求更好的视觉表达",
-  },
-  {
     id: "frontend-develop",
     enabled: true,
     tag: "前端开发",
-    label: "熟悉 React / Nuxt 框架，常用 Tauri / Electron 进行跨平台应用开发",
+    label: "熟悉 React / Nuxt 框架，常用 Nestjs / Axum 等后端框架，常用 Tauri / Electron / Capacitor 进行跨平台应用开发",
+  },
+  {
+    id: "uiux-system",
+    enabled: true,
+    tag: "前端开发",
+    label: "熟悉 Figma / Houdini 工具链，常用 D3 / Three.js 并深入了解交互与设计心理学，追求更好的视觉表达",
   },
   {
     id: "product-discovery",
@@ -263,12 +257,13 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:cube-bold",
   },
   {
     id: "maple",
     enabled: true,
     title: "Maple — AI 编码 SDD 看板工作台",
-    summary: "为 AI 编码场景独特设计的 SDD 看板系统，多 Worker 任务派发、状态管理与报告回写",
+    summary: "AI-Native 的 SDD 看板，多 Worker 任务派发、状态管理与报告回写",
     url: "https://github.com/parallized/maple",
     date: "2026",
     stack: "Tauri / MCP & Skills / CLI",
@@ -277,15 +272,16 @@ const projectPool = ref<ProjectItem[]>([
     evidence: [
     ],
     star: {
-      situation: "AI 编码工具缺少结构化的任务管理层，多 Agent 并行时上下文混乱。",
-      task: "Maple 打通「任务 → 执行 → 回写」闭环",
+      situation: "AI 编码工具缺少结构化的任务管理层，多 Agent 并行时上下文混乱，心智负担高。",
+      task: "Maple 打通「任务 → 执行 → 回写」闭环，至少提高 30% 迭代速度",
       actions: [
-        "设计任务状态流，统一多 Worker 执行视图与冲突解决，构建可视化看板 UI，提供直观的任务构思、编排与优先级管理体验",
-        "实现完整 MCP 工具集（任务查询、报告提交、标签管理、Worker 完成通知），支持任意 AI Coding 工具调用",
+        "设计任务 Workflow，统一多 Worker 执行视图与冲突解决，构建可视化看板 UI，提供直观的任务构思、编排与管理体验",
+        "实现完整 MCP & Skills 工具集（任务查询、报告提交、标签管理、Worker 完成通知）",
       ],
       results: [
       ],
     },
+    icon: "ph:kanban-bold",
   },
   {
     id: "npt",
@@ -310,6 +306,7 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:check-square-offset-bold",
   },
   {
     id: "para-navigation",
@@ -336,13 +333,14 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:navigation-arrow-bold",
   },
   {
     id: "runedra",
     enabled: true,
     title: "Runedra 知树 — 知识学习加速平台",
-    summary: "面向学习者的知识组织与加速平台，强调多维信息架构与可检索体验",
-    url: "https://rune.parallized.cn",
+    summary: "面向学习者的可视化知识图谱，提供 AI 在学习全流程的辅助",
+    url: "https://runedra.cn",
     date: "2024 - 至今",
     stack: "Nuxt 4 / Graph / AI 驱动",
     roles: ["全栈开发", "产品设计", "前端开发"],
@@ -354,12 +352,13 @@ const projectPool = ref<ProjectItem[]>([
       situation: "学习资料分散在不同平台，上下文割裂，信息壁垒导致学习效率低下。",
       task: "借助 DeepSearch 与高效的交互设计使知识获取与管理更顺畅",
       actions: [
-        "按学习路径重构信息架构，设计多维索引结构，降低至少 30% 任何层级和领域学习者的心智负担",
-        "深度优化的交互设计，结合 AI 与 DeepSearch 辅助内容生成题库并借助平台能力高效展示",
+        "按学习路径重构信息架构，设计多维 RAG & Memory 索引结构，降低至少 30% 任意层级学习者心智负担",
+        "深度优化的交互设计，结合 AI + DeepSearch 题库并借助平台能力高效且优雅地展示",
       ],
       results: [
       ],
     },
+    icon: "ph:tree-structure-bold",
   },
   {
     id: "wow-magician",
@@ -384,6 +383,7 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:magic-wand-bold",
   },
   {
     id: "ash-iris",
@@ -412,6 +412,7 @@ const projectPool = ref<ProjectItem[]>([
         "简历内容可精准聚焦岗位关键词，显著提升 6 秒初筛通过率。",
       ],
     },
+    icon: "ph:browsers-bold",
   },
   {
     id: "owocaptain",
@@ -440,6 +441,7 @@ const projectPool = ref<ProjectItem[]>([
         "沉淀了「地图/点位/策略」类空间信息可视化的可复用交互模板与设计规范。",
       ],
     },
+    icon: "ph:magnifying-glass-bold",
   },
   {
     id: "safe-inset",
@@ -468,6 +470,7 @@ const projectPool = ref<ProjectItem[]>([
         "形成完整的开源发布规范（README/LICENSE/CHANGELOG），便于社区二次维护与 Fork。",
       ],
     },
+    icon: "ph:wrench-bold",
   },
   {
     id: "unity-captain",
@@ -494,6 +497,7 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:game-controller-bold",
   },
   {
     id: "dalamud-plugins",
@@ -522,6 +526,7 @@ const projectPool = ref<ProjectItem[]>([
         "为后续游戏工具产品化和运维协作提供标准化基础设施。",
       ],
     },
+    icon: "ph:plug-bold",
   },
   {
     id: "vertree",
@@ -535,7 +540,7 @@ const projectPool = ref<ProjectItem[]>([
     tags: ["压力测试", "Rust 异步", "工具开发", "性能瓶颈分析"],
     evidence: [
       "基于 Tokio 异步运行时构建，高并发下工具自身 CPU 占用 < 5%，不成为测试瓶颈。",
-      "支持可配置的请求模式（渐进/脉冲/恒压），适配不同压测场景。",
+      "支持可配置s的请求模式（渐进/脉冲/恒压），适配不同压测场景。",
     ],
     star: {
       situation: "自建服务上线前需要可控的压力验证，现有通用工具不够灵活且难以定制协议。",
@@ -550,11 +555,12 @@ const projectPool = ref<ProjectItem[]>([
         "积累 Rust 异步网络编程与性能分析实践经验，提升系统级工程能力。",
       ],
     },
+    icon: "ph:activity-bold",
   },
   {
     id: "lineup",
     enabled: true,
-    title: "Lineup — 多游戏战术 Lineup 平台",
+    title: "Lineup — 多游戏战术速查平台",
     summary: "覆盖 Valorant / OW / War Thunder 等多款游戏的统一战术查阅平台",
     url: "https://github.com/parallized/Lineup",
     date: "2025",
@@ -565,15 +571,16 @@ const projectPool = ref<ProjectItem[]>([
       "多款热门游戏的战术点位数据，沉淀了空间信息展示的可复用交互模式与数据组织规范",
     ],
     star: {
-      situation: "FPS 游戏中 Lineup 技巧散落在视频和帖子中，难以快速检索。",
-      task: "构建统一的多游戏查阅平台，实现 Lineup 快速定位与检索",
+      situation: "FPS 游戏中的技巧散落在视频和帖子中，难以快速检索。",
+      task: "构建统一的多游戏查阅平台，实现 Lineup 时的快速定位与检索",
       actions: [
         "设计跨游戏统一的信息架构（游戏 → 地图 → 角色 → 点位），降低用户认知和查找成本",
-        "优化浏览路径与交互设计，确保实战前 30 秒内可获取关键 Lineup 信息，建立可复用可扩展的数据结构，支持快速更新 Lineup 内容",
+        "优化浏览路径与交互设计，确保实战前 30 秒内可获取关键信息，建立可复用可扩展的图形关系数据结构，支持 AI Native 快速更新内容",
       ],
       results: [
       ],
     },
+    icon: "ph:layout-bold",
   },
   {
     id: "incity",
@@ -600,6 +607,7 @@ const projectPool = ref<ProjectItem[]>([
       results: [
       ],
     },
+    icon: "ph:city-bold",
   },
 ]);
 
@@ -766,24 +774,24 @@ onBeforeUnmount(() => {
 </script>
 <template>
   <div class="cv-bg min-h-screen overflow-x-hidden bg-neutral-100 text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-100">
-    <div class="page-wrap mx-auto w-full px-4 py-8 transition-all duration-500 md:px-8 md:py-12" :class="isTwoColumn ? 'max-w-none' : 'max-w-[1024px]'">
+    <div class="page-wrap mx-auto w-full px-4 py-8 transition-all duration-500 md:px-8 md:py-12" :class="isTwoColumn ? 'max-w-none' : 'max-w-[1200px]'">
       <article class="sheet overflow-hidden rounded-2xl bg-white shadow-[0_24px_70px_rgba(0,0,0,0.10)] ring-1 ring-black/5 transition-colors duration-300 dark:bg-neutral-800 dark:shadow-[0_24px_70px_rgba(0,0,0,0.50)] dark:ring-white/10">
         <!-- Main Content -->
         <main class="p-8 md:p-12">
           <!-- Header -->
           <header class="mb-10 flex flex-col items-start justify-between gap-6 pb-4 md:flex-row md:items-end">
             <div class="space-y-3">
-              <h1 class="font-serif text-2xl tracking-tight text-neutral-900 dark:text-white md:text-4xl">
-                前端开发
+              <h1 class="font-serif text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white md:text-4xl">
+                AI Native & Agent 开发
               </h1>
-              <p class="font-sans text-[12px] font-light text-neutral-600 dark:text-neutral-400">
-                擅长通过 AI + SDD 在模糊需求下定义技术架构，实现从 0 到 1 的产品闭环
+              <p class="font-sans text-[14px] font-light text-neutral-600 dark:text-neutral-400">
+                2 年 AI / 互联网实习 + 项目经验，擅长完成从 0 到 1 的产品定义、技术架构<br>与开发落地。具备 RAG、Agent Workflow、MCP 经验
               </p>
               <div class="h-1 w-12 bg-neutral-900 dark:bg-neutral-100"></div>
             </div>
 
             <!-- Contact & Education -->
-            <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-sm sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-4 text-[14px] sm:grid-cols-2">
               <div class="space-y-2">
                 <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                   <Icon name="ph:envelope-simple-bold" class="opacity-60" />
@@ -799,8 +807,8 @@ onBeforeUnmount(() => {
                 </div>
               </div>
               <div class="space-y-1">
-                <div class="text-neutral-900 dark:text-white">浙江科技大学</div>
-                <div class="text-xs text-neutral-500 dark:text-neutral-400">数媒技本科 · 26 届</div>
+                <div class="text-neutral-900 text-[16px] font-semibold dark:text-white">浙江科技大学</div>
+                <div class="text-[14px] text-neutral-500 dark:text-neutral-400">数媒技本科 · 26 届</div>
               </div>
             </div>
           </header>
@@ -814,7 +822,7 @@ onBeforeUnmount(() => {
                 </h2>
                 
                 <div class="space-y-1">
-                  <ul class="space-y-1.5 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                  <ul class="space-y-1.5 text-[14px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                     <li v-for="item in enabledResumeItems" :key="item.id" class="relative pl-4">
                       <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full border border-neutral-300 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800"></span>
                       {{ item.label }}
@@ -834,11 +842,11 @@ onBeforeUnmount(() => {
                       <h3 class="font-serif text-lg font-bold text-neutral-900 dark:text-white">
                         {{ exp.company }}
                       </h3>
-                      <span class="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500 shrink-0">
+                      <span class="font-mono text-[15px] font-semibold text-neutral-400 dark:text-neutral-500 shrink-0">
                         {{ exp.date }}
                       </span>
                     </div>
-                    <ul class="list-disc space-y-1 pl-4 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                    <ul class="list-disc space-y-1 pl-4 text-[14px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                       <li v-for="item in exp.items" :key="item">
                         {{ item }}
                       </li>
@@ -859,21 +867,22 @@ onBeforeUnmount(() => {
                   >
                   <div class="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
                     <h3 class="flex items-center gap-2 font-serif text-lg font-bold text-neutral-900 dark:text-white">
+                      <Icon v-if="project.icon" :name="project.icon" class="text-base opacity-70 shrink-0" />
                       <a :href="project.url" target="_blank" class="hover:underline hover:decoration-neutral-400">
                         {{ project.title }}
                       </a>
                     </h3>
-                    <span class="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500">
+                    <span class="font-mono text-[15px] font-semibold text-neutral-400 dark:text-neutral-500">
                       {{ project.date }}
                     </span>
                   </div>
 
-                  <p class="text-[14px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  <p class="text-[15px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
                     {{ project.summary }}
-                    <span class="ml-1 text-[11px] font-normal text-neutral-500 dark:text-neutral-400">{{ project.stack }}</span>
+                    <span class="ml-1 text-[12px] font-normal text-neutral-500 dark:text-neutral-400">{{ project.stack }}</span>
                   </p>
 
-                  <div class="grid gap-2 text-[12px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                  <div class="grid gap-2 text-[14px] leading-relaxed text-neutral-700 dark:text-neutral-300">
                     <div>
                       <p>{{ project.star.situation }} {{ project.star.task }}</p>
                     </div>
@@ -889,7 +898,7 @@ onBeforeUnmount(() => {
                     </div>
                   </div>
 
-                  <div class="text-[11px] italic text-neutral-500 dark:text-neutral-500">
+                  <div class="text-[13px] italic text-neutral-500 dark:text-neutral-500">
                     <ul class="space-y-0.5">
                       <li v-for="row in project.evidence" :key="row">{{ row }}</li>
                     </ul>
@@ -992,7 +1001,7 @@ onBeforeUnmount(() => {
               <!-- Template Selector -->
               <section class="space-y-4">
                 <div class="flex items-center justify-between">
-                  <h3 class="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">岗位模版</h3>
+                  <h3 class="text-[12px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">岗位模版</h3>
                   <button
                     type="button"
                     class="text-xs font-bold text-neutral-900 underline underline-offset-4 dark:text-white"
