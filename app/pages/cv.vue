@@ -22,6 +22,7 @@ const RESUME_TAGS = [
   "Three.js 开发",
   "数据可视化",
   "技术美术",
+  "计算机系统",
 ] as const;
 
 type ResumeTag = (typeof RESUME_TAGS)[number];
@@ -232,6 +233,83 @@ const projectPool = ref<ProjectItem[]>([
   //     ],
   //   },
   // },
+  {
+    id: "lab-mit-6s081",
+    enabled: true,
+    title: "MIT 6.S081: Operating Systems (Labs)",
+    summary: "基于 C 语言在 xv6 内核实现进程管理、虚拟内存及日志文件系统等核心模块。",
+    url: "https://pdos.csail.mit.edu/6.S081/2020/index.html",
+    date: "2025",
+    stack: "C / xv6 / QEMU / GDB",
+    roles: ["后端开发", "逆向工程", "计算机系统"],
+    tags: ["OS Kernel", "Virtual Memory", "Multithreading", "Locking"],
+    evidence: [
+      "实现 COW Fork、Lazy Allocation 与 Page Table 映射，深入理解虚拟内存管理机制。",
+      "重构内存分配器与多线程调度逻辑，利用 Lock 机制处理高并发下的 Race Condition。",
+    ],
+    star: {
+      situation: "操作系统底层机制是计算机科学的基石，对于理解高性能并发、内存安全及系统级优化至关重要。",
+      task: "从零实现 xv6 内核的关键组件，通过核心实验掌握操作系统核心原理。",
+      actions: [
+        "实现 System Calls、Page Table 管理及 COW Fork，优化进程创建与内存使用效率。",
+        "开发基于硬件中断的多线程支持与 Lock 机制，确保内核态代码在多核环境下的并发安全性。",
+        "扩展 xv6 文件系统，支持大文件存储，理解磁盘 I/O 链路与 inode 结构设计。",
+      ],
+      results: [],
+    },
+    icon: "ph:cpu-bold",
+  },
+  {
+    id: "lab-cs144",
+    enabled: true,
+    title: "CS144: Introduction to Computer Networking (Labs)",
+    summary: "从零构建支持可靠传输与拥塞控制的 TCP/IP 协议栈。",
+    url: "https://cs144.github.io/",
+    date: "2025",
+    stack: "C++ / TCP/IP / Wireshark / Linux",
+    roles: ["后端开发", "计算机系统"],
+    tags: ["TCP/IP", "Flow Control", "Reliable Transport", "Router"],
+    evidence: [
+      "实现滑动窗口协议与重传机制，在不稳定网络环境下保证数据的 100% 可靠传输。",
+      "构建 ARP 映射与 IP 路由转发逻辑，实现从数据链路层到网络层的全链路闭环。",
+    ],
+    star: {
+      situation: "网络协议栈的设计直接影响分布式系统的性能与稳定性，深入理解 TCP 机制是开发高性能后端服务的基础。",
+      task: "在 Minet 框架下构建一个功能完备且高性能的 TCP 协议栈。",
+      actions: [
+        "实现 TCP Receiver 与 Sender，通过滑动窗口与 ACK/Retransmit 机制解决报文丢包与乱序问题。",
+        "开发 Network Interface 模块，处理 Ethernet 帧封装与 ARP 缓存维护，打通 IP 路由与链路层对接。",
+        "模拟真实网络丢包场景进行压力测试，通过 Wireshark 抓包分析并优化拥塞控制算法。",
+      ],
+      results: [],
+    },
+    icon: "ph:globe-hemisphere-west-bold",
+  },
+  {
+    id: "lab-cmu-15445",
+    enabled: true,
+    title: "CMU 15-445: Database Systems (Labs)",
+    summary: "从零实现基于 BusTub 框架、支持 ACID 特性的关系型数据库存储引擎。",
+    url: "https://15445.courses.cs.cmu.edu/",
+    date: "2025",
+    stack: "C++ / Database / Storage Engine / Buffer Pool",
+    roles: ["后端开发", "计算机系统"],
+    tags: ["Storage Engine", "B+ Tree", "Concurrency Control", "Buffer Pool"],
+    evidence: [
+      "实现 LRU-K 缓冲池管理算法与支持并发的 B+ Tree 索引。",
+      "构建 Volcano 模型的查询执行引擎，支持顺序扫描、索引连接等算子。",
+    ],
+    star: {
+      situation: "数据库存储引擎的设计是现代后端系统性能的关键因素。",
+      task: "在 CMU 提供的 BusTub 框架上实现从缓冲池到索引再到执行引擎的全链路功能。",
+      actions: [
+        "实现可扩展哈希索引与页级别并发控制，保证索引在高并发读写下的正确性。",
+        "完成基于两阶段锁 (2PL) 的并发控制逻辑，实现不同的隔离级别。",
+      ],
+      results: [],
+    },
+    icon: "ph:database-bold",
+  },
   {
     id: "player-community-leader",
     enabled: true,
@@ -612,7 +690,9 @@ const projectPool = ref<ProjectItem[]>([
 ]);
 
 const enabledResumeItems = computed(() => resumeItems.value.filter((i) => i.enabled));
-const enabledProjects = computed(() => projectPool.value.filter((p) => p.enabled));
+const enabledProjectsPool = computed(() => projectPool.value.filter((p) => p.enabled));
+const enabledProjects = computed(() => enabledProjectsPool.value.filter((p) => !p.id.startsWith("lab-")));
+const enabledLabs = computed(() => enabledProjectsPool.value.filter((p) => p.id.startsWith("lab-")));
 const enabledExperiences = computed(() => experiencePool.value.filter((e) => e.enabled));
 
 const resumeGroups = computed(() => {
@@ -647,8 +727,8 @@ const selectAll = () => {
 
 const TEMPLATES = [
   { id: "all", name: "全部内容", tags: [] },
-  { id: "ai-startup", name: "AI Startup", tags: ["AI-Native 开发", "Agent 开发", "全栈开发", "逆向工程"] },
-  { id: "agent", name: "Agent 架构", tags: ["Agent 开发", "后端开发", "全栈开发"] },
+  { id: "ai-startup", name: "AI Startup", tags: ["AI-Native 开发", "Agent 开发", "全栈开发", "逆向工程", "计算机系统"] },
+  { id: "agent", name: "Agent 架构", tags: ["Agent 开发", "后端开发", "全栈开发", "计算机系统"] },
   { id: "frontend", name: "前端 / UIUX", tags: ["前端开发", "UI / UX 设计", "Three.js 开发", "数据可视化"] },
   { id: "game", name: "游戏 / Unity", tags: ["Unity 开发", "技术美术", "Three.js 开发"] },
   { id: "product", name: "产品 / 全栈", tags: ["产品设计", "全栈开发", "前端开发", "后端开发"] },
@@ -851,6 +931,28 @@ onBeforeUnmount(() => {
                         {{ item }}
                       </li>
                     </ul>
+                  </article>
+                </div>
+              </section>
+
+              <!-- Hardcore Labs -->
+              <section v-if="enabledLabs.length" class="space-y-3">
+                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">核心实践</h2>
+                <div class="space-y-2">
+                  <article v-for="lab in enabledLabs" :key="lab.id" class="flex items-baseline justify-between gap-4 border-b border-neutral-300/30 pb-1.5 dark:border-neutral-700/30">
+                    <div class="flex items-baseline gap-3 overflow-hidden">
+                      <h3 class="flex shrink-0 items-center gap-1.5 font-serif text-[16px] font-bold text-neutral-900 dark:text-white">
+                        <Icon v-if="lab.icon" :name="lab.icon" class="text-sm opacity-70" />
+                        <a :href="lab.url" target="_blank" class="hover:underline">{{ lab.title }}</a>
+                      </h3>
+                      <p class="truncate text-[14px] text-neutral-600 dark:text-neutral-400">
+                        {{ lab.summary }}
+                        <span class="ml-1 text-[12px] font-normal text-neutral-500/70 dark:text-neutral-500/70">{{ lab.stack }}</span>
+                      </p>
+                    </div>
+                    <span class="shrink-0 font-mono text-[14px] font-medium text-neutral-400 dark:text-neutral-500">
+                      {{ lab.date }}
+                    </span>
                   </article>
                 </div>
               </section>
@@ -1070,12 +1172,34 @@ onBeforeUnmount(() => {
                 </div>
               </section>
 
+              <!-- Lab Toggles -->
+              <section class="space-y-6">
+                <h3 class="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">核心实验</h3>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div
+                    v-for="project in projectPool.filter(p => p.id.startsWith('lab-'))"
+                    :key="project.id"
+                    class="flex items-start gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/50"
+                  >
+                    <label class="relative mt-0.5 inline-flex shrink-0 cursor-pointer items-center">
+                      <input v-model="project.enabled" type="checkbox" class="peer sr-only" />
+                      <span class="h-4 w-7 rounded-full bg-neutral-200 transition peer-checked:bg-neutral-900 dark:bg-neutral-800 dark:peer-checked:bg-white" />
+                      <span class="absolute left-0.5 top-0.5 h-3 w-3 rounded-full bg-white shadow-sm transition peer-checked:translate-x-3 dark:bg-neutral-900" />
+                    </label>
+                    <div class="min-w-0">
+                      <div class="truncate text-xs font-bold">{{ project.title }}</div>
+                      <div class="truncate text-[10px] text-neutral-500">{{ project.summary }}</div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <!-- Project Toggles -->
               <section class="space-y-6">
                 <h3 class="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">项目池</h3>
                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   <div
-                    v-for="project in projectPool"
+                    v-for="project in projectPool.filter(p => !p.id.startsWith('lab-'))"
                     :key="project.id"
                     class="flex items-start gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/50"
                   >
