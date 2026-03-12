@@ -311,6 +311,25 @@ const projectPool = ref<ProjectItem[]>([
     icon: "ph:database-bold",
   },
   {
+    id: "lab-berkeley-cs61b",
+    enabled: true,
+    title: "UCB CS61B: 数据结构与算法",
+    summary: "实现双端队列、左倾红黑树、基于 B+ 树的数据库搜索引擎。以及基于 2D Tilemap 的世界渲染器",
+    url: "https://sp21.datastructur.es/",
+    date: "2024",
+    stack: "Java / Git / JUnit",
+    roles: ["前端开发", "全栈开发", "后端开发"],
+    tags: ["Data Structures", "Algorithms", "Java", "A* Pathfinding"],
+    evidence: [],
+    star: {
+      situation: "",
+      task: "",
+      actions: [],
+      results: [],
+    },
+    icon: "ph:tree-structure-bold",
+  },
+  {
     id: "player-community-leader",
     enabled: true,
     title: "Minecraft 游戏社区服务器 — 独立研发与商业运营",
@@ -913,6 +932,28 @@ onBeforeUnmount(() => {
             </div>
 
             <div class="space-y-12" :class="isTwoColumn ? 'pl-4' : 'pt-8'">
+              <!-- Hardcore Labs -->
+              <section v-if="enabledLabs.length" class="space-y-4">
+                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">核心实践</h2>
+                <div class="space-y-6">
+                  <article v-for="lab in enabledLabs" :key="lab.id" class="space-y-1.5">
+                    <div class="flex items-baseline justify-between gap-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
+                      <h3 class="flex items-center gap-1.5 font-serif text-lg font-bold text-neutral-900 dark:text-white">
+                        <Icon v-if="lab.icon" :name="lab.icon" class="text-sm opacity-70" />
+                        <a :href="lab.url" target="_blank" class="hover:underline">{{ lab.title }}</a>
+                      </h3>
+                      <span class="font-mono text-[15px] font-semibold text-neutral-400 dark:text-neutral-500 shrink-0">
+                        {{ lab.date }}
+                      </span>
+                    </div>
+                    <p class="text-[14px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+                      {{ lab.summary }}
+                      <span class="ml-1 text-[12px] font-normal text-neutral-500/70 dark:text-neutral-500/70">{{ lab.stack }}</span>
+                    </p>
+                  </article>
+                </div>
+              </section>
+
               <!-- Internship Experience -->
               <section v-if="enabledExperiences.length" class="space-y-4">
                 <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">实习经历</h2>
@@ -931,28 +972,6 @@ onBeforeUnmount(() => {
                         {{ item }}
                       </li>
                     </ul>
-                  </article>
-                </div>
-              </section>
-
-              <!-- Hardcore Labs -->
-              <section v-if="enabledLabs.length" class="space-y-3">
-                <h2 class="font-serif text-xl font-bold tracking-tight text-neutral-900 dark:text-white">核心实践</h2>
-                <div class="space-y-2">
-                  <article v-for="lab in enabledLabs" :key="lab.id" class="flex items-baseline justify-between gap-4 border-b border-neutral-300/30 pb-1.5 dark:border-neutral-700/30">
-                    <div class="flex items-baseline gap-3 overflow-hidden">
-                      <h3 class="flex shrink-0 items-center gap-1.5 font-serif text-[16px] font-bold text-neutral-900 dark:text-white">
-                        <Icon v-if="lab.icon" :name="lab.icon" class="text-sm opacity-70" />
-                        <a :href="lab.url" target="_blank" class="hover:underline">{{ lab.title }}</a>
-                      </h3>
-                      <p class="truncate text-[14px] text-neutral-600 dark:text-neutral-400">
-                        {{ lab.summary }}
-                        <span class="ml-1 text-[12px] font-normal text-neutral-500/70 dark:text-neutral-500/70">{{ lab.stack }}</span>
-                      </p>
-                    </div>
-                    <span class="shrink-0 font-mono text-[14px] font-medium text-neutral-400 dark:text-neutral-500">
-                      {{ lab.date }}
-                    </span>
                   </article>
                 </div>
               </section>
