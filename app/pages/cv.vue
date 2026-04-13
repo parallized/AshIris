@@ -610,7 +610,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "vertree",
-    enabled: true,
+    enabled: false,
     title: "Vertree — Rust 高性能压力测试工具",
     summary: "自研的 Rust 异步网络压测工具，保证测试工具本身不成为瓶颈，支持可配置的压测场景。",
     url: "https://github.com/parallized/Vertree",
