@@ -119,18 +119,6 @@ const experiencePool = ref<ExperienceItem[]>([
 
 const resumeItems = ref<ResumeItem[]>([
   {
-    id: "highlight-hardcore",
-    enabled: true,
-    tag: "逆向工程",
-    label: "自研 MCP 插件实现二进制语义自动化还原，将人工变量 / 结构体分析耗时降低 90%，一周内完成传统数月级逆向工程项目。",
-  },
-  {
-    id: "highlight-business",
-    enabled: true,
-    tag: "全栈开发",
-    label: "作为负责人从 0 打造 10W+ 注册量游戏，实现月纯利 20k+ 的规模化盈利",
-  },
-  {
     id: "agent-tooling",
     enabled: true,
     tag: "Agent 开发",
@@ -146,25 +134,25 @@ const resumeItems = ref<ResumeItem[]>([
     id: "reverse-ida",
     enabled: true,
     tag: "逆向工程",
-    label: "利用 LLM 对反汇编代码进行语义化标注，自动化还原函数签名与数据结构，将二进制逆向工程从手工考古升级为 AI 辅助解构",
+    label: "利用 LLM + MCP 对反汇编代码进行语义化标注，自动化还原函数签名与数据结构，将二进制逆向工程从手工考古升级为 AI 辅助解构",
   },
   {
     id: "backend-distributed",
     enabled: true,
     tag: "后端开发",
-    label: "Java + Redis 分布式架构设计：通过多级缓存与服务器分流策略，在 DAU 2000+ 峰值下维持系统延迟 < 100ms，支撑高并发业务场景",
+    label: "常用 K8s，Docker，RabbitMQ 等工具，具备分布式系统设计经验",
   },
   {
     id: "backend-rust-service",
     enabled: true,
     tag: "后端开发",
-    label: "Rust + C++ DLL 跨语言混合开发：构建高性能扫描器与内存攻防组件，利用 Axum 实现标准化 RESTful API 服务化，涵盖 A* Navigation 路径规划、射线检测等核心接口",
+    label: "熟悉 Rust + C++ DLL 跨语言混合开发，了解 Axum，熟悉 A* Navigation 路径规划、射线检测",
   },
   {
     id: "frontend-develop",
     enabled: true,
     tag: "前端开发",
-    label: "熟悉 React / Nuxt 框架，常用 Nestjs / Axum 等后端框架，常用 Tauri / Electron / Capacitor 进行跨平台应用开发",
+    label: "熟悉 React / Nuxt 框架，常用 Nestjs / ElysiaJS 等后端框架，常用 Tauri / Electron / Capacitor / Flutter 进行跨平台应用开发",
   },
   {
     id: "uiux-system",
@@ -180,9 +168,9 @@ const resumeItems = ref<ResumeItem[]>([
   },
   {
     id: "unity-editor",
-    enabled: true,
+    enabled: false,
     tag: "Unity 开发",
-    label: "Unity/UE 引擎深度开发与编辑器扩展：具备 Houdini 过程化建模、Blender 资产工作流及 Editor Tooling 实践，探索多种 AI 链路方案",
+    label: "Unity / UE 引擎编辑器扩展：具备 Houdini 过程化建模、Blender 资产工作流及 Editor Tooling 实践，探索多种 AI 链路方案",
   },
   {
     id: "threejs-viz",
@@ -191,16 +179,10 @@ const resumeItems = ref<ResumeItem[]>([
     label: "Three.js / WebGL 空间可视化实践：具备 3D 场景构建与交互开发能力，结合空间信息可视化在游戏战术工具中实现高密度数据的直觉化呈现",
   },
   {
-    id: "data-viz",
-    enabled: true,
-    tag: "数据可视化",
-    label: "在多款游戏工具项目中实现大量地图 / 点位 / 策略的可视化呈现，形成可复用的信息展示模板，提升关键信息的查找成功率",
-  },
-  {
     id: "tech-art",
-    enabled: true,
+    enabled: false,
     tag: "技术美术",
-    label: "Blender 插件兼容修复、Houdini 过程化建模、游戏资产管线搭建，打通创意到工程落地全链路",
+    label: "了解 Blender 插件开发、Houdini 程序化建模、游戏资产管线搭建",
   },
 ]);
 
@@ -360,20 +342,21 @@ const projectPool = ref<ProjectItem[]>([
     id: "maple",
     enabled: true,
     title: "Maple — AI 编码 SDD 看板工作台",
-    summary: "AI-Native 的 SDD 看板，多 Worker 任务派发、状态管理与报告回写",
+    summary: "针对多 Agent 协作时上下文混乱的痛点，从零构建了 AI-Native 的 SDD 可视化看板系统",
     url: "https://github.com/parallized/maple",
     date: "2026",
     stack: "Tauri / MCP & Skills / CLI",
     roles: ["Agent 开发", "全栈开发", "产品设计", "前端开发"],
     tags: ["SDD 工作流", "任务看板", "多 Worker 协作", "100% 可追溯"],
     evidence: [
+      "53 star 开源在：github.com/parallized/maple"
     ],
     star: {
-      situation: "AI 编码工具缺少结构化的任务管理层，多 Agent 并行时上下文混乱，心智负担高。",
-      task: "Maple 打通「任务 → 执行 → 回写」闭环，至少提高 30% 迭代速度",
+      situation: "基于 Codex 等 CLI 工具，构建以任务单为核心的 SDD 中控，通过状态回写，Human in the loop 与多任务调度降低开发心智负担与上下文丢失",
+      task: "",
       actions: [
-        "设计任务 Workflow，统一多 Worker 执行视图与冲突解决，构建可视化看板 UI，提供直观的任务构思、编排与管理体验",
-        "实现完整 MCP & Skills 工具集（任务查询、报告提交、标签管理、Worker 完成通知）",
+        "Agentic Workflow 编排：设计多 Worker 并行调度的执行引擎，通过共享状态上下文，状态锁，报告回写解决冲突，有效降低多 Agent 协同的心智负担",
+        "全栈 MCP 工具链：基于 Tauri 构建 CI/CD，自主封装涵盖任务查询、报告提交、标签管理等核心环节的 MCP & Skills 工具集",
       ],
       results: [
       ],
@@ -382,7 +365,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "npt",
-    enabled: true,
+    enabled: false,
     title: "Notion Project Tracker — AI 可执行项目中枢",
     summary: "将 Notion 升级为 AI Agent 可直接执行任务的项目中枢",
     url: "https://github.com/parallized/notion-project-tracker",
@@ -407,7 +390,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "para-navigation",
-    enabled: true,
+    enabled: false,
     title: "para-navigation — 高性能导航服务",
     summary: "基于 Rust + Detour / NavMesh 的 RESTful 导航服务，支撑 3D 的路径与空间查询",
     url: "https://github.com/parallized/para-navigation",
@@ -436,7 +419,7 @@ const projectPool = ref<ProjectItem[]>([
     id: "runedra",
     enabled: true,
     title: "Runedra 知树 — 知识学习加速平台",
-    summary: "面向学习者的可视化知识图谱，提供 AI 在学习全流程的辅助",
+    summary: "面向所有学习者的可视化知识图谱，提供 AI 在学习全流程的辅助",
     url: "https://runedra.cn",
     date: "2024 - 至今",
     stack: "Nuxt 4 / Graph / AI 驱动",
@@ -446,11 +429,12 @@ const projectPool = ref<ProjectItem[]>([
       "线上持续运营：runedra.cn",
     ],
     star: {
-      situation: "学习资料分散在不同平台，上下文割裂，信息壁垒导致学习效率低下。",
-      task: "借助 DeepSearch 与高效的交互设计使知识获取与管理更顺畅",
+      situation: "受启发于 LLM 底层原理，将用户当前知识状态映射作为 few-shot 进行 DeepSearch，产出向量化的知识图谱与半侵入式的学习路径",
+      task: "",
       actions: [
-        "按学习路径重构信息架构，设计多维 RAG & Memory 索引结构，降低至少 30% 任意层级学习者心智负担",
-        "深度优化的交互设计，结合 AI + DeepSearch 题库并借助平台能力高效且优雅地展示",
+        "深度定制的自增长知识库结构：WebSearch 并按知识结构高性能流式入库，设计多维 RAG & Memory 索引结构，建立多个 Tag 作为基向量，寻找课题相似度",
+        "知识库 Agent Harness 实践：基于数十个 Agent 角色协作，完成信息收集，知识提炼，敏感审查，日志分析，提示词自优化与学习情况可持续追踪",
+        "实时渲染性能敏感架构设计：知识图谱和知识库同时接入多个数据流，要求多阶段多维度所见即所得，基于 RxJS 管道和状态流与适配器模式消除并发陷阱和异步地狱"
       ],
       results: [
       ],
@@ -461,7 +445,7 @@ const projectPool = ref<ProjectItem[]>([
     id: "wow-magician",
     enabled: true,
     title: "WoW Magician — AI 战术板与排轴系统",
-    summary: "面向公会协作的 AI + MRT 战术信息系统，将排轴方案从个人经验沉淀为可迭代共享的团队资产",
+    summary: "魔兽世界 AI 战术信息系统，全自动提供复杂的 BOSS 战场景解决方案",
     url: "https://wow.parallized.cn",
     date: "2025",
     stack: "Full-Stack / AI 辅助生成 / Lua Ecosystem / 规则引擎",
@@ -471,11 +455,11 @@ const projectPool = ref<ProjectItem[]>([
       "线上运营站点：wow.parallized.cn",
     ],
     star: {
-      situation: "游戏机制排轴和战术同步完全依赖人工，信息更新慢且版本混乱，关键时刻信息可读性差。",
-      task: "构建一个能快速协作、统一认知的战术信息系统，让团队在实战前 5 分钟内完成战术同步。",
+      situation: "",
+      task: "基于 AI 构建一套规则模式自动入库解决新的游戏机制组合，将复杂的几十个技能以黑白名单和优先级匹配 3 秒安排好 10 分钟的战术决策",
       actions: [
-        "将战术信息拆解为可复用模块化组件，支持多人并行查看、编辑与版本迭代。引入 AI 辅助生成与规则化处理引擎，将手工配置耗时减少 80%",
-        "形成可复用的战术板工作流，团队战术同步时间从 30 分钟压缩至 5 分钟",
+        "IDA MCP 逆向分析工具链：基于 LLM 分析函数签名与调用关系，逆向几乎零基础的情况下借助 AI 一周完成了数百个关键数据挖掘，并直接并入决策因子知识库",
+        "跨语言基建与通信：Rust 实现 A* 高性能寻路，Lua 侧实现 WS 广播到 RabbitMQ 分 Patch 削峰后交给后端 AI Worker 消费解算，前端 Konva 万级元素渲染",
       ],
       results: [
       ],
@@ -571,7 +555,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "unity-captain",
-    enabled: true,
+    enabled: false,
     title: "Unity-Captain — 编辑器内 AI 工程助手",
     summary: "Unity 编辑器内嵌 AI 对话与工程结构辅助实验，探索 AI 深度融入游戏开发工作流的可行路径",
     url: "https://github.com/parallized/Unity-Captain-Demoscene",
@@ -598,7 +582,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "dalamud-plugins",
-    enabled: true,
+    enabled: false,
     title: "DalamudPlugins — 游戏插件生态索引",
     summary: "FFXIV 插件索引与维护仓库，面向游戏工具生态的统一分发与版本管理入口。",
     url: "https://github.com/Nesb01t/DalamudPlugins",
@@ -656,7 +640,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "lineup",
-    enabled: true,
+    enabled: false,
     title: "Lineup — 多游戏战术速查平台",
     summary: "覆盖 Valorant / OW / War Thunder 等多款游戏的统一战术查阅平台",
     url: "https://github.com/parallized/Lineup",
@@ -681,7 +665,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "incity",
-    enabled: true,
+    enabled: false,
     title: "Incity + Outcity — C++ / Electron 混合架构",
     summary: "C++ 异步 TCP 通信内核 + Electron 跨语言架构实践，验证底层服务与前端协同的最佳路径",
     url: "https://github.com/parallized/Incity",
@@ -881,10 +865,10 @@ onBeforeUnmount(() => {
           <header class="mb-10 flex flex-col items-start justify-between gap-6 pb-4 md:flex-row md:items-end">
             <div class="space-y-3">
               <h1 class="font-serif text-2xl font-semibold tracking-tight text-neutral-900 dark:text-white md:text-4xl">
-                AI Native & Agent 开发
+                AI Native & 全栈开发
               </h1>
               <p class="font-sans text-[14px] font-light text-neutral-600 dark:text-neutral-400">
-                2 年 AI / 互联网实习 + 项目经验，擅长完成从 0 到 1 的产品定义、技术架构<br>与开发落地。具备 RAG、Agent Workflow、MCP 经验
+                2 年 AI / 互联网项目实习经验，主导多个 0 到 1 的产品定义、技术架构与开发落地<br>具备 RAG、Agent Workflow、MCP 与扎实的底层系统设计经验。
               </p>
               <div class="h-1 w-12 bg-neutral-900 dark:bg-neutral-100"></div>
             </div>
@@ -907,7 +891,7 @@ onBeforeUnmount(() => {
               </div>
               <div class="space-y-1">
                 <div class="text-neutral-900 text-[16px] font-semibold dark:text-white">浙江科技大学</div>
-                <div class="text-[14px] text-neutral-500 dark:text-neutral-400">数媒技本科 · 26 届</div>
+                <div class="text-[14px] text-neutral-500 dark:text-neutral-400">数媒技本科 2021 - 2026</div>
               </div>
             </div>
           </header>
