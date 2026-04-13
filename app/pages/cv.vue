@@ -217,7 +217,7 @@ const projectPool = ref<ProjectItem[]>([
   // },
   {
     id: "lab-mit-6s081",
-    enabled: true,
+    enabled: false,
     title: "MIT 6.S081: Operating Systems (Labs)",
     summary: "基于 C 语言在 xv6 内核实现进程管理、虚拟内存及日志文件系统等核心模块。",
     url: "https://pdos.csail.mit.edu/6.S081/2020/index.html",
@@ -243,7 +243,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "lab-cs144",
-    enabled: true,
+    enabled: false,
     title: "CS144: Introduction to Computer Networking (Labs)",
     summary: "从零构建支持可靠传输与拥塞控制的 TCP/IP 协议栈。",
     url: "https://cs144.github.io/",
@@ -269,7 +269,7 @@ const projectPool = ref<ProjectItem[]>([
   },
   {
     id: "lab-cmu-15445",
-    enabled: true,
+    enabled: false,
     title: "CMU 15-445: Database Systems (Labs)",
     summary: "从零实现基于 BusTub 框架、支持 ACID 特性的关系型数据库存储引擎。",
     url: "https://15445.courses.cs.cmu.edu/",
@@ -312,33 +312,6 @@ const projectPool = ref<ProjectItem[]>([
     icon: "ph:tree-structure-bold",
   },
   {
-    id: "player-community-leader",
-    enabled: true,
-    title: "Minecraft 游戏社区服务器 — 独立研发与商业运营",
-    summary: "从零独立打造 MC 游戏服务器，涵盖玩法设计、插件开发、服务端架构与运营",
-    url: "https://github.com/parallized",
-    date: "2012 - 2017",
-    stack: "Java / Spigot 插件开发 / 游戏系统设计 / Redis / 运营策划",
-    roles: ["全栈开发", "产品设计", "后端开发"],
-    tags: ["游戏服务器", "插件开发", "商业运营", "玩法设计"],
-    evidence: [
-      "累计注册用户 10W+，月纯利 20k+，持续稳定运营 2 年",
-      "独立完成从玩法策划、Java 插件开发、服务端运维到商业变现的全链路闭环",
-    ],
-    star: {
-      situation: "Minecraft 服务器生态中玩法同质化严重且技术门槛较高，多数服务器难以兼顾游戏体验与商业可持续性。",
-      task: "作为唯一负责人，独立完成从玩法设计、Java 插件开发、服务端架构到社区运营与变现的全链路工作",
-      actions: [
-        "自主设计并开发多套原创玩法系统（经济体系、成长线、赛季机制），通过 Java 插件实现定制化游戏逻辑",
-        "搭建 Java + Redis 服务端架构，实现多服分流与数据持久化，保障 DAU 2000+ 峰值下的流畅游戏体验",
-        "建立社区运营与危机响应体系，突发故障 24 小时内完成补偿与恢复",
-      ],
-      results: [
-      ],
-    },
-    icon: "ph:cube-bold",
-  },
-  {
     id: "maple",
     enabled: true,
     title: "Maple — AI 编码 SDD 看板工作台",
@@ -362,6 +335,32 @@ const projectPool = ref<ProjectItem[]>([
       ],
     },
     icon: "ph:kanban-bold",
+  },
+    {
+    id: "player-community-leader",
+    enabled: true,
+    title: "Minecraft 游戏社区服务器 — 独立研发与商业运营",
+    summary: "基于 MC 引擎从零打造 RPG 游戏服务器，涵盖玩法设计、插件开发、服务端架构与运营运维全流程",
+    url: "https://github.com/parallized",
+    date: "2012 - 2017",
+    stack: "Java / Spigot 插件开发 / 游戏系统设计 / 地图与关卡设计 / 运营策划",
+    roles: ["全栈开发", "产品设计", "后端开发"],
+    tags: ["游戏服务器", "插件开发", "商业运营", "玩法设计"],
+    evidence: [
+      "全生命周期服务器 10+，累计注册用户 10W+，持续稳定运营 2 年，月纯利从 2k 到 20k 不等",
+    ],
+    star: {
+      situation: "作为唯一负责人，独立完成从玩法设计、Java 插件开发、服务端架构到社区运营与变现的全链路工作",
+      task: "",
+      actions: [
+        "小学时期对插件开发感兴趣，想创作自己的玩法开始接触基础建模与编程，基于社区低代码工具和 Notepad++ 完成汉化与基础 JSON 制作",
+        "后续制作 RPG 插件与服务器起步，搭建面板服务器，优化 JVM 参数，扩容硬件提高游戏在线稳定性，期间实践了关卡与物品设计，UI 设计，全流程的玩法策划",
+        "从常态在线 50+ 逐步扩大到 500，借助社区与自制插件、地图、工具，拓展了多种游戏模式",
+      ],
+      results: [
+      ],
+    },
+    icon: "ph:cube-bold",
   },
   {
     id: "npt",
