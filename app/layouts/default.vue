@@ -41,7 +41,7 @@ const navLinks = [
   >
     <!-- Desktop/Mobile Navigation -->
     <header
-      class="fixed right-[6vw] md:right-[12vw] top-8 md:top-12 z-100 flex flex-col items-end gap-6 mix-blend-difference"
+      class="fixed left-0 right-0 top-0 z-100 flex flex-row items-center justify-between px-[6vw] md:px-[12vw] py-8 md:py-12 mix-blend-difference"
     >
       <NuxtLink
         to="/#home"
@@ -54,45 +54,46 @@ const navLinks = [
         >
       </NuxtLink>
 
-      <!-- Mobile Menu Toggle -->
-      <button
-        @click="toggleMenu"
-        class="md:hidden text-[#A68B6D] flex flex-col gap-1.5 items-end p-2"
-        aria-label="Toggle Menu"
-      >
-        <div
-          class="w-6 h-[0.5px] bg-current transition-all"
-          :class="{ 'rotate-45 translate-y-[6.5px]': isMenuOpen }"
-        ></div>
-        <div
-          class="w-4 h-[0.5px] bg-current transition-opacity"
-          :class="{ 'opacity-0': isMenuOpen }"
-        ></div>
-        <div
-          class="w-6 h-[0.5px] bg-current transition-all"
-          :class="{ '-rotate-45 -translate-y-[6.5px]': isMenuOpen }"
-        ></div>
-      </button>
-
-      <!-- Desktop Links -->
-      <nav class="hidden md:flex flex-col items-end gap-3">
-        <div class="h-16 w-[0.5px] bg-[#D9D1C7]/20 my-2"></div>
-        <NuxtLink
-          v-for="link in navLinks"
-          :key="link.name"
-          :to="link.to"
-          @click.prevent="handleNavClick(link.to)"
-          class="group relative overflow-hidden px-1 py-1"
+      <div class="flex items-center gap-8">
+        <!-- Mobile Menu Toggle -->
+        <button
+          @click="toggleMenu"
+          class="md:hidden text-[#A68B6D] flex flex-col gap-1.5 items-end p-2"
+          aria-label="Toggle Menu"
         >
-          <span
-            class="text-[12px] font-black uppercase tracking-[0.3em] text-[#D9D1C7]/40 group-hover:text-white transition-colors duration-500"
-            >{{ link.name }}</span
-          >
           <div
-            class="absolute bottom-0 left-0 w-full h-[0.5px] bg-[#A68B6D] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right"
+            class="w-6 h-[0.5px] bg-current transition-all"
+            :class="{ 'rotate-45 translate-y-[6.5px]': isMenuOpen }"
           ></div>
-        </NuxtLink>
-      </nav>
+          <div
+            class="w-4 h-[0.5px] bg-current transition-opacity"
+            :class="{ 'opacity-0': isMenuOpen }"
+          ></div>
+          <div
+            class="w-6 h-[0.5px] bg-current transition-all"
+            :class="{ '-rotate-45 -translate-y-[6.5px]': isMenuOpen }"
+          ></div>
+        </button>
+
+        <!-- Desktop Links -->
+        <nav class="hidden md:flex flex-row items-center gap-8">
+          <NuxtLink
+            v-for="link in navLinks"
+            :key="link.name"
+            :to="link.to"
+            @click.prevent="handleNavClick(link.to)"
+            class="group relative overflow-hidden px-1 py-1"
+          >
+            <span
+              class="text-[12px] font-black uppercase tracking-[0.3em] text-[#D9D1C7]/40 group-hover:text-white transition-colors duration-500"
+              >{{ link.name }}</span
+            >
+            <div
+              class="absolute bottom-0 left-0 w-full h-[0.5px] bg-[#A68B6D] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right"
+            ></div>
+          </NuxtLink>
+        </nav>
+      </div>
     </header>
 
     <!-- Mobile Menu Overlay -->
