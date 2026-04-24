@@ -10,11 +10,16 @@ export default defineNuxtPlugin(() => {
 
   // 2. 初始化 Lenis
   const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    duration: 0.68,
+    easing: (t) => 1 - Math.pow(1 - t, 4),
+    lerp: 0.22,
     orientation: "vertical",
     gestureOrientation: "vertical",
     smoothWheel: true,
+    syncTouch: true,
+    syncTouchLerp: 0.16,
+    wheelMultiplier: 1.14,
+    touchMultiplier: 1.04,
   });
 
   // 3. 独立 RAF 循环，解耦与 GSAP Ticker 的强绑定

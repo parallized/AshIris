@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import FooterSection from "~/components/footer-section.vue";
 
 const isMenuOpen = ref(false);
+const route = useRoute();
 const { $lenis } = useNuxtApp();
+const isBoardPage = computed(() => route.path === "/board");
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -21,9 +23,9 @@ const handleNavClick = (to: string) => {
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
+        return;
       }
     }
-    return;
   }
   navigateTo(to);
 };
@@ -44,7 +46,13 @@ const navLinks = [
   >
     <!-- Desktop/Mobile Navigation -->
     <header
-      class="fixed left-0 right-0 top-0 z-100 flex flex-row items-center justify-between px-[6vw] md:px-[12vw] py-8 md:py-12 mix-blend-difference"
+      v-if="!isBoardPage"
+      class="fixed left-0 right-0 top-0 z-100 flex flex-row items-center justify-between px-[6vw] md:px-[12vw] transition-colors duration-300"
+      :class="
+        isBoardPage
+          ? 'py-5 md:py-6 bg-[#F6F6F2]/82 border-b border-[#20211F]/8 backdrop-blur-xl'
+          : 'py-8 md:py-12 mix-blend-difference'
+      "
     >
       <NuxtLink
         to="/#home"
@@ -52,7 +60,12 @@ const navLinks = [
         class="group"
       >
         <span
-          class="text-xs md:text-base font-black uppercase tracking-[0.4em] text-[#A68B6D] group-hover:text-white transition-colors"
+          class="text-xs md:text-base font-black uppercase tracking-[0.4em] transition-colors"
+          :class="
+            isBoardPage
+              ? 'text-[#20211F]/70 group-hover:text-[#20211F]'
+              : 'text-[#A68B6D] group-hover:text-white'
+          "
           >Greater Bread</span
         >
       </NuxtLink>
@@ -61,7 +74,8 @@ const navLinks = [
         <!-- Mobile Menu Toggle -->
         <button
           @click="toggleMenu"
-          class="md:hidden text-[#A68B6D] flex flex-col gap-1.5 items-end p-2"
+          class="md:hidden flex flex-col gap-1.5 items-end p-2"
+          :class="isBoardPage ? 'text-[#20211F]/70' : 'text-[#A68B6D]'"
           aria-label="Toggle Menu"
         >
           <div
@@ -88,11 +102,17 @@ const navLinks = [
             class="group relative overflow-hidden px-1 py-1"
           >
             <span
-              class="text-[12px] font-black uppercase tracking-[0.3em] text-[#D9D1C7]/40 group-hover:text-white transition-colors duration-500"
+              class="text-[12px] font-black uppercase tracking-[0.3em] transition-colors duration-500"
+              :class="
+                isBoardPage
+                  ? 'text-[#20211F]/45 group-hover:text-[#20211F]'
+                  : 'text-[#D9D1C7]/40 group-hover:text-white'
+              "
               >{{ link.name }}</span
             >
             <div
-              class="absolute bottom-0 left-0 w-full h-[0.5px] bg-[#A68B6D] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right"
+              class="absolute bottom-0 left-0 w-full h-[0.5px] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right"
+              :class="isBoardPage ? 'bg-[#20211F]/24' : 'bg-[#A68B6D]'"
             ></div>
           </NuxtLink>
         </nav>
@@ -109,7 +129,7 @@ const navLinks = [
       leave-to-class="opacity-0 translate-x-full"
     >
       <div
-        v-if="isMenuOpen"
+        v-if="isMenuOpen && !isBoardPage"
         class="fixed inset-0 z-90 bg-[#1A1614] flex flex-col items-center justify-center p-12 md:hidden text-[#D9D1C7]"
       >
         <div class="flex flex-col items-center gap-10 text-center">
@@ -135,6 +155,7 @@ const navLinks = [
 
     <!-- 侧边装饰线 -->
     <div
+      v-if="!isBoardPage"
       class="fixed left-[6vw] md:left-[12vw] top-0 bottom-0 w-[0.5px] bg-[#D9D1C7]/10 z-40 hidden sm:block"
     ></div>
 
@@ -142,7 +163,7 @@ const navLinks = [
       <slot />
     </main>
 
-    <FooterSection />
+    <FooterSection v-if="!isBoardPage" />
   </div>
 </template>
 

@@ -29,9 +29,9 @@ const handleNavClick = (to: string) => {
           duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
+        return;
       }
     }
-    return;
   }
   navigateTo(to);
 };
