@@ -289,6 +289,39 @@ onBeforeUnmount(() => {
 <template>
   <div ref="boardPage" class="board-page" :style="stageStyle">
     <div class="board-shell">
+      <section
+        class="board-grid"
+        :style="{ '--active-accent': activeProject.accent }"
+        aria-label="Project details"
+      >
+        <article class="cv-card">
+          <header class="cv-header">
+            <h1 class="cv-title">
+              {{ activeProject.title }}
+              <span class="cv-divider">/</span>
+              <span class="cv-label">{{ activeProject.label }}</span>
+            </h1>
+          </header>
+          <div class="cv-body">
+            <p class="cv-brief">{{ activeProject.brief }}</p>
+            <ul class="cv-list">
+              <li v-for="item in activeProject.problems" :key="item.title">
+                <strong>{{ item.title }}</strong>：{{ item.desc }}
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="image-card">
+          <img
+            :src="activeProject.image"
+            :alt="`${activeProject.title} screenshot`"
+            loading="eager"
+            decoding="async"
+          />
+        </article>
+      </section>
+
       <aside class="board-rail" :style="railStyle" aria-label="Project board">
         <div class="rail-viewport">
           <div class="rail-orb" aria-hidden="true"></div>
@@ -312,77 +345,6 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </aside>
-
-      <section
-        class="board-grid"
-        :style="{ '--active-accent': activeProject.accent }"
-        aria-label="Project screenshots"
-      >
-        <article class="grid-card tile-1 data-card">
-          <header class="card-header">
-            <span>Core data</span>
-            <strong>{{ activeProject.title }}</strong>
-          </header>
-          <ul class="metric-list">
-            <li v-for="metric in activeProject.metrics" :key="metric.label">
-              <b>{{ metric.value }}</b>
-              <span>{{ metric.label }}</span>
-              <small>{{ metric.note }}</small>
-            </li>
-          </ul>
-        </article>
-
-        <article class="grid-card tile-2 cv-card">
-          <header class="cv-header">
-            <h3 class="cv-title">
-              {{ activeProject.title }}
-              <span class="cv-divider">|</span>
-              <span class="cv-label">{{ activeProject.label }}</span>
-            </h3>
-          </header>
-          <div class="cv-body">
-            <p class="cv-brief">{{ activeProject.brief }}</p>
-            <ul class="cv-list">
-              <li v-for="item in activeProject.problems" :key="item.title">
-                <strong>{{ item.title }}</strong>：{{ item.desc }}
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="grid-card tile-3 image-card">
-          <img
-            :src="activeProject.image"
-            :alt="`${activeProject.title} screenshot`"
-            loading="eager"
-            decoding="async"
-          />
-        </article>
-
-        <article class="grid-card tile-4 stack-card">
-          <header class="card-header">
-            <span>Stack</span>
-            <strong>Groups</strong>
-          </header>
-          <div class="stack-groups">
-            <section
-              v-for="group in activeProject.stackGroups"
-              :key="group.type"
-              class="stack-group"
-            >
-              <p>{{ group.type }}</p>
-              <div class="icon-row">
-                <Icon
-                  v-for="icon in group.icons"
-                  :key="icon"
-                  :name="icon"
-                  aria-hidden="true"
-                />
-              </div>
-            </section>
-          </div>
-        </article>
-      </section>
     </div>
   </div>
 </template>
@@ -422,13 +384,12 @@ onBeforeUnmount(() => {
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-columns: minmax(88px, 12vw) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(88px, 8vw);
   gap: clamp(14px, 2.6vw, 40px);
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  padding: calc(var(--nav-offset) + var(--page-pad)) var(--page-pad)
-    var(--page-pad);
+  padding: calc(var(--nav-offset) + var(--page-pad)) var(--page-pad) 0;
 }
 
 @supports (height: 100svh) {
@@ -441,6 +402,7 @@ onBeforeUnmount(() => {
 .rail-viewport {
   min-height: 0;
   overflow: visible;
+  z-index: 10;
 }
 
 .rail-viewport {
@@ -453,7 +415,8 @@ onBeforeUnmount(() => {
 
 .rail-track {
   position: absolute;
-  left: 0;
+  right: 0;
+  left: auto;
   top: 50%;
   display: grid;
   gap: var(--shot-gap);
@@ -491,8 +454,9 @@ onBeforeUnmount(() => {
 .rail-orb {
   position: absolute;
   top: 50%;
-  left: calc(var(--shot-width) + 10px);
-  z-index: 2;
+  right: calc(var(--shot-width) + 16px);
+  left: auto;
+  z-index: 12;
   width: 10px;
   height: 10px;
   border: 0;
@@ -504,51 +468,24 @@ onBeforeUnmount(() => {
 
 .board-grid {
   --active-accent: #8ba264;
-  display: grid;
-  min-width: 0;
-  min-height: 0;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.05fr) minmax(0, 1.05fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(10px, 1.6vw, 18px);
-}
-
-.grid-card {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-  border: 1px solid rgb(32 33 31 / 8%);
-  background: #deded8;
-  box-shadow: 0 24px 80px rgb(32 33 31 / 8%);
-}
-
-.data-card,
-.cv-card,
-.stack-card {
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 1.8vw, 22px);
-  padding: clamp(16px, 2.3vw, 28px);
+  gap: clamp(30px, 4vh, 60px);
+  min-width: 0;
+  min-height: 0;
+  padding: 0 clamp(40px, 6vw, 100px);
+  height: 100%;
 }
 
-.tile-1 {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.tile-2 {
-  grid-column: 2 / 4;
-  grid-row: 1;
-}
-
-.tile-3 {
-  grid-column: 1 / 3;
-  grid-row: 2;
-}
-
-.tile-4 {
-  grid-column: 3;
-  grid-row: 2;
+.image-card {
+  flex: none;
+  width: 100%;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
+  background: #deded8;
+  height: 42vh;
+  margin-top: auto;
 }
 
 .image-card img {
@@ -567,140 +504,69 @@ onBeforeUnmount(() => {
   transform: scale(1.025);
 }
 
-.card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.card-header span {
-  color: #73766f;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.card-header strong {
-  overflow: hidden;
-  max-width: 62%;
-  color: #20211f;
-  font-size: clamp(14px, 1.2vw, 18px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  text-align: right;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.metric-list,
-.problem-list {
-  display: grid;
-  gap: clamp(8px, 1.2vw, 12px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.metric-list li {
-  display: grid;
-  grid-template-columns: minmax(56px, 0.38fr) minmax(0, 0.62fr);
-  column-gap: 12px;
-  row-gap: 5px;
-  align-items: baseline;
-  border-top: 1px solid rgb(32 33 31 / 9%);
-  padding-top: clamp(8px, 1.2vw, 12px);
-}
-
-.metric-list li:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.metric-list b {
-  color: #20211f;
-  font-size: clamp(20px, 2.8vw, 42px);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-}
-
-.metric-list span {
-  color: #20211f;
-  font-size: clamp(13px, 1.25vw, 17px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0;
-}
-
-.metric-list small {
-  grid-column: 2;
-  color: #62655e;
-  font-size: clamp(10px, 0.85vw, 12px);
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: 0;
-}
-
 .cv-card {
+  flex: none;
+  max-width: 85%;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  background:
-    linear-gradient(135deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 20%)),
-    #deded8;
+  gap: clamp(20px, 3vw, 40px);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  padding-right: 2vw;
+  padding-top: clamp(20px, 4vh, 60px);
 }
 
 .cv-header {
-  border-bottom: 2px solid #20211f16;
-  padding-bottom: clamp(12px, 1.5vw, 16px);
+  border-bottom: 2px solid #20211f;
+  padding-bottom: clamp(16px, 2vw, 24px);
 }
 
 .cv-title {
   margin: 0;
   color: #20211f;
-  font-size: clamp(16px, 1.5vw, 22px);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.5px;
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
 
 .cv-divider {
-  margin: 0 10px;
-  color: rgb(32 33 31 / 30%);
-  font-weight: 400;
+  margin: 0 16px;
+  color: rgb(32 33 31 / 20%);
+  font-weight: 300;
 }
 
 .cv-label {
-  color: #4a4d47;
-  font-size: clamp(14px, 1.2vw, 18px);
-  font-weight: 600;
+  color: #62655e;
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 500;
 }
 
 .cv-body {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.2vw, 16px);
+  gap: clamp(16px, 2vw, 28px);
 }
 
 .cv-brief {
   margin: 0;
   color: #262824;
-  font-size: clamp(13px, 1vw, 15px);
+  font-size: clamp(14px, 1.15vw, 16px);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.8;
   text-align: justify;
 }
 
 .cv-list {
   margin: 0;
-  padding: 0 0 0 20px;
+  padding: 0 0 0 24px;
   list-style: square;
-  color: #343631;
-  font-size: clamp(12px, 0.9vw, 14px);
+  color: #62655e;
+  font-size: clamp(14px, 1.1vw, 15px);
   line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .cv-list li::marker {
@@ -712,51 +578,28 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
-.stack-groups {
-  display: grid;
-  gap: clamp(10px, 1.5vw, 16px);
-}
-
-.stack-group {
-  display: grid;
-  gap: 10px;
-  border-top: 1px solid rgb(32 33 31 / 9%);
-  padding-top: clamp(10px, 1.4vw, 14px);
-}
-
-.stack-group:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.stack-group p {
-  margin: 0;
-  color: #62655e;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.icon-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  color: #20211f;
-}
-
-.icon-row :deep(svg) {
-  width: clamp(22px, 2.1vw, 30px);
-  height: clamp(22px, 2.1vw, 30px);
-}
-
 @media (max-width: 920px) {
   .board-shell {
     --page-pad: 16px;
-    grid-template-columns: minmax(58px, 16vw) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(58px, 16vw);
     grid-template-rows: minmax(0, 1fr);
     gap: 10px;
+  }
+
+  .board-grid {
+    flex-direction: column;
+    padding: 0;
+    gap: 30px;
+  }
+
+  .cv-card {
+    padding-right: 0;
+  }
+
+  .image-card {
+    border-radius: 20px;
+    height: 40vh;
+    width: 100%;
   }
 
   .rail-viewport {
@@ -786,25 +629,20 @@ onBeforeUnmount(() => {
   }
 
   .rail-orb {
-    left: calc(var(--shot-width) + 6px);
+    right: calc(var(--shot-width) + 6px);
+    left: auto;
     top: 50%;
     bottom: auto;
     width: 10px;
     height: 10px;
     transform: translateY(-50%);
   }
-
-  .data-card,
-  .cv-card,
-  .stack-card {
-    padding: 14px;
-  }
 }
 
 @media (max-width: 560px) {
   .board-shell {
     --page-pad: 12px;
-    grid-template-columns: minmax(50px, 15vw) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(50px, 15vw);
     gap: 8px;
   }
 
@@ -815,51 +653,12 @@ onBeforeUnmount(() => {
   }
 
   .board-grid {
-    gap: 8px;
+    gap: 20px;
   }
 
-  .data-card,
-  .cv-card,
-  .stack-card {
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .card-header {
-    display: grid;
-    gap: 6px;
-  }
-
-  .card-header strong {
-    max-width: 100%;
-    text-align: left;
-  }
-
-  .metric-list li {
-    grid-template-columns: 1fr;
-    gap: 3px;
-  }
-
-  .metric-list small {
-    grid-column: auto;
-  }
-
-  .metric-list b {
-    font-size: clamp(17px, 5.4vw, 22px);
-  }
-
-  .metric-list span {
-    font-size: clamp(11px, 3.2vw, 13px);
-  }
-
-
-
-  .stack-group {
-    gap: 7px;
-  }
-
-  .icon-row {
-    gap: 7px;
+  .image-card {
+    border-radius: 16px;
+    height: 35vh;
   }
 }
 </style>
