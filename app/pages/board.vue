@@ -19,7 +19,10 @@ interface BoardProject {
     note: string;
   }>;
   brief: string;
-  problems: string[];
+  problems: Array<{
+    title: string;
+    desc: string;
+  }>;
   stackGroups: Array<{
     type: string;
     icons: string[];
@@ -39,8 +42,12 @@ const projects: BoardProject[] = [
       { label: "回写链路", value: "Auto", note: "报告自动归档" },
     ],
     brief:
-      "为 AI 编码流程做一个可视任务中枢，把 SDD、Worker 状态和报告回写放在同一张板上。",
-    problems: ["状态散落在终端与文档里", "多 Agent 输出难追踪", "用轻量看板统一入口"],
+      "AI 编码流程的新尝试，将类 Notion 优雅的状态管理、知识库与原子命题融入规范驱动开发 (SDD) 看板。通过 MCP & Skills 打通 Claude Code / Codex 与 Maple 中控的实时数据交互。",
+    problems: [
+      { title: "面向状态的原子命题决策", desc: "设计一套命题状态，搭建从命题草稿、执行状态到结果报告回写的全链路 MCP 通路；解耦对话上下文与单个命题的信息熵及过度关联，构建以 Spec 为核心的开发代理工作流。" },
+      { title: "黑盒运行与安全审查", desc: "提取 Coding Agent 使用过程中的抽象行为，利用 node-xterm 与 workflow 完全管理编码过程。通过 MCP 要求在合适的时机 Human in the loop 切入干预，相比传统的多对话窗口极大降低心智负担。" },
+      { title: "统一视图与多项目知识管理", desc: "利用 RAG 与多层 Memory 技术，允许 AI 根据策略模式巩固记忆，抽调历史记录，作为上下文注入对话窗口提高 function call 效能。内部构建了一套类消息队列与 worker 池，根据不同 Agent 并发数认领任务避免超限。" },
+    ],
     stackGroups: [
       { type: "App", icons: ["ph:monitor-fill", "ph:code-fill", "ph:terminal-window-fill"] },
       { type: "Agent", icons: ["ph:robot-fill", "ph:list-checks-fill", "ph:git-branch-fill"] },
@@ -60,7 +67,11 @@ const projects: BoardProject[] = [
     ],
     brief:
       "把搜索、资料和学习进度整理成知识图谱，避免每次学习都从零开始找资料。",
-    problems: ["知识点之间缺少结构", "推荐内容容易断层", "用图谱和记忆串起路径"],
+    problems: [
+      { title: "信息孤岛", desc: "知识点之间缺少结构" },
+      { title: "上下文断层", desc: "推荐内容容易断层" },
+      { title: "路径串联", desc: "用图谱和记忆串起路径" },
+    ],
     stackGroups: [
       { type: "AI", icons: ["ph:sparkle-fill", "ph:brain-fill", "ph:magnifying-glass-fill"] },
       { type: "Graph", icons: ["ph:tree-structure-fill", "ph:circles-four-fill"] },
@@ -80,7 +91,11 @@ const projects: BoardProject[] = [
     ],
     brief:
       "为魔兽团本做战术板，把时间轴、站位、技能和 AI 建议压进一个高密度界面。",
-    problems: ["手写 MRT 成本高", "战术信息分散", "用规则和 AI 合并排轴流程"],
+    problems: [
+      { title: "维护成本", desc: "手写 MRT 成本高" },
+      { title: "信息分散", desc: "战术信息分散" },
+      { title: "流程合并", desc: "用规则和 AI 合并排轴流程" },
+    ],
     stackGroups: [
       { type: "Game", icons: ["ph:game-controller-fill", "ph:map-trifold-fill"] },
       { type: "Engine", icons: ["ph:magic-wand-fill", "ph:chart-line-up-fill"] },
@@ -100,7 +115,11 @@ const projects: BoardProject[] = [
     ],
     brief:
       "为公会内容做一个更像产品的入口，让阵容、攻略、归档和活动信息更容易被扫描。",
-    problems: ["资料页缺少层级", "游戏氛围难保留", "用暗色信息架构承接内容"],
+    problems: [
+      { title: "层级扁平", desc: "资料页缺少层级" },
+      { title: "氛围缺失", desc: "游戏氛围难保留" },
+      { title: "沉浸架构", desc: "用暗色信息架构承接内容" },
+    ],
     stackGroups: [
       { type: "Web", icons: ["ph:globe-fill", "ph:cards-fill", "ph:code-fill"] },
       { type: "UX", icons: ["ph:users-three-fill", "ph:list-checks-fill"] },
@@ -120,7 +139,11 @@ const projects: BoardProject[] = [
     ],
     brief:
       "面向守望先锋实战准备，把地图点位、动线和英雄定位整理成快速参考。",
-    problems: ["视频攻略不适合赛前查", "点位命名不统一", "用地图视角组织信息"],
+    problems: [
+      { title: "检索低效", desc: "视频攻略不适合赛前查" },
+      { title: "认知差异", desc: "点位命名不统一" },
+      { title: "空间组织", desc: "用地图视角组织信息" },
+    ],
     stackGroups: [
       { type: "Map", icons: ["ph:map-trifold-fill", "ph:strategy-fill"] },
       { type: "Game", icons: ["ph:game-controller-fill", "ph:crosshair-fill"] },
@@ -140,7 +163,11 @@ const projects: BoardProject[] = [
     ],
     brief:
       "把个人站、作品集和简历合成一个稳定的身份入口，减少重复维护。",
-    problems: ["作品信息分散", "简历和站点割裂", "用统一内容模型承接展示"],
+    problems: [
+      { title: "信息碎片", desc: "作品信息分散" },
+      { title: "身份割裂", desc: "简历和站点割裂" },
+      { title: "统一模型", desc: "用统一内容模型承接展示" },
+    ],
     stackGroups: [
       { type: "Front", icons: ["ph:globe-fill", "ph:code-fill", "ph:sparkle-fill"] },
       { type: "Motion", icons: ["ph:bounding-box-fill", "ph:magic-wand-fill"] },
@@ -305,17 +332,22 @@ onBeforeUnmount(() => {
           </ul>
         </article>
 
-        <article class="grid-card tile-2 story-card">
-          <header class="card-header">
-            <span>Why</span>
-            <strong>{{ activeProject.label }}</strong>
+        <article class="grid-card tile-2 cv-card">
+          <header class="cv-header">
+            <h3 class="cv-title">
+              {{ activeProject.title }}
+              <span class="cv-divider">|</span>
+              <span class="cv-label">{{ activeProject.label }}</span>
+            </h3>
           </header>
-          <p>{{ activeProject.brief }}</p>
-          <ul class="problem-list">
-            <li v-for="item in activeProject.problems" :key="item">
-              {{ item }}
-            </li>
-          </ul>
+          <div class="cv-body">
+            <p class="cv-brief">{{ activeProject.brief }}</p>
+            <ul class="cv-list">
+              <li v-for="item in activeProject.problems" :key="item.title">
+                <strong>{{ item.title }}</strong>：{{ item.desc }}
+              </li>
+            </ul>
+          </div>
         </article>
 
         <article class="grid-card tile-3 image-card">
@@ -356,6 +388,8 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
 :global(html.board-hide-scrollbar),
 :global(html.board-hide-scrollbar body) {
   scrollbar-width: none;
@@ -489,7 +523,7 @@ onBeforeUnmount(() => {
 }
 
 .data-card,
-.story-card,
+.cv-card,
 .stack-card {
   display: flex;
   flex-direction: column;
@@ -543,9 +577,9 @@ onBeforeUnmount(() => {
 .card-header span {
   color: #73766f;
   font-size: 11px;
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -554,9 +588,9 @@ onBeforeUnmount(() => {
   max-width: 62%;
   color: #20211f;
   font-size: clamp(14px, 1.2vw, 18px);
-  font-weight: 650;
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -589,57 +623,93 @@ onBeforeUnmount(() => {
 .metric-list b {
   color: #20211f;
   font-size: clamp(20px, 2.8vw, 42px);
-  font-weight: 680;
+  font-weight: 800;
   line-height: 0.9;
-  letter-spacing: 0;
+  letter-spacing: -0.03em;
 }
 
 .metric-list span {
-  color: #343631;
+  color: #20211f;
   font-size: clamp(13px, 1.25vw, 17px);
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0;
 }
 
 .metric-list small {
   grid-column: 2;
-  color: #777970;
+  color: #62655e;
   font-size: clamp(10px, 0.85vw, 12px);
-  font-weight: 520;
+  font-weight: 500;
   line-height: 1.3;
   letter-spacing: 0;
 }
 
-.story-card {
-  justify-content: space-between;
+.cv-card {
+  justify-content: flex-start;
   background:
-    linear-gradient(135deg, rgb(255 255 255 / 50%), rgb(255 255 255 / 24%)),
+    linear-gradient(135deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 20%)),
     #deded8;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 }
 
-.story-card p {
-  max-width: 760px;
+.cv-header {
+  border-bottom: 2px solid #20211f16;
+  padding-bottom: clamp(12px, 1.5vw, 16px);
+}
+
+.cv-title {
+  margin: 0;
+  color: #20211f;
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+.cv-divider {
+  margin: 0 10px;
+  color: rgb(32 33 31 / 30%);
+  font-weight: 400;
+}
+
+.cv-label {
+  color: #4a4d47;
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 600;
+}
+
+.cv-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.2vw, 16px);
+}
+
+.cv-brief {
   margin: 0;
   color: #262824;
-  font-size: clamp(20px, 2.9vw, 48px);
-  font-weight: 620;
-  line-height: 1.02;
-  letter-spacing: 0;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: justify;
 }
 
-.problem-list {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.cv-list {
+  margin: 0;
+  padding: 0 0 0 20px;
+  list-style: square;
+  color: #343631;
+  font-size: clamp(12px, 0.9vw, 14px);
+  line-height: 1.8;
 }
 
-.problem-list li {
-  border-top: 1px solid rgb(32 33 31 / 10%);
-  padding-top: 10px;
-  color: #62655e;
-  font-size: clamp(11px, 1vw, 13px);
-  font-weight: 560;
-  line-height: 1.45;
-  letter-spacing: 0;
+.cv-list li::marker {
+  color: var(--active-accent);
+}
+
+.cv-list li strong {
+  color: #20211f;
+  font-weight: 700;
 }
 
 .stack-groups {
@@ -663,9 +733,9 @@ onBeforeUnmount(() => {
   margin: 0;
   color: #62655e;
   font-size: 11px;
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -725,22 +795,9 @@ onBeforeUnmount(() => {
   }
 
   .data-card,
-  .story-card,
+  .cv-card,
   .stack-card {
     padding: 14px;
-  }
-
-  .story-card p {
-    font-size: clamp(18px, 4.8vw, 30px);
-  }
-
-  .problem-list {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
-
-  .problem-list li {
-    padding-top: 7px;
   }
 }
 
@@ -762,7 +819,7 @@ onBeforeUnmount(() => {
   }
 
   .data-card,
-  .story-card,
+  .cv-card,
   .stack-card {
     gap: 10px;
     padding: 10px;
@@ -795,9 +852,7 @@ onBeforeUnmount(() => {
     font-size: clamp(11px, 3.2vw, 13px);
   }
 
-  .story-card p {
-    font-size: clamp(17px, 5vw, 22px);
-  }
+
 
   .stack-group {
     gap: 7px;
