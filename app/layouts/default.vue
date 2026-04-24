@@ -23,13 +23,16 @@ const handleNavClick = (to: string) => {
         });
       }
     }
+    return;
   }
+  navigateTo(to);
 };
 
 const navLinks = [
   { name: "Home", to: "/#home" },
   { name: "Works", to: "/#works" },
   { name: "About", to: "/#about" },
+  { name: "Board", to: "/board" },
   { name: "Contact", to: "/#contact" },
 ];
 </script>
