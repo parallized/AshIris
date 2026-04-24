@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import ashIrisImage from "~/assets/image/board/ash-iris.webp";
-import mapleImage from "~/assets/image/board/maple.webp";
+import mapleImage from "~/assets/image/board/maple-overview.png";
 import owocaptainImage from "~/assets/image/board/owocaptain.webp";
-import runedraImage from "~/assets/image/board/runedra.webp";
+import runedraImage from "~/assets/image/board/runedra-concept.png";
 import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
 import wowRaidPlusImage from "~/assets/image/board/wow-raid-plus.webp";
 
@@ -33,7 +33,7 @@ const projects: BoardProject[] = [
   {
     slug: "maple",
     title: "Maple",
-    label: "Task board",
+    label: "基于 MCP 通路的多 Code Agent 与 SDD 管理看板",
     image: mapleImage,
     accent: "#8BA264",
     metrics: [
@@ -66,11 +66,11 @@ const projects: BoardProject[] = [
       { label: "记忆", value: "Memory", note: "长期学习记录" },
     ],
     brief:
-      "把搜索、资料和学习进度整理成知识图谱，避免每次学习都从零开始找资料。",
+      "面向任意领域学习的知识路径产品，把用户的兴趣、资料、问答和练习过程沉淀为可推进的学习图谱。通过 RAG、Memory 与多模态内容理解，把一次性的搜索行为转化为持续更新的技能成长路线。",
     problems: [
-      { title: "信息孤岛", desc: "知识点之间缺少结构" },
-      { title: "上下文断层", desc: "推荐内容容易断层" },
-      { title: "路径串联", desc: "用图谱和记忆串起路径" },
+      { title: "从意图到路径的结构化", desc: "学习者通常只有模糊兴趣，很难判断先学什么、如何推进、何时复盘。Runedra 将目标拆解为知识节点、前置关系与练习任务，用图谱方式呈现学习路线，降低进入陌生领域的决策成本。" },
+      { title: "资料理解与长期记忆", desc: "结合 NotebookLM / OpenAI 一类的内容理解能力，将网页、笔记、问答和用户反馈抽取成可检索上下文；通过 RAG 与分层 Memory 保存关键概念、偏好和阶段成果，避免每次学习都重新组织资料。" },
+      { title: "渐进式反馈与作品化沉淀", desc: "围绕节点完成度、练习结果和复盘记录生成下一步建议，把学习过程从被动阅读变成可交互的任务流。最终产出不仅是笔记，而是一套能持续扩展、复用和展示的个人知识体系。" },
     ],
     stackGroups: [
       { type: "AI", icons: ["ph:sparkle-fill", "ph:brain-fill", "ph:magnifying-glass-fill"] },
