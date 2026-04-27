@@ -627,7 +627,10 @@ onBeforeUnmount(() => {
                     <div class="flex items-baseline justify-between gap-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
                       <h3 class="flex items-center gap-1.5 font-serif text-lg font-bold text-neutral-900 dark:text-white">
                         <Icon v-if="lab.icon" :name="lab.icon" class="text-sm opacity-70" />
-                        <a :href="lab.url" target="_blank" class="hover:underline">{{ lab.title }}</a>
+                        <a :href="lab.url" target="_blank" class="group/link flex items-center gap-1 hover:underline">
+                          {{ lab.title }}
+                          <Icon name="ph:arrow-square-out-bold" class="text-[14px] opacity-40 transition-opacity group-hover/link:opacity-100" />
+                        </a>
                       </h3>
                       <span class="shrink-0 font-mono text-[15px] font-semibold text-neutral-400 dark:text-neutral-500">{{ lab.date }}</span>
                     </div>
@@ -667,7 +670,10 @@ onBeforeUnmount(() => {
                     <div class="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-neutral-300/50 pb-1.5 dark:border-neutral-700/50">
                       <h3 class="flex items-center gap-2 font-serif text-lg font-bold text-neutral-900 dark:text-white">
                         <Icon v-if="project.icon" :name="project.icon" class="shrink-0 text-base opacity-70" />
-                        <a :href="project.url" target="_blank" class="hover:underline hover:decoration-neutral-400">{{ project.title }}</a>
+                        <a :href="project.url" target="_blank" class="group/link flex items-center gap-1 hover:underline hover:decoration-neutral-400">
+                          {{ project.title }}
+                          <Icon name="ph:arrow-square-out-bold" class="text-[15px] opacity-40 transition-opacity group-hover/link:opacity-100" />
+                        </a>
                       </h3>
                       <span class="font-mono text-[15px] font-semibold text-neutral-400 dark:text-neutral-500">{{ project.date }}</span>
                     </div>

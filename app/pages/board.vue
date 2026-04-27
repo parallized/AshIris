@@ -7,10 +7,30 @@ import runedraImage from "~/assets/image/board/runedra-concept.png";
 import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
 import wowRaidPlusImage from "~/assets/image/board/wow-raid-plus.webp";
 
+type StackIcon =
+  | string
+  | {
+      name: string;
+      label: string;
+    };
+
+type StackSticker = {
+  name: string;
+  label: string;
+};
+
+type StickerSlot = {
+  x: number;
+  y: number;
+  rotate: number;
+  scale: number;
+};
+
 interface BoardProject {
   slug: string;
   title: string;
   label: string;
+  url?: string;
   image: string;
   accent: string;
   metrics: Array<{
@@ -25,7 +45,7 @@ interface BoardProject {
   }>;
   stackGroups: Array<{
     type: string;
-    icons: string[];
+    icons: StackIcon[];
   }>;
 }
 
@@ -34,6 +54,7 @@ const projects: BoardProject[] = [
     slug: "maple",
     title: "Maple",
     label: "基于 MCP 通路的多 Code Agent 与 SDD 管理看板",
+    url: "https://github.com/parallized/maple",
     image: mapleImage,
     accent: "#8BA264",
     metrics: [
@@ -49,15 +70,36 @@ const projects: BoardProject[] = [
       { title: "统一视图与多项目知识管理", desc: "利用 RAG 与多层 Memory 技术，允许 AI 根据策略模式巩固记忆，抽调历史记录，作为上下文注入对话窗口提高 function call 效能。内部构建了一套类消息队列与 worker 池，根据不同 Agent 并发数认领任务避免超限。" },
     ],
     stackGroups: [
-      { type: "App", icons: ["ph:monitor-fill", "ph:code-fill", "ph:terminal-window-fill"] },
-      { type: "Agent", icons: ["ph:robot-fill", "ph:list-checks-fill", "ph:git-branch-fill"] },
-      { type: "Data", icons: ["ph:database-fill", "ph:file-text-fill"] },
+      {
+        type: "Shell",
+        icons: [
+          { name: "simple-icons:tauri", label: "Tauri" },
+          { name: "simple-icons:typescript", label: "TypeScript" },
+          { name: "simple-icons:nodedotjs", label: "Node.js" },
+        ],
+      },
+      {
+        type: "Agent",
+        icons: [
+          { name: "simple-icons:modelcontextprotocol", label: "Model Context Protocol" },
+          { name: "simple-icons:claude", label: "Claude Code" },
+          { name: "simple-icons:openai", label: "Codex / OpenAI" },
+        ],
+      },
+      {
+        type: "Workflow",
+        icons: [
+          { name: "simple-icons:github", label: "GitHub" },
+          { name: "ph:terminal-window-fill", label: "CLI" },
+        ],
+      },
     ],
   },
   {
     slug: "runedra",
     title: "Runedra 知树",
     label: "Knowledge map",
+    url: "https://runedra.cn",
     image: runedraImage,
     accent: "#9E845E",
     metrics: [
@@ -82,6 +124,7 @@ const projects: BoardProject[] = [
     slug: "wow-magician",
     title: "WoW Magician",
     label: "Raid planner",
+    url: "https://wow.parallized.cn",
     image: wowMagicianImage,
     accent: "#7C8E9F",
     metrics: [
@@ -106,6 +149,7 @@ const projects: BoardProject[] = [
     slug: "wow-raid-plus",
     title: "WoW Raid Plus",
     label: "Raid utility",
+    url: "https://wowraidplus.parallized.cn",
     image: wowRaidPlusImage,
     accent: "#A47A72",
     metrics: [
@@ -130,6 +174,7 @@ const projects: BoardProject[] = [
     slug: "owocaptain",
     title: "OwOcaptain",
     label: "Map guide",
+    url: "https://owo.parallized.cn",
     image: owocaptainImage,
     accent: "#8C9A86",
     metrics: [
@@ -154,6 +199,7 @@ const projects: BoardProject[] = [
     slug: "ash-iris",
     title: "Ash Iris",
     label: "Identity",
+    url: "https://parallized.cn",
     image: ashIrisImage,
     accent: "#8A867B",
     metrics: [
@@ -176,6 +222,23 @@ const projects: BoardProject[] = [
   },
 ];
 
+const stackIconName = (icon: StackIcon) =>
+  typeof icon === "string" ? icon : icon.name;
+
+const stackIconLabel = (icon: StackIcon, fallback: string) =>
+  typeof icon === "string" ? fallback : icon.label;
+
+const stickerSlots: StickerSlot[] = [
+  { x: -176, y: 26, rotate: -16, scale: 1.08 },
+  { x: -112, y: 4, rotate: -5, scale: 0.9 },
+  { x: -54, y: 22, rotate: 11, scale: 0.98 },
+  { x: 8, y: 0, rotate: -8, scale: 1.14 },
+  { x: 78, y: 20, rotate: 7, scale: 0.96 },
+  { x: 140, y: 6, rotate: 17, scale: 1.06 },
+  { x: -2, y: 46, rotate: 2, scale: 0.88 },
+  { x: 62, y: 48, rotate: -7, scale: 0.82 },
+];
+
 const activeIndex = ref(0);
 const scrollProgress = ref(0);
 const boardPage = ref<HTMLElement | null>(null);
@@ -184,12 +247,32 @@ let cancelLenisScroll: (() => void) | undefined;
 let syncFrame: number | undefined;
 
 const activeProject = computed(() => projects[activeIndex.value] ?? projects[0]);
+const activeStackStickers = computed<StackSticker[]>(() =>
+  activeProject.value.stackGroups.flatMap((group) =>
+    group.icons.map((icon) => ({
+      name: stackIconName(icon),
+      label: stackIconLabel(icon, group.type),
+    })),
+  ),
+);
 const stageStyle = computed(() => ({
   "--stage-scroll": `${Math.max(1, projects.length - 1) * 180}px`,
 }));
 const railStyle = computed(() => ({
   "--rail-progress": scrollProgress.value.toFixed(4),
 }));
+
+const stickerStyle = (index: number) => {
+  const slot = stickerSlots[index % stickerSlots.length];
+
+  return {
+    "--sticker-x": `${slot.x}px`,
+    "--sticker-y": `${-slot.y}px`,
+    "--sticker-rotate": `${slot.rotate}deg`,
+    "--sticker-scale": slot.scale.toString(),
+    "--sticker-z": (10 + index).toString(),
+  };
+};
 
 useHead({
   title: "Board | Greater Bread",
@@ -295,31 +378,77 @@ onBeforeUnmount(() => {
         aria-label="Project details"
       >
         <article class="cv-card">
-          <header class="cv-header">
-            <h1 class="cv-title">
-              {{ activeProject.title }}
-              <span class="cv-divider">/</span>
-              <span class="cv-label">{{ activeProject.label }}</span>
-            </h1>
-          </header>
-          <div class="cv-body">
-            <p class="cv-brief">{{ activeProject.brief }}</p>
-            <ul class="cv-list">
-              <li v-for="item in activeProject.problems" :key="item.title">
-                <strong>{{ item.title }}</strong>：{{ item.desc }}
-              </li>
-            </ul>
-          </div>
+          <Transition name="text-stagger">
+            <div :key="activeProject.slug" class="cv-card-inner">
+              <header class="cv-header">
+                <div class="cv-title-row">
+                  <h1 class="cv-title">{{ activeProject.title }}</h1>
+                  <div class="cv-title-line"></div>
+                </div>
+                <p class="cv-label">{{ activeProject.label }}</p>
+              </header>
+              <div class="cv-body">
+                <p class="cv-brief">{{ activeProject.brief }}</p>
+                <ul class="cv-list">
+                  <li v-for="item in activeProject.problems" :key="item.title">
+                    <strong>{{ item.title }}</strong>：{{ item.desc }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </Transition>
         </article>
 
-        <article class="image-card">
-          <img
-            :src="activeProject.image"
-            :alt="`${activeProject.title} screenshot`"
-            loading="eager"
-            decoding="async"
-          />
-        </article>
+        <div class="relative mt-auto flex w-full flex-col gap-3">
+          <div class="relative h-5">
+            <Transition name="link-fade">
+              <a
+                v-if="activeProject.url"
+                :key="`link-${activeProject.slug}`"
+                :href="activeProject.url"
+                target="_blank"
+                class="absolute left-0 top-0 flex w-fit items-center gap-1.5 font-mono text-[13px] font-medium tracking-wide text-neutral-500 transition-colors hover:text-neutral-900"
+              >
+                <Icon name="ph:arrow-square-out-bold" class="text-[14px] opacity-80" />
+                <span>{{ activeProject.url.replace(/^https?:\/\//, '').replace(/\/$/, '') }}</span>
+              </a>
+            </Transition>
+          </div>
+
+          <Transition name="stack-pile-fade">
+            <div
+              :key="`stack-${activeProject.slug}`"
+              class="stack-pile-stage"
+              aria-label="Project stack"
+            >
+              <div class="stack-pile" aria-hidden="true">
+                <div
+                  v-for="(sticker, index) in activeStackStickers"
+                  :key="`${activeProject.slug}-${sticker.name}`"
+                  class="stack-sticker"
+                  :style="stickerStyle(index)"
+                  :title="sticker.label"
+                >
+                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-cutline" />
+                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-paper" />
+                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-ink" />
+                </div>
+              </div>
+            </div>
+          </Transition>
+
+          <article class="image-card">
+            <Transition name="img-crossblur">
+              <img
+                :key="activeProject.slug"
+                :src="activeProject.image"
+                :alt="`${activeProject.title} screenshot`"
+                loading="eager"
+                decoding="async"
+              />
+            </Transition>
+          </article>
+        </div>
       </section>
 
       <aside class="board-rail" :style="railStyle" aria-label="Project board">
@@ -438,7 +567,7 @@ onBeforeUnmount(() => {
   height: var(--shot-height);
   overflow: hidden;
   border: 0;
-  border-radius: 2px;
+  border-radius: 6px;
   background: #d8d8d3;
   padding: 0;
   cursor: pointer;
@@ -457,13 +586,14 @@ onBeforeUnmount(() => {
   right: calc(var(--shot-width) + 16px);
   left: auto;
   z-index: 12;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 50%;
   background: #11110f;
   box-shadow: none;
   transform: translateY(-50%);
+  aspect-ratio: 1;
 }
 
 .board-grid {
@@ -485,11 +615,14 @@ onBeforeUnmount(() => {
   box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
   background: #deded8;
   height: 42vh;
-  margin-top: auto;
+  position: relative;
 }
 
 .image-card img {
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -504,9 +637,162 @@ onBeforeUnmount(() => {
   transform: scale(1.025);
 }
 
+.image-card .img-crossblur-enter-active {
+  transition: opacity 0.6s cubic-bezier(0.3, 0, 0.2, 1),
+              filter 0.6s cubic-bezier(0.3, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+  z-index: 2;
+  will-change: opacity, filter, transform;
+}
+
+.image-card .img-crossblur-leave-active {
+  transition: filter 0.6s cubic-bezier(0.3, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+  z-index: 1;
+  will-change: filter, transform;
+}
+
+.image-card .img-crossblur-enter-from {
+  opacity: 0;
+  filter: blur(24px);
+  transform: scale(1.1);
+}
+
+.image-card .img-crossblur-leave-to {
+  filter: blur(24px);
+  transform: scale(1.1);
+}
+
+.link-fade-enter-active,
+.link-fade-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: absolute;
+}
+
+.link-fade-enter-from {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.link-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.stack-pile-stage {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  width: min(100%, clamp(320px, 42vw, 640px));
+  height: clamp(82px, 10vh, 112px);
+  margin: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.stack-pile {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 460px;
+  max-width: 100%;
+  height: 112px;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+}
+
+.stack-sticker {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: var(--sticker-z);
+  width: 74px;
+  height: 74px;
+  color: #20211f;
+  transform: translate3d(
+      calc(-50% + var(--sticker-x)),
+      var(--sticker-y),
+      0
+    )
+    rotate(var(--sticker-rotate))
+    scale(var(--sticker-scale));
+}
+
+.stack-sticker::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 0;
+  border-radius: 48% 52% 45% 55% / 52% 45% 55% 48%;
+  background: #f7f7f2;
+  box-shadow: 0 4px 4px rgb(32 33 31, 90%);
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.stack-sticker:nth-child(2n)::before {
+  border-radius: 56% 44% 54% 46% / 44% 54% 46% 56%;
+  transform: rotate(7deg) scale(1.12);
+}
+
+.stack-sticker:nth-child(3n)::before {
+  border-radius: 46% 54% 42% 58% / 58% 42% 58% 42%;
+  transform: rotate(-3deg) scale(1.08);
+}
+
+.stack-sticker-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+}
+
+.stack-sticker-cutline {
+  z-index: 1;
+  color: #f7f7f2;
+  opacity: 1;
+  transform: scale(1.24);
+}
+
+.stack-sticker-paper {
+  z-index: 2;
+  color: #f7f7f2;
+  transform: scale(1.12);
+}
+
+.stack-sticker-ink {
+  z-index: 3;
+  color: #20211f;
+  transform: scale(1);
+}
+
+.stack-pile-fade-enter-active,
+.stack-pile-fade-leave-active {
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.3, 0, 0.2, 1),
+    filter 0.4s ease;
+}
+
+.stack-pile-fade-enter-from {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px) scale(0.97);
+}
+
+.stack-pile-fade-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(-10px) scale(0.98);
+}
+
 .cv-card {
+  position: relative;
   flex: none;
   max-width: 85%;
+}
+
+.cv-card-inner {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -514,32 +800,44 @@ onBeforeUnmount(() => {
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   padding-right: 2vw;
   padding-top: clamp(20px, 4vh, 60px);
+  width: 100%;
 }
 
 .cv-header {
-  border-bottom: 2px solid #20211f;
-  padding-bottom: clamp(16px, 2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.cv-title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
 }
 
 .cv-title {
   margin: 0;
   color: #20211f;
-  font-size: clamp(24px, 2.5vw, 36px);
+  font-size: clamp(36px, 4vw, 56px);
   font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-.cv-divider {
-  margin: 0 16px;
-  color: rgb(32 33 31 / 20%);
-  font-weight: 300;
+.cv-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #20211f9f 0%, var(--active-accent) 40%, transparent 100%);
+  border-radius: 2px;
+  opacity: 0.8;
 }
 
 .cv-label {
-  color: #62655e;
-  font-size: clamp(16px, 1.5vw, 20px);
-  font-weight: 500;
+  margin: 0;
+  color: #8c8f87;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .cv-body {
@@ -578,6 +876,62 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
+.text-stagger-leave-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  z-index: 1;
+}
+
+.text-stagger-leave-to {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.text-stagger-enter-active {
+  transition: opacity 0.6s ease;
+  z-index: 2;
+}
+
+.text-stagger-enter-from {
+  opacity: 0;
+}
+
+.text-stagger-enter-active .cv-title {
+  animation: blurSlideUp 0.6s cubic-bezier(0.3, 0, 0.2, 1) both;
+}
+
+.text-stagger-enter-active .cv-brief {
+  animation: blurSlideUp 0.6s cubic-bezier(0.3, 0, 0.2, 1) 0.05s both;
+}
+
+.text-stagger-enter-active .cv-list li:nth-child(1) {
+  animation: blurSlideUp 0.6s cubic-bezier(0.3, 0, 0.2, 1) 0.1s both;
+}
+
+.text-stagger-enter-active .cv-list li:nth-child(2) {
+  animation: blurSlideUp 0.6s cubic-bezier(0.3, 0, 0.2, 1) 0.15s both;
+}
+
+.text-stagger-enter-active .cv-list li:nth-child(3) {
+  animation: blurSlideUp 0.6s cubic-bezier(0.3, 0, 0.2, 1) 0.2s both;
+}
+
+@keyframes blurSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 @media (max-width: 920px) {
   .board-shell {
     --page-pad: 16px;
@@ -600,6 +954,17 @@ onBeforeUnmount(() => {
     border-radius: 20px;
     height: 40vh;
     width: 100%;
+  }
+
+  .stack-pile-stage {
+    width: 100%;
+    height: 72px;
+  }
+
+  .stack-pile {
+    width: 420px;
+    height: 96px;
+    transform: translateX(-50%) scale(0.76);
   }
 
   .rail-viewport {
@@ -633,9 +998,11 @@ onBeforeUnmount(() => {
     left: auto;
     top: 50%;
     bottom: auto;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     transform: translateY(-50%);
+    aspect-ratio: 1;
   }
 }
 
@@ -659,6 +1026,14 @@ onBeforeUnmount(() => {
   .image-card {
     border-radius: 16px;
     height: 35vh;
+  }
+
+  .stack-pile-stage {
+    height: 54px;
+  }
+
+  .stack-pile {
+    transform: translateX(-50%) scale(0.58);
   }
 }
 </style>
