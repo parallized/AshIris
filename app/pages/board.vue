@@ -229,14 +229,14 @@ const stackIconLabel = (icon: StackIcon, fallback: string) =>
   typeof icon === "string" ? fallback : icon.label;
 
 const stickerSlots: StickerSlot[] = [
-  { x: -176, y: 26, rotate: -16, scale: 1.08 },
-  { x: -112, y: 4, rotate: -5, scale: 0.9 },
-  { x: -54, y: 22, rotate: 11, scale: 0.98 },
-  { x: 8, y: 0, rotate: -8, scale: 1.14 },
-  { x: 78, y: 20, rotate: 7, scale: 0.96 },
-  { x: 140, y: 6, rotate: 17, scale: 1.06 },
-  { x: -2, y: 46, rotate: 2, scale: 0.88 },
-  { x: 62, y: 48, rotate: -7, scale: 0.82 },
+  { x: -20, y: 8, rotate: 14, scale: 0.92 },
+  { x: -65, y: 26, rotate: -6, scale: 1.0 },
+  { x: -105, y: 44, rotate: 8, scale: 0.96 },
+  { x: -150, y: 56, rotate: -4, scale: 1.08 },
+  { x: -195, y: 46, rotate: 12, scale: 0.98 },
+  { x: -240, y: 28, rotate: -8, scale: 1.04 },
+  { x: -280, y: 12, rotate: -15, scale: 0.9 },
+  { x: -155, y: 15, rotate: 5, scale: 0.88 },
 ];
 
 const activeIndex = ref(0);
@@ -270,7 +270,7 @@ const stickerStyle = (index: number) => {
     "--sticker-y": `${-slot.y}px`,
     "--sticker-rotate": `${slot.rotate}deg`,
     "--sticker-scale": slot.scale.toString(),
-    "--sticker-z": (10 + index).toString(),
+    "--sticker-z": (10 + Math.round(slot.y) + index).toString(),
   };
 };
 
@@ -399,7 +399,7 @@ onBeforeUnmount(() => {
           </Transition>
         </article>
 
-        <div class="relative mt-auto flex w-full flex-col gap-3">
+        <div class="board-visual-block">
           <div class="relative h-5">
             <Transition name="link-fade">
               <a
@@ -415,39 +415,41 @@ onBeforeUnmount(() => {
             </Transition>
           </div>
 
-          <Transition name="stack-pile-fade">
-            <div
-              :key="`stack-${activeProject.slug}`"
-              class="stack-pile-stage"
-              aria-label="Project stack"
-            >
-              <div class="stack-pile" aria-hidden="true">
-                <div
-                  v-for="(sticker, index) in activeStackStickers"
-                  :key="`${activeProject.slug}-${sticker.name}`"
-                  class="stack-sticker"
-                  :style="stickerStyle(index)"
-                  :title="sticker.label"
-                >
-                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-cutline" />
-                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-paper" />
-                  <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-ink" />
+          <div class="image-dock-stage">
+            <Transition name="stack-pile-fade">
+              <div
+                :key="`stack-${activeProject.slug}`"
+                class="stack-pile-stage"
+                aria-label="Project stack"
+              >
+                <div class="stack-pile" aria-hidden="true">
+                  <div
+                    v-for="(sticker, index) in activeStackStickers"
+                    :key="`${activeProject.slug}-${sticker.name}`"
+                    class="stack-sticker"
+                    :style="stickerStyle(index)"
+                    :title="sticker.label"
+                  >
+                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-cutline" />
+                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-paper" />
+                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-ink" />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Transition>
-
-          <article class="image-card">
-            <Transition name="img-crossblur">
-              <img
-                :key="activeProject.slug"
-                :src="activeProject.image"
-                :alt="`${activeProject.title} screenshot`"
-                loading="eager"
-                decoding="async"
-              />
             </Transition>
-          </article>
+
+            <article class="image-card">
+              <Transition name="img-crossblur">
+                <img
+                  :key="activeProject.slug"
+                  :src="activeProject.image"
+                  :alt="`${activeProject.title} screenshot`"
+                  loading="eager"
+                  decoding="async"
+                />
+              </Transition>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -607,15 +609,32 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 
+.board-visual-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.image-dock-stage {
+  --stack-overlap: clamp(26px, 3.2vh, 38px);
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
 .image-card {
   flex: none;
+  position: relative;
+  z-index: 2;
   width: 100%;
   border-radius: 24px 24px 0 0;
   overflow: hidden;
   box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
   background: #deded8;
   height: 42vh;
-  position: relative;
 }
 
 .image-card img {
@@ -680,37 +699,37 @@ onBeforeUnmount(() => {
 }
 
 .stack-pile-stage {
-  position: relative;
-  z-index: 4;
-  align-self: center;
-  width: min(100%, clamp(320px, 42vw, 640px));
-  height: clamp(82px, 10vh, 112px);
+  position: absolute;
+  top: 0;
+  right: clamp(28px, 5vw, 84px);
+  z-index: 1;
+  width: min(72%, clamp(420px, 54vw, 780px));
+  height: clamp(96px, 12vh, 136px);
   margin: 0;
   overflow: visible;
   pointer-events: none;
+  translate: 0 calc(-100% + var(--stack-overlap));
 }
 
 .stack-pile {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  width: 460px;
-  max-width: 100%;
-  height: 112px;
-  transform: translateX(-50%);
-  transform-origin: center bottom;
+  right: 0;
+  width: min(100%, 560px);
+  height: 132px;
+  transform-origin: right bottom;
 }
 
 .stack-sticker {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  right: 0;
   z-index: var(--sticker-z);
-  width: 74px;
-  height: 74px;
+  width: 64px;
+  height: 64px;
   color: #20211f;
   transform: translate3d(
-      calc(-50% + var(--sticker-x)),
+      var(--sticker-x),
       var(--sticker-y),
       0
     )
@@ -721,11 +740,11 @@ onBeforeUnmount(() => {
 .stack-sticker::before {
   content: "";
   position: absolute;
-  inset: 10px;
+  inset: 8px;
   z-index: 0;
   border-radius: 48% 52% 45% 55% / 52% 45% 55% 48%;
   background: #f7f7f2;
-  box-shadow: 0 4px 4px rgb(32 33 31, 90%);
+  box-shadow: 0 4px 8px rgb(32 33 31 / 15%);
   transform: rotate(-8deg) scale(1.1);
 }
 
@@ -950,6 +969,10 @@ onBeforeUnmount(() => {
     padding-right: 0;
   }
 
+  .image-dock-stage {
+    --stack-overlap: 28px;
+  }
+
   .image-card {
     border-radius: 20px;
     height: 40vh;
@@ -957,14 +980,15 @@ onBeforeUnmount(() => {
   }
 
   .stack-pile-stage {
+    right: 0;
     width: 100%;
     height: 72px;
   }
 
   .stack-pile {
-    width: 420px;
+    width: min(100%, 480px);
     height: 96px;
-    transform: translateX(-50%) scale(0.76);
+    transform: scale(0.76);
   }
 
   .rail-viewport {
@@ -1023,6 +1047,10 @@ onBeforeUnmount(() => {
     gap: 20px;
   }
 
+  .image-dock-stage {
+    --stack-overlap: 20px;
+  }
+
   .image-card {
     border-radius: 16px;
     height: 35vh;
@@ -1033,7 +1061,7 @@ onBeforeUnmount(() => {
   }
 
   .stack-pile {
-    transform: translateX(-50%) scale(0.58);
+    transform: scale(0.58);
   }
 }
 </style>
