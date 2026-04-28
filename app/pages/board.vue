@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import ashIrisImage from "~/assets/image/board/ash-iris.webp";
 import mapleImage from "~/assets/image/board/maple-overview.png";
 import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.png";
 import owocaptainImage from "~/assets/image/board/owocaptain.webp";
-import runedraImage from "~/assets/image/board/runedra-concept.png";
+import runedraMapImage from "~/assets/image/board/runedra-map.webp";
+import runedraQuizImage from "~/assets/image/board/runedra-quiz.webp";
 import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
 import wowRaidPlusImage from "~/assets/image/board/wow-raid-plus.webp";
 
@@ -107,7 +108,8 @@ const projects: BoardProject[] = [
     title: "Runedra 知树",
     label: "Knowledge map",
     url: "https://runedra.cn",
-    image: runedraImage,
+    image: runedraMapImage,
+    sideImage: runedraQuizImage,
     accent: "#9E845E",
     metrics: [
       { label: "学习路径", value: "Graph", note: "知识关系可视化" },
@@ -115,16 +117,36 @@ const projects: BoardProject[] = [
       { label: "记忆", value: "Memory", note: "长期学习记录" },
     ],
     brief:
-      "面向任意领域学习的知识路径产品，把用户的兴趣、资料、问答和练习过程沉淀为可推进的学习图谱。通过 RAG、Memory 与多模态内容理解，把一次性的搜索行为转化为持续更新的技能成长路线。",
+      "面向任意领域学习的知识路径 Agent 产品，把用户的兴趣、资料、问答和练习过程沉淀为可推进的学习图谱。通过 RAG、Memory 与多模态内容理解，把一次性的搜索行为转化为持续更新的技能成长路线。",
     problems: [
       { title: "从意图到路径的结构化", desc: "学习者通常只有模糊兴趣，很难判断先学什么、如何推进、何时复盘。Runedra 将目标拆解为知识节点、前置关系与练习任务，用图谱方式呈现学习路线，降低进入陌生领域的决策成本。" },
       { title: "资料理解与长期记忆", desc: "结合 NotebookLM / OpenAI 一类的内容理解能力，将网页、笔记、问答和用户反馈抽取成可检索上下文；通过 RAG 与分层 Memory 保存关键概念、偏好和阶段成果，避免每次学习都重新组织资料。" },
       { title: "渐进式反馈与作品化沉淀", desc: "围绕节点完成度、练习结果和复盘记录生成下一步建议，把学习过程从被动阅读变成可交互的任务流。最终产出不仅是笔记，而是一套能持续扩展、复用和展示的个人知识体系。" },
     ],
     stackGroups: [
-      { type: "AI", icons: ["ph:sparkle-fill", "ph:brain-fill", "ph:magnifying-glass-fill"] },
-      { type: "Graph", icons: ["ph:tree-structure-fill", "ph:circles-four-fill"] },
-      { type: "Web", icons: ["ph:globe-fill", "ph:database-fill"] },
+      {
+        type: "AI",
+        icons: [
+          { name: "logos:openai-icon", label: "OpenAI" },
+          { name: "simple-icons:langchain", label: "LangChain", color: "#1C3C3C" },
+        ],
+      },
+      {
+        type: "Graph",
+        icons: [
+          { name: "logos:neo4j", label: "Neo4j" },
+          { name: "logos:supabase-icon", label: "Supabase" },
+          { name: "logos:postgresql", label: "PostgreSQL" },
+        ],
+      },
+      {
+        type: "Web",
+        icons: [
+          { name: "logos:nextjs-icon", label: "Next.js" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
     ],
   },
   {
@@ -147,9 +169,29 @@ const projects: BoardProject[] = [
       { title: "流程合并", desc: "用规则和 AI 合并排轴流程" },
     ],
     stackGroups: [
-      { type: "Game", icons: ["ph:game-controller-fill", "ph:map-trifold-fill"] },
-      { type: "Engine", icons: ["ph:magic-wand-fill", "ph:chart-line-up-fill"] },
-      { type: "Infra", icons: ["ph:database-fill", "ph:cube-transparent-fill"] },
+      {
+        type: "AI",
+        icons: [
+          { name: "logos:openai-icon", label: "OpenAI" },
+          { name: "simple-icons:claude", label: "Claude", color: "#D97757" },
+        ],
+      },
+      {
+        type: "Front",
+        icons: [
+          { name: "logos:nextjs-icon", label: "Next.js" },
+          { name: "logos:react", label: "React" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
+      {
+        type: "Infra",
+        icons: [
+          { name: "logos:nodejs-icon", label: "Node.js" },
+          { name: "logos:postgresql", label: "PostgreSQL" },
+        ],
+      },
     ],
   },
   {
@@ -172,9 +214,24 @@ const projects: BoardProject[] = [
       { title: "沉浸架构", desc: "用暗色信息架构承接内容" },
     ],
     stackGroups: [
-      { type: "Web", icons: ["ph:globe-fill", "ph:cards-fill", "ph:code-fill"] },
-      { type: "UX", icons: ["ph:users-three-fill", "ph:list-checks-fill"] },
-      { type: "Visual", icons: ["ph:monitor-fill", "ph:magic-wand-fill"] },
+      {
+        type: "Front",
+        icons: [
+          { name: "logos:nuxt-icon", label: "Nuxt" },
+          { name: "logos:vue", label: "Vue" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
+      {
+        type: "Design",
+        icons: [
+          { name: "logos:figma", label: "Figma" },
+          { name: "logos:cloudflare-icon", label: "Cloudflare" },
+          { name: "logos:vercel-icon", label: "Vercel" },
+          { name: "logos:github-icon", label: "GitHub" },
+        ],
+      },
     ],
   },
   {
@@ -197,9 +254,29 @@ const projects: BoardProject[] = [
       { title: "空间组织", desc: "用地图视角组织信息" },
     ],
     stackGroups: [
-      { type: "Map", icons: ["ph:map-trifold-fill", "ph:strategy-fill"] },
-      { type: "Game", icons: ["ph:game-controller-fill", "ph:crosshair-fill"] },
-      { type: "Web", icons: ["ph:browser-fill", "ph:cards-fill"] },
+      {
+        type: "Map",
+        icons: [
+          { name: "logos:mapbox-icon", label: "Mapbox" },
+          { name: "logos:react", label: "React" },
+        ],
+      },
+      {
+        type: "Web",
+        icons: [
+          { name: "logos:nextjs-icon", label: "Next.js" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
+      {
+        type: "Infra",
+        icons: [
+          { name: "logos:nodejs-icon", label: "Node.js" },
+          { name: "logos:postgresql", label: "PostgreSQL" },
+          { name: "logos:cloudflare-icon", label: "Cloudflare" },
+        ],
+      },
     ],
   },
   {
@@ -222,9 +299,24 @@ const projects: BoardProject[] = [
       { title: "统一模型", desc: "用统一内容模型承接展示" },
     ],
     stackGroups: [
-      { type: "Front", icons: ["ph:globe-fill", "ph:code-fill", "ph:sparkle-fill"] },
-      { type: "Motion", icons: ["ph:bounding-box-fill", "ph:magic-wand-fill"] },
-      { type: "Docs", icons: ["ph:file-text-fill", "ph:printer-fill"] },
+      {
+        type: "Front",
+        icons: [
+          { name: "logos:nuxt-icon", label: "Nuxt" },
+          { name: "logos:vue", label: "Vue" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
+      {
+        type: "Motion",
+        icons: [
+          { name: "logos:vitejs", label: "Vite" },
+          { name: "simple-icons:greensock", label: "GSAP", color: "#88CE02" },
+          { name: "simple-icons:sass", label: "Sass", color: "#CC6699" },
+          { name: "logos:nodejs-icon", label: "Node.js" },
+        ],
+      },
     ],
   },
 ];
@@ -252,9 +344,12 @@ const stickerSlots: StickerSlot[] = [
 const activeIndex = ref(0);
 const scrollProgress = ref(0);
 const boardPage = ref<HTMLElement | null>(null);
+const cvCard = ref<HTMLElement | null>(null);
+const cvCardHeight = ref<number | null>(null);
 const { $lenis } = useNuxtApp();
 let cancelLenisScroll: (() => void) | undefined;
 let syncFrame: number | undefined;
+let cvHeightTimer: number | undefined;
 
 const activeProject = computed(() => projects[activeIndex.value] ?? projects[0]);
 const activeStackStickers = computed<StackSticker[]>(() =>
@@ -272,6 +367,11 @@ const stageStyle = computed(() => ({
 const railStyle = computed(() => ({
   "--rail-progress": scrollProgress.value.toFixed(4),
 }));
+const cvCardStyle = computed(() =>
+  cvCardHeight.value === null
+    ? undefined
+    : { height: `${cvCardHeight.value}px` },
+);
 
 const stickerStyle = (index: number, sticker: StackSticker) => {
   const slot = stickerSlots[index % stickerSlots.length];
@@ -294,6 +394,45 @@ const stickerStyle = (index: number, sticker: StackSticker) => {
 useHead({
   title: "Board | Greater Bread",
 });
+
+const clearCvHeightTimer = () => {
+  if (cvHeightTimer === undefined) return;
+
+  window.clearTimeout(cvHeightTimer);
+  cvHeightTimer = undefined;
+};
+
+const lockCvCardHeight = (element: Element) => {
+  clearCvHeightTimer();
+  cvCardHeight.value = Math.ceil((element as HTMLElement).offsetHeight);
+};
+
+const animateCvCardHeight = async (element: Element, done: () => void) => {
+  const card = cvCard.value;
+  if (!card) {
+    done();
+    return;
+  }
+
+  await nextTick();
+
+  const nextHeight = Math.ceil((element as HTMLElement).offsetHeight);
+  if (cvCardHeight.value === null) {
+    cvCardHeight.value = Math.ceil(card.offsetHeight);
+  }
+
+  requestAnimationFrame(() => {
+    cvCardHeight.value = nextHeight;
+  });
+
+  clearCvHeightTimer();
+  cvHeightTimer = window.setTimeout(done, 760);
+};
+
+const releaseCvCardHeight = () => {
+  clearCvHeightTimer();
+  cvCardHeight.value = null;
+};
 
 const setActiveProject = (index: number) => {
   const nextIndex = (index + projects.length) % projects.length;
@@ -378,6 +517,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.documentElement.classList.remove("board-hide-scrollbar");
+  clearCvHeightTimer();
   cancelLenisScroll?.();
   if (syncFrame !== undefined) cancelAnimationFrame(syncFrame);
   window.removeEventListener("scroll", scheduleSyncScrollState);
@@ -394,8 +534,15 @@ onBeforeUnmount(() => {
         :style="{ '--active-accent': activeProject.accent }"
         aria-label="Project details"
       >
-        <article class="cv-card">
-          <Transition name="text-stagger">
+        <article ref="cvCard" class="cv-card" :style="cvCardStyle">
+          <Transition
+            name="text-stagger"
+            @before-leave="lockCvCardHeight"
+            @enter="animateCvCardHeight"
+            @after-enter="releaseCvCardHeight"
+            @enter-cancelled="releaseCvCardHeight"
+            @leave-cancelled="releaseCvCardHeight"
+          >
             <div :key="activeProject.slug" class="cv-card-inner">
               <header class="cv-header">
                 <div class="cv-title-row">
@@ -691,7 +838,7 @@ onBeforeUnmount(() => {
   border-radius: 24px 24px 0 0;
   clip-path: inset(0 round 24px 24px 0 0);
   box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
-  background: #151515;
+  background: #f1f1ee;
 }
 
 .image-frame img {
@@ -708,8 +855,8 @@ onBeforeUnmount(() => {
 }
 
 .image-frame-secondary img {
-  padding: clamp(8px, 1.1vw, 16px);
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .image-card:hover .image-frame img {
@@ -881,6 +1028,8 @@ onBeforeUnmount(() => {
   position: relative;
   flex: none;
   max-width: 85%;
+  transition: height 720ms cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: height;
 }
 
 .cv-card-inner {
