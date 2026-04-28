@@ -8,6 +8,8 @@ import runedraImage from "~/assets/image/board/runedra-concept.png";
 import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
 import wowRaidPlusImage from "~/assets/image/board/wow-raid-plus.webp";
 
+definePageMeta({ layout: false });
+
 type StackIcon =
   | string
   | {
