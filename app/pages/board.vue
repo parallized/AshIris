@@ -13,11 +13,13 @@ type StackIcon =
   | {
       name: string;
       label: string;
+      color?: string;
     };
 
 type StackSticker = {
   name: string;
   label: string;
+  color?: string;
 };
 
 type StickerSlot = {
@@ -85,7 +87,7 @@ const projects: BoardProject[] = [
         type: "Agent",
         icons: [
           { name: "simple-icons:modelcontextprotocol", label: "Model Context Protocol" },
-          { name: "simple-icons:claude", label: "Claude Code" },
+          { name: "simple-icons:claude", label: "Claude Code", color: "#D97757" },
           { name: "logos:openai-icon", label: "Codex / OpenAI" },
         ],
       },
@@ -231,6 +233,9 @@ const stackIconName = (icon: StackIcon) =>
 const stackIconLabel = (icon: StackIcon, fallback: string) =>
   typeof icon === "string" ? fallback : icon.label;
 
+const stackIconColor = (icon: StackIcon) =>
+  typeof icon === "string" ? undefined : icon.color;
+
 const stickerSlots: StickerSlot[] = [
   { x: -20, y: 8, rotate: 14, scale: 0.92 },
   { x: -65, y: 26, rotate: -6, scale: 1.0 },
@@ -255,6 +260,7 @@ const activeStackStickers = computed<StackSticker[]>(() =>
     group.icons.map((icon) => ({
       name: stackIconName(icon),
       label: stackIconLabel(icon, group.type),
+      color: stackIconColor(icon),
     })),
   ),
 );
@@ -265,16 +271,22 @@ const railStyle = computed(() => ({
   "--rail-progress": scrollProgress.value.toFixed(4),
 }));
 
-const stickerStyle = (index: number) => {
+const stickerStyle = (index: number, sticker: StackSticker) => {
   const slot = stickerSlots[index % stickerSlots.length];
 
-  return {
+  const style: Record<string, string> = {
     "--sticker-x": `${slot.x}px`,
     "--sticker-y": `${-slot.y}px`,
     "--sticker-rotate": `${slot.rotate}deg`,
     "--sticker-scale": slot.scale.toString(),
     "--sticker-z": (10 + Math.round(slot.y) + index).toString(),
   };
+
+  if (sticker.color) {
+    style["color"] = sticker.color;
+  }
+
+  return style;
 };
 
 useHead({
@@ -430,7 +442,7 @@ onBeforeUnmount(() => {
                     v-for="(sticker, index) in activeStackStickers"
                     :key="`${activeProject.slug}-${sticker.name}`"
                     class="stack-sticker"
-                    :style="stickerStyle(index)"
+                    :style="stickerStyle(index, sticker)"
                     :title="sticker.label"
                   >
                     <Icon :name="sticker.name" class="stack-sticker-icon" />
@@ -440,7 +452,7 @@ onBeforeUnmount(() => {
             </Transition>
 
             <article class="image-card">
-              <Transition name="img-crossblur">
+              <Transition name="img-brightness" :duration="{ enter: 480, leave: 360 }">
                 <div
                   :key="activeProject.slug"
                   class="image-frame-set"
@@ -649,21 +661,19 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 2;
   width: 100%;
-  border-radius: 24px 24px 0 0;
-  overflow: hidden;
-  box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
-  background: #deded8;
   height: 42vh;
 }
 
 .image-frame-set {
+  --image-brightness: 1;
   position: absolute;
   inset: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(8px, 1vw, 14px);
+  gap: clamp(14px, 1.4vw, 24px);
   width: 100%;
   height: 100%;
+  background: #f1f1ee;
 }
 
 .image-frame-set-pair {
@@ -676,6 +686,9 @@ onBeforeUnmount(() => {
   height: 100%;
   margin: 0;
   overflow: hidden;
+  border-radius: 24px 24px 0 0;
+  clip-path: inset(0 round 24px 24px 0 0);
+  box-shadow: 0 20px 80px rgb(0 0 0 / 12%);
   background: #151515;
 }
 
@@ -686,10 +699,10 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.92) contrast(0.96);
+  filter: brightness(var(--image-brightness)) saturate(0.92) contrast(0.96);
   transition:
     transform 840ms cubic-bezier(0.19, 1, 0.22, 1),
-    filter 360ms ease;
+    filter 480ms cubic-bezier(0.3, 0, 0.2, 1);
 }
 
 .image-frame-secondary img {
@@ -698,34 +711,25 @@ onBeforeUnmount(() => {
 }
 
 .image-card:hover .image-frame img {
-  filter: saturate(1) contrast(1);
+  filter: brightness(var(--image-brightness)) saturate(1) contrast(1);
   transform: scale(1.025);
 }
 
-.image-card .img-crossblur-enter-active {
-  transition: opacity 0.6s cubic-bezier(0.3, 0, 0.2, 1),
-              filter 0.6s cubic-bezier(0.3, 0, 0.2, 1),
-              transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+.image-card .img-brightness-enter-active {
   z-index: 2;
-  will-change: opacity, filter, transform;
 }
 
-.image-card .img-crossblur-leave-active {
-  transition: filter 0.6s cubic-bezier(0.3, 0, 0.2, 1),
-              transform 0.6s cubic-bezier(0.3, 0, 0.2, 1);
+.image-card .img-brightness-leave-active {
   z-index: 1;
-  will-change: filter, transform;
+  pointer-events: none;
 }
 
-.image-card .img-crossblur-enter-from {
-  opacity: 0;
-  filter: blur(24px);
-  transform: scale(1.1);
+.image-card .img-brightness-enter-from {
+  --image-brightness: 0.72;
 }
 
-.image-card .img-crossblur-leave-to {
-  filter: blur(24px);
-  transform: scale(1.1);
+.image-card .img-brightness-leave-to {
+  --image-brightness: 1.12;
 }
 
 .link-fade-enter-active,
