@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import agentForestPromptImage from "~/assets/image/board/agent-forest-prompt.webp";
+import agentForestResultImage from "~/assets/image/board/agent-forest-result.webp";
 import ashIrisAboutImage from "~/assets/image/board/ash-iris-about.webp";
 import ashIrisHeroImage from "~/assets/image/board/ash-iris-hero.webp";
-import mapleImage from "~/assets/image/board/maple-overview.png";
-import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.png";
+import goclawHomeImage from "~/assets/image/board/goclaw-home.webp";
+import goclawPlannerImage from "~/assets/image/board/goclaw-planner.webp";
+import mapleImage from "~/assets/image/board/maple-overview.webp";
+import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.webp";
 import nptDeliveryImage from "~/assets/image/board/notion-project-tracker-delivery.webp";
-import nptOverviewImage from "~/assets/image/board/notion-project-tracker-overview.png";
+import nptOverviewImage from "~/assets/image/board/notion-project-tracker-overview.webp";
 import owocaptainMapImage from "~/assets/image/board/owocaptain-map.webp";
 import owocaptainNavImage from "~/assets/image/board/owocaptain-nav.webp";
 import paraNavigationNavmeshImage from "~/assets/image/board/para-navigation-navmesh.webp";
 import paraNavigationRouteImage from "~/assets/image/board/para-navigation-route.webp";
+import recallRepositoryImage from "~/assets/image/board/recall-repository.webp";
+import recallStationImage from "~/assets/image/board/recall-station.webp";
 import runedraMapImage from "~/assets/image/board/runedra-map.webp";
 import runedraQuizImage from "~/assets/image/board/runedra-quiz.webp";
 import wowMagicianCooldownsImage from "~/assets/image/board/wow-magician-cooldowns.webp";
@@ -156,6 +162,99 @@ const projects: BoardProject[] = [
     ],
   },
   {
+    slug: "agent-forest",
+    title: "Agent Forest",
+    label: "Parallel multi-agent investigation framework",
+    url: "https://github.com/parallized/agent-forest",
+    image: agentForestPromptImage,
+    sideImage: agentForestResultImage,
+    accent: "#9E92FF",
+    metrics: [
+      { label: "并发", value: "32", note: "最多 32 个 Agent" },
+      { label: "视角", value: "Persona", note: "证据/风险/反方" },
+      { label: "综合", value: "Local", note: "主会话收束判断" },
+    ],
+    brief:
+      "把单次 LLM 回答扩展成可编排的认知森林：用 4 到 32 个专门 Agent 并行拆解复杂问题，再由当前会话作为 synthesizer 收束证据、分歧、风险和行动建议。",
+    problems: [
+      { title: "多视角问题切片", desc: "内置 Evidence Hunter、Risk Auditor、Systems Thinker、Contrarian 等 persona，让复杂研究、架构审查和策略判断不再依赖一个模型的一次性直觉，而是让不同立场同时探索问题空间。" },
+      { title: "严格的综合边界", desc: "将外部 Agent 报告与本地主综合阶段明确隔离，保留报告来源、运行状态和观点差异，避免把多个 Agent 的噪声误读成共识，也减少传统多窗口研究的整理成本。" },
+      { title: "面向真实工作的运行安全", desc: "支持 OpenAI-compatible Provider、preset / inline agent 定义、progress 日志、超大 JSON 输出落盘和 agent-led research，让它可以作为 Codex / Claude 工作流里的深度研究引擎，而不是演示脚本。" },
+    ],
+    stackGroups: [
+      {
+        type: "Runtime",
+        icons: [
+          { name: "logos:python", label: "Python" },
+          { name: "logos:openai-icon", label: "OpenAI-compatible API" },
+          { name: "simple-icons:json", label: "JSON Payload", color: "#888888" },
+        ],
+      },
+      {
+        type: "Agents",
+        icons: [
+          { name: "ph:users-three-fill", label: "Parallel Agents", color: "#9E92FF" },
+          { name: "simple-icons:claude", label: "Claude Code", color: "#D97757" },
+          { name: "ph:git-branch-fill", label: "Persona Presets", color: "#77B7FF" },
+        ],
+      },
+      {
+        type: "Workflow",
+        icons: [
+          { name: "ph:terminal-window-fill", label: "CLI" },
+          { name: "logos:github-icon", label: "GitHub" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "recall",
+    title: "Recall Station",
+    label: "MCP-powered closed-loop knowledge station",
+    url: "https://github.com/parallized/Recall",
+    image: recallRepositoryImage,
+    sideImage: recallStationImage,
+    accent: "#9B8CFF",
+    metrics: [
+      { label: "事实", value: "Truth", note: "全网碎片提纯" },
+      { label: "闭环", value: "Recall", note: "检索 / 复习 / 内化" },
+      { label: "目标", value: "80d", note: "掌握度 0 到 80" },
+    ],
+    brief:
+      "基于 MCP 的全网原子事实提炼与知识闭环工作站，将 Perplexity、NotebookLM、Anki、Obsidian 一类能力收束成主动学习系统，把碎片资料重构为可复习、可追踪、可内化的事实仓库。",
+    problems: [
+      { title: "从信息收藏到事实提炼", desc: "Recall 抛弃传统笔记软件的被动收藏模式，把研究主题拆成原子事实、证据来源和知识节点，通过自动化深度检索与 AI 脱水，生成能被长期学习系统吸收的事实清单。" },
+      { title: "知识路径与图谱推荐", desc: "自动构建三级分类路标与主动图谱推荐，将任何领域的全网碎片压缩为可推进的学习路线，让用户不必先整理资料再学习，而是在系统引导下边探索边建立结构。" },
+      { title: "复习闭环与本地知识库", desc: "围绕 Bun monorepo、React、SQLite Schema 与 MCP 网关，把事实仓库、间隔复习、外部知识工具和本地知识库串成闭环，目标是在 80 天内把陌生领域掌握度从 0 推到 80。" },
+    ],
+    stackGroups: [
+      {
+        type: "Runtime",
+        icons: [
+          { name: "simple-icons:bun", label: "Bun", color: "#FBF0DF" },
+          { name: "logos:react", label: "React" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+        ],
+      },
+      {
+        type: "Knowledge",
+        icons: [
+          { name: "simple-icons:modelcontextprotocol", label: "Model Context Protocol" },
+          { name: "simple-icons:obsidian", label: "Obsidian", color: "#7C3AED" },
+          { name: "simple-icons:anki", label: "Anki", color: "#80C2EE" },
+        ],
+      },
+      {
+        type: "AI",
+        icons: [
+          { name: "logos:openai-icon", label: "LLM" },
+          { name: "ph:brain-fill", label: "NotebookLM-style synthesis", color: "#A98DFF" },
+          { name: "ph:database-fill", label: "SQLite Repository", color: "#6C7A89" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "runedra",
     title: "Runedra 知树",
     label: "Knowledge map",
@@ -197,6 +296,54 @@ const projects: BoardProject[] = [
           { name: "logos:nextjs-icon", label: "Next.js" },
           { name: "logos:typescript-icon", label: "TypeScript" },
           { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "goclaw",
+    title: "GoClaw",
+    label: "AI-powered real-world activity planner",
+    url: "https://github.com/parallized/GoClaw",
+    image: goclawPlannerImage,
+    sideImage: goclawHomeImage,
+    accent: "#5F86FF",
+    metrics: [
+      { label: "场景", value: "2+", note: "跑步 / 拍照可扩展" },
+      { label: "数据", value: "Live", note: "天气 / POI / 路线" },
+      { label: "原则", value: "No Mock", note: "拒绝伪造兜底" },
+    ],
+    brief:
+      "面向现实世界行动的 AI 活动规划器：输入模糊意图，系统用真实天气、POI、地理编码、OSRM 路线与 LLM 结构化决策，生成可执行的跑步路线或拍照地点计划。",
+    problems: [
+      { title: "从模糊意图到确定计划", desc: "把「明天想去跑步」「下周想去拍照」这类轻量愿望转成明确输入输出 Schema，由场景注册表调度独立 Planner，让新场景可以像插件一样接入，而不是堆硬编码分支。" },
+      { title: "真实世界数据编排", desc: "将 Open-Meteo、高德 / Overpass POI、OSRM 路由、Nominatim 逆地理和导航跳转封装成 Provider 层，按国内地点服务优先级与降级链路稳定召回现实数据。" },
+      { title: "拒绝假 Demo 的工程约束", desc: "系统不返回伪造景点、伪造天气或伪造路线；即便模型未配置或响应异常，也尽量依靠确定性代码和物理世界 API 输出真实可用的基准方案。" },
+    ],
+    stackGroups: [
+      {
+        type: "App",
+        icons: [
+          { name: "simple-icons:bun", label: "Bun", color: "#FBF0DF" },
+          { name: "logos:react", label: "React" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:vitejs", label: "Vite" },
+        ],
+      },
+      {
+        type: "World",
+        icons: [
+          { name: "simple-icons:openstreetmap", label: "OpenStreetMap", color: "#7EBC6F" },
+          { name: "ph:cloud-sun-fill", label: "Open-Meteo", color: "#F5C45E" },
+          { name: "ph:map-pin-area-fill", label: "POI / Geocoding", color: "#5F86FF" },
+        ],
+      },
+      {
+        type: "Engine",
+        icons: [
+          { name: "logos:openai-icon", label: "LLM Decision" },
+          { name: "ph:route-fill", label: "OSRM Routing", color: "#31B77A" },
+          { name: "simple-icons:zod", label: "Zod Contracts", color: "#3068B7" },
         ],
       },
     ],
