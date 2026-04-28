@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import ashIrisImage from "~/assets/image/board/ash-iris.webp";
 import mapleImage from "~/assets/image/board/maple-overview.png";
+import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.png";
 import owocaptainImage from "~/assets/image/board/owocaptain.webp";
 import runedraImage from "~/assets/image/board/runedra-concept.png";
 import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
@@ -32,6 +33,7 @@ interface BoardProject {
   label: string;
   url?: string;
   image: string;
+  sideImage?: string;
   accent: string;
   metrics: Array<{
     label: string;
@@ -56,6 +58,7 @@ const projects: BoardProject[] = [
     label: "基于 MCP 通路的多 Code Agent 与 SDD 管理看板",
     url: "https://github.com/parallized/maple",
     image: mapleImage,
+    sideImage: mapleWorkerConfigImage,
     accent: "#8BA264",
     metrics: [
       { label: "协作状态", value: "Trace", note: "Worker 进度可回看" },
@@ -73,9 +76,9 @@ const projects: BoardProject[] = [
       {
         type: "Shell",
         icons: [
-          { name: "simple-icons:tauri", label: "Tauri" },
-          { name: "simple-icons:typescript", label: "TypeScript" },
-          { name: "simple-icons:nodedotjs", label: "Node.js" },
+          { name: "logos:tauri", label: "Tauri" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+          { name: "logos:nodejs-icon", label: "Node.js" },
         ],
       },
       {
@@ -83,13 +86,13 @@ const projects: BoardProject[] = [
         icons: [
           { name: "simple-icons:modelcontextprotocol", label: "Model Context Protocol" },
           { name: "simple-icons:claude", label: "Claude Code" },
-          { name: "simple-icons:openai", label: "Codex / OpenAI" },
+          { name: "logos:openai-icon", label: "Codex / OpenAI" },
         ],
       },
       {
         type: "Workflow",
         icons: [
-          { name: "simple-icons:github", label: "GitHub" },
+          { name: "logos:github-icon", label: "GitHub" },
           { name: "ph:terminal-window-fill", label: "CLI" },
         ],
       },
@@ -416,7 +419,7 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="image-dock-stage">
-            <Transition name="stack-pile-fade">
+            <Transition name="stack-pile-fade" :duration="{ enter: 1000, leave: 400 }">
               <div
                 :key="`stack-${activeProject.slug}`"
                 class="stack-pile-stage"
@@ -430,9 +433,7 @@ onBeforeUnmount(() => {
                     :style="stickerStyle(index)"
                     :title="sticker.label"
                   >
-                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-cutline" />
-                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-paper" />
-                    <Icon :name="sticker.name" class="stack-sticker-icon stack-sticker-ink" />
+                    <Icon :name="sticker.name" class="stack-sticker-icon" />
                   </div>
                 </div>
               </div>
@@ -440,13 +441,31 @@ onBeforeUnmount(() => {
 
             <article class="image-card">
               <Transition name="img-crossblur">
-                <img
+                <div
                   :key="activeProject.slug"
-                  :src="activeProject.image"
-                  :alt="`${activeProject.title} screenshot`"
-                  loading="eager"
-                  decoding="async"
-                />
+                  class="image-frame-set"
+                  :class="{ 'image-frame-set-pair': activeProject.sideImage }"
+                >
+                  <figure
+                    v-if="activeProject.sideImage"
+                    class="image-frame image-frame-secondary"
+                  >
+                    <img
+                      :src="activeProject.sideImage"
+                      :alt="`${activeProject.title} secondary screenshot`"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </figure>
+                  <figure class="image-frame image-frame-primary">
+                    <img
+                      :src="activeProject.image"
+                      :alt="`${activeProject.title} screenshot`"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </figure>
+                </div>
               </Transition>
             </article>
           </div>
@@ -637,11 +656,33 @@ onBeforeUnmount(() => {
   height: 42vh;
 }
 
-.image-card img {
+.image-frame-set {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(8px, 1vw, 14px);
+  width: 100%;
+  height: 100%;
+}
+
+.image-frame-set-pair {
+  grid-template-columns: minmax(0, 38.2fr) minmax(0, 61.8fr);
+}
+
+.image-frame {
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #151515;
+}
+
+.image-frame img {
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -651,7 +692,12 @@ onBeforeUnmount(() => {
     filter 360ms ease;
 }
 
-.image-card:hover img {
+.image-frame-secondary img {
+  padding: clamp(8px, 1.1vw, 16px);
+  object-fit: contain;
+}
+
+.image-card:hover .image-frame img {
   filter: saturate(1) contrast(1);
   transform: scale(1.025);
 }
@@ -728,6 +774,7 @@ onBeforeUnmount(() => {
   width: 64px;
   height: 64px;
   color: #20211f;
+  opacity: 0.7;
   transform: translate3d(
       var(--sticker-x),
       var(--sticker-y),
@@ -735,27 +782,19 @@ onBeforeUnmount(() => {
     )
     rotate(var(--sticker-rotate))
     scale(var(--sticker-scale));
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.stack-sticker::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  z-index: 0;
-  border-radius: 48% 52% 45% 55% / 52% 45% 55% 48%;
-  background: #f7f7f2;
-  box-shadow: 0 4px 8px rgb(32 33 31 / 15%);
-  transform: rotate(-8deg) scale(1.1);
-}
-
-.stack-sticker:nth-child(2n)::before {
-  border-radius: 56% 44% 54% 46% / 44% 54% 46% 56%;
-  transform: rotate(7deg) scale(1.12);
-}
-
-.stack-sticker:nth-child(3n)::before {
-  border-radius: 46% 54% 42% 58% / 58% 42% 58% 42%;
-  transform: rotate(-3deg) scale(1.08);
+.stack-sticker:hover {
+  opacity: 1;
+  transform: translate3d(
+      var(--sticker-x),
+      calc(var(--sticker-y) - 6px),
+      0
+    )
+    rotate(var(--sticker-rotate))
+    scale(calc(var(--sticker-scale) * 1.05));
+  z-index: 50;
 }
 
 .stack-sticker-icon {
@@ -766,43 +805,70 @@ onBeforeUnmount(() => {
   transform-origin: center;
 }
 
-.stack-sticker-cutline {
-  z-index: 1;
-  color: #f7f7f2;
-  opacity: 1;
-  transform: scale(1.24);
+.stack-pile-fade-enter-active {
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
-.stack-sticker-paper {
-  z-index: 2;
-  color: #f7f7f2;
-  transform: scale(1.12);
-}
-
-.stack-sticker-ink {
-  z-index: 3;
-  color: #20211f;
-  transform: scale(1);
-}
-
-.stack-pile-fade-enter-active,
 .stack-pile-fade-leave-active {
-  transition:
-    opacity 0.4s ease,
-    transform 0.5s cubic-bezier(0.3, 0, 0.2, 1),
-    filter 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
 }
 
 .stack-pile-fade-enter-from {
   opacity: 0;
   filter: blur(8px);
-  transform: translateY(18px) scale(0.97);
 }
+
+.stack-pile-fade-enter-active .stack-sticker {
+  animation: sticker-burst 0.7s both;
+}
+.stack-pile-fade-enter-active .stack-sticker:nth-child(1) { animation-delay: 0.00s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(2) { animation-delay: 0.04s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(3) { animation-delay: 0.08s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(4) { animation-delay: 0.12s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(5) { animation-delay: 0.16s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(6) { animation-delay: 0.20s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(7) { animation-delay: 0.24s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(8) { animation-delay: 0.28s; }
 
 .stack-pile-fade-leave-to {
   opacity: 0;
   filter: blur(8px);
-  transform: translateY(-10px) scale(0.98);
+  transform: translateY(-10px);
+}
+
+@keyframes sticker-burst {
+  0% {
+    opacity: 0;
+    transform: translate3d(
+        calc(-155px + (var(--sticker-x) + 155px) * 0.1),
+        calc(-28px + (var(--sticker-y) + 28px) * 0.1),
+        0
+      )
+      rotate(calc(var(--sticker-rotate) * 0.1))
+      scale(var(--sticker-scale));
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  30% {
+    opacity: 0.8;
+    transform: translate3d(
+        calc(-155px + (var(--sticker-x) + 155px) * 1.1),
+        calc(-28px + (var(--sticker-y) + 28px) * 1.1),
+        0
+      )
+      rotate(calc(var(--sticker-rotate) * 1.1))
+      scale(var(--sticker-scale));
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translate3d(
+        var(--sticker-x),
+        var(--sticker-y),
+        0
+      )
+      rotate(var(--sticker-rotate))
+      scale(var(--sticker-scale));
+  }
 }
 
 .cv-card {
