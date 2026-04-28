@@ -4,8 +4,12 @@ import ashIrisAboutImage from "~/assets/image/board/ash-iris-about.webp";
 import ashIrisHeroImage from "~/assets/image/board/ash-iris-hero.webp";
 import mapleImage from "~/assets/image/board/maple-overview.png";
 import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.png";
+import nptDeliveryImage from "~/assets/image/board/notion-project-tracker-delivery.webp";
+import nptOverviewImage from "~/assets/image/board/notion-project-tracker-overview.png";
 import owocaptainMapImage from "~/assets/image/board/owocaptain-map.webp";
 import owocaptainNavImage from "~/assets/image/board/owocaptain-nav.webp";
+import paraNavigationNavmeshImage from "~/assets/image/board/para-navigation-navmesh.webp";
+import paraNavigationRouteImage from "~/assets/image/board/para-navigation-route.webp";
 import runedraMapImage from "~/assets/image/board/runedra-map.webp";
 import runedraQuizImage from "~/assets/image/board/runedra-quiz.webp";
 import wowMagicianCooldownsImage from "~/assets/image/board/wow-magician-cooldowns.webp";
@@ -101,6 +105,52 @@ const projects: BoardProject[] = [
         icons: [
           { name: "logos:github-icon", label: "GitHub" },
           { name: "ph:terminal-window-fill", label: "CLI" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "notion-project-tracker",
+    title: "Notion Project Tracker",
+    label: "Notion-native AI project execution loop",
+    url: "https://github.com/parallized/notion-project-tracker",
+    image: nptOverviewImage,
+    sideImage: nptDeliveryImage,
+    accent: "#7E8A86",
+    metrics: [
+      { label: "入口", value: "Skill", note: "Claude / Codex 调用" },
+      { label: "队列", value: "Notion", note: "TODO 精确发现" },
+      { label: "回写", value: "REST", note: "交付评论与日志" },
+    ],
+    brief:
+      "把 Notion 从需求收集器变成 AI 可执行的项目中枢：在页面里写任务、图片和验收材料，NPT 通过 Notion MCP + REST 精确发现待办，驱动 Claude / Codex 在代码库执行，并把结果写回任务评论和会话日志。",
+    problems: [
+      { title: "把自然语言任务变成执行队列", desc: "Notion 更适合承载图文需求、上下文和验收标准。NPT 将 NPT、项目、概要、IDEA 与 TODO 数据库组织成可信工作区，让 Agent 可以读取复杂任务，却不会在用户的整个 Notion 里乱搜乱改。" },
+      { title: "把 Agent 接入项目状态", desc: "通过 .npt.json 或项目名解析对应 TODO 数据库，使用 Notion REST 精确查询待办，执行前后同步队列中、待办、已完成、已阻塞等状态，把一次 Codex / Claude 会话变成可追踪的项目执行单元。" },
+      { title: "把交付变成审计链路", desc: "任务完成后优先以 NPT integration 身份写回评论，记录交付内容、改动说明、测试结果和阻塞原因，同时维护会话日志与发现缓存，让 AI 产出可以被验收、追溯和继续迭代。" },
+    ],
+    stackGroups: [
+      {
+        type: "Workspace",
+        icons: [
+          { name: "logos:notion-icon", label: "Notion" },
+          { name: "simple-icons:modelcontextprotocol", label: "Model Context Protocol" },
+          { name: "logos:python", label: "Python" },
+        ],
+      },
+      {
+        type: "Agent",
+        icons: [
+          { name: "logos:openai-icon", label: "Codex / OpenAI" },
+          { name: "simple-icons:claude", label: "Claude Code", color: "#D97757" },
+          { name: "logos:github-icon", label: "GitHub" },
+        ],
+      },
+      {
+        type: "Automation",
+        icons: [
+          { name: "ph:terminal-window-fill", label: "CLI" },
+          { name: "ph:database-fill", label: "Notion REST" },
         ],
       },
     ],
@@ -241,6 +291,53 @@ const projects: BoardProject[] = [
           { name: "logos:nodejs-icon", label: "Node.js" },
           { name: "logos:postgresql", label: "PostgreSQL" },
           { name: "logos:cloudflare-icon", label: "Cloudflare" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "para-navigation",
+    title: "para-navigation",
+    label: "Rust + Detour NavMesh HTTP pathfinding service",
+    url: "https://github.com/parallized/para-navigation",
+    image: paraNavigationNavmeshImage,
+    sideImage: paraNavigationRouteImage,
+    accent: "#778A96",
+    metrics: [
+      { label: "核心", value: "Rust", note: "Axum HTTP 服务" },
+      { label: "寻路", value: "Detour", note: "NavMesh / A*" },
+      { label: "接口", value: "JSON", note: "POST API + E2E" },
+    ],
+    brief:
+      "把游戏世界里的空间移动从经验脚本变成可调用的导航能力：用 Rust / Axum 包住 C++ Detour NavMesh 内核，读取兼容 mmaps 数据，并提供寻路、随机点、射线、贴地移动和附近网格查询等 JSON API。",
+    problems: [
+      { title: "把复杂地形变成可查询空间", desc: "通过 Rust FFI 封装 C++ bridge 与 vendored Detour，把 World of Warcraft 的 mmaps 数据加载为可计算 NavMesh，让脚本和 Agent 能在真实地形上理解可走区域、坡度、边界与障碍。" },
+      { title: "导航能力服务化", desc: "基于 Axum 暴露 /v1/path、random-point、move-along-surface、cast-ray、explore-polygon、mesh/nearby 等端点，将寻路内核拆成稳定 HTTP 服务，方便任何上层工具以 JSON + POST 调用。" },
+      { title: "从坐标到行动的工程闭环", desc: "围绕 filter configure、session release、默认配置生成和 Node E2E 分层测试建立运行边界，让避障、Slope 导航和路线探索不只停留在 demo，而能作为游戏自动化与空间智能工具链的底层能力。" },
+    ],
+    stackGroups: [
+      {
+        type: "Core",
+        icons: [
+          { name: "logos:rust", label: "Rust" },
+          { name: "logos:c-plusplus", label: "C++" },
+          { name: "simple-icons:cmake", label: "CMake", color: "#064F8C" },
+        ],
+      },
+      {
+        type: "Navigation",
+        icons: [
+          { name: "ph:polygon-fill", label: "Detour / NavMesh", color: "#8AB4A2" },
+          { name: "ph:path-fill", label: "A* Pathfinding", color: "#E3B36B" },
+          { name: "ph:map-trifold-fill", label: "mmaps", color: "#5B8FB9" },
+        ],
+      },
+      {
+        type: "API",
+        icons: [
+          { name: "simple-icons:json", label: "JSON", color: "#666666" },
+          { name: "logos:javascript", label: "JavaScript E2E" },
+          { name: "ph:terminal-window-fill", label: "CLI" },
         ],
       },
     ],
