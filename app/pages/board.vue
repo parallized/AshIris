@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
-import ashIrisImage from "~/assets/image/board/ash-iris.webp";
+import ashIrisAboutImage from "~/assets/image/board/ash-iris-about.webp";
+import ashIrisHeroImage from "~/assets/image/board/ash-iris-hero.webp";
 import mapleImage from "~/assets/image/board/maple-overview.png";
 import mapleWorkerConfigImage from "~/assets/image/board/maple-worker-config.png";
-import owocaptainImage from "~/assets/image/board/owocaptain.webp";
+import owocaptainMapImage from "~/assets/image/board/owocaptain-map.webp";
+import owocaptainNavImage from "~/assets/image/board/owocaptain-nav.webp";
 import runedraMapImage from "~/assets/image/board/runedra-map.webp";
 import runedraQuizImage from "~/assets/image/board/runedra-quiz.webp";
-import wowMagicianImage from "~/assets/image/board/wow-magician.webp";
-import wowRaidPlusImage from "~/assets/image/board/wow-raid-plus.webp";
+import wowMagicianCooldownsImage from "~/assets/image/board/wow-magician-cooldowns.webp";
+import wowMagicianTimelineImage from "~/assets/image/board/wow-magician-timeline.webp";
 
 definePageMeta({ layout: false });
 
@@ -152,21 +154,22 @@ const projects: BoardProject[] = [
   {
     slug: "wow-magician",
     title: "WoW Magician",
-    label: "Raid planner",
+    label: "面向魔兽世界团队副本指挥的 AI Raid Planning System",
     url: "https://wow.parallized.cn",
-    image: wowMagicianImage,
+    image: wowMagicianTimelineImage,
+    sideImage: wowMagicianCooldownsImage,
     accent: "#7C8E9F",
     metrics: [
-      { label: "排轴", value: "3s", note: "AI 生成战术稿" },
-      { label: "路径", value: "<5ms", note: "地图查询响应" },
-      { label: "协同", value: "Raid", note: "团队实时调整" },
+      { label: "认知", value: "LLM", note: "把混沌战斗语义化" },
+      { label: "工具", value: "3s", note: "从焦虑到可执行轴" },
+      { label: "生态", value: "WCL", note: "战报/阵容/缓存闭环" },
     ],
     brief:
-      "为魔兽团本做战术板，把时间轴、站位、技能和 AI 建议压进一个高密度界面。",
+      "将复杂的游戏场景当作认知边界实验进行建模的 AI tooling：通过 Exa、WebSearch 获取 BOSS 技能、WCL 行为证据、阵容冷却和团长的经验判断，清洗为可计算状态和事实条目，再由 LLM 与规则引擎重组为可执行的战术轴。",
     problems: [
-      { title: "维护成本", desc: "手写 MRT 成本高" },
-      { title: "信息分散", desc: "战术信息分散" },
-      { title: "流程合并", desc: "用规则和 AI 合并排轴流程" },
+      { title: "战斗状态建模", desc: "将整个游戏复杂的 BOSS 技能时间轴、WCL 战斗事件、团队和职业借助 LLM 语义统一抽象成可查询的 Combat State，基于多种数据表 + 遗传算法让原本依赖团长经验的判断可以被系统计算安排。" },
+      { title: "LLM 约束式战术生成", desc: "基于 RAG 注入分层时效性记忆游戏数据信息，实现规则引擎、黑白名单、冷却窗口、优先级和阵容上下文约束输出，确保生成的排轴方案在时间、职业、目标和执行层面都是合法的。" },
+      { title: "复盘到执行的闭环", desc: "将 WCL API 实时数据接回排轴系统，生成可被 MRT、战术板和 WoW Lua 插件消费的结构化结果，让战术规划能够持续迭代。" },
     ],
     stackGroups: [
       {
@@ -179,44 +182,6 @@ const projects: BoardProject[] = [
       {
         type: "Front",
         icons: [
-          { name: "logos:nextjs-icon", label: "Next.js" },
-          { name: "logos:react", label: "React" },
-          { name: "logos:typescript-icon", label: "TypeScript" },
-          { name: "logos:tailwindcss-icon", label: "Tailwind CSS" },
-        ],
-      },
-      {
-        type: "Infra",
-        icons: [
-          { name: "logos:nodejs-icon", label: "Node.js" },
-          { name: "logos:postgresql", label: "PostgreSQL" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "wow-raid-plus",
-    title: "WoW Raid Plus",
-    label: "Raid utility",
-    url: "https://wowraidplus.parallized.cn",
-    image: wowRaidPlusImage,
-    accent: "#A47A72",
-    metrics: [
-      { label: "团队入口", value: "Guild", note: "内容聚合" },
-      { label: "资料", value: "Raid", note: "副本信息归档" },
-      { label: "视觉", value: "Dark", note: "沉浸式呈现" },
-    ],
-    brief:
-      "为公会内容做一个更像产品的入口，让阵容、攻略、归档和活动信息更容易被扫描。",
-    problems: [
-      { title: "层级扁平", desc: "资料页缺少层级" },
-      { title: "氛围缺失", desc: "游戏氛围难保留" },
-      { title: "沉浸架构", desc: "用暗色信息架构承接内容" },
-    ],
-    stackGroups: [
-      {
-        type: "Front",
-        icons: [
           { name: "logos:nuxt-icon", label: "Nuxt" },
           { name: "logos:vue", label: "Vue" },
           { name: "logos:typescript-icon", label: "TypeScript" },
@@ -224,12 +189,12 @@ const projects: BoardProject[] = [
         ],
       },
       {
-        type: "Design",
+        type: "Engine",
         icons: [
-          { name: "logos:figma", label: "Figma" },
-          { name: "logos:cloudflare-icon", label: "Cloudflare" },
-          { name: "logos:vercel-icon", label: "Vercel" },
-          { name: "logos:github-icon", label: "GitHub" },
+          { name: "logos:lua", label: "Lua" },
+          { name: "logos:rust", label: "Rust" },
+          { name: "logos:rabbitmq-icon", label: "RabbitMQ" },
+          { name: "simple-icons:konva", label: "Konva", color: "#0D83CD" },
         ],
       },
     ],
@@ -238,8 +203,9 @@ const projects: BoardProject[] = [
     slug: "owocaptain",
     title: "OwOcaptain",
     label: "Map guide",
-    url: "https://owo.parallized.cn",
-    image: owocaptainImage,
+    url: "https://ow.parallized.cn",
+    image: owocaptainMapImage,
+    sideImage: owocaptainNavImage,
     accent: "#8C9A86",
     metrics: [
       { label: "查询", value: "30s", note: "赛前快速确认" },
@@ -249,9 +215,9 @@ const projects: BoardProject[] = [
     brief:
       "面向守望先锋实战准备，把地图点位、动线和英雄定位整理成快速参考。",
     problems: [
-      { title: "检索低效", desc: "视频攻略不适合赛前查" },
-      { title: "认知差异", desc: "点位命名不统一" },
-      { title: "空间组织", desc: "用地图视角组织信息" },
+      { title: "地图坐标与战术数据建模", desc: "将守望先锋地图拆成「地图 / 区域 / 场景 / 点位 / 箭头 / 英雄头像」的数据结构，并用百分比坐标统一描述位置，使点位标记、危险区域和移动路线能够在不同地图与屏幕尺寸下稳定复用。" },
+      { title: "可视化编辑器与状态同步", desc: "设计 UI 学习模式与开发模式两套交互流程，通过 Pinia 管理当前地图、区域、场景、点位和快捷键状态，支持拖拽点位、编辑说明、切换英雄、添加箭头和一键导出，让战术内容可以低成本维护和迭代。" },
+      { title: "战术教学界面的工程化体验", desc: "基于 Nuxt / Vue 构建响应式地图界面，并结合键盘导航、图片 WebP 优化、地图预设数据和组件化布局，保证用户能快速切换地图场景、查看战术信息，并在复杂地图资源下保持流畅操作。" },
     ],
     stackGroups: [
       {
@@ -284,7 +250,8 @@ const projects: BoardProject[] = [
     title: "Ash Iris",
     label: "Identity",
     url: "https://parallized.cn",
-    image: ashIrisImage,
+    image: ashIrisHeroImage,
+    sideImage: ashIrisAboutImage,
     accent: "#8A867B",
     metrics: [
       { label: "站点", value: "v3", note: "长期迭代" },
@@ -294,9 +261,9 @@ const projects: BoardProject[] = [
     brief:
       "把个人站、作品集和简历合成一个稳定的身份入口，减少重复维护。",
     problems: [
-      { title: "信息碎片", desc: "作品信息分散" },
-      { title: "身份割裂", desc: "简历和站点割裂" },
-      { title: "统一模型", desc: "用统一内容模型承接展示" },
+      { title: "统一内容模型", desc: "将首页、作品集 Board 和 CV 从三个独立页面收敛为同一套入口，用项目、技能、经历、指标、链接和技术栈等结构化字段驱动展示，解决作品信息、简历内容和条目重复维护的问题。" },
+      { title: "滚动叙事型作品展板", desc: "在 board 中把项目数据、截图、技术栈贴纸、右侧缩略轨道和当前项目状态绑定到滚动进度，通过 Lenis 滚动控制、RAF 状态同步、键盘切换、Sticky 全屏布局和转场动画，实现交互展览的作品集浏览体验。" },
+      { title: "交互式简历系统", desc: "在 cv 中将技能、项目、实验和经历拆成可开关数据池，支持岗位模板筛选、深浅色模式、单双栏布局、localStorage 持久化和打印 / PDF 输出，让一份简历同时作为个人知识积累库持续迭代。" },
     ],
     stackGroups: [
       {
