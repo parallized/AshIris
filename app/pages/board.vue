@@ -4,6 +4,8 @@ import agentForestPromptImage from "~/assets/image/board/agent-forest-prompt.web
 import agentForestResultImage from "~/assets/image/board/agent-forest-result.webp";
 import ashIrisAboutImage from "~/assets/image/board/ash-iris-about.webp";
 import ashIrisHeroImage from "~/assets/image/board/ash-iris-hero.webp";
+import bobberFlowImage from "~/assets/image/board/bobber-flow.webp";
+import bobberWindowImage from "~/assets/image/board/bobber-window.webp";
 import goclawHomeImage from "~/assets/image/board/goclaw-home.webp";
 import goclawPlannerImage from "~/assets/image/board/goclaw-planner.webp";
 import mapleImage from "~/assets/image/board/maple-overview.webp";
@@ -129,11 +131,11 @@ const projects: BoardProject[] = [
       { label: "回写", value: "REST", note: "交付评论与日志" },
     ],
     brief:
-      "把 Notion 从需求收集器变成 AI 可执行的项目中枢：在页面里写任务、图片和验收材料，NPT 通过 Notion MCP + REST 精确发现待办，驱动 Claude / Codex 在代码库执行，并把结果写回任务评论和会话日志。",
+      "将 Notion 从需求收集器变成 AI 可执行的项目中枢 MCP & Skills：在页面里写任务、图片和验收材料，NPT 通过 Notion MCP + REST 精确发现待办，驱动 Claude / Codex 在代码库执行，并把结果写回任务评论和会话日志。",
     problems: [
-      { title: "把自然语言任务变成执行队列", desc: "Notion 更适合承载图文需求、上下文和验收标准。NPT 将 NPT、项目、概要、IDEA 与 TODO 数据库组织成可信工作区，让 Agent 可以读取复杂任务，却不会在用户的整个 Notion 里乱搜乱改。" },
-      { title: "把 Agent 接入项目状态", desc: "通过 .npt.json 或项目名解析对应 TODO 数据库，使用 Notion REST 精确查询待办，执行前后同步队列中、待办、已完成、已阻塞等状态，把一次 Codex / Claude 会话变成可追踪的项目执行单元。" },
-      { title: "把交付变成审计链路", desc: "任务完成后优先以 NPT integration 身份写回评论，记录交付内容、改动说明、测试结果和阻塞原因，同时维护会话日志与发现缓存，让 AI 产出可以被验收、追溯和继续迭代。" },
+      { title: "单线式的自然语言对话转为任务执行队列", desc: "Notion 更适合承载图文需求、上下文和验收标准。NPT 将 NPT、项目、概要、IDEA 与 TODO 数据库组织成可信工作区，让 Agent 可以读取复杂任务，却不会在用户的整个 Notion 里乱搜乱改。" },
+      { title: "借助 MCP 将 Agent 接入项目状态", desc: "通过 .npt.json 或项目名解析对应 TODO 数据库，使用 Notion REST 精确查询待办，执行前后同步队列中、待办、已完成、已阻塞等状态，把一次 Codex / Claude 会话变成可追踪的项目执行单元。" },
+      { title: "循环交付变成审计链路", desc: "任务完成后优先以 NPT integration 身份写回评论，记录交付内容、改动说明、测试结果和阻塞原因，同时维护会话日志与发现缓存，让 AI 产出可以被验收、追溯和继续迭代。" },
     ],
     stackGroups: [
       {
@@ -175,7 +177,7 @@ const projects: BoardProject[] = [
       { label: "综合", value: "Local", note: "主会话收束判断" },
     ],
     brief:
-      "把单次 LLM 回答扩展成可编排的认知森林：用 4 到 32 个专门 Agent 并行拆解复杂问题，再由当前会话作为 synthesizer 收束证据、分歧、风险和行动建议。",
+      "拓展单次 LLM 回答为可编排的认知森林 Skills：用 4 到 32 个专门 Agent 并行拆解复杂问题，再由当前会话作为 synthesizer 收束证据、分歧、风险和行动建议。",
     problems: [
       { title: "多视角问题切片", desc: "内置 Evidence Hunter、Risk Auditor、Systems Thinker、Contrarian 等 persona，让复杂研究、架构审查和策略判断不再依赖一个模型的一次性直觉，而是让不同立场同时探索问题空间。" },
       { title: "严格的综合边界", desc: "将外部 Agent 报告与本地主综合阶段明确隔离，保留报告来源、运行状态和观点差异，避免把多个 Agent 的噪声误读成共识，也减少传统多窗口研究的整理成本。" },
@@ -221,10 +223,10 @@ const projects: BoardProject[] = [
       { label: "目标", value: "80d", note: "掌握度 0 到 80" },
     ],
     brief:
-      "基于 MCP 的全网原子事实提炼与知识闭环工作站，将 Perplexity、NotebookLM、Anki、Obsidian 一类能力收束成主动学习系统，把碎片资料重构为可复习、可追踪、可内化的事实仓库。",
+      "基于 Exa / WebSearch 的全网原子事实提炼与知识闭环工作站，由 LLM 自动聚类三层 Room 并清洗入库，一句话获取海量原子事实形成可自我生长、拓展的知识库。",
     problems: [
-      { title: "从信息收藏到事实提炼", desc: "Recall 抛弃传统笔记软件的被动收藏模式，把研究主题拆成原子事实、证据来源和知识节点，通过自动化深度检索与 AI 脱水，生成能被长期学习系统吸收的事实清单。" },
-      { title: "知识路径与图谱推荐", desc: "自动构建三级分类路标与主动图谱推荐，将任何领域的全网碎片压缩为可推进的学习路线，让用户不必先整理资料再学习，而是在系统引导下边探索边建立结构。" },
+      { title: "原子事实提炼与知识入库", desc: "Recall 抛弃传统笔记软件的被动收藏模式，把研究主题拆成原子事实、证据来源和知识节点，通过自动化 WebSearch 与 AI 脱水，生成能被长期学习系统吸收的事实清单。" },
+      { title: "知识路径推荐与图谱组织", desc: "基于三层分类结构、主题 Room 和知识图谱关系，把零散资料归类为不同 Tag，让用户不需要先整理完整资料库，也能在探索过程中快速检索核心内容。" },
       { title: "复习闭环与本地知识库", desc: "围绕 Bun monorepo、React、SQLite Schema 与 MCP 网关，把事实仓库、间隔复习、外部知识工具和本地知识库串成闭环，目标是在 80 天内把陌生领域掌握度从 0 推到 80。" },
     ],
     stackGroups: [
@@ -485,6 +487,53 @@ const projects: BoardProject[] = [
           { name: "simple-icons:json", label: "JSON", color: "#666666" },
           { name: "logos:javascript", label: "JavaScript E2E" },
           { name: "ph:terminal-window-fill", label: "CLI" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "bobber",
+    title: "Bobber",
+    label: "WASAPI acoustic fishing assistant",
+    url: "https://github.com/parallized/Bobber",
+    image: bobberFlowImage,
+    sideImage: bobberWindowImage,
+    accent: "#8C74D8",
+    metrics: [
+      { label: "输入", value: "Audio", note: "Windows Core Audio" },
+      { label: "触发", value: "Peak", note: "浮漂声学峰值" },
+      { label: "动作", value: "SendInput", note: "本地按键注入" },
+    ],
+    brief:
+      "声学信号判断鱼漂动静的轻量桌面工具：通过独立音频通道监听游戏声音峰值，在明确咬钩特征出现时触发交互按键，把手工盯漂转成可调试的音频分析流程。",
+    problems: [
+      { title: "声音替代画面与数据探测", desc: "Bobber 不扫描进程、不读取游戏状态，而是把游戏内钓鱼声效分离到干净的音频设备通道中，用 WASAPI 枚举设备并读取峰值，让判断建立在可观测的声音波形上。" },
+      { title: "经验调参可视化反馈", desc: "Electron / Vue 界面实时显示终端输出、音频通道和峰值变化，帮助用户根据环境音、效果音与游戏音量调整阈值，减少纯人工回调与反复试错。" },
+      { title: "原生能力与桌面壳协作", desc: "核心 DLL 使用 Rust 暴露 StartCore、SelectDevice、GetPeakValue、PressKey 等接口，主进程通过 koffi 调用，按键注入走 SendInput，形成前端控制、原生采样和本地操作的闭环。" },
+    ],
+    stackGroups: [
+      {
+        type: "Desktop",
+        icons: [
+          { name: "simple-icons:electron", label: "Electron", color: "#9FEAF9" },
+          { name: "logos:vue", label: "Vue" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+        ],
+      },
+      {
+        type: "Native",
+        icons: [
+          { name: "logos:rust", label: "Rust DLL" },
+          { name: "simple-icons:windows", label: "Windows Core Audio", color: "#0078D4" },
+          { name: "ph:keyboard-fill", label: "SendInput", color: "#E7C857" },
+        ],
+      },
+      {
+        type: "Signal",
+        icons: [
+          { name: "ph:waveform-fill", label: "Audio Peak" },
+          { name: "logos:d3", label: "D3 Visualization" },
+          { name: "ph:speaker-high-fill", label: "Device Routing", color: "#8C74D8" },
         ],
       },
     ],
