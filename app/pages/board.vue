@@ -6,6 +6,8 @@ import ashIrisAboutImage from "~/assets/image/board/ash-iris-about.webp";
 import ashIrisHeroImage from "~/assets/image/board/ash-iris-hero.webp";
 import bobberFlowImage from "~/assets/image/board/bobber-flow.webp";
 import bobberWindowImage from "~/assets/image/board/bobber-window.webp";
+import catlikeRenderingMaterialsImage from "~/assets/image/board/catlike-rendering-materials.webp";
+import catlikeRenderingMirrorsImage from "~/assets/image/board/catlike-rendering-mirrors.webp";
 import goclawHomeImage from "~/assets/image/board/goclaw-home.webp";
 import goclawPlannerImage from "~/assets/image/board/goclaw-planner.webp";
 import mapleImage from "~/assets/image/board/maple-overview.webp";
@@ -16,10 +18,14 @@ import owocaptainMapImage from "~/assets/image/board/owocaptain-map.webp";
 import owocaptainNavImage from "~/assets/image/board/owocaptain-nav.webp";
 import paraNavigationNavmeshImage from "~/assets/image/board/para-navigation-navmesh.webp";
 import paraNavigationRouteImage from "~/assets/image/board/para-navigation-route.webp";
+import pixellensDetailImage from "~/assets/image/board/pixellens-detail.webp";
+import pixellensOverviewImage from "~/assets/image/board/pixellens-overview.webp";
 import recallRepositoryImage from "~/assets/image/board/recall-repository.webp";
 import recallStationImage from "~/assets/image/board/recall-station.webp";
 import runedraMapImage from "~/assets/image/board/runedra-map.webp";
 import runedraQuizImage from "~/assets/image/board/runedra-quiz.webp";
+import unityCaptainEditorImage from "~/assets/image/board/unity-captain-editor.webp";
+import unityCaptainProxyImage from "~/assets/image/board/unity-captain-proxy.webp";
 import wowMagicianCooldownsImage from "~/assets/image/board/wow-magician-cooldowns.webp";
 import wowMagicianTimelineImage from "~/assets/image/board/wow-magician-timeline.webp";
 
@@ -131,7 +137,7 @@ const projects: BoardProject[] = [
       { label: "回写", value: "REST", note: "交付评论与日志" },
     ],
     brief:
-      "将 Notion 从需求收集器变成 AI 可执行的项目中枢 MCP & Skills：在页面里写任务、图片和验收材料，NPT 通过 Notion MCP + REST 精确发现待办，驱动 Claude / Codex 在代码库执行，并把结果写回任务评论和会话日志。",
+      "将 Notion 从需求收集器变成 AI 可执行的项目中枢 MCP & Skills：在页面里写任务、图片和验收材料，NPT 通过 Notion MCP + REST 发现待办，驱动 Claude / Codex 在代码库执行，并把结果写回任务评论和会话日志。",
     problems: [
       { title: "单线式的自然语言对话转为任务执行队列", desc: "Notion 更适合承载图文需求、上下文和验收标准。NPT 将 NPT、项目、概要、IDEA 与 TODO 数据库组织成可信工作区，让 Agent 可以读取复杂任务，却不会在用户的整个 Notion 里乱搜乱改。" },
       { title: "借助 MCP 将 Agent 接入项目状态", desc: "通过 .npt.json 或项目名解析对应 TODO 数据库，使用 Notion REST 精确查询待办，执行前后同步队列中、待办、已完成、已阻塞等状态，把一次 Codex / Claude 会话变成可追踪的项目执行单元。" },
@@ -303,6 +309,53 @@ const projects: BoardProject[] = [
     ],
   },
   {
+    slug: "pixellens",
+    title: "PixelLens",
+    label: "Minecraft Web 3D structure archive",
+    url: "https://github.com/Nesb01t/pixellens",
+    image: pixellensOverviewImage,
+    sideImage: pixellensDetailImage,
+    accent: "#D87928",
+    metrics: [
+      { label: "渲染", value: "WebGL", note: "Three.js / Tres.js 场景图" },
+      { label: "管线", value: "GLTF", note: "Litematic → OBJ → GLTF" },
+      { label: "交互", value: "Pick", note: "轨道控制 / 射线拾取" },
+    ],
+    brief:
+      "面向 Minecraft 结构的 Web 3D 可视化档案馆：把 Litematic 建筑通过 Mineways、Blender 和材质注入流程转成 GLTF，在浏览器里以可交互场景展示结构、材料、方块清单与模型资产。",
+    problems: [
+      { title: "像素结构到 WebGL 资产管线", desc: "搭建 Litematic → OBJ → GLTF 的自动化转换流程，让游戏内建筑不只是截图，而是可以被浏览器加载、旋转、拾取和继续分析的三维资产。" },
+      { title: "Minecraft 材质语义还原", desc: "根据 GLTF 传入名称做动态纹理映射与属性归一化，并为玻璃、水等透明材质走专用渲染通道，减少方块模型在 WebGL 里常见的材质错配和透明排序问题。" },
+      { title: "大场景浏览与信息面板", desc: "通过状态机场景控制、视锥体动态加载、层级透明度管理、轨道控制器和射线拾取，把结构信息、材料清单、投影文件和模型调试信息统一到可探索界面里。" },
+    ],
+    stackGroups: [
+      {
+        type: "WebGL",
+        icons: [
+          { name: "simple-icons:threedotjs", label: "Three.js", color: "#20211F" },
+          { name: "logos:vue", label: "Vue" },
+          { name: "logos:typescript-icon", label: "TypeScript" },
+        ],
+      },
+      {
+        type: "Pipeline",
+        icons: [
+          { name: "simple-icons:minecraft", label: "Minecraft", color: "#62B34F" },
+          { name: "simple-icons:blender", label: "Blender", color: "#E87D0D" },
+          { name: "ph:cube-focus-fill", label: "GLTF Assets", color: "#D87928" },
+        ],
+      },
+      {
+        type: "Shaders",
+        icons: [
+          { name: "simple-icons:webgl", label: "WebGL", color: "#990000" },
+          { name: "ph:selection-background-fill", label: "Ray Picking", color: "#86C8FF" },
+          { name: "ph:polygon-fill", label: "Scene Graph", color: "#8BA264" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "goclaw",
     title: "GoClaw",
     label: "AI-powered real-world activity planner",
@@ -316,11 +369,11 @@ const projects: BoardProject[] = [
       { label: "原则", value: "No Mock", note: "拒绝伪造兜底" },
     ],
     brief:
-      "面向现实世界行动的 AI 活动规划器：输入模糊意图，系统用真实天气、POI、地理编码、OSRM 路线与 LLM 结构化决策，生成可执行的跑步路线或拍照地点计划。",
+      "面向现实世界活动决策的 AI Planner，用户只需要决策“想跑步、想拍照、想出去玩”等模糊意图，系统就会结合真实天气、POI、地理编码和路线服务，生成可执行的地点选择、行动路线与时间安排。",
     problems: [
-      { title: "从模糊意图到确定计划", desc: "把「明天想去跑步」「下周想去拍照」这类轻量愿望转成明确输入输出 Schema，由场景注册表调度独立 Planner，让新场景可以像插件一样接入，而不是堆硬编码分支。" },
-      { title: "真实世界数据编排", desc: "将 Open-Meteo、高德 / Overpass POI、OSRM 路由、Nominatim 逆地理和导航跳转封装成 Provider 层，按国内地点服务优先级与降级链路稳定召回现实数据。" },
-      { title: "拒绝假 Demo 的工程约束", desc: "系统不返回伪造景点、伪造天气或伪造路线；即便模型未配置或响应异常，也尽量依靠确定性代码和物理世界 API 输出真实可用的基准方案。" },
+      { title: "模糊意图到结构化计划", desc: "将用户的自然语言愿望拆解，得到活动类型、时间窗口、距离偏好、地点约束、天气条件和输出 Schema，让 LLM 从“聊天回答”转变为可以调度数据源、生成路线和返回确定结果的 Planner。" },
+      { title: "真实世界数据源编排", desc: "将 Open-Meteo 天气、高德 / Overpass POI、OSRM 路线、Nominatim 地理编码等外部服务封装为统一 Provider 层，并处理坐标转换、服务优先级、异常降级和数据归一化，保证规划结果基于真实可用的数据。" },
+      { title: "反幻觉的可执行决策约束", desc: "规定 LLM 凭空编造地点、天气或路线，要求所有推荐都绑定 API 返回的真实 POI、天气状态、距离和路线结果，再输出可被前端地图、行程卡片和用户行动直接消费的结构化方案。" },
     ],
     stackGroups: [
       {
@@ -460,9 +513,9 @@ const projects: BoardProject[] = [
     brief:
       "把游戏世界里的空间移动从经验脚本变成可调用的导航能力：用 Rust / Axum 包住 C++ Detour NavMesh 内核，读取兼容 mmaps 数据，并提供寻路、随机点、射线、贴地移动和附近网格查询等 JSON API。",
     problems: [
-      { title: "把复杂地形变成可查询空间", desc: "通过 Rust FFI 封装 C++ bridge 与 vendored Detour，把 World of Warcraft 的 mmaps 数据加载为可计算 NavMesh，让脚本和 Agent 能在真实地形上理解可走区域、坡度、边界与障碍。" },
-      { title: "导航能力服务化", desc: "基于 Axum 暴露 /v1/path、random-point、move-along-surface、cast-ray、explore-polygon、mesh/nearby 等端点，将寻路内核拆成稳定 HTTP 服务，方便任何上层工具以 JSON + POST 调用。" },
-      { title: "从坐标到行动的工程闭环", desc: "围绕 filter configure、session release、默认配置生成和 Node E2E 分层测试建立运行边界，让避障、Slope 导航和路线探索不只停留在 demo，而能作为游戏自动化与空间智能工具链的底层能力。" },
+      { title: "复杂地形 To 可查询空间", desc: "通过 Rust FFI 封装 C++ bridge 与 vendored Detour，将 mmaps 数据加载为可计算 NavMesh，让 Agent 能在真实地形上理解可走区域、坡度、边界与障碍。" },
+      { title: "高性能的导航能力服务化", desc: "基于 Axum 暴露 /v1/path、random-point、move-along-surface、cast-ray、explore-polygon、mesh/nearby 等端点，将寻路内核拆成稳定 HTTP 服务，方便任何上层工具以 JSON + POST 调用。" },
+      { title: "从坐标到行动的工程闭环", desc: "围绕 filter configure、session release、默认配置生成和 Node E2E 分层测试建立运行边界，让避障、Slope 导航和路线探索作为自动化与空间智能工具链的底层能力。" },
     ],
     stackGroups: [
       {
@@ -507,7 +560,7 @@ const projects: BoardProject[] = [
     brief:
       "声学信号判断鱼漂动静的轻量桌面工具：通过独立音频通道监听游戏声音峰值，在明确咬钩特征出现时触发交互按键，把手工盯漂转成可调试的音频分析流程。",
     problems: [
-      { title: "声音替代画面与数据探测", desc: "Bobber 不扫描进程、不读取游戏状态，而是把游戏内钓鱼声效分离到干净的音频设备通道中，用 WASAPI 枚举设备并读取峰值，让判断建立在可观测的声音波形上。" },
+      { title: "Win32 声音底层数据探测", desc: "Bobber 不扫描进程、不读取游戏状态，将声效分离到干净的音频设备通道中，用 WASAPI 枚举设备并读取峰值，让判断建立在可观测的声音波形上。" },
       { title: "经验调参可视化反馈", desc: "Electron / Vue 界面实时显示终端输出、音频通道和峰值变化，帮助用户根据环境音、效果音与游戏音量调整阈值，减少纯人工回调与反复试错。" },
       { title: "原生能力与桌面壳协作", desc: "核心 DLL 使用 Rust 暴露 StartCore、SelectDevice、GetPeakValue、PressKey 等接口，主进程通过 koffi 调用，按键注入走 SendInput，形成前端控制、原生采样和本地操作的闭环。" },
     ],
@@ -539,6 +592,52 @@ const projects: BoardProject[] = [
     ],
   },
   {
+    slug: "catlike-rendering",
+    title: "Catlike Rendering",
+    label: "Unity rendering pipeline studies",
+    url: "https://catlikecoding.com/unity/tutorials/rendering",
+    image: catlikeRenderingMirrorsImage,
+    sideImage: catlikeRenderingMaterialsImage,
+    accent: "#7FA2B8",
+    metrics: [
+      { label: "引擎", value: "Unity", note: "Built-in Rendering" },
+      { label: "材质", value: "PBR", note: "反射 / 光照 / Shader" },
+      { label: "训练", value: "Frame", note: "从像素理解管线" },
+    ],
+    brief:
+      "沿着 Catlike Coding 的 Unity Rendering 系列拆解图形学基础：从光照、阴影、反射、后处理到复杂材质，把教程中的渲染概念转成可运行场景和可调试 shader 实验。",
+    problems: [
+      { title: "渲染管线的可视化拆解", desc: "通过 Unity 场景复现镜面、地面与天花反射等案例，把相机、光源、深度、法线和反射采样从抽象公式变成可观察的画面差异。" },
+      { title: "材质与光照模型实践", desc: "围绕 PBR、金属度、粗糙度、法线、遮蔽和自发光等参数构建复杂材质，理解一个 shader 如何把纹理、几何和光照共同折叠为最终像素。" },
+      { title: "从教程到工程直觉", desc: "把分步练习作为图形工程训练场，积累调 shader、查帧、定位视觉 bug 和评估渲染成本的经验，而不只停留在复制代码。" },
+    ],
+    stackGroups: [
+      {
+        type: "Engine",
+        icons: [
+          { name: "logos:unity", label: "Unity" },
+          { name: "logos:c-sharp", label: "C#" },
+          { name: "ph:code-block-fill", label: "ShaderLab", color: "#4E8AC8" },
+        ],
+      },
+      {
+        type: "Rendering",
+        icons: [
+          { name: "ph:sphere-fill", label: "PBR Materials", color: "#7FA2B8" },
+          { name: "ph:sun-fill", label: "Lighting", color: "#F3C969" },
+          { name: "ph:diamonds-four-fill", label: "Reflection", color: "#A7C7E7" },
+        ],
+      },
+      {
+        type: "Practice",
+        icons: [
+          { name: "ph:image-square-fill", label: "Frame Debugging", color: "#89B4FA" },
+          { name: "ph:git-branch-fill", label: "Tutorial Progress", color: "#9D8AE8" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "ash-iris",
     title: "Ash Iris",
     label: "Identity",
@@ -552,7 +651,7 @@ const projects: BoardProject[] = [
       { label: "作品", value: "Board", note: "项目统一展示" },
     ],
     brief:
-      "把个人站、作品集和简历合成一个稳定的身份入口，减少重复维护。",
+      "个人站、作品集和简历。",
     problems: [
       { title: "统一内容模型", desc: "将首页、作品集 Board 和 CV 从三个独立页面收敛为同一套入口，用项目、技能、经历、指标、链接和技术栈等结构化字段驱动展示，解决作品信息、简历内容和条目重复维护的问题。" },
       { title: "滚动叙事型作品展板", desc: "在 board 中把项目数据、截图、技术栈贴纸、右侧缩略轨道和当前项目状态绑定到滚动进度，通过 Lenis 滚动控制、RAF 状态同步、键盘切换、Sticky 全屏布局和转场动画，实现交互展览的作品集浏览体验。" },
@@ -579,6 +678,52 @@ const projects: BoardProject[] = [
       },
     ],
   },
+  {
+    slug: "unity-captain-demoscene",
+    title: "Unity Captain",
+    label: "Unity Editor AI scene scripting bridge",
+    url: "https://github.com/parallized/Unity-Captain-Demoscene",
+    image: unityCaptainProxyImage,
+    sideImage: unityCaptainEditorImage,
+    accent: "#6E8FAF",
+    metrics: [
+      { label: "入口", value: "Editor", note: "Unity 面板内对话" },
+      { label: "协议", value: "JSON", note: "Schema 约束输出" },
+      { label: "桥接", value: "C#", note: "HttpClient 调本地核心" },
+    ],
+    brief:
+      "把 Unity 编辑器本身变成 AI 场景编排入口：在 EditorWindow 中输入自然语言目标，约束 Captain 输出可解析 JSON，再由 C# 代理转发到本地核心服务，让剧情、对话和演示场景可以从提示词进入工程资产流水线。",
+    problems: [
+      { title: "自然语言到场景数据", desc: "将“创建三个对话场景”一类需求拆成 position、totalTime、lines 等结构化字段，把创意描述收束为 Unity 可以继续消费的场景与对白数据。" },
+      { title: "Editor 内的人机协作面板", desc: "在 Unity Captain 标签页里保留用户输入、Captain 输出、schema 文件选择和发送动作，让 AI 生成不脱离编辑器上下文，便于快速迭代演示内容。" },
+      { title: "本地 Captain 服务桥接", desc: "通过 CaptainProxy.cs 使用 HttpClient 将编辑器请求发送到 localhost 核心端点，并反序列化 reasoning / content 响应，为后续接入更复杂的工具调用和资产生成留出接口。" },
+    ],
+    stackGroups: [
+      {
+        type: "Engine",
+        icons: [
+          { name: "logos:unity", label: "Unity" },
+          { name: "logos:c-sharp", label: "C#" },
+          { name: "simple-icons:dotnet", label: ".NET", color: "#512BD4" },
+        ],
+      },
+      {
+        type: "AI",
+        icons: [
+          { name: "logos:openai-icon", label: "LLM Core" },
+          { name: "simple-icons:json", label: "JSON Schema", color: "#555555" },
+          { name: "ph:brackets-curly-fill", label: "Structured Output", color: "#6E8FAF" },
+        ],
+      },
+      {
+        type: "Workflow",
+        icons: [
+          { name: "logos:github-icon", label: "GitHub" },
+          { name: "ph:terminal-window-fill", label: "Local Service" },
+        ],
+      },
+    ],
+  },
 ];
 
 const stackIconName = (icon: StackIcon) =>
@@ -599,6 +744,10 @@ const stickerSlots: StickerSlot[] = [
   { x: -240, y: 28, rotate: -8, scale: 1.04 },
   { x: -280, y: 12, rotate: -15, scale: 0.9 },
   { x: -155, y: 15, rotate: 5, scale: 0.88 },
+  { x: -320, y: 36, rotate: 9, scale: 0.9 },
+  { x: -110, y: 4, rotate: -12, scale: 0.84 },
+  { x: -210, y: 4, rotate: 7, scale: 0.86 },
+  { x: -25, y: 42, rotate: -10, scale: 0.82 },
 ];
 
 const activeIndex = ref(0);
@@ -1242,6 +1391,10 @@ onBeforeUnmount(() => {
 .stack-pile-fade-enter-active .stack-sticker:nth-child(6) { animation-delay: 0.20s; }
 .stack-pile-fade-enter-active .stack-sticker:nth-child(7) { animation-delay: 0.24s; }
 .stack-pile-fade-enter-active .stack-sticker:nth-child(8) { animation-delay: 0.28s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(9) { animation-delay: 0.32s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(10) { animation-delay: 0.36s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(11) { animation-delay: 0.40s; }
+.stack-pile-fade-enter-active .stack-sticker:nth-child(12) { animation-delay: 0.44s; }
 
 .stack-pile-fade-leave-to {
   opacity: 0;
