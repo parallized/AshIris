@@ -25,8 +25,6 @@ const skills: Skill[] = [
 
     <IdentitySection
       id="about"
-      graduation="双非本数媒 2021 — 2026"
-      experience="2 年实习经验，多年游戏周边开发"
       base="浙江，杭州"
       :skills="skills"
     />

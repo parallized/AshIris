@@ -7,8 +7,6 @@ interface Skill {
 }
 
 defineProps<{
-  graduation?: string;
-  experience?: string;
   base?: string;
   skills: Skill[];
 }>();
@@ -127,8 +125,6 @@ onMounted(() => {
         <div class="space-y-2">
           <div
             v-for="(val, label, index) in {
-              Academic: graduation,
-              Professional: experience,
               Location: base,
               Status: '接受邀约',
             }"

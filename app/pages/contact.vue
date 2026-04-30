@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const email = "1317699264@qq.com";
-const copied = ref(false);
+const email = "parallizedcn@gmail.com";
+const copiedType = ref<string | null>(null);
 let copyTimer: number | undefined;
 
-const copyEmail = async () => {
+const copyText = async (text: string, type: string) => {
   if (!import.meta.client) return;
 
   if (navigator.clipboard) {
-    await navigator.clipboard.writeText(email);
+    await navigator.clipboard.writeText(text);
   } else {
     const textarea = document.createElement("textarea");
-    textarea.value = email;
+    textarea.value = text;
     textarea.setAttribute("readonly", "");
     textarea.style.position = "fixed";
     textarea.style.opacity = "0";
@@ -22,61 +22,74 @@ const copyEmail = async () => {
     document.body.removeChild(textarea);
   }
 
-  copied.value = true;
+  copiedType.value = type;
   if (copyTimer !== undefined) window.clearTimeout(copyTimer);
   copyTimer = window.setTimeout(() => {
-    copied.value = false;
+    copiedType.value = null;
   }, 1600);
 };
 </script>
 
 <template>
   <main class="contact-page">
-    <NuxtLink to="/about" class="contact-brand" aria-label="About parallized">
-      <Icon name="ph:hand-peace-bold" class="contact-brand-icon" />
-      <span>parallized</span>
-    </NuxtLink>
+    <div class="contact-container">
+      <article class="cv-card-inner">
+        <header class="cv-header">
+          <div class="cv-title-row">
+            <h1 class="cv-title">{{ email }}</h1>
+            <div class="cv-title-line"></div>
+          </div>
+          <p class="cv-label">打个招呼，或是探讨未来的合作</p>
+        </header>
 
-    <section class="contact-center" aria-label="Contact">
-      <p class="contact-kicker">Say hi or talk future projects</p>
-      <a :href="`mailto:${email}`" class="contact-email">{{ email }}</a>
-
-      <div class="contact-actions" aria-label="Contact links">
-        <button type="button" class="contact-chip" @click="copyEmail">
-          {{ copied ? "Copied" : "Copy email" }}
-        </button>
-        <a
-          class="contact-chip"
-          href="https://github.com/parallized"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
-        <a
-          class="contact-chip"
-          href="https://parallized.cn"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Blog
-        </a>
-        <a class="contact-chip" :href="`mailto:${email}`">Mail</a>
-      </div>
-    </section>
+        <div class="cv-body">
+          <p class="cv-brief">
+            如果你希望建立合作、有任何问题，或者只是想交个朋友，欢迎随时联系我。我始终乐于探讨新项目、创意想法，或是参与到你的愿景之中。
+          </p>
+          <ul class="cv-list">
+            <li>
+              <button type="button" class="action-link" @click="copyText(email, 'email')">
+                <Icon name="ph:envelope-simple-fill" class="action-icon" />
+                <span><strong>{{ copiedType === 'email' ? '已复制' : '邮箱' }}</strong>：点击复制 {{ email }}</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="action-link" @click="copyText('parallized', 'wechat')">
+                <Icon name="simple-icons:wechat" class="action-icon" />
+                <span><strong>微信</strong>：点击复制 parallized</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="action-link" @click="copyText('1317699264', 'qq')">
+                <Icon name="simple-icons:tencentqq" class="action-icon" />
+                <span><strong>QQ</strong>：点击复制 1317699264</span>
+              </button>
+            </li>
+            <li>
+              <a href="https://github.com/parallized" target="_blank" rel="noreferrer" class="action-link">
+                <Icon name="simple-icons:github" class="action-icon" />
+                <span><strong>GitHub</strong>：github.com/parallized</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
   </main>
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
 .contact-page {
   position: relative;
-  display: grid;
   min-height: 100vh;
-  place-items: center;
-  padding: 80px 24px 132px;
-  background: #f6f6f4;
-  color: #4a4a47;
-  overflow: hidden;
+  background: #f1f1ee;
+  color: #20211f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 10vw;
 }
 
 @supports (height: 100svh) {
@@ -85,98 +98,128 @@ const copyEmail = async () => {
   }
 }
 
-.contact-brand {
-  position: fixed;
-  top: 28px;
-  left: clamp(22px, 6vw, 128px);
-  z-index: 4;
+.contact-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.cv-card-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(20px, 3vw, 40px);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  width: 100%;
+}
+
+.cv-header {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.cv-title-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+}
+
+.cv-title {
+  margin: 0;
+  color: #20211f;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  word-break: break-all;
+}
+
+.cv-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #20211f9f 0%, #8ba264 40%, transparent 100%);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.cv-label {
+  margin: 0;
+  color: #8c8f87;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+}
+
+.cv-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.cv-brief {
+  margin: 0;
+  color: #262824;
+  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 400;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.cv-list {
+  margin: 0;
+  padding: 0 0 0 24px;
+  list-style: square;
+  color: #62655e;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cv-list li::marker {
+  color: #8ba264;
+}
+
+.action-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition: opacity 0.2s;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: #555650;
-  font-size: clamp(16px, 1.4vw, 21px);
-  font-weight: 500;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.contact-brand-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.contact-center {
-  width: min(100%, 900px);
-  text-align: center;
-}
-
-.contact-kicker {
-  margin: 0 0 18px;
-  color: #4f514d;
-  font-size: clamp(15px, 1.5vw, 21px);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.contact-email {
-  display: inline-block;
-  color: #50514f;
-  font-size: clamp(38px, 6vw, 78px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-decoration: none;
-  word-break: break-word;
-}
-
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
-  margin-top: 42px;
 }
 
-.contact-chip {
-  border: 0;
-  border-radius: 999px;
-  background: #eef1ee;
-  color: #555650;
-  padding: 12px 22px;
-  font: inherit;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background 220ms ease,
-    color 220ms ease,
-    transform 220ms ease;
+.action-link:hover {
+  opacity: 0.7;
 }
 
-.contact-chip:hover {
-  background: #20211f;
-  color: #f7f6f1;
-  transform: translateY(-1px);
+.action-link strong {
+  color: #20211f;
+  font-weight: 700;
+}
+
+.action-icon {
+  font-size: 1.1em;
+  color: #8ba264;
+  opacity: 0.9;
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {
   .contact-page {
-    padding-inline: 18px;
+    padding-inline: 24px;
   }
-
-  .contact-brand {
-    left: 20px;
-  }
-
-  .contact-email {
-    font-size: clamp(34px, 13vw, 52px);
-  }
-
-  .contact-chip {
-    padding: 11px 16px;
-    font-size: 14px;
+  
+  .cv-title {
+    font-size: clamp(28px, 8vw, 40px);
   }
 }
 </style>
