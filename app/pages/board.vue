@@ -1067,6 +1067,8 @@ onBeforeUnmount(() => {
       </aside>
     </div>
   </div>
+
+  <AppDock />
 </template>
 
 <style scoped>

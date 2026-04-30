@@ -840,6 +840,8 @@ onBeforeUnmount(() => {
       </Transition>
     </Teleport>
   </div>
+
+  <AppDock />
 </template>
 
 <style scoped>
