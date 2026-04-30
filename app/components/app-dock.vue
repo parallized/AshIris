@@ -4,13 +4,12 @@ import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } 
 const route = useRoute();
 
 const dockItems = [
+  { label: "主页", to: "/", icon: "ph:house" },
   { label: "画廊", to: "/board", icon: "ph:images-square" },
-  { label: "关于", to: "/about", icon: "ph:user-focus" },
   { label: "联系", to: "/contact", icon: "ph:paper-plane-tilt" },
 ];
 
-const isActive = (to: string) =>
-  route.path === to || (route.path === "/" && to === "/about");
+const isActive = (to: string) => route.path === to;
 
 const dockRef = ref<HTMLElement | null>(null);
 const hoverIndex = ref<number | null>(null);
