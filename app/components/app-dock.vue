@@ -114,7 +114,7 @@ watch(
   overflow: visible;
   border: 1px solid rgb(15 23 42 / 5%);
   border-radius: 999px;
-  background: rgb(247 248 244 / 34%);
+  background: rgb(247 248 244 / 42%);
   box-shadow:
     0 18px 48px -30px rgb(15 23 42 / 22%),
     0 8px 22px -14px rgb(15 23 42 / 16%),
@@ -167,7 +167,7 @@ watch(
   height: 38px;
   padding: 0 12px;
   border-radius: 999px;
-  color: rgb(32 33 31 / 48%);
+  color: rgb(32 33 31 / 72%);
   text-decoration: none;
   transition:
     color 260ms ease,

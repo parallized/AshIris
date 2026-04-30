@@ -134,7 +134,7 @@ onMounted(() => {
             }"
             :key="label"
             :style="{ transitionDelay: `${index * 150}ms` }"
-            class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group border-b-[0.5px] border-[#E8E4DF]/10 py-10 flex flex-col md:flex-row md:items-center justify-between hover:bg-[#E8E4DF]/5 px-4 -mx-4 cursor-default"
+            class="reveal-pure opacity-0 translate-y-10 transition-all duration-1000 ease-out data-[animate=true]:opacity-100 data-[animate=true]:translate-y-0 group py-10 flex flex-col md:flex-row md:items-center justify-between hover:bg-[#E8E4DF]/5 px-4 -mx-4 cursor-default"
           >
             <span
               class="text-[9px] font-black uppercase tracking-[0.4em] opacity-20 group-hover:opacity-100 group-hover:text-[#D4AF37]"

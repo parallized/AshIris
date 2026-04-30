@@ -15,7 +15,7 @@ const skills: Skill[] = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#1A1614] pb-28">
+  <div class="min-h-screen bg-[#1A1614]">
     <HeroSection
       id="about-hero"
       letter="G"
