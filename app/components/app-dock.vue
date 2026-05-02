@@ -14,6 +14,9 @@ const isActive = (to: string) => route.path === to;
 const dockRef = ref<HTMLElement | null>(null);
 const hoverIndex = ref<number | null>(null);
 const activeIndex = computed(() => dockItems.findIndex((item) => isActive(item.to)));
+const highlightedIndex = computed(() =>
+  hoverIndex.value ?? (activeIndex.value >= 0 ? activeIndex.value : 0),
+);
 const indicator = reactive({
   opacity: 0,
   width: 0,
@@ -84,7 +87,7 @@ watch(
       :key="item.to"
       :to="item.to"
       class="app-dock-link"
-      :class="{ 'app-dock-link-active': isActive(item.to) }"
+      :class="{ 'app-dock-link-highlighted': index === highlightedIndex }"
       :aria-label="item.label"
       :aria-current="isActive(item.to) ? 'page' : undefined"
       :title="item.label"
@@ -166,24 +169,23 @@ watch(
   height: 38px;
   padding: 0 12px;
   border-radius: 999px;
-  color: rgb(32 33 31 / 72%);
+  color: rgb(32 33 31 / 88%);
   text-decoration: none;
   transition:
     color 260ms ease,
     padding 260ms ease;
 }
 
-.app-dock-link:hover,
 .app-dock-link:focus-visible {
-  color: #f7f6f1;
+  outline: none;
 }
 
-.app-dock-link-active {
+.app-dock-link-highlighted {
   color: #f7f6f1;
   padding: 0 14px;
 }
 
-.app-dock-link-active:hover {
+.app-dock-link-highlighted:hover {
   color: #f7f6f1;
 }
 

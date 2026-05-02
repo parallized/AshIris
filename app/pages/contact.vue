@@ -49,20 +49,29 @@ const copyText = async (text: string, type: string) => {
           <ul class="cv-list">
             <li>
               <button type="button" class="action-link" @click="copyText(email, 'email')">
-                <Icon name="ph:envelope-simple-fill" class="action-icon" />
-                <span><strong>{{ copiedType === 'email' ? '已复制' : '邮箱' }}</strong>：点击复制 {{ email }}</span>
+                <span class="badge-main-content" :class="{ 'is-hidden': copiedType === 'email' }">
+                  <Icon name="ph:envelope-simple-fill" class="action-icon" />
+                  <span><strong>邮箱</strong>：{{ email }}</span>
+                </span>
+                <span class="badge-feedback-overlay" :class="{ 'is-visible': copiedType === 'email' }">已复制</span>
               </button>
             </li>
             <li>
               <button type="button" class="action-link" @click="copyText('parallized', 'wechat')">
-                <Icon name="simple-icons:wechat" class="action-icon" />
-                <span><strong>微信</strong>：点击复制 parallized</span>
+                <span class="badge-main-content" :class="{ 'is-hidden': copiedType === 'wechat' }">
+                  <Icon name="simple-icons:wechat" class="action-icon" />
+                  <span><strong>微信</strong>：parallized</span>
+                </span>
+                <span class="badge-feedback-overlay" :class="{ 'is-visible': copiedType === 'wechat' }">已复制</span>
               </button>
             </li>
             <li>
               <button type="button" class="action-link" @click="copyText('1317699264', 'qq')">
-                <Icon name="simple-icons:tencentqq" class="action-icon" />
-                <span><strong>QQ</strong>：点击复制 1317699264</span>
+                <span class="badge-main-content" :class="{ 'is-hidden': copiedType === 'qq' }">
+                  <Icon name="simple-icons:tencentqq" class="action-icon" />
+                  <span><strong>QQ</strong>：1317699264</span>
+                </span>
+                <span class="badge-feedback-overlay" :class="{ 'is-visible': copiedType === 'qq' }">已复制</span>
               </button>
             </li>
             <li>
@@ -137,9 +146,9 @@ const copyText = async (text: string, type: string) => {
 .cv-title-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, #20211f9f 0%, #8ba264 40%, transparent 100%);
+  background: linear-gradient(to right, #20211f9f 0%, #a0a09a 40%, transparent 100%);
   border-radius: 2px;
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .cv-label {
@@ -168,48 +177,72 @@ const copyText = async (text: string, type: string) => {
 
 .cv-list {
   margin: 0;
-  padding: 0 0 0 24px;
-  list-style: square;
-  color: #62655e;
-  font-size: clamp(14px, 1.1vw, 15px);
-  line-height: 1.8;
+  padding: 0;
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.cv-list li::marker {
-  color: #8ba264;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .action-link {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: inherit;
+  position: relative;
+  background: #e8e8e5;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a4a47;
   cursor: pointer;
-  text-align: left;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  overflow: hidden;
 }
 
 .action-link:hover {
-  opacity: 0.7;
+  background: #20211f;
+  color: #f7f6f1;
 }
 
-.action-link strong {
-  color: #20211f;
+.badge-main-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.badge-main-content.is-hidden {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.badge-feedback-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.badge-feedback-overlay.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .action-icon {
   font-size: 1.1em;
-  color: #8ba264;
-  opacity: 0.9;
+  color: inherit;
+  opacity: 0.8;
   flex-shrink: 0;
 }
 
