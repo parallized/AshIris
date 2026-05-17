@@ -14,6 +14,7 @@ const isActive = (to: string) => route.path === to;
 const dockRef = ref<HTMLElement | null>(null);
 const hoverIndex = ref<number | null>(null);
 const activeIndex = computed(() => dockItems.findIndex((item) => isActive(item.to)));
+const selectedIndex = computed(() => hoverIndex.value ?? activeIndex.value);
 const indicator = reactive({
   opacity: 0,
   width: 0,
@@ -84,7 +85,10 @@ watch(
       :key="item.to"
       :to="item.to"
       class="app-dock-link"
-      :class="{ 'app-dock-link-active': isActive(item.to) }"
+      :class="{
+        'app-dock-link-active': isActive(item.to),
+        'app-dock-link-selected': selectedIndex === index,
+      }"
       :aria-label="item.label"
       :aria-current="isActive(item.to) ? 'page' : undefined"
       :title="item.label"
@@ -100,10 +104,12 @@ watch(
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
 .app-dock {
   position: fixed;
   left: 50%;
-  bottom: max(20px, env(safe-area-inset-bottom));
+  bottom: max(44px, calc(env(safe-area-inset-bottom) + 28px));
   z-index: 3000;
   display: flex;
   align-items: center;
@@ -121,6 +127,7 @@ watch(
     inset 0 -1px 0 rgb(0 0 0 / 5%);
   backdrop-filter: blur(18px) saturate(1.35);
   -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   transform: translateX(-50%);
 }
 
@@ -171,19 +178,20 @@ watch(
   transition:
     color 260ms ease,
     padding 260ms ease;
+  transition-delay: 0ms;
 }
 
-.app-dock-link:hover,
-.app-dock-link:focus-visible {
+.app-dock-link-selected {
   color: #f7f6f1;
+  transition-delay: 320ms, 0ms;
 }
 
 .app-dock-link-active {
-  color: #f7f6f1;
   padding: 0 14px;
+  transition-delay: 0ms;
 }
 
-.app-dock-link-active:hover {
+.app-dock-link-active.app-dock-link-selected {
   color: #f7f6f1;
 }
 
@@ -196,10 +204,16 @@ watch(
 
 .app-dock-label {
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+}
+
+@media (max-width: 980px) {
+  .app-dock {
+    display: none;
+  }
 }
 
 @media (max-width: 560px) {
