@@ -7,9 +7,10 @@ import worksImage from "~/assets/image/works.webp";
 import ashIrisPreviewImage from "~/assets/image/board/ash-iris.webp";
 import goclawPreviewImage from "~/assets/image/board/goclaw-home.webp";
 import magicboardPreviewImage from "~/assets/image/board/agent-forest-result.webp";
-import maplePreviewImage from "~/assets/image/board/maple-overview.webp";
-import runedraPreviewImage from "~/assets/image/board/runedra.webp";
-import wowPreviewImage from "~/assets/image/board/wow-raid-plus.webp";
+import masterPreviewImage from "~/assets/image/board/unity-captain-proxy.webp";
+import paraNavigationPreviewImage from "~/assets/image/board/para-navigation-route.webp";
+import runedraPreviewImage from "~/assets/image/board/runedra-map.webp";
+import wowPreviewImage from "~/assets/image/board/wow-magician-timeline.webp";
 
 interface Skill {
   label: string;
@@ -145,54 +146,67 @@ const contactVisualImages = [
 
 const featuredProjects = [
   {
-    id: "ash-iris",
-    title: "Ash Iris",
-    label: "个人身份与作品集",
+    id: "blog",
+    serviceIds: ["ash-iris"],
+    title: "博客",
+    label: "Blog",
     image: ashIrisPreviewImage,
     to: "/board",
   },
   {
     id: "magicboard",
+    serviceIds: ["magicboard"],
     title: "Magicboard",
-    label: "Agent 任务与知识编排",
+    label: "白板",
     image: magicboardPreviewImage,
     to: "/board",
   },
   {
     id: "runedra",
+    serviceIds: ["runedra"],
     title: "Runedra",
-    label: "知识地图与测验系统",
+    label: "知树",
     image: runedraPreviewImage,
     to: "/board",
   },
   {
     id: "goclaw",
+    serviceIds: ["goclaw"],
     title: "GoClaw",
-    label: "规划与工具链入口",
+    label: "智能规划",
     image: goclawPreviewImage,
     to: "/board",
   },
   {
     id: "wowmagicians",
-    title: "WowRaidPlus",
+    serviceIds: ["wowmagicians"],
+    title: "WowMagicians",
     label: "游戏社区工具",
     image: wowPreviewImage,
     to: "/board",
   },
   {
-    id: "maple",
-    title: "Maple",
-    label: "本地 Agent 工作流中控",
-    image: maplePreviewImage,
+    id: "para-navigation",
+    serviceIds: ["para-navigation"],
+    title: "ParaNavigation",
+    label: "导航路径",
+    image: paraNavigationPreviewImage,
+    to: "/board",
+  },
+  {
+    id: "master",
+    serviceIds: ["grok2api", "cliproxyapi"],
+    title: "Master",
+    label: "Grok + Master 平均",
+    image: masterPreviewImage,
     to: "/board",
   },
 ];
 
-const { data: opsStatus, pending: isStatusPending, error: statusError } =
-  useFetch<OpsStatus>(statusEndpoint, {
-    server: false,
-    default: () => fallbackOpsStatus,
-  });
+const { data: opsStatus } = useFetch<OpsStatus>(statusEndpoint, {
+  server: false,
+  default: () => fallbackOpsStatus,
+});
 
 const { data: latencyHistory } = useFetch<OpsHistoryPoint[]>(historyEndpoint, {
   server: false,
@@ -210,15 +224,74 @@ const serviceUpTotal = computed(
     ).length
 );
 
+const summarizeOverall = (states: string[]) => {
+  if (states.includes("down")) return "down";
+  if (states.includes("degraded")) return "degraded";
+  if (states.includes("up")) return "up";
+  return "unknown";
+};
+
+const averageLatency = (latencies: Array<number | null | undefined>) => {
+  const usableLatencies = latencies.filter(
+    (latency): latency is number => typeof latency === "number"
+  );
+
+  if (!usableLatencies.length) return null;
+
+  return (
+    usableLatencies.reduce((total, latency) => total + latency, 0) /
+    usableLatencies.length
+  );
+};
+
+const uptimeTone = (overall: string, latency: number | null) => {
+  if (overall === "down") return "is-red";
+  if (overall === "degraded") return "is-orange";
+  if (overall === "unknown") return "is-yellow";
+  if (typeof latency === "number" && latency >= 900) return "is-orange";
+  if (typeof latency === "number" && latency >= 650) return "is-yellow";
+  return "is-green";
+};
+
+const uptimeSegmentsForProject = (serviceIds: string[]) => {
+  const history = latencyHistory.value ?? [];
+  const selectedHistory = history.length > 18
+    ? history.filter((_, index) => index % Math.ceil(history.length / 18) === 0)
+    : history;
+
+  return selectedHistory.slice(-18).map((point, index) => {
+    const services = serviceIds
+      .map((serviceId) => point.services[serviceId])
+      .filter(Boolean);
+    const latency = averageLatency(services.map((service) => service.latencyMs));
+    const overall = summarizeOverall(services.map((service) => service.overall));
+
+    return {
+      id: `${point.timestamp}-${index}`,
+      overall,
+      tone: uptimeTone(overall, latency),
+    };
+  });
+};
+
 const projectCards = computed(() =>
   featuredProjects.map((project) => {
-    const service = opsStatus.value?.services[project.id];
+    const services = project.serviceIds
+      .map((serviceId) => opsStatus.value?.services[serviceId])
+      .filter((service): service is OpsService => Boolean(service));
+    const latencyMs = averageLatency(services.map((service) => service.http?.latencyMs));
+    const uptimeSegments = uptimeSegmentsForProject(project.serviceIds);
+    const goodSegments = uptimeSegments.filter((segment) => segment.overall === "up").length;
 
     return {
       ...project,
-      overall: service?.overall ?? (project.id === "maple" ? "local" : "unknown"),
-      latencyMs: service?.http?.latencyMs ?? null,
-      url: service?.url,
+      overall: summarizeOverall(services.map((service) => service.overall)),
+      latencyMs,
+      uptimePercent: uptimeSegments.length
+        ? Math.round((goodSegments / uptimeSegments.length) * 100)
+        : null,
+      uptimeSegments,
+      url: services[0]?.url,
     };
   })
 );
@@ -231,8 +304,8 @@ const chartPlotTop = 26;
 const chartPlotBottom = 184;
 const chartGridLines = [26, 79, 132, 184];
 const metricYAxisLabels = [
-  { label: "100", y: chartPlotTop },
-  { label: "50", y: (chartPlotTop + chartPlotBottom) / 2 },
+  { label: "100%", y: chartPlotTop },
+  { label: "50%", y: (chartPlotTop + chartPlotBottom) / 2 },
   { label: "0", y: chartPlotBottom },
 ];
 
@@ -262,6 +335,8 @@ const averagePointLatency = (point: OpsHistoryPoint) => {
   );
 };
 
+const clampPercent = (value: number) => Math.min(Math.max(value, 0), 100);
+
 const metricSamples = computed(() =>
   (latencyHistory.value ?? []).map((point) => ({
     timestamp: point.timestamp,
@@ -277,9 +352,9 @@ const metricChartLines = computed(() => {
   const usableHeight = chartPlotBottom - chartPlotTop;
   const denominator = Math.max(samples.length - 1, 1);
   const configs = [
-    { key: "cpu", label: "CPU", className: "is-cpu" },
-    { key: "mem", label: "MEM", className: "is-mem" },
-    { key: "response", label: "RESPONSE", className: "is-response" },
+    { key: "cpu", label: "CPU", className: "is-cpu", scale: "percent" },
+    { key: "mem", label: "MEM", className: "is-mem", scale: "percent" },
+    { key: "response", label: "RESPONSE", className: "is-response", scale: "relative" },
   ] as const;
 
   return configs.map((config) => {
@@ -299,7 +374,12 @@ const metricChartLines = computed(() => {
     const range = max - min || 1;
 
     const coordinates = values.map((sample) => {
-      const normalized = max === min ? 0.5 : (sample.value - min) / range;
+      const normalized =
+        config.scale === "percent"
+          ? clampPercent(sample.value) / 100
+          : max === min
+            ? 0.5
+            : (sample.value - min) / range;
 
       return {
         x: chartPaddingX + (sample.index / denominator) * usableWidth,
@@ -357,17 +437,6 @@ const statusLabel = (overall?: string) => {
 const formatLatency = (latency?: number | null) =>
   typeof latency === "number" ? `${Math.round(latency)}ms` : "--";
 
-const updatedAtLabel = computed(() => {
-  if (!opsStatus.value?.timestamp) return "waiting for status";
-
-  return new Intl.DateTimeFormat("zh-CN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-    timeZone: "Asia/Shanghai",
-  }).format(new Date(opsStatus.value.timestamp));
-});
-
 const serviceTone = (overall?: string) => {
   if (overall === "up") return "is-up";
   if (overall === "down") return "is-down";
@@ -400,8 +469,8 @@ const handlePortraitError = (event: Event) => {
 
         <div class="hero-meta" aria-label="Current profile">
           <span v-for="item in skills" :key="item.label">
-            <strong>{{ item.label }}</strong>
-            {{ item.value }}
+            <strong>{{ item.value }}</strong>
+            <small>{{ item.label }}</small>
           </span>
         </div>
       </header>
@@ -434,7 +503,7 @@ const handlePortraitError = (event: Event) => {
               class="inline-action"
               aria-label="Go to contact page"
             >
-              <span>协作 / 排障 / 做工具</span>
+              <span>Contact</span>
               <Icon name="ph:arrow-up-right" class="action-icon" />
             </NuxtLink>
           </div>
@@ -482,8 +551,8 @@ const handlePortraitError = (event: Event) => {
         <article class="panel latency-panel" aria-label="Six hour service metrics">
           <div class="latency-head">
             <div>
-              <p class="panel-label">6H</p>
-              <h2>核心</h2>
+              <p class="panel-label">Server 6H</p>
+              <h2>核心状态</h2>
             </div>
             <div class="metric-legend" aria-label="Metric legend">
               <span
@@ -547,69 +616,37 @@ const handlePortraitError = (event: Event) => {
           <Icon name="ph:hourglass-high" class="archive-icon" />
         </article>
 
-        <article class="panel code-panel">
-          <div class="code-head">
-            <p class="panel-label">Reading list</p>
-            <span>{{ statusError ? "stale" : "live" }}</span>
-          </div>
-          <div class="stack-list">
-            <div>
-              <Icon name="ph:wave-sine" class="tree-icon" />
-              <span>Latency as texture</span>
-              <small>把可用性压到视觉角落，不让指标抢走作品叙事</small>
-            </div>
-            <div>
-              <Icon name="ph:images" class="tree-icon" />
-              <span>Project sampling</span>
-              <small>每个服务保留一张真实项目截图，状态叠在图片上</small>
-            </div>
-            <div>
-              <Icon name="ph:shield-check" class="tree-icon" />
-              <span>Public but narrow</span>
-              <small>前端不接触 Docker、Kuma 数据库或服务器命令</small>
-            </div>
-          </div>
-          <div class="terminal-card">
-            <span>GET /ops/status/history-6h.json</span>
-            <strong>
-              {{ isStatusPending ? "loading live work" : `${serviceUpTotal} visible services` }}
-            </strong>
-            <em>refreshed {{ updatedAtLabel }}</em>
-          </div>
-        </article>
-
         <article class="panel projects-panel">
           <div class="panel-topline">
             <p class="panel-label">Project signals</p>
-            <span class="quiet-status">availability over screenshots</span>
+            <span class="quiet-status">service status</span>
           </div>
-          <div class="project-mosaic">
+          <div class="project-status-list">
             <NuxtLink
               v-for="project in projectCards"
               :key="project.id"
               :to="project.to"
-              class="project-tile"
-              :class="[`tile-${project.id}`, serviceTone(project.overall)]"
+              class="project-status-card"
+              :class="serviceTone(project.overall)"
             >
               <img
                 :src="project.image"
-                :alt="project.label"
-                loading="lazy"
+                :alt="`${project.title} ${project.label}`"
+                loading="eager"
                 decoding="async"
               />
-              <span class="tile-shade" aria-hidden="true"></span>
-              <span class="tile-status">
-                {{ statusLabel(project.overall) }}
-                <small>{{ formatLatency(project.latencyMs) }}</small>
-              </span>
-              <span class="tile-copy">
+              <span class="project-status-copy">
                 <strong>{{ project.title }}</strong>
-                {{ project.label }}
+                <small>{{ project.label }}</small>
+              </span>
+              <span class="project-status-meta">
+                <i aria-hidden="true"></i>
+                {{ project.uptimePercent ?? "--" }}% · {{ formatLatency(project.latencyMs) }}
               </span>
             </NuxtLink>
           </div>
           <p class="panel-footnote">
-            Maple 是本地工作流作品，所以以 local 标记；其余项目读取公开服务状态。
+            状态读取公开 ops / uptime 数据；Master 为 Grok 与 Master 平均。
           </p>
         </article>
 
@@ -655,12 +692,12 @@ const handlePortraitError = (event: Event) => {
             </div>
           </div>
           <div class="contact-copy">
-            <p class="panel-label">联系</p>
+            <p class="panel-label">Contact</p>
             <span class="contact-note">杭州 / 可远程协作</span>
           </div>
           <div class="contact-bottom">
             <span class="contact-action">
-              CONTACT
+              联系
               <Icon name="ph:paper-plane-tilt" class="contact-icon" />
             </span>
           </div>
@@ -674,7 +711,7 @@ const handlePortraitError = (event: Event) => {
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap");
 
 .home-page {
-  --film-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23grain)' opacity='.72'/%3E%3C/svg%3E");
+  --film-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23grain)' opacity='.82'/%3E%3C/svg%3E");
   min-height: 100vh;
   background:
     radial-gradient(circle at 28% 8%, rgb(32 33 31 / 4%), transparent 28rem),
@@ -763,28 +800,60 @@ const handlePortraitError = (event: Event) => {
 
 .hero-meta {
   display: grid;
-  gap: 14px;
-  padding-bottom: 8px;
-  color: #63665f;
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: 15px;
-  line-height: 1.5;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  align-self: end;
+  justify-self: end;
+  width: min(860px, 100%);
+  overflow: hidden;
+  border-block: 1px solid rgb(32 33 31 / 10%);
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 30%), rgb(238 238 232 / 28%)),
+    rgb(246 246 241 / 42%);
+  color: rgb(32 33 31 / 78%);
+  box-shadow: none;
 }
 
 .hero-meta span {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  padding-block: 10px;
-  border-bottom: 1px solid rgb(32 33 31 / 9%);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 17px 18px 16px;
+  border-left: 1px solid rgb(32 33 31 / 12%);
+  text-align: center;
+}
+
+.hero-meta span:first-child {
+  border-left: 0;
 }
 
 .hero-meta strong {
-  color: #20211f;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  overflow: hidden;
+  max-width: 100%;
+  color: rgb(32 33 31 / 88%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: clamp(13px, 1.02vw, 16px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
   text-transform: none;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 62%);
+  white-space: nowrap;
+}
+
+.hero-meta small {
+  overflow: hidden;
+  max-width: 100%;
+  color: rgb(32 33 31 / 56%);
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-board {
@@ -793,7 +862,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-areas:
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color monitor monitor monitor monitor camera camera camera camera camera"
-    "contact contact contact code code code code camera camera camera camera camera";
+    "contact contact contact contact contact contact contact camera camera camera camera camera";
   gap: 18px;
   align-items: stretch;
 }
@@ -838,40 +907,20 @@ const handlePortraitError = (event: Event) => {
 }
 
 .portrait-frame a::before,
-.contact-shot::before,
-.tile-shade::before {
+.contact-shot::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(rgb(128 128 128 / 68%), rgb(128 128 128 / 68%)),
+    linear-gradient(rgb(128 128 128 / 74%), rgb(128 128 128 / 74%)),
     var(--film-grain);
   background-size: auto, 86px 86px;
   background-blend-mode: overlay, normal;
   mix-blend-mode: soft-light;
-  opacity: 0.28;
-  filter: contrast(1.9);
-}
-
-.portrait-frame a::after,
-.tile-shade::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(102deg, transparent 0 31px, rgb(255 255 255 / 66%) 32px, transparent 33px),
-    repeating-linear-gradient(178deg, transparent 0 44px, rgb(12 12 10 / 42%) 45px, transparent 46px),
-    linear-gradient(90deg, transparent, rgb(255 255 255 / 42%) 48%, transparent 53%);
-  background-size:
-    180px 100%,
-    260px 100%,
-    100% 100%;
-  mix-blend-mode: soft-light;
-  opacity: 0.045;
+  opacity: 0.36;
+  filter: contrast(2.1);
 }
 
 .portrait-frame img {
@@ -967,7 +1016,6 @@ const handlePortraitError = (event: Event) => {
   font-weight: 600;
 }
 
-.code-panel::before,
 .projects-panel::before {
   content: "";
   position: absolute;
@@ -981,7 +1029,6 @@ const handlePortraitError = (event: Event) => {
   background-size: 18px 18px;
 }
 
-.code-panel > *,
 .projects-panel > * {
   position: relative;
   z-index: 1;
@@ -1130,7 +1177,6 @@ const handlePortraitError = (event: Event) => {
 .archive-panel,
 .projects-panel,
 .host-panel,
-.code-panel,
 .contact-panel {
   padding: 20px;
 }
@@ -1279,6 +1325,27 @@ const handlePortraitError = (event: Event) => {
     inset 0 1px 0 rgb(255 255 255 / 68%);
 }
 
+.archive-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(128 128 128 / 74%), rgb(128 128 128 / 74%)),
+    var(--film-grain);
+  background-size: auto, 78px 78px;
+  background-blend-mode: overlay, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.34;
+  filter: contrast(2.05);
+}
+
+.archive-panel > div,
+.archive-icon {
+  z-index: 1;
+}
+
 .archive-panel h2 {
   max-width: 190px;
   margin: 0;
@@ -1408,82 +1475,9 @@ const handlePortraitError = (event: Event) => {
   line-height: 1.62;
 }
 
-.code-panel {
-  grid-area: code;
-  display: grid;
-  align-content: space-between;
-  gap: 22px;
-  min-height: 100%;
-}
-
-.stack-list {
-  display: grid;
-  gap: 14px;
-  color: #696d66;
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: 14px;
-}
-
-.stack-list div {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  column-gap: 12px;
-  row-gap: 4px;
-  align-items: center;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgb(32 33 31 / 8%);
-}
-
-.stack-list div:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.stack-list span {
-  color: #292c27;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.stack-list small {
-  grid-column: 2;
-  color: #73766f;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.tree-icon {
-  width: 18px;
-  height: 18px;
-  color: #3f433c;
-}
-
-.terminal-card {
-  display: grid;
-  gap: 8px;
-  padding: 16px;
-  border-radius: 7px;
-  background: #151615;
-  color: #eeefe9;
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-}
-
-.terminal-card span,
-.terminal-card em {
-  color: rgb(238 239 233 / 58%);
-  font-size: 12px;
-  font-style: normal;
-  letter-spacing: 0.08em;
-}
-
-.terminal-card strong {
-  color: #f8f8f2;
-  font-size: clamp(15px, 1.45vw, 20px);
-  letter-spacing: 0.02em;
-}
-
 .projects-panel {
   grid-area: camera;
+  align-self: start;
   min-height: 0;
   padding: 20px;
 }
@@ -1496,136 +1490,135 @@ const handlePortraitError = (event: Event) => {
   margin-bottom: 20px;
 }
 
-.project-mosaic {
+.project-status-list {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  grid-auto-rows: 118px;
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
-.project-tile {
+.project-status-card {
   position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: 0;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  min-height: 74px;
+  padding: 9px 12px 9px 9px;
   overflow: hidden;
-  border: 1px solid rgb(32 33 31 / 7%);
-  border-radius: 7px;
-  background: #dddcd6;
-  color: #20211f;
+  border: 1px solid rgb(32 33 31 / 5%);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 80%), rgb(247 247 243 / 84%)),
+    #f6f6f2;
+  color: rgb(17 18 17 / 86%);
   text-decoration: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 74%);
   transition:
-    filter 260ms ease,
-    transform 220ms ease;
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
-.project-tile:hover,
-.project-tile:focus-visible {
-  filter: saturate(0.98) contrast(1.02);
+.project-status-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(128 128 128 / 42%), rgb(128 128 128 / 42%)),
+    var(--film-grain);
+  background-size: auto, 82px 82px;
+  background-blend-mode: overlay, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.12;
+  filter: contrast(1.8);
+}
+
+.project-status-card:hover,
+.project-status-card:focus-visible {
+  border-color: rgb(32 33 31 / 10%);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 88%), rgb(249 249 245 / 92%)),
+    #f8f8f4;
   transform: translateY(-1px);
 }
 
-.project-tile img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.68) contrast(0.94);
-  transition:
-    filter 260ms ease,
-    transform 480ms ease;
-}
-
-.project-tile:hover img,
-.project-tile:focus-visible img {
-  filter: saturate(0.86) contrast(0.98);
-  transform: scale(1.025);
-}
-
-.tile-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgb(0 0 0 / 0%) 26%, rgb(0 0 0 / 48%) 100%),
-    linear-gradient(90deg, rgb(0 0 0 / 28%), rgb(0 0 0 / 0%) 48%);
-}
-
-.tile-status {
-  position: absolute;
-  z-index: 3;
-  top: 10px;
-  right: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 26px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: rgb(31 42 34 / 86%);
-  color: #f4f4ef;
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.tile-status small {
-  color: rgb(244 244 239 / 72%);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-.project-tile.is-down .tile-status {
-  background: rgb(108 36 36 / 88%);
-}
-
-.project-tile.is-degraded .tile-status {
-  background: rgb(107 90 30 / 88%);
-}
-
-.project-tile.is-local .tile-status,
-.project-tile.is-unknown .tile-status {
-  background: rgb(32 33 31 / 72%);
-}
-
-.tile-copy {
+.project-status-card > * {
   position: relative;
-  z-index: 3;
+  z-index: 1;
+}
+
+.project-status-card img {
+  display: block;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgb(32 33 31 / 7%);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, rgb(238 238 232), rgb(250 250 246));
+  object-fit: cover;
+  filter: saturate(0.78) contrast(0.96);
+}
+
+.project-status-copy {
   display: grid;
   gap: 6px;
-  width: 100%;
-  padding: 16px;
-  color: rgb(244 244 239 / 76%);
+  min-width: 0;
+}
+
+.project-status-copy strong {
+  overflow: hidden;
+  color: rgb(15 16 15 / 92%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-status-copy small {
+  overflow: hidden;
+  color: rgb(45 50 58 / 68%);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: 13px;
-  line-height: 1.35;
-}
-
-.tile-copy strong {
-  color: #fbfaf5;
-  font-size: clamp(16px, 1.55vw, 23px);
   font-weight: 600;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-status-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgb(32 33 31 / 46%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
   line-height: 1;
+  white-space: nowrap;
 }
 
-.tile-ash-iris,
-.tile-magicboard {
-  grid-column: span 3;
-  grid-row: span 2;
+.project-status-meta i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #2db784;
+  box-shadow: 0 0 0 3px rgb(45 183 132 / 12%);
 }
 
-.tile-runedra,
-.tile-goclaw,
-.tile-wowmagicians,
-.tile-maple {
-  grid-column: span 3;
+.project-status-card.is-down .project-status-meta i {
+  background: #c95c61;
+  box-shadow: 0 0 0 3px rgb(201 92 97 / 12%);
+}
+
+.project-status-card.is-degraded .project-status-meta i,
+.project-status-card.is-unknown .project-status-meta i {
+  background: #d19939;
+  box-shadow: 0 0 0 3px rgb(209 153 57 / 12%);
 }
 
 .contact-panel {
@@ -1682,16 +1675,8 @@ const handlePortraitError = (event: Event) => {
   inset: 0;
   z-index: 3;
   background:
-    repeating-linear-gradient(102deg, transparent 0 32px, rgb(255 255 255 / 42%) 33px, transparent 34px),
-    repeating-linear-gradient(178deg, transparent 0 46px, rgb(12 12 10 / 30%) 47px, transparent 48px),
     linear-gradient(180deg, rgb(10 11 10 / 2%), rgb(10 11 10 / 20%)),
     radial-gradient(circle at 20% 15%, rgb(255 255 255 / 22%), transparent 38%);
-  background-size:
-    180px 100%,
-    260px 100%,
-    auto,
-    auto;
-  mix-blend-mode: soft-light;
   pointer-events: none;
 }
 
@@ -1738,7 +1723,7 @@ const handlePortraitError = (event: Event) => {
 
 .contact-palette {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   left: 27.55%;
   top: 54%;
   bottom: 0;
@@ -1845,12 +1830,8 @@ const handlePortraitError = (event: Event) => {
     grid-template-areas:
       "intro intro"
       "project monitor"
-      "color code"
-      "contact camera";
-  }
-
-  .hero-meta {
-    max-width: 560px;
+      "color contact"
+      "camera camera";
   }
 
   .project-callout {
@@ -1866,19 +1847,6 @@ const handlePortraitError = (event: Event) => {
     grid-template-columns: 1fr;
   }
 
-  .project-mosaic {
-    grid-auto-rows: 136px;
-  }
-
-  .tile-ash-iris,
-  .tile-magicboard,
-  .tile-runedra,
-  .tile-goclaw,
-  .tile-wowmagicians,
-  .tile-maple {
-    grid-column: span 6;
-    grid-row: span 1;
-  }
 }
 
 @media (max-width: 760px) {
@@ -1914,7 +1882,6 @@ const handlePortraitError = (event: Event) => {
       "project"
       "monitor"
       "color"
-      "code"
       "camera"
       "contact";
   }
@@ -1926,7 +1893,6 @@ const handlePortraitError = (event: Event) => {
   .archive-panel,
   .latency-panel,
   .host-panel,
-  .code-panel,
   .contact-panel {
     min-height: 210px;
   }
@@ -1941,19 +1907,5 @@ const handlePortraitError = (event: Event) => {
     justify-content: start;
   }
 
-  .project-mosaic {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 170px;
-  }
-
-  .tile-ash-iris,
-  .tile-magicboard,
-  .tile-runedra,
-  .tile-goclaw,
-  .tile-wowmagicians,
-  .tile-maple {
-    grid-column: auto;
-    grid-row: auto;
-  }
 }
 </style>
