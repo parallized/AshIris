@@ -1502,7 +1502,7 @@ const handlePortraitError = (event: Event) => {
   min-height: 0;
   padding: clamp(82px, 8vw, 120px) 28px;
   border: 0;
-  border-radius: 17px;
+  border-radius: 8px;
   background: #07090b;
   box-shadow: none;
   isolation: isolate;
@@ -1607,7 +1607,7 @@ const handlePortraitError = (event: Event) => {
   color: rgb(255 255 255 / 94%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.12;
   letter-spacing: 0;
   text-overflow: ellipsis;
@@ -1619,7 +1619,7 @@ const handlePortraitError = (event: Event) => {
   color: rgb(255 255 255 / 58%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 12px;
-  font-weight: 750;
+  font-weight: 500;
   line-height: 1.15;
   text-overflow: ellipsis;
   white-space: nowrap;
