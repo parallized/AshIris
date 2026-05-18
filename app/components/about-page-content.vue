@@ -138,6 +138,9 @@ const fallbackOpsStatus: OpsStatus = {
 const profilePhotoPath = "/profile-photo.jpg";
 const statusEndpoint = "https://parallized.cn/ops/status/latest.json";
 const historyEndpoint = "https://parallized.cn/ops/status/history-6h.json";
+const lastIdeaUpdateAt = new Date("2026-05-18T00:00:00+08:00");
+const dayInMs = 24 * 60 * 60 * 1000;
+const utc8OffsetMs = 8 * 60 * 60 * 1000;
 
 const contactVisualImages = [
   { id: "background", image: backgroundImage, alt: "campus building entrance" },
@@ -224,6 +227,16 @@ const serviceUpTotal = computed(
       (service) => service.overall === "up"
     ).length
 );
+
+const lastIdeaUpdateLabel = computed(() => {
+  const currentDay = Math.floor((Date.now() + utc8OffsetMs) / dayInMs);
+  const updateDay = Math.floor(
+    (lastIdeaUpdateAt.getTime() + utc8OffsetMs) / dayInMs
+  );
+  const daysSinceUpdate = Math.max(0, currentDay - updateDay);
+
+  return `上次更新于 ${daysSinceUpdate} 天前`;
+});
 
 const summarizeOverall = (states: string[]) => {
   if (states.includes("down")) return "down";
@@ -734,6 +747,16 @@ const handlePortraitError = (event: Event) => {
             <small>在键盘边观察，也负责把一天的工作拉回生活。</small>
           </div>
         </article>
+
+        <article class="panel update-panel" aria-label="Idea update cadence">
+          <p class="update-ghost">
+            如果产生了新 IDEA，<br />
+            我就会来这里更新
+          </p>
+          <div class="update-badge">
+            {{ lastIdeaUpdateLabel }}
+          </div>
+        </article>
       </section>
     </section>
   </main>
@@ -907,7 +930,8 @@ const handlePortraitError = (event: Event) => {
   grid-template-areas:
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color monitor monitor monitor monitor camera camera camera camera camera"
-    "contact contact contact cat cat cat cat camera camera camera camera camera";
+    "contact contact contact cat cat cat cat camera camera camera camera camera"
+    "update update update update update update update . . . . .";
   gap: 18px;
   align-items: stretch;
 }
@@ -1223,6 +1247,7 @@ const handlePortraitError = (event: Event) => {
 .projects-panel,
 .host-panel,
 .cat-panel,
+.update-panel,
 .contact-panel {
   padding: 20px;
 }
@@ -1811,6 +1836,60 @@ const handlePortraitError = (event: Event) => {
   line-height: 1;
 }
 
+.update-panel {
+  grid-area: update;
+  display: grid;
+  place-items: center;
+  min-height: 230px;
+  overflow: hidden;
+  border-color: rgb(32 33 31 / 5%);
+  border-radius: 48px;
+  background: rgb(255 255 252 / 88%);
+  box-shadow:
+    0 22px 60px -46px rgb(32 33 31 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 84%);
+  isolation: isolate;
+}
+
+.update-ghost {
+  position: absolute;
+  inset: 28px 34px;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: rgb(32 33 31 / 24%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: clamp(42px, 4.8vw, 78px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.update-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min(84%, 460px);
+  min-height: 94px;
+  padding: 0 34px;
+  border-radius: 24px;
+  background: #2f2f2d;
+  color: #f4f4ef;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: clamp(23px, 2.45vw, 42px);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow:
+    0 22px 44px -22px rgb(32 33 31 / 68%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
+}
+
 .contact-panel {
   grid-area: contact;
   display: grid;
@@ -2022,6 +2101,7 @@ const handlePortraitError = (event: Event) => {
       "project monitor"
       "color contact"
       "cat cat"
+      "update update"
       "camera camera";
   }
 
@@ -2075,6 +2155,7 @@ const handlePortraitError = (event: Event) => {
       "color"
       "camera"
       "cat"
+      "update"
       "contact";
   }
 
@@ -2086,6 +2167,7 @@ const handlePortraitError = (event: Event) => {
   .latency-panel,
   .host-panel,
   .cat-panel,
+  .update-panel,
   .contact-panel {
     min-height: 210px;
   }
