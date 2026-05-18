@@ -317,6 +317,7 @@ const chartPaddingRight = 24;
 const chartPlotTop = 26;
 const chartPlotBottom = 184;
 const chartGridLines = [26, 79, 132, 184];
+const responseChartMaxMs = 1500;
 const metricYAxisLabels = [
   { label: "100%", y: chartPlotTop },
   { label: "50%", y: (chartPlotTop + chartPlotBottom) / 2 },
@@ -368,7 +369,7 @@ const metricChartLines = computed(() => {
   const configs = [
     { key: "cpu", label: "CPU", className: "is-cpu", scale: "percent" },
     { key: "mem", label: "MEM", className: "is-mem", scale: "percent" },
-    { key: "response", label: "RESPONSE", className: "is-response", scale: "relative" },
+    { key: "response", label: "RESPONSE", className: "is-response", scale: "latency" },
   ] as const;
 
   return configs.map((config) => {
@@ -383,17 +384,11 @@ const metricChartLines = computed(() => {
       return { ...config, path: "" };
     }
 
-    const min = Math.min(...values.map((sample) => sample.value));
-    const max = Math.max(...values.map((sample) => sample.value));
-    const range = max - min || 1;
-
     const coordinates = values.map((sample) => {
       const normalized =
         config.scale === "percent"
           ? clampPercent(sample.value) / 100
-          : max === min
-            ? 0.5
-            : (sample.value - min) / range;
+          : clampPercent((sample.value / responseChartMaxMs) * 100) / 100;
 
       return {
         x: chartPaddingX + (sample.index / denominator) * usableWidth,
