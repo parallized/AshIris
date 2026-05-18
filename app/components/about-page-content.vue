@@ -1561,45 +1561,22 @@ const handlePortraitError = (event: Event) => {
   min-height: 68px;
   padding: 10px 13px 10px 11px;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 12%);
+  border: 0;
   border-radius: 15px;
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%)),
-    rgb(8 12 15 / 28%);
+  background: transparent;
   color: rgb(255 255 255 / 90%);
   text-decoration: none;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 10%),
-    inset 0 -1px 0 rgb(0 0 0 / 18%);
-  backdrop-filter: blur(11px) saturate(1.08);
-  -webkit-backdrop-filter: blur(11px) saturate(1.08);
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 180ms ease;
+  box-shadow: none;
+  transition: transform 180ms ease;
 }
 
 .project-status-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgb(128 128 128 / 28%), rgb(128 128 128 / 28%)),
-    var(--film-grain);
-  background-size: auto, 92px 92px;
-  background-blend-mode: overlay, normal;
-  mix-blend-mode: soft-light;
-  opacity: 0.06;
-  filter: contrast(1.3);
+  content: none;
 }
 
 .project-status-card:hover,
 .project-status-card:focus-visible {
-  border-color: rgb(255 255 255 / 18%);
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 3%)),
-    rgb(8 12 15 / 34%);
+  background: transparent;
   transform: translateY(-1px);
 }
 
@@ -1612,10 +1589,9 @@ const handlePortraitError = (event: Event) => {
   display: block;
   width: 43px;
   height: 43px;
-  border: 1px solid rgb(255 255 255 / 14%);
+  border: 0;
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgb(238 238 232 / 48%), rgb(250 250 246 / 18%));
+  background: transparent;
   object-fit: cover;
   filter: saturate(0.96) contrast(1.02);
 }
