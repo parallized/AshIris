@@ -14,7 +14,9 @@ const isActive = (to: string) => route.path === to;
 const dockRef = ref<HTMLElement | null>(null);
 const hoverIndex = ref<number | null>(null);
 const activeIndex = computed(() => dockItems.findIndex((item) => isActive(item.to)));
-const selectedIndex = computed(() => hoverIndex.value ?? activeIndex.value);
+const highlightedIndex = computed(() =>
+  hoverIndex.value ?? (activeIndex.value >= 0 ? activeIndex.value : 0),
+);
 const indicator = reactive({
   opacity: 0,
   width: 0,
@@ -30,7 +32,7 @@ const indicatorStyle = computed(() => ({
 const getLinks = () =>
   Array.from(dockRef.value?.querySelectorAll<HTMLElement>(".app-dock-link") ?? []);
 
-const moveIndicator = (index = hoverIndex.value ?? activeIndex.value) => {
+const moveIndicator = (index = highlightedIndex.value) => {
   const dock = dockRef.value;
   const links = getLinks();
   const link = index >= 0 ? links[index] : undefined;
@@ -54,7 +56,7 @@ const setHover = (index: number) => {
 
 const clearHover = () => {
   hoverIndex.value = null;
-  moveIndicator(activeIndex.value);
+  moveIndicator();
 };
 
 onMounted(() => {
@@ -85,10 +87,7 @@ watch(
       :key="item.to"
       :to="item.to"
       class="app-dock-link"
-      :class="{
-        'app-dock-link-active': isActive(item.to),
-        'app-dock-link-selected': selectedIndex === index,
-      }"
+      :class="{ 'app-dock-link-highlighted': index === highlightedIndex }"
       :aria-label="item.label"
       :aria-current="isActive(item.to) ? 'page' : undefined"
       :title="item.label"
@@ -173,7 +172,7 @@ watch(
   height: 38px;
   padding: 0 12px;
   border-radius: 999px;
-  color: rgb(32 33 31 / 72%);
+  color: rgb(32 33 31 / 88%);
   text-decoration: none;
   transition:
     color 260ms ease,
@@ -181,17 +180,17 @@ watch(
   transition-delay: 0ms;
 }
 
-.app-dock-link-selected {
-  color: #f7f6f1;
-  transition-delay: 320ms, 0ms;
+.app-dock-link:focus-visible {
+  outline: none;
 }
 
-.app-dock-link-active {
+.app-dock-link-highlighted {
+  color: #f7f6f1;
   padding: 0 14px;
   transition-delay: 0ms;
 }
 
-.app-dock-link-active.app-dock-link-selected {
+.app-dock-link-highlighted:hover {
   color: #f7f6f1;
 }
 
