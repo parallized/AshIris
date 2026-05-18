@@ -3,6 +3,7 @@ import { computed } from "vue";
 import backgroundImage from "~/assets/image/background.webp";
 import hireImage from "~/assets/image/hire.webp";
 import identityImage from "~/assets/image/identity.webp";
+import projectBackdropImage from "~/assets/image/project-backdrop.jpg";
 import worksImage from "~/assets/image/works.webp";
 import catCompanionImage from "~/assets/image/cat-companion.webp";
 import ashIrisPreviewImage from "~/assets/image/board/ash-iris.webp";
@@ -102,9 +103,9 @@ interface OpsHistoryPoint {
 }
 
 const skills: Skill[] = [
-  { label: "经验", value: "AI / 设计 / 开发" },
-  { label: "技术栈", value: "任何" },
-  { label: "位置", value: "杭州 / UTC+8" },
+  { label: "Experience", value: "AI / Design / Dev" },
+  { label: "Stack", value: "Any" },
+  { label: "Location", value: "Hangzhou / UTC+8" },
 ];
 
 const fallbackOpsStatus: OpsStatus = {
@@ -478,8 +479,8 @@ const handlePortraitError = (event: Event) => {
 
         <div class="hero-meta" aria-label="Current profile">
           <span v-for="item in skills" :key="item.label">
-            <strong>{{ item.value }}</strong>
             <small>{{ item.label }}</small>
+            <strong>{{ item.value }}</strong>
           </span>
         </div>
       </header>
@@ -504,9 +505,12 @@ const handlePortraitError = (event: Event) => {
           </figure>
 
           <div class="intro-body">
-            <p>
-              我是一名全栈创意开发工程师。主要的工作围绕设计、开发、探索新的 AI-Native 工具链与 Agents 编排，在此之前有 2 年 AI 与互联网经验，曾在某知名像素风社区游戏以及某是兄弟就来砍我游戏 5 年时间内独自完成全周期相关工作，从 0 到 1000 人同时在线。后续就读数字媒体技术专业在杭州学习建模与技术美术，喜欢会画画的人。
-            </p>
+            <div class="intro-copy">
+              <p class="panel-label">About</p>
+              <p>
+                我是一名全栈创意开发工程师。主要的工作围绕设计、开发、探索新的 AI-Native 工具链与 Agents 编排，在此之前有 2 年 AI 与互联网经验，曾在某知名像素风社区游戏以及某是兄弟就来砍我游戏 5 年时间内独自完成全周期相关工作，从 0 到 1000 人同时在线。后续就读数字媒体技术专业在杭州学习建模与技术美术，喜欢会画画的人。
+              </p>
+            </div>
             <NuxtLink
               to="/contact"
               class="inline-action"
@@ -628,7 +632,7 @@ const handlePortraitError = (event: Event) => {
 
         <article class="panel projects-panel">
           <img
-            :src="backgroundImage"
+            :src="projectBackdropImage"
             alt=""
             class="project-status-backdrop"
             aria-hidden="true"
@@ -729,10 +733,10 @@ const handlePortraitError = (event: Event) => {
             />
             <div class="cat-card-copy">
               <span class="cat-card-title">
-                <strong>我的猫</strong>
+                <strong>我的 Coding 大检察官</strong>
                 <Icon name="ph:seal-check-fill" class="cat-verified" aria-hidden="true" />
               </span>
-              <p>灰虎斑白手套，负责巡逻、陪写代码和夜间值班。</p>
+              <p>负责巡逻、陪写代码和夜间值班。</p>
             </div>
             <div class="cat-card-bottom" aria-label="Cat profile details">
               <span>
@@ -752,13 +756,11 @@ const handlePortraitError = (event: Event) => {
         </article>
 
         <article class="panel update-panel" aria-label="Idea update cadence">
-          <p class="update-ghost" aria-hidden="true">
-            <span>如果产生了新 IDEA</span>
-            <span>我就会来这里更新</span>
+          <p class="update-ghost">
+            <span>网站处于持续更新中</span>
+            <span>不断产生和拥抱变化</span>
+            <span>{{ lastIdeaUpdateLabel }}</span>
           </p>
-          <div class="update-badge">
-            {{ lastIdeaUpdateLabel }}
-          </div>
         </article>
       </section>
     </section>
@@ -770,6 +772,9 @@ const handlePortraitError = (event: Event) => {
 
 .home-page {
   --film-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23grain)' opacity='.82'/%3E%3C/svg%3E");
+  --home-panel-padding-x: clamp(18px, 2.2vw, 28px);
+  --home-panel-padding-y: clamp(20px, 2.1vw, 28px);
+  --home-panel-label-gap: 22px;
   min-height: 100vh;
   background:
     radial-gradient(circle at 28% 8%, rgb(32 33 31 / 4%), transparent 28rem),
@@ -874,10 +879,11 @@ const handlePortraitError = (event: Event) => {
   position: relative;
   display: grid;
   justify-items: center;
-  gap: 6px;
+  gap: 5px;
   min-width: 0;
   padding: 0 22px;
   border-left: 0;
+  overflow: visible;
   text-align: center;
 }
 
@@ -901,13 +907,13 @@ const handlePortraitError = (event: Event) => {
 }
 
 .hero-meta strong {
-  overflow: hidden;
+  overflow: visible;
   max-width: 100%;
   color: rgb(32 33 31 / 88%);
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(13px, 0.95vw, 15px);
-  font-weight: 800;
-  line-height: 1;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(12px, 0.9vw, 14px);
+  font-weight: 400;
+  line-height: 1.28;
   letter-spacing: 0;
   text-transform: none;
   text-overflow: ellipsis;
@@ -916,13 +922,15 @@ const handlePortraitError = (event: Event) => {
 }
 
 .hero-meta small {
-  overflow: hidden;
+  overflow: visible;
   max-width: 100%;
-  color: rgb(32 33 31 / 56%);
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
+  color: #666a62;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -934,7 +942,7 @@ const handlePortraitError = (event: Event) => {
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color camera camera camera camera camera monitor monitor monitor monitor"
     "contact contact contact camera camera camera camera camera cat cat cat cat"
-    "update update update camera camera camera camera camera . . . .";
+    "update update update camera camera camera camera camera cat cat cat cat";
   gap: 18px;
   align-items: stretch;
 }
@@ -956,7 +964,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
   align-items: stretch;
   gap: 0;
-  height: clamp(280px, 20vw, 310px);
+  height: clamp(310px, 22vw, 340px);
   min-height: 0;
 }
 
@@ -1011,10 +1019,26 @@ const handlePortraitError = (event: Event) => {
   justify-content: space-between;
   gap: 16px;
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  padding: clamp(20px, 2.1vw, 28px) clamp(18px, 2.2vw, 28px) clamp(16px, 1.8vw, 22px);
+  padding: var(--home-panel-padding-y) var(--home-panel-padding-x) clamp(16px, 1.8vw, 22px);
 }
 
-.intro-body p {
+.intro-copy {
+  display: grid;
+  gap: var(--home-panel-label-gap);
+}
+
+.intro-body .panel-label,
+.project-callout .panel-label,
+.archive-panel .panel-label,
+.latency-panel .panel-label {
+  color: #666a62;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.intro-copy p:not(.panel-label) {
   max-width: 680px;
   margin: 0;
   color: #343731;
@@ -1061,9 +1085,9 @@ const handlePortraitError = (event: Event) => {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 22px;
+  gap: var(--home-panel-label-gap);
   min-height: 0;
-  padding: clamp(24px, 2.4vw, 34px);
+  padding: var(--home-panel-padding-y) var(--home-panel-padding-x);
   border-color: rgb(32 33 31 / 8%);
   background: rgb(252 252 249 / 90%);
   color: #20211f;
@@ -1077,9 +1101,13 @@ const handlePortraitError = (event: Event) => {
 .callout-head,
 .code-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
+}
+
+.callout-head {
+  min-height: 13px;
 }
 
 .code-head span {
@@ -1123,16 +1151,12 @@ const handlePortraitError = (event: Event) => {
   z-index: 1;
 }
 
-.project-callout .panel-label {
-  color: #666a62;
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-}
-
 .project-callout .callout-icon {
+  position: absolute;
+  top: var(--home-panel-padding-y);
+  right: var(--home-panel-padding-x);
   color: #3c4039;
+  pointer-events: none;
 }
 
 .callout-title {
@@ -1263,8 +1287,12 @@ const handlePortraitError = (event: Event) => {
   min-height: 250px;
   padding: clamp(24px, 2.4vw, 34px);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 72%), rgb(250 249 244 / 92%)),
-    #f7f5ee;
+    radial-gradient(circle at 84% 6%, rgb(167 177 255 / 10%), transparent 30%),
+    linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(253 252 248 / 94%)),
+    #fffefa;
+  box-shadow:
+    0 18px 48px -42px rgb(15 23 42 / 18%),
+    inset 0 1px 0 rgb(255 255 255 / 92%);
 }
 
 .latency-head {
@@ -1276,7 +1304,7 @@ const handlePortraitError = (event: Event) => {
 
 .latency-title {
   display: grid;
-  gap: 12px;
+  gap: 22px;
   min-width: 0;
 }
 
@@ -1303,7 +1331,7 @@ const handlePortraitError = (event: Event) => {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #686b61;
+  color: #858981;
   font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 11px;
   font-weight: 800;
@@ -1315,21 +1343,21 @@ const handlePortraitError = (event: Event) => {
 .metric-legend span::before {
   content: "";
   width: 17px;
-  height: 3px;
+  height: 2px;
   border-radius: 999px;
   background: currentColor;
 }
 
 .metric-legend .is-cpu {
-  color: #8f45df;
+  color: #8d7be8;
 }
 
 .metric-legend .is-mem {
-  color: #6f91e8;
+  color: #9ac6ec;
 }
 
 .metric-legend .is-response {
-  color: #e85f83;
+  color: #efa6ad;
 }
 
 .latency-chart {
@@ -1337,18 +1365,22 @@ const handlePortraitError = (event: Event) => {
   width: 100%;
   min-height: 156px;
   overflow: visible;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 82%), rgb(255 255 255 / 42%)),
+    linear-gradient(0deg, transparent 0, transparent calc(25% - 0.5px), rgb(32 33 31 / 4%) 25%, transparent calc(25% + 0.5px), transparent calc(50% - 0.5px), rgb(32 33 31 / 4%) 50%, transparent calc(50% + 0.5px), transparent calc(75% - 0.5px), rgb(32 33 31 / 4%) 75%, transparent calc(75% + 0.5px));
 }
 
 .metric-grid-line {
   fill: none;
-  stroke: rgb(32 33 31 / 8%);
-  stroke-dasharray: 2 9;
+  stroke: rgb(32 33 31 / 5%);
+  stroke-dasharray: none;
   stroke-linecap: round;
-  stroke-width: 0.85;
+  stroke-width: 0.7;
 }
 
 .metric-axis-label {
-  fill: rgb(67 70 62 / 58%);
+  fill: rgb(67 70 62 / 40%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -1368,23 +1400,24 @@ const handlePortraitError = (event: Event) => {
 .metric-line {
   fill: none;
   stroke: currentColor;
-  stroke-dasharray: 22 7;
+  stroke-dasharray: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 2.8;
-  filter: drop-shadow(0 7px 10px rgb(32 33 31 / 8%));
+  stroke-width: 1.25;
+  opacity: 0.82;
+  filter: drop-shadow(0 5px 9px rgb(32 33 31 / 4%));
 }
 
 .metric-line.is-cpu {
-  color: #8f45df;
+  color: #7b68d8;
 }
 
 .metric-line.is-mem {
-  color: #7fa0ee;
+  color: #9fc9ef;
 }
 
 .metric-line.is-response {
-  color: #ed6688;
+  color: #ee9ea8;
 }
 
 .archive-panel {
@@ -1429,7 +1462,7 @@ const handlePortraitError = (event: Event) => {
 
 .archive-panel h2 {
   max-width: 240px;
-  margin: 12px 0 0;
+  margin: 22px 0 0;
   color: rgb(22 23 19 / 86%);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(24px, 2.15vw, 34px);
@@ -1563,7 +1596,7 @@ const handlePortraitError = (event: Event) => {
   align-items: center;
   justify-items: center;
   min-height: 0;
-  padding: clamp(82px, 8vw, 120px) 28px;
+  padding: clamp(56px, 5.8vw, 88px) 28px;
   border: 0;
   border-radius: 8px;
   background: #07090b;
@@ -1590,15 +1623,16 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-backdrop {
   position: absolute;
-  inset: -10%;
+  inset: 0;
   z-index: 0;
   display: block;
-  width: 120%;
-  height: 120%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
-  filter: blur(12px) saturate(1.08) contrast(1.05) brightness(0.68);
-  transform: scale(1.12);
+  object-position: 50% 57%;
+  filter: saturate(1.02) contrast(1.04) brightness(0.64);
+  transform: translateX(38px) scale(1.15);
+  transform-origin: 50% 50%;
 }
 
 .projects-panel::after {
@@ -1608,11 +1642,18 @@ const handlePortraitError = (event: Event) => {
   z-index: 1;
   pointer-events: none;
   background:
+    linear-gradient(rgb(128 128 128 / 58%), rgb(128 128 128 / 58%)),
+    var(--film-grain),
     radial-gradient(circle at 80% 6%, rgb(255 177 126 / 38%), transparent 30%),
     radial-gradient(circle at 18% 0%, rgb(183 115 154 / 30%), transparent 32%),
     radial-gradient(circle at 52% 43%, rgb(112 48 54 / 18%), transparent 36%),
     linear-gradient(180deg, rgb(7 9 11 / 8%), rgb(4 6 8 / 48%)),
     linear-gradient(90deg, rgb(3 5 7 / 58%), rgb(3 5 7 / 18%) 46%, rgb(4 5 7 / 38%));
+  background-size: auto, 82px 82px, auto, auto, auto, auto, auto;
+  background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+  filter: contrast(1.7);
 }
 
 .project-status-card {
@@ -1761,16 +1802,17 @@ const handlePortraitError = (event: Event) => {
 .cat-card::before {
   content: "";
   position: absolute;
-  inset: 36% 0 0;
+  inset: auto 0 0;
   z-index: 1;
+  height: clamp(168px, 36%, 238px);
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgb(14 15 13 / 0%) 0%, rgb(14 15 13 / 34%) 38%, rgb(14 15 13 / 84%) 100%),
-    radial-gradient(circle at 26% 92%, rgb(255 255 255 / 14%), transparent 38%);
-  backdrop-filter: blur(16px) saturate(0.92);
-  -webkit-backdrop-filter: blur(16px) saturate(0.92);
-  mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 72%) 24%, #000 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 72%) 24%, #000 100%);
+    linear-gradient(180deg, rgb(14 15 13 / 0%) 0%, rgb(14 15 13 / 50%) 42%, rgb(14 15 13 / 86%) 100%),
+    radial-gradient(circle at 26% 92%, rgb(255 255 255 / 12%), transparent 38%);
+  backdrop-filter: blur(18px) saturate(0.9);
+  -webkit-backdrop-filter: blur(18px) saturate(0.9);
+  mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 16%) 24%, rgb(0 0 0 / 82%) 42%, #000 68%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 16%) 24%, rgb(0 0 0 / 82%) 42%, #000 68%);
 }
 
 .cat-card::after {
@@ -1780,12 +1822,13 @@ const handlePortraitError = (event: Event) => {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(rgb(128 128 128 / 42%), rgb(128 128 128 / 42%)),
+    linear-gradient(rgb(128 128 128 / 58%), rgb(128 128 128 / 58%)),
     var(--film-grain);
   background-size: auto, 82px 82px;
   background-blend-mode: overlay, normal;
   mix-blend-mode: soft-light;
-  opacity: 0.2;
+  opacity: 0.34;
+  filter: contrast(1.9);
 }
 
 .cat-card-photo {
@@ -1822,7 +1865,7 @@ const handlePortraitError = (event: Event) => {
 .cat-card strong {
   overflow: hidden;
   color: rgb(255 255 255 / 94%);
-  font-size: clamp(24px, 2.25vw, 34px);
+  font-size: clamp(20px, 1.75vw, 27px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0;
@@ -1832,8 +1875,8 @@ const handlePortraitError = (event: Event) => {
 
 .cat-verified {
   flex: 0 0 auto;
-  width: 27px;
-  height: 27px;
+  width: 22px;
+  height: 22px;
   color: rgb(255 255 255 / 94%);
   filter: drop-shadow(0 2px 10px rgb(0 0 0 / 24%));
 }
@@ -1842,8 +1885,9 @@ const handlePortraitError = (event: Event) => {
   max-width: 330px;
   margin: 0;
   color: rgb(255 255 255 / 84%);
-  font-size: clamp(13px, 1.25vw, 16px);
-  font-weight: 500;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(12px, 1.05vw, 14px);
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -1856,7 +1900,7 @@ const handlePortraitError = (event: Event) => {
   min-width: 0;
   color: rgb(255 255 255 / 82%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1;
   text-shadow: 0 2px 12px rgb(0 0 0 / 34%);
@@ -1870,20 +1914,20 @@ const handlePortraitError = (event: Event) => {
 }
 
 .cat-bottom-icon {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   color: currentColor;
 }
 
 .cat-follow {
   justify-content: center;
-  min-height: 48px;
+  min-height: 44px;
   margin-left: auto;
-  padding: 0 22px;
+  padding: 0 18px;
   border-radius: 999px;
   background: rgb(255 255 255 / 90%);
   color: #151714;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   text-shadow: none;
   box-shadow:
@@ -1892,8 +1936,8 @@ const handlePortraitError = (event: Event) => {
 }
 
 .cat-follow-icon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: currentColor;
 }
 
@@ -1901,32 +1945,51 @@ const handlePortraitError = (event: Event) => {
   grid-area: update;
   display: grid;
   place-items: center;
-  min-height: 190px;
+  min-height: 160px;
   overflow: hidden;
-  border-color: rgb(32 33 31 / 5%);
+  border: 0;
   border-radius: 8px;
-  background: rgb(255 255 252 / 88%);
-  box-shadow:
-    0 22px 60px -46px rgb(32 33 31 / 22%),
-    inset 0 1px 0 rgb(255 255 255 / 84%);
+  background-clip: padding-box;
+  background:
+    radial-gradient(circle at 52% 96%, rgb(32 33 31 / 19%), transparent 42%),
+    radial-gradient(circle at 50% 130%, rgb(32 33 31 / 28%), transparent 50%),
+    linear-gradient(180deg, #fbfbf8 0%, #f1f1ee 46%, #d7d8d4 100%);
+  box-shadow: 0 22px 60px -46px rgb(32 33 31 / 22%);
   isolation: isolate;
 }
 
-.update-ghost {
+.update-panel::before {
+  content: "";
   position: absolute;
-  inset: 18px 22px 16px;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(128 128 128 / 38%), rgb(128 128 128 / 38%)),
+    var(--film-grain);
+  background-size: auto, 86px 86px;
+  background-blend-mode: overlay, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
+  filter: contrast(1.8);
+}
+
+.update-ghost {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  place-items: center;
+  gap: 7px;
+  justify-items: center;
   margin: 0;
-  color: rgb(32 33 31 / 16%);
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(22px, 2.1vw, 34px);
-  font-weight: 600;
-  line-height: 1;
+  padding: 18px 20px;
+  color: #20211f;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 400;
+  line-height: 1.2;
   letter-spacing: 0;
   text-align: center;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 36%);
 }
 
 .update-ghost span {
@@ -1936,11 +1999,19 @@ const handlePortraitError = (event: Event) => {
 }
 
 .update-ghost span:first-child {
-  grid-row: 1;
+  color: rgb(32 33 31 / 54%);
+}
+
+.update-ghost span:nth-child(2) {
+  color: #11120f;
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-style: italic;
 }
 
 .update-ghost span:last-child {
-  grid-row: 3;
+  color: rgb(32 33 31 / 58%);
+  font-size: clamp(12px, 0.9vw, 14px);
+  line-height: 1.35;
 }
 
 .update-badge {
@@ -1950,13 +2021,13 @@ const handlePortraitError = (event: Event) => {
   align-items: center;
   justify-content: center;
   min-width: min(70%, 240px);
-  min-height: 54px;
-  padding: 0 20px;
+  min-height: 48px;
+  padding: 0 18px;
   border-radius: 14px;
   background: #2f2f2d;
   color: #f4f4ef;
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(15px, 1.35vw, 22px);
+  font-size: clamp(13px, 1.05vw, 17px);
   font-weight: 600;
   line-height: 1;
   text-align: center;
@@ -1971,8 +2042,8 @@ const handlePortraitError = (event: Event) => {
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
   align-content: stretch;
-  gap: 16px;
-  min-height: 260px;
+  gap: 12px;
+  min-height: 230px;
   padding: 0;
   color: #20211f;
   text-decoration: none;
@@ -1984,7 +2055,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   grid-template-rows: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 0;
-  min-height: 166px;
+  min-height: 146px;
   padding: 0;
   overflow: hidden;
   border: 0;
@@ -2093,7 +2164,7 @@ const handlePortraitError = (event: Event) => {
 
 .contact-note {
   display: block;
-  margin-top: 14px;
+  margin-top: 10px;
   color: #757870;
   font-size: 14px;
 }
@@ -2102,7 +2173,7 @@ const handlePortraitError = (event: Event) => {
   display: grid;
   align-self: end;
   gap: 14px;
-  padding-bottom: 24px;
+  padding-bottom: 18px;
 }
 
 .contact-bottom strong {
