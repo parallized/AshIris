@@ -4,6 +4,7 @@ import backgroundImage from "~/assets/image/background.webp";
 import hireImage from "~/assets/image/hire.webp";
 import identityImage from "~/assets/image/identity.webp";
 import worksImage from "~/assets/image/works.webp";
+import catCompanionImage from "~/assets/image/cat-companion.webp";
 import ashIrisPreviewImage from "~/assets/image/board/ash-iris.webp";
 import goclawPreviewImage from "~/assets/image/board/goclaw-home.webp";
 import magicboardPreviewImage from "~/assets/image/board/agent-forest-result.webp";
@@ -707,6 +708,32 @@ const handlePortraitError = (event: Event) => {
             </span>
           </div>
         </NuxtLink>
+
+        <article class="panel cat-panel" aria-label="Cat companion">
+          <div class="cat-card cat-card-photo">
+            <img
+              :src="catCompanionImage"
+              alt="灰色虎斑猫抬头看向镜头"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="cat-card cat-card-profile">
+            <span class="cat-card-label">Cat</span>
+            <strong>我的猫</strong>
+            <small>灰虎斑 / 白手套</small>
+            <div class="cat-tags" aria-label="Cat traits">
+              <span>巡逻</span>
+              <span>陪写代码</span>
+              <span>夜间值班</span>
+            </div>
+          </div>
+          <div class="cat-card cat-card-note">
+            <span>Companion</span>
+            <strong>安静但有存在感</strong>
+            <small>在键盘边观察，也负责把一天的工作拉回生活。</small>
+          </div>
+        </article>
       </section>
     </section>
   </main>
@@ -880,7 +907,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-areas:
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color monitor monitor monitor monitor camera camera camera camera camera"
-    "contact contact contact . . . . camera camera camera camera camera";
+    "contact contact contact cat cat cat cat camera camera camera camera camera";
   gap: 18px;
   align-items: stretch;
 }
@@ -1195,6 +1222,7 @@ const handlePortraitError = (event: Event) => {
 .archive-panel,
 .projects-panel,
 .host-panel,
+.cat-panel,
 .contact-panel {
   padding: 20px;
 }
@@ -1655,6 +1683,134 @@ const handlePortraitError = (event: Event) => {
   color: #f2c45f;
 }
 
+.cat-panel {
+  grid-area: cat;
+  min-height: 350px;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 16% 12%, rgb(229 221 255 / 62%), transparent 38%),
+    radial-gradient(circle at 86% 76%, rgb(255 221 204 / 74%), transparent 42%),
+    linear-gradient(135deg, #f8f6ff 0%, #f4f1eb 100%);
+  isolation: isolate;
+}
+
+.cat-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(128 128 128 / 34%), rgb(128 128 128 / 34%)),
+    var(--film-grain);
+  background-size: auto, 96px 96px;
+  background-blend-mode: overlay, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.12;
+}
+
+.cat-card {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgb(32 33 31 / 9%);
+  border-radius: 8px;
+  background: rgb(255 255 252 / 86%);
+  box-shadow:
+    0 18px 42px -34px rgb(32 33 31 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 76%);
+}
+
+.cat-card-photo {
+  left: 8%;
+  top: 14%;
+  width: 38%;
+  aspect-ratio: 0.78;
+  transform: rotate(-7deg);
+}
+
+.cat-card-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 54%;
+  filter: saturate(0.9) contrast(0.98);
+}
+
+.cat-card-profile,
+.cat-card-note {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 18px 20px;
+  color: #211f2c;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+}
+
+.cat-card-profile {
+  right: 7%;
+  top: 17%;
+  width: 58%;
+  min-height: 150px;
+  transform: rotate(5deg);
+}
+
+.cat-card-note {
+  right: 15%;
+  bottom: 12%;
+  width: 62%;
+  min-height: 132px;
+  transform: rotate(-4deg);
+}
+
+.cat-card-label,
+.cat-card-note span {
+  color: rgb(72 56 126 / 78%);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cat-card strong {
+  color: #18152d;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(20px, 2vw, 27px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.cat-card small {
+  color: rgb(32 33 31 / 58%);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.42;
+}
+
+.cat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.cat-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border: 1px solid rgb(72 56 126 / 12%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 54%);
+  color: rgb(72 56 126 / 82%);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .contact-panel {
   grid-area: contact;
   display: grid;
@@ -1865,6 +2021,7 @@ const handlePortraitError = (event: Event) => {
       "intro intro"
       "project monitor"
       "color contact"
+      "cat cat"
       "camera camera";
   }
 
@@ -1917,6 +2074,7 @@ const handlePortraitError = (event: Event) => {
       "monitor"
       "color"
       "camera"
+      "cat"
       "contact";
   }
 
@@ -1927,6 +2085,7 @@ const handlePortraitError = (event: Event) => {
   .archive-panel,
   .latency-panel,
   .host-panel,
+  .cat-panel,
   .contact-panel {
     min-height: 210px;
   }
