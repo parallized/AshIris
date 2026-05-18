@@ -617,10 +617,14 @@ const handlePortraitError = (event: Event) => {
         </article>
 
         <article class="panel projects-panel">
-          <div class="panel-topline">
-            <p class="panel-label">Project signals</p>
-            <span class="quiet-status">service status</span>
-          </div>
+          <img
+            :src="worksImage"
+            alt=""
+            class="project-status-backdrop"
+            aria-hidden="true"
+            loading="eager"
+            decoding="async"
+          />
           <div class="project-status-list">
             <NuxtLink
               v-for="project in projectCards"
@@ -641,13 +645,14 @@ const handlePortraitError = (event: Event) => {
               </span>
               <span class="project-status-meta">
                 <i aria-hidden="true"></i>
-                {{ project.uptimePercent ?? "--" }}% · {{ formatLatency(project.latencyMs) }}
+                <Icon
+                  :name="project.overall === 'up' ? 'ph:check-circle-fill' : 'ph:spinner-gap-bold'"
+                  class="project-status-icon"
+                  aria-hidden="true"
+                />
               </span>
             </NuxtLink>
           </div>
-          <p class="panel-footnote">
-            状态读取公开 ops / uptime 数据；Master 为 Grok 与 Master 平均。
-          </p>
         </article>
 
         <NuxtLink to="/contact" class="panel contact-panel">
@@ -790,43 +795,56 @@ const handlePortraitError = (event: Event) => {
 .hero-copy h1 {
   max-width: 930px;
   margin: 0;
+  padding-top: 0.08em;
   color: #20211f;
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   font-size: clamp(42px, 5.15vw, 86px);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: 0;
 }
 
 .hero-meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: inline-flex;
   grid-column: 1 / -1;
   align-self: end;
   justify-self: end;
-  width: min(860px, 100%);
-  overflow: hidden;
-  border-block: 1px solid rgb(32 33 31 / 10%);
+  width: auto;
+  overflow: visible;
   border-radius: 0;
-  background:
-    linear-gradient(180deg, rgb(255 255 255 / 30%), rgb(238 238 232 / 28%)),
-    rgb(246 246 241 / 42%);
+  background: transparent;
   color: rgb(32 33 31 / 78%);
   box-shadow: none;
 }
 
 .hero-meta span {
+  position: relative;
   display: grid;
   justify-items: center;
-  gap: 7px;
+  gap: 6px;
   min-width: 0;
-  padding: 17px 18px 16px;
-  border-left: 1px solid rgb(32 33 31 / 12%);
+  padding: 0 22px;
+  border-left: 0;
   text-align: center;
 }
 
 .hero-meta span:first-child {
   border-left: 0;
+  padding-left: 0;
+}
+
+.hero-meta span:last-child {
+  padding-right: 0;
+}
+
+.hero-meta span + span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 1px;
+  background: rgb(32 33 31 / 13%);
 }
 
 .hero-meta strong {
@@ -834,7 +852,7 @@ const handlePortraitError = (event: Event) => {
   max-width: 100%;
   color: rgb(32 33 31 / 88%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(13px, 1.02vw, 16px);
+  font-size: clamp(13px, 0.95vw, 15px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0;
@@ -849,7 +867,7 @@ const handlePortraitError = (event: Event) => {
   max-width: 100%;
   color: rgb(32 33 31 / 56%);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
   text-overflow: ellipsis;
@@ -1478,8 +1496,16 @@ const handlePortraitError = (event: Event) => {
 .projects-panel {
   grid-area: camera;
   align-self: start;
+  display: grid;
+  align-items: center;
+  justify-items: center;
   min-height: 0;
-  padding: 20px;
+  padding: clamp(74px, 8vw, 118px) 28px;
+  border: 0;
+  border-radius: 18px;
+  background: #121416;
+  box-shadow: none;
+  isolation: isolate;
 }
 
 .panel-topline {
@@ -1491,28 +1517,61 @@ const handlePortraitError = (event: Event) => {
 }
 
 .project-status-list {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 16px;
+  width: min(420px, 100%);
+}
+
+.project-status-backdrop {
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  display: block;
+  width: 116%;
+  height: 116%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: blur(26px) saturate(1.05) contrast(1.08) brightness(0.54);
+  transform: scale(1.08);
+}
+
+.projects-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 76% 14%, rgb(255 176 118 / 30%), transparent 31%),
+    radial-gradient(circle at 20% 0%, rgb(194 117 153 / 25%), transparent 34%),
+    linear-gradient(180deg, rgb(7 9 11 / 8%), rgb(4 6 8 / 56%)),
+    linear-gradient(90deg, rgb(5 7 9 / 62%), transparent 44%, rgb(5 7 9 / 42%));
 }
 
 .project-status-card {
   position: relative;
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr) auto;
+  grid-template-columns: 48px minmax(0, 1fr) 28px;
   align-items: center;
   gap: 13px;
-  min-height: 74px;
-  padding: 9px 12px 9px 9px;
+  min-height: 70px;
+  padding: 10px 14px 10px 11px;
   overflow: hidden;
-  border: 1px solid rgb(32 33 31 / 5%);
-  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 17px;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 80%), rgb(247 247 243 / 84%)),
-    #f6f6f2;
-  color: rgb(17 18 17 / 86%);
+    linear-gradient(180deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 5%)),
+    rgb(18 22 25 / 42%);
+  color: rgb(255 255 255 / 90%);
   text-decoration: none;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 74%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 16%),
+    0 18px 42px -30px rgb(0 0 0 / 80%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition:
     background 180ms ease,
     border-color 180ms ease,
@@ -1525,21 +1584,21 @@ const handlePortraitError = (event: Event) => {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(rgb(128 128 128 / 42%), rgb(128 128 128 / 42%)),
+    linear-gradient(rgb(128 128 128 / 58%), rgb(128 128 128 / 58%)),
     var(--film-grain);
-  background-size: auto, 82px 82px;
+  background-size: auto, 74px 74px;
   background-blend-mode: overlay, normal;
   mix-blend-mode: soft-light;
-  opacity: 0.12;
-  filter: contrast(1.8);
+  opacity: 0.18;
+  filter: contrast(1.95);
 }
 
 .project-status-card:hover,
 .project-status-card:focus-visible {
-  border-color: rgb(32 33 31 / 10%);
+  border-color: rgb(255 255 255 / 24%);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 88%), rgb(249 249 245 / 92%)),
-    #f8f8f4;
+    linear-gradient(180deg, rgb(255 255 255 / 17%), rgb(255 255 255 / 7%)),
+    rgb(18 22 25 / 48%);
   transform: translateY(-1px);
 }
 
@@ -1550,14 +1609,14 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-card img {
   display: block;
-  width: 58px;
-  height: 58px;
-  border: 1px solid rgb(32 33 31 / 7%);
-  border-radius: 7px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 9px;
   background:
-    linear-gradient(135deg, rgb(238 238 232), rgb(250 250 246));
+    linear-gradient(135deg, rgb(238 238 232 / 48%), rgb(250 250 246 / 18%));
   object-fit: cover;
-  filter: saturate(0.78) contrast(0.96);
+  filter: saturate(0.9) contrast(0.98);
 }
 
 .project-status-copy {
@@ -1568,7 +1627,7 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-copy strong {
   overflow: hidden;
-  color: rgb(15 16 15 / 92%);
+  color: rgb(255 255 255 / 94%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 15px;
   font-weight: 800;
@@ -1580,10 +1639,10 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-copy small {
   overflow: hidden;
-  color: rgb(45 50 58 / 68%);
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  color: rgb(255 255 255 / 62%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 750;
   line-height: 1.15;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1592,33 +1651,31 @@ const handlePortraitError = (event: Event) => {
 .project-status-meta {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  color: rgb(32 33 31 / 46%);
+  justify-content: center;
+  color: #36e0b4;
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 11px;
+  font-size: 18px;
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
 }
 
 .project-status-meta i {
-  display: block;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #2db784;
-  box-shadow: 0 0 0 3px rgb(45 183 132 / 12%);
+  display: none;
 }
 
-.project-status-card.is-down .project-status-meta i {
-  background: #c95c61;
-  box-shadow: 0 0 0 3px rgb(201 92 97 / 12%);
+.project-status-icon {
+  width: 18px;
+  height: 18px;
 }
 
-.project-status-card.is-degraded .project-status-meta i,
-.project-status-card.is-unknown .project-status-meta i {
-  background: #d19939;
-  box-shadow: 0 0 0 3px rgb(209 153 57 / 12%);
+.project-status-card.is-down .project-status-meta {
+  color: #ff9ca2;
+}
+
+.project-status-card.is-degraded .project-status-meta,
+.project-status-card.is-unknown .project-status-meta {
+  color: #f2c45f;
 }
 
 .contact-panel {
