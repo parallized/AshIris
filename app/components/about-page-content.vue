@@ -718,28 +718,24 @@ const handlePortraitError = (event: Event) => {
         </NuxtLink>
 
         <article class="panel cat-panel" aria-label="Cat companion">
-          <div class="cat-card cat-card-photo">
+          <div class="cat-card">
             <img
               :src="catCompanionImage"
               alt="灰色虎斑猫抬头看向镜头"
               loading="lazy"
               decoding="async"
             />
-          </div>
-          <div class="cat-card cat-card-profile">
-            <span class="cat-card-label">Cat</span>
-            <strong>我的猫</strong>
-            <small>灰虎斑 / 白手套</small>
-            <div class="cat-tags" aria-label="Cat traits">
-              <span>巡逻</span>
-              <span>陪写代码</span>
-              <span>夜间值班</span>
+            <div class="cat-card-copy">
+              <span class="cat-card-label">Cat</span>
+              <strong>我的猫</strong>
+              <small>灰虎斑 / 白手套</small>
+              <div class="cat-tags" aria-label="Cat traits">
+                <span>巡逻</span>
+                <span>陪写代码</span>
+                <span>夜间值班</span>
+              </div>
+              <p>安静但有存在感，在键盘边观察，也负责把一天的工作拉回生活。</p>
             </div>
-          </div>
-          <div class="cat-card cat-card-note">
-            <span>Companion</span>
-            <strong>安静但有存在感</strong>
-            <small>在键盘边观察，也负责把一天的工作拉回生活。</small>
           </div>
         </article>
 
@@ -1705,8 +1701,10 @@ const handlePortraitError = (event: Event) => {
 
 .cat-panel {
   grid-area: cat;
+  display: grid;
+  place-items: center;
   min-height: 350px;
-  overflow: visible;
+  overflow: hidden;
   background:
     radial-gradient(circle at 16% 12%, rgb(229 221 255 / 62%), transparent 38%),
     radial-gradient(circle at 86% 76%, rgb(255 221 204 / 74%), transparent 42%),
@@ -1730,62 +1728,46 @@ const handlePortraitError = (event: Event) => {
 }
 
 .cat-card {
-  position: absolute;
+  position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(154px, 0.9fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 2.6vw, 30px);
+  width: min(90%, 560px);
+  min-height: 236px;
+  padding: clamp(20px, 2.4vw, 30px);
   overflow: hidden;
   border: 1px solid rgb(32 33 31 / 9%);
-  border-radius: 8px;
-  background: rgb(255 255 252 / 86%);
+  border-radius: 22px;
+  background: rgb(255 255 252 / 90%);
   box-shadow:
-    0 18px 42px -34px rgb(32 33 31 / 30%),
+    0 24px 58px -42px rgb(32 33 31 / 34%),
     inset 0 1px 0 rgb(255 255 255 / 76%);
 }
 
-.cat-card-photo {
-  left: 8%;
-  top: 14%;
-  width: 38%;
-  aspect-ratio: 0.78;
-  transform: rotate(-7deg);
-}
-
-.cat-card-photo img {
+.cat-card img {
   display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 0.82;
+  height: auto;
+  overflow: hidden;
+  border-radius: 15px;
   object-fit: cover;
   object-position: 46% 54%;
   filter: saturate(0.9) contrast(0.98);
 }
 
-.cat-card-profile,
-.cat-card-note {
+.cat-card-copy {
   display: grid;
   align-content: start;
-  gap: 7px;
-  padding: 18px 20px;
+  gap: 8px;
+  min-width: 0;
   color: #211f2c;
   font-family: "Inter", "Noto Sans SC", sans-serif;
 }
 
-.cat-card-profile {
-  right: 7%;
-  top: 17%;
-  width: 58%;
-  min-height: 150px;
-  transform: rotate(5deg);
-}
-
-.cat-card-note {
-  right: 15%;
-  bottom: 12%;
-  width: 62%;
-  min-height: 132px;
-  transform: rotate(-4deg);
-}
-
-.cat-card-label,
-.cat-card-note span {
+.cat-card-label {
   color: rgb(72 56 126 / 78%);
   font-size: 11px;
   font-weight: 700;
@@ -1808,6 +1790,15 @@ const handlePortraitError = (event: Event) => {
   font-size: 13px;
   font-weight: 500;
   line-height: 1.42;
+}
+
+.cat-card p {
+  max-width: 270px;
+  margin: 6px 0 0;
+  color: rgb(32 33 31 / 62%);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 .cat-tags {
