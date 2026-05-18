@@ -924,9 +924,9 @@ const handlePortraitError = (event: Event) => {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-areas:
     "intro intro intro intro intro intro intro intro project project project project"
-    "color color color monitor monitor monitor monitor camera camera camera camera camera"
-    "contact contact contact cat cat cat cat camera camera camera camera camera"
-    "update update update update update update update . . . . .";
+    "color color color camera camera camera camera camera monitor monitor monitor monitor"
+    "contact contact contact camera camera camera camera camera cat cat cat cat"
+    "contact contact contact update update update update update cat cat cat cat";
   gap: 18px;
   align-items: stretch;
 }
@@ -1543,7 +1543,7 @@ const handlePortraitError = (event: Event) => {
 
 .projects-panel {
   grid-area: camera;
-  align-self: start;
+  align-self: stretch;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -2095,9 +2095,8 @@ const handlePortraitError = (event: Event) => {
       "intro intro"
       "project monitor"
       "color contact"
-      "cat cat"
-      "update update"
-      "camera camera";
+      "camera camera"
+      "cat update";
   }
 
   .project-callout {
