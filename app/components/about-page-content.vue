@@ -559,7 +559,7 @@ const handlePortraitError = (event: Event) => {
 
         <article class="panel latency-panel" aria-label="Six hour service metrics">
           <div class="latency-head">
-            <div>
+            <div class="latency-title">
               <p class="panel-label">Server 6H</p>
               <h2>核心状态</h2>
             </div>
@@ -616,6 +616,7 @@ const handlePortraitError = (event: Event) => {
 
         <article class="panel archive-panel">
           <div>
+            <p class="panel-label">Status</p>
             <h2>服务在线状态</h2>
           </div>
           <div class="archive-metric">
@@ -627,7 +628,7 @@ const handlePortraitError = (event: Event) => {
 
         <article class="panel projects-panel">
           <img
-            :src="worksImage"
+            :src="backgroundImage"
             alt=""
             class="project-status-backdrop"
             aria-hidden="true"
@@ -720,29 +721,40 @@ const handlePortraitError = (event: Event) => {
         <article class="panel cat-panel" aria-label="Cat companion">
           <div class="cat-card">
             <img
+              class="cat-card-photo"
               :src="catCompanionImage"
               alt="灰色虎斑猫抬头看向镜头"
               loading="lazy"
               decoding="async"
             />
             <div class="cat-card-copy">
-              <span class="cat-card-label">Cat</span>
-              <strong>我的猫</strong>
-              <small>灰虎斑 / 白手套</small>
-              <div class="cat-tags" aria-label="Cat traits">
-                <span>巡逻</span>
-                <span>陪写代码</span>
-                <span>夜间值班</span>
-              </div>
-              <p>安静但有存在感，在键盘边观察，也负责把一天的工作拉回生活。</p>
+              <span class="cat-card-title">
+                <strong>我的猫</strong>
+                <Icon name="ph:seal-check-fill" class="cat-verified" aria-hidden="true" />
+              </span>
+              <p>灰虎斑白手套，负责巡逻、陪写代码和夜间值班。</p>
+            </div>
+            <div class="cat-card-bottom" aria-label="Cat profile details">
+              <span>
+                <Icon name="ph:paw-print-fill" class="cat-bottom-icon" aria-hidden="true" />
+                巡逻
+              </span>
+              <span>
+                <Icon name="ph:moon-stars-fill" class="cat-bottom-icon" aria-hidden="true" />
+                值班
+              </span>
+              <span class="cat-follow">
+                Follow
+                <Icon name="ph:plus" class="cat-follow-icon" aria-hidden="true" />
+              </span>
             </div>
           </div>
         </article>
 
         <article class="panel update-panel" aria-label="Idea update cadence">
-          <p class="update-ghost">
-            如果产生了新 IDEA，<br />
-            我就会来这里更新
+          <p class="update-ghost" aria-hidden="true">
+            <span>如果产生了新 IDEA</span>
+            <span>我就会来这里更新</span>
           </p>
           <div class="update-badge">
             {{ lastIdeaUpdateLabel }}
@@ -775,7 +787,7 @@ const handlePortraitError = (event: Event) => {
 .home-shell {
   width: min(100%, 1520px);
   margin: 0 auto;
-  padding: clamp(56px, 8vw, 108px) clamp(18px, 5vw, 72px) 116px;
+  padding: clamp(56px, 8vw, 108px) clamp(18px, 5vw, 72px) 188px;
 }
 
 .screen-gate {
@@ -922,7 +934,7 @@ const handlePortraitError = (event: Event) => {
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color camera camera camera camera camera monitor monitor monitor monitor"
     "contact contact contact camera camera camera camera camera cat cat cat cat"
-    "contact contact contact update update update update update cat cat cat cat";
+    "update update update camera camera camera camera camera . . . .";
   gap: 18px;
   align-items: stretch;
 }
@@ -1247,8 +1259,9 @@ const handlePortraitError = (event: Event) => {
   grid-area: monitor;
   display: grid;
   align-content: space-between;
-  gap: 12px;
+  gap: 14px;
   min-height: 250px;
+  padding: clamp(24px, 2.4vw, 34px);
   background:
     linear-gradient(180deg, rgb(255 255 255 / 72%), rgb(250 249 244 / 92%)),
     #f7f5ee;
@@ -1256,20 +1269,25 @@ const handlePortraitError = (event: Event) => {
 
 .latency-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 18px;
+  gap: 20px;
+}
+
+.latency-title {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
 }
 
 .latency-head h2 {
-  margin: 8px 0 0;
-  color: #303229;
-  font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(17px, 1.65vw, 23px);
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1.05;
-  letter-spacing: 0.04em;
+  margin: 0;
+  color: #20211f;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  font-size: clamp(24px, 2.15vw, 34px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0;
 }
 
 .metric-legend {
@@ -1373,8 +1391,9 @@ const handlePortraitError = (event: Event) => {
   grid-area: color;
   display: grid;
   align-content: space-between;
-  gap: 16px;
+  gap: 18px;
   min-height: 230px;
+  padding: clamp(24px, 2.4vw, 34px);
   border-color: rgb(255 255 255 / 54%);
   background:
     radial-gradient(circle at 18% 12%, rgb(255 207 191 / 95%), transparent 36%),
@@ -1409,12 +1428,12 @@ const handlePortraitError = (event: Event) => {
 }
 
 .archive-panel h2 {
-  max-width: 190px;
-  margin: 0;
+  max-width: 240px;
+  margin: 12px 0 0;
   color: rgb(22 23 19 / 86%);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: clamp(22px, 1.8vw, 27px);
-  font-weight: 700;
+  font-size: clamp(24px, 2.15vw, 34px);
+  font-weight: 500;
   line-height: 1.12;
   letter-spacing: 0;
   text-shadow:
@@ -1441,10 +1460,10 @@ const handlePortraitError = (event: Event) => {
 .archive-panel strong {
   color: rgb(5 5 4 / 82%);
   font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: clamp(39px, 3.45vw, 52px);
-  font-weight: 600;
-  line-height: 0.88;
-  letter-spacing: -0.02em;
+  font-size: clamp(36px, 3.15vw, 48px);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: 0;
   text-shadow:
     0 1px 0 rgb(255 255 255 / 52%),
     0 10px 28px rgb(255 255 255 / 20%);
@@ -1452,8 +1471,8 @@ const handlePortraitError = (event: Event) => {
 
 .archive-icon {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: clamp(24px, 2.4vw, 34px);
+  right: clamp(24px, 2.4vw, 34px);
   width: 48px;
   height: 48px;
   padding: 13px;
@@ -1565,8 +1584,8 @@ const handlePortraitError = (event: Event) => {
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 15px;
-  width: min(350px, 100%);
+  gap: 12px;
+  width: min(370px, 100%);
 }
 
 .project-status-backdrop {
@@ -1578,7 +1597,7 @@ const handlePortraitError = (event: Event) => {
   height: 120%;
   object-fit: cover;
   object-position: 50% 50%;
-  filter: blur(34px) saturate(1.12) contrast(1.12) brightness(0.62);
+  filter: blur(12px) saturate(1.08) contrast(1.05) brightness(0.68);
   transform: scale(1.12);
 }
 
@@ -1592,8 +1611,8 @@ const handlePortraitError = (event: Event) => {
     radial-gradient(circle at 80% 6%, rgb(255 177 126 / 38%), transparent 30%),
     radial-gradient(circle at 18% 0%, rgb(183 115 154 / 30%), transparent 32%),
     radial-gradient(circle at 52% 43%, rgb(112 48 54 / 18%), transparent 36%),
-    linear-gradient(180deg, rgb(7 9 11 / 2%), rgb(4 6 8 / 45%)),
-    linear-gradient(90deg, rgb(3 5 7 / 62%), transparent 42%, rgb(4 5 7 / 38%));
+    linear-gradient(180deg, rgb(7 9 11 / 8%), rgb(4 6 8 / 48%)),
+    linear-gradient(90deg, rgb(3 5 7 / 58%), rgb(3 5 7 / 18%) 46%, rgb(4 5 7 / 38%));
 }
 
 .project-status-card {
@@ -1602,16 +1621,23 @@ const handlePortraitError = (event: Event) => {
   grid-template-columns: 43px minmax(0, 1fr) 22px;
   align-items: center;
   gap: 11px;
-  min-height: 68px;
-  padding: 10px 13px 10px 11px;
+  min-height: 62px;
+  padding: 9px 12px 9px 10px;
   overflow: hidden;
-  border: 0;
-  border-radius: 15px;
-  background: transparent;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 13px;
+  background: rgb(255 255 255 / 7%);
   color: rgb(255 255 255 / 90%);
   text-decoration: none;
-  box-shadow: none;
-  transition: transform 180ms ease;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 14px 34px -28px rgb(0 0 0 / 58%);
+  backdrop-filter: blur(14px) saturate(1.18);
+  -webkit-backdrop-filter: blur(14px) saturate(1.18);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .project-status-card::before {
@@ -1620,7 +1646,8 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-card:hover,
 .project-status-card:focus-visible {
-  background: transparent;
+  border-color: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 11%);
   transform: translateY(-1px);
 }
 
@@ -1703,133 +1730,181 @@ const handlePortraitError = (event: Event) => {
   grid-area: cat;
   display: grid;
   place-items: center;
-  min-height: 350px;
+  min-height: 260px;
+  padding: 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 16% 12%, rgb(229 221 255 / 62%), transparent 38%),
-    radial-gradient(circle at 86% 76%, rgb(255 221 204 / 74%), transparent 42%),
-    linear-gradient(135deg, #f8f6ff 0%, #f4f1eb 100%);
+  border: 0;
+  background: #1a1b18;
   isolation: isolate;
 }
 
 .cat-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgb(128 128 128 / 34%), rgb(128 128 128 / 34%)),
-    var(--film-grain);
-  background-size: auto, 96px 96px;
-  background-blend-mode: overlay, normal;
-  mix-blend-mode: soft-light;
-  opacity: 0.12;
+  content: none;
 }
 
 .cat-card {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(154px, 0.9fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(18px, 2.6vw, 30px);
-  width: min(90%, 560px);
-  min-height: 236px;
-  padding: clamp(20px, 2.4vw, 30px);
+  align-content: end;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  padding: clamp(18px, 2vw, 26px);
   overflow: hidden;
-  border: 1px solid rgb(32 33 31 / 9%);
-  border-radius: 22px;
-  background: rgb(255 255 252 / 90%);
-  box-shadow:
-    0 24px 58px -42px rgb(32 33 31 / 34%),
-    inset 0 1px 0 rgb(255 255 255 / 76%);
+  border-radius: inherit;
+  color: #f7f7f3;
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  isolation: isolate;
 }
 
-.cat-card img {
+.cat-card::before {
+  content: "";
+  position: absolute;
+  inset: 36% 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(14 15 13 / 0%) 0%, rgb(14 15 13 / 34%) 38%, rgb(14 15 13 / 84%) 100%),
+    radial-gradient(circle at 26% 92%, rgb(255 255 255 / 14%), transparent 38%);
+  backdrop-filter: blur(16px) saturate(0.92);
+  -webkit-backdrop-filter: blur(16px) saturate(0.92);
+  mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 72%) 24%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 72%) 24%, #000 100%);
+}
+
+.cat-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(128 128 128 / 42%), rgb(128 128 128 / 42%)),
+    var(--film-grain);
+  background-size: auto, 82px 82px;
+  background-blend-mode: overlay, normal;
+  mix-blend-mode: soft-light;
+  opacity: 0.2;
+}
+
+.cat-card-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   display: block;
   width: 100%;
-  aspect-ratio: 0.82;
-  height: auto;
-  overflow: hidden;
-  border-radius: 15px;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
   object-fit: cover;
-  object-position: 46% 54%;
-  filter: saturate(0.9) contrast(0.98);
+  object-position: 50% 64%;
+  filter: saturate(0.98) contrast(1.04) brightness(1.06);
 }
 
 .cat-card-copy {
+  position: relative;
+  z-index: 3;
   display: grid;
-  align-content: start;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
-  color: #211f2c;
-  font-family: "Inter", "Noto Sans SC", sans-serif;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 32%);
 }
 
-.cat-card-label {
-  color: rgb(72 56 126 / 78%);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
+.cat-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .cat-card strong {
-  color: #18152d;
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  font-size: clamp(20px, 2vw, 27px);
+  overflow: hidden;
+  color: rgb(255 255 255 / 94%);
+  font-size: clamp(24px, 2.25vw, 34px);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1;
   letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.cat-card small {
-  color: rgb(32 33 31 / 58%);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.42;
+.cat-verified {
+  flex: 0 0 auto;
+  width: 27px;
+  height: 27px;
+  color: rgb(255 255 255 / 94%);
+  filter: drop-shadow(0 2px 10px rgb(0 0 0 / 24%));
 }
 
 .cat-card p {
-  max-width: 270px;
-  margin: 6px 0 0;
-  color: rgb(32 33 31 / 62%);
-  font-size: 13px;
+  max-width: 330px;
+  margin: 0;
+  color: rgb(255 255 255 / 84%);
+  font-size: clamp(13px, 1.25vw, 16px);
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
-.cat-tags {
+.cat-card-bottom {
+  position: relative;
+  z-index: 3;
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 6px;
-}
-
-.cat-tags span {
-  display: inline-flex;
   align-items: center;
-  min-height: 24px;
-  padding: 0 9px;
-  border: 1px solid rgb(72 56 126 / 12%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 54%);
-  color: rgb(72 56 126 / 82%);
-  font-size: 11px;
+  gap: 18px;
+  min-width: 0;
+  color: rgb(255 255 255 / 82%);
+  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 34%);
+}
+
+.cat-card-bottom span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.cat-bottom-icon {
+  width: 17px;
+  height: 17px;
+  color: currentColor;
+}
+
+.cat-follow {
+  justify-content: center;
+  min-height: 48px;
+  margin-left: auto;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 90%);
+  color: #151714;
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: none;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 64%),
+    0 18px 32px -22px rgb(0 0 0 / 58%);
+}
+
+.cat-follow-icon {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
 }
 
 .update-panel {
   grid-area: update;
   display: grid;
   place-items: center;
-  min-height: 230px;
+  min-height: 190px;
   overflow: hidden;
   border-color: rgb(32 33 31 / 5%);
-  border-radius: 48px;
+  border-radius: 8px;
   background: rgb(255 255 252 / 88%);
   box-shadow:
     0 22px 60px -46px rgb(32 33 31 / 22%),
@@ -1839,18 +1914,33 @@ const handlePortraitError = (event: Event) => {
 
 .update-ghost {
   position: absolute;
-  inset: 28px 34px;
+  inset: 18px 22px 16px;
   z-index: 0;
   display: grid;
+  grid-template-rows: auto 1fr auto;
   place-items: center;
   margin: 0;
-  color: rgb(32 33 31 / 24%);
+  color: rgb(32 33 31 / 16%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(42px, 4.8vw, 78px);
-  font-weight: 700;
-  line-height: 0.98;
+  font-size: clamp(22px, 2.1vw, 34px);
+  font-weight: 600;
+  line-height: 1;
   letter-spacing: 0;
   text-align: center;
+}
+
+.update-ghost span {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.update-ghost span:first-child {
+  grid-row: 1;
+}
+
+.update-ghost span:last-child {
+  grid-row: 3;
 }
 
 .update-badge {
@@ -1859,15 +1949,15 @@ const handlePortraitError = (event: Event) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: min(84%, 460px);
-  min-height: 94px;
-  padding: 0 34px;
-  border-radius: 24px;
+  min-width: min(70%, 240px);
+  min-height: 54px;
+  padding: 0 20px;
+  border-radius: 14px;
   background: #2f2f2d;
   color: #f4f4ef;
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: clamp(23px, 2.45vw, 42px);
-  font-weight: 700;
+  font-size: clamp(15px, 1.35vw, 22px);
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -1882,7 +1972,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-rows: auto auto minmax(0, 1fr);
   align-content: stretch;
   gap: 16px;
-  min-height: 350px;
+  min-height: 260px;
   padding: 0;
   color: #20211f;
   text-decoration: none;
@@ -1894,7 +1984,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   grid-template-rows: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 0;
-  min-height: 224px;
+  min-height: 166px;
   padding: 0;
   overflow: hidden;
   border: 0;
