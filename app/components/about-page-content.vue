@@ -880,7 +880,7 @@ const handlePortraitError = (event: Event) => {
   grid-template-areas:
     "intro intro intro intro intro intro intro intro project project project project"
     "color color color monitor monitor monitor monitor camera camera camera camera camera"
-    "contact contact contact contact contact contact contact camera camera camera camera camera";
+    "contact contact contact . . . . camera camera camera camera camera";
   gap: 18px;
   align-items: stretch;
 }
