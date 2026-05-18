@@ -1500,10 +1500,10 @@ const handlePortraitError = (event: Event) => {
   align-items: center;
   justify-items: center;
   min-height: 0;
-  padding: clamp(74px, 8vw, 118px) 28px;
+  padding: clamp(82px, 8vw, 120px) 28px;
   border: 0;
-  border-radius: 18px;
-  background: #121416;
+  border-radius: 17px;
+  background: #07090b;
   box-shadow: none;
   isolation: isolate;
 }
@@ -1521,21 +1521,21 @@ const handlePortraitError = (event: Event) => {
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-  width: min(420px, 100%);
+  gap: 15px;
+  width: min(350px, 100%);
 }
 
 .project-status-backdrop {
   position: absolute;
-  inset: -8%;
+  inset: -10%;
   z-index: 0;
   display: block;
-  width: 116%;
-  height: 116%;
+  width: 120%;
+  height: 120%;
   object-fit: cover;
   object-position: 50% 50%;
-  filter: blur(26px) saturate(1.05) contrast(1.08) brightness(0.54);
-  transform: scale(1.08);
+  filter: blur(34px) saturate(1.12) contrast(1.12) brightness(0.62);
+  transform: scale(1.12);
 }
 
 .projects-panel::after {
@@ -1545,33 +1545,34 @@ const handlePortraitError = (event: Event) => {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 76% 14%, rgb(255 176 118 / 30%), transparent 31%),
-    radial-gradient(circle at 20% 0%, rgb(194 117 153 / 25%), transparent 34%),
-    linear-gradient(180deg, rgb(7 9 11 / 8%), rgb(4 6 8 / 56%)),
-    linear-gradient(90deg, rgb(5 7 9 / 62%), transparent 44%, rgb(5 7 9 / 42%));
+    radial-gradient(circle at 80% 6%, rgb(255 177 126 / 38%), transparent 30%),
+    radial-gradient(circle at 18% 0%, rgb(183 115 154 / 30%), transparent 32%),
+    radial-gradient(circle at 52% 43%, rgb(112 48 54 / 18%), transparent 36%),
+    linear-gradient(180deg, rgb(7 9 11 / 2%), rgb(4 6 8 / 45%)),
+    linear-gradient(90deg, rgb(3 5 7 / 62%), transparent 42%, rgb(4 5 7 / 38%));
 }
 
 .project-status-card {
   position: relative;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 28px;
+  grid-template-columns: 43px minmax(0, 1fr) 22px;
   align-items: center;
-  gap: 13px;
-  min-height: 70px;
-  padding: 10px 14px 10px 11px;
+  gap: 11px;
+  min-height: 68px;
+  padding: 10px 13px 10px 11px;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: 17px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 15px;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 5%)),
-    rgb(18 22 25 / 42%);
+    linear-gradient(180deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%)),
+    rgb(8 12 15 / 28%);
   color: rgb(255 255 255 / 90%);
   text-decoration: none;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 16%),
-    0 18px 42px -30px rgb(0 0 0 / 80%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+    inset 0 1px 0 rgb(255 255 255 / 10%),
+    inset 0 -1px 0 rgb(0 0 0 / 18%);
+  backdrop-filter: blur(11px) saturate(1.08);
+  -webkit-backdrop-filter: blur(11px) saturate(1.08);
   transition:
     background 180ms ease,
     border-color 180ms ease,
@@ -1584,21 +1585,21 @@ const handlePortraitError = (event: Event) => {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(rgb(128 128 128 / 58%), rgb(128 128 128 / 58%)),
+    linear-gradient(rgb(128 128 128 / 28%), rgb(128 128 128 / 28%)),
     var(--film-grain);
-  background-size: auto, 74px 74px;
+  background-size: auto, 92px 92px;
   background-blend-mode: overlay, normal;
   mix-blend-mode: soft-light;
-  opacity: 0.18;
-  filter: contrast(1.95);
+  opacity: 0.06;
+  filter: contrast(1.3);
 }
 
 .project-status-card:hover,
 .project-status-card:focus-visible {
-  border-color: rgb(255 255 255 / 24%);
+  border-color: rgb(255 255 255 / 18%);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 17%), rgb(255 255 255 / 7%)),
-    rgb(18 22 25 / 48%);
+    linear-gradient(180deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 3%)),
+    rgb(8 12 15 / 34%);
   transform: translateY(-1px);
 }
 
@@ -1609,19 +1610,19 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-card img {
   display: block;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgb(255 255 255 / 18%);
-  border-radius: 9px;
+  width: 43px;
+  height: 43px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 8px;
   background:
     linear-gradient(135deg, rgb(238 238 232 / 48%), rgb(250 250 246 / 18%));
   object-fit: cover;
-  filter: saturate(0.9) contrast(0.98);
+  filter: saturate(0.96) contrast(1.02);
 }
 
 .project-status-copy {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   min-width: 0;
 }
 
@@ -1629,7 +1630,7 @@ const handlePortraitError = (event: Event) => {
   overflow: hidden;
   color: rgb(255 255 255 / 94%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: 0;
@@ -1639,9 +1640,9 @@ const handlePortraitError = (event: Event) => {
 
 .project-status-copy small {
   overflow: hidden;
-  color: rgb(255 255 255 / 62%);
+  color: rgb(255 255 255 / 58%);
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 750;
   line-height: 1.15;
   text-overflow: ellipsis;
@@ -1652,9 +1653,9 @@ const handlePortraitError = (event: Event) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #36e0b4;
+  color: #36dfb4;
   font-family: "Inter", "Noto Sans SC", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -1665,8 +1666,8 @@ const handlePortraitError = (event: Event) => {
 }
 
 .project-status-icon {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
 }
 
 .project-status-card.is-down .project-status-meta {
